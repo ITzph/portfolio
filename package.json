@@ -18,6 +18,7 @@
     "affected:e2e": "nx affected:e2e",
     "affected:test": "nx affected:test",
     "affected:lint": "nx affected:lint",
+    "affected:lint:fix": "nx affected:lint --fix",
     "affected:dep-graph": "nx affected:dep-graph",
     "affected": "nx affected",
     "format": "nx format:write",
@@ -27,18 +28,12 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "format:fix": "pretty-quick --staged",
-    "eslint:fix": "lint-staged --relative"
+    "format:fix": "pretty-quick --staged"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "run-s format:fix"
+      "pre-commit": "run-s format:fix affected:lint:fix"
     }
-  },
-  "lint-staged": {
-    "*.{js,ts}": [
-      "ng lint --fix"
-    ]
   },
   "private": true,
   "dependencies": {
