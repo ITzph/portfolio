@@ -10,7 +10,7 @@
       },
       "root": "apps/webapp",
       "sourceRoot": "apps/webapp/src",
-      "prefix": "codegino",
+      "prefix": "portfolio",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -89,10 +89,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/webapp/tsconfig.app.json",
-              "apps/webapp/tsconfig.spec.json"
-            ],
+            "tsConfig": ["apps/webapp/tsconfig.app.json", "apps/webapp/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!apps/webapp/**/*"]
           }
         },
@@ -172,10 +169,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/api/tsconfig.app.json",
-              "apps/api/tsconfig.spec.json"
-            ],
+            "tsConfig": ["apps/api/tsconfig.app.json", "apps/api/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!apps/api/**/*"]
           }
         },

@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 
-import { Message } from '@codegino/api-interfaces';
+import { Message } from '@portfolio/api-interfaces';
 
 import { AppService } from './app.service';
 
