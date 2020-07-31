@@ -4,6 +4,8 @@ import { catchError, map, concatMap } from 'rxjs/operators';
 import { EMPTY, of } from 'rxjs';
 
 import * as ProfileActions from '../actions/profile.actions';
+import { HttpClient } from '@angular/common/http';
+import { Profile } from '@portfolio/api-interfaces';
 
 @Injectable()
 export class ProfileEffects {
@@ -11,14 +13,13 @@ export class ProfileEffects {
     return this.actions$.pipe(
       ofType(ProfileActions.loadProfiles),
       concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
+        this.httpClient.get<Profile>('/api/profiles/me').pipe(
           map((data) => ProfileActions.loadProfilesSuccess({ data })),
-          catchError((error) => of(ProfileActions.loadProfilesFailure({ error }))),
+          catchError((error) => of(ProfileActions.loadProfilesFailure())),
         ),
       ),
     );
   });
 
-  constructor(private actions$: Actions) {}
+  constructor(private readonly actions$: Actions, private readonly httpClient: HttpClient) {}
 }

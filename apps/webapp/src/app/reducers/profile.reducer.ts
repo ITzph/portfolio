@@ -5,17 +5,32 @@ import { Profile } from '@portfolio/api-interfaces';
 export const profileFeatureKey = 'profile';
 
 export interface State {
-  profile: Profile;
+  currentUser: Profile;
 }
 
 export const initialState: State = {
-  profile: Profile.defaultInstance(),
+  currentUser: null,
 };
 
 export const reducer = createReducer(
   initialState,
 
-  on(ProfileActions.loadProfiles, (state) => state),
-  on(ProfileActions.loadProfilesSuccess, (state, action) => state),
-  on(ProfileActions.loadProfilesFailure, (state, action) => state),
+  on(
+    ProfileActions.loadProfilesSuccess,
+    (state: State, action): State => {
+      return {
+        ...state,
+        currentUser: action.data,
+      };
+    },
+  ),
+  on(
+    ProfileActions.loadProfilesFailure,
+    (state: State, action): State => {
+      return {
+        ...state,
+        currentUser: Profile.defaultInstance(),
+      };
+    },
+  ),
 );

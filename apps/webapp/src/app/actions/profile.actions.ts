@@ -1,13 +1,11 @@
 import { createAction, props } from '@ngrx/store';
+import { Profile } from '@portfolio/api-interfaces';
 
 export const loadProfiles = createAction('[Profile] Load Profiles');
 
 export const loadProfilesSuccess = createAction(
   '[Profile] Load Profiles Success',
-  props<{ data: any }>(),
+  props<{ data: Profile }>(),
 );
 
-export const loadProfilesFailure = createAction(
-  '[Profile] Load Profiles Failure',
-  props<{ error: any }>(),
-);
+export const loadProfilesFailure = createAction('[Profile] Load Profiles Failure');
