@@ -1,0 +1,58 @@
+$xs-device: 'only screen and (min-width : 32rem)';
+$sm-device: 'only screen and (min-width : 45rem)';
+$md-device: 'only screen and (min-width : 76.8rem)';
+$lg-device: 'only screen and (min-width : 90rem)';
+$xl-device: 'only screen and (min-width : 120rem)';
+
+$color-primary: var(--color-primary);
+$color-primary-contrast: var(--color-primary-contrast);
+$color-primary-light: var(--color-primary-light);
+$color-primary-light-contrast: var(--color-primary-contrast);
+$color-primary-dark: var(--color-primary-dark);
+$color-primary-dark-contrast: var(--color-primary-contrast);
+$color-primary-accent: var(--color-primary-accent);
+$color-primary-accent-contrast: var(--color-primary-contrast);
+
+$color-secondary: var(--color-secondary);
+$color-secondary-contrast: var(--color-secondary-contrast);
+$color-secondary-light: var(--color-secondary-light);
+$color-secondary-light-contrast: var(--color-secondary-contrast);
+$color-secondary-dark: var(--color-secondary-dark);
+$color-secondary-dark-contrast: var(--color-secondary-contrast);
+$color-secondary-accent: var(--color-secondary-accent);
+$color-secondary-accent-contrast: var(--color-secondary-accent-contrast);
+
+$color-dark: var(--color-dark);
+$color-dark-contrast: var(--color-dark-contrast);
+$color-dark-light: var(--color-dark-light);
+$color-dark-light-contrast: var(--color-dark-contrast);
+$color-dark-dark: var(--color-dark-dark);
+$color-dark-dark-contrast: var(--color-dark-dark-contrast);
+$color-dark-accent: var(--color-dark-accent);
+$color-dark-accent-contrast: var(--color-dark-accent-contrast);
+
+$color-light: var(--color-light);
+$color-light-contrast: var(--color-light-contrast);
+$color-light-light: var(--color-light-light);
+$color-light-light-contrast: var(--color-light-contrast);
+$color-light-dark: var(--color-light-dark);
+$color-light-dark-contrast: var(--color-light-dark-contrast);
+$color-light-accent: var(--color-light-accent);
+$color-light-accent-contrast: var(--color-light-accent-contrast);
+
+$light-gray-1: var(--light-gray-1);
+$light-gray-2: var(--light-gray-2);
+$dark-gray-1: var(--dark-gray-1);
+$dark-gray-2: var(--dark-gray-2);
+
+$margin-big: var(--margin-big);
+$margin-medium: var(--margin-medium);
+$margin-small: var(--margin-small);
+$margin-very-small: var(--margin-very-very-small);
+$margin-very-very-small: var(--margin-very-very-small);
+
+$padding-big: var(--padding-big);
+$padding-medium: var(--padding-medium);
+$padding-small: var(--padding-small);
+$padding-very-small: var(--padding-very-very-small);
+$padding-very-very-small: var(--padding-very-very-small);

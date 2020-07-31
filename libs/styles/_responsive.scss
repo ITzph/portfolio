@@ -1,0 +1,96 @@
+@import 'variables';
+
+p {
+  font-size: 1.6rem;
+  @media #{$xs-device} {
+    font-size: 1.2rem;
+  }
+  @media #{$sm-device} {
+    font-size: 1.4rem;
+  }
+  @media #{$md-device} {
+    font-size: 1.4rem;
+  }
+  @media #{$lg-device} {
+    font-size: 1.6rem;
+  }
+  @media #{$xl-device} {
+    font-size: 1.8rem;
+  }
+}
+
+a {
+  font-size: 1.6rem;
+  @media #{$xs-device} {
+    font-size: 1.2rem;
+  }
+  @media #{$sm-device} {
+    font-size: 1.4rem;
+  }
+  @media #{$md-device} {
+    font-size: 1.4rem;
+  }
+  @media #{$lg-device} {
+    font-size: 1.6rem;
+  }
+  @media #{$xl-device} {
+    font-size: 1.8rem;
+  }
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: $margin-medium;
+  text-transform: uppercase;
+  @media #{$xs-device} {
+    font-size: 2.6rem;
+  }
+  @media #{$sm-device} {
+    font-size: 2.8rem;
+  }
+  @media #{$md-device} {
+    font-size: 2.8rem;
+  }
+  @media #{$lg-device} {
+    font-size: 3rem;
+  }
+  @media #{$xl-device} {
+    font-size: 3.2rem;
+  }
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: $margin-small;
+  @media #{$xs-device} {
+    font-size: 1.8rem;
+  }
+  @media #{$sm-device} {
+    font-size: 2rem;
+  }
+  @media #{$md-device} {
+    font-size: 2rem;
+  }
+  @media #{$lg-device} {
+    font-size: 2.2rem;
+  }
+  @media #{$xl-device} {
+    font-size: 2.4rem;
+  }
+}
+
+h3 {
+  font-size: 1.8rem;
+  @media #{$xs-device} {
+    font-size: 1.4rem;
+  }
+  @media #{$sm-device} {
+    font-size: 1.6rem;
+  }
+  @media #{$lg-device} {
+    font-size: 1.8rem;
+  }
+  @media #{$xl-device} {
+    font-size: 2rem;
+  }
+}
