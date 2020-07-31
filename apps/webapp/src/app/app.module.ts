@@ -11,6 +11,7 @@ import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router
 import { environment } from '../environments/environment';
 import { HmrModule, stateSetter } from '../hmr.module';
 import { CustomSerializer } from './merged-route-serializer';
+import { HeaderModule } from './modules/header/header.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +32,7 @@ import { CustomSerializer } from './merged-route-serializer';
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    HeaderModule,
   ],
   providers: [
     {
