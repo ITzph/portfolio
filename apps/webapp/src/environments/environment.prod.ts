@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   hmr: false,
-  api: 'http://localhost:3333/api',
+  api: 'http://nodejs-env.eba-xwdmaydp.ap-southeast-1.elasticbeanstalk.com/api',
 };
