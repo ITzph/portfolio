@@ -145,7 +145,7 @@
           "builder": "@nrwl/node:build",
           "options": {
             "outputPath": "dist/apps/api",
-            "webpackConfig": "apps/api/webpack.config.js",
+            "webpackConfig": "webpack-api.config.js",
             "main": "apps/api/src/main.ts",
             "tsConfig": "apps/api/tsconfig.app.json",
             "assets": ["apps/api/src/assets"]
