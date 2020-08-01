@@ -80,7 +80,10 @@ function generatePackageJson() {
   }, {});
 
   const basePackageJson = {
+    name: 'nestjs-app',
     dependencies,
+    version: '0.0.1',
+    private: true,
     scripts: {
       start: 'node main.js',
     },
