@@ -9,6 +9,7 @@
     "start": "ng serve",
     "dev": "ng serve --configuration hmr -o --proxy-config apps/webapp/proxy.conf.json",
     "build": "ng build --prod",
+    "build:api": "ng build api --prod",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",

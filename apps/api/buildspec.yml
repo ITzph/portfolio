@@ -13,11 +13,11 @@ phases:
   pre_build:
     commands:
       - echo installing dependencies...
-      - npm install -g @angular/cli @nestjs/cli
+      - npm install -g @angular/cli
   build:
     commands:
       - echo building...
-      - ng build api --prod
+      - npm run-script build:api
 artifacts:
   files:
     - '**/*'
