@@ -12,7 +12,6 @@ phases:
       - apt install --no-install-recommends yarn
   pre_build:
     commands:
-      - aws s3 rm s3://dev-carlogino.cc --recursive
       - echo installing dependencies...
       - npm i -g @angular/cli
       - npm install
@@ -20,6 +19,7 @@ phases:
     commands:
       - echo building...
       - npm run-script build
+      - aws s3 rm s3://$ARTIFACTS_BUCKET --recursive
 artifacts:
   files:
     - '**/*'
