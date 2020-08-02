@@ -10,17 +10,19 @@ import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const globalPrefix = 'api';
-  app.setGlobalPrefix(globalPrefix);
-  const port = process.env.PORT || 3333;
+  const GLOBAL_PREFIX = 'api';
+
+  app.setGlobalPrefix(GLOBAL_PREFIX);
+
+  const PORT = process.env.PORT || 3333;
+  const PORTFOLIO_FRONTEND_URL = process.env.PORTFOLIO_URL || 'http://localhost:4200';
+
   app.enableCors({
-    origin: [
-      'http://localhost:4200',
-      'http://test-frontend.com.s3-website-ap-southeast-1.amazonaws.com',
-    ],
+    origin: [PORTFOLIO_FRONTEND_URL],
   });
-  await app.listen(port, () => {
-    Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);
+
+  await app.listen(PORT, () => {
+    Logger.log('Listening at http://localhost:' + PORT + '/' + GLOBAL_PREFIX);
   });
 }
 
