@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   hmr: false,
-  api: process.env.PORTFOLIO_DEV_API,
+  api: 'http://portfolio-dev-api.ap-southeast-1.elasticbeanstalk.com/api',
 };
