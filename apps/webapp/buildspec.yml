@@ -12,6 +12,7 @@ phases:
       - apt install --no-install-recommends yarn
   pre_build:
     commands:
+      - aws s3 rm s3://dev-carlogino.cc --recursive
       - echo installing dependencies...
       - npm i -g @angular/cli
       - npm install
