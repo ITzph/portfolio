@@ -19,6 +19,7 @@ phases:
     commands:
       - echo building...
       - npm run-script build
+      - aws s3 rm s3://$ARTIFACTS_BUCKET --recursive
 artifacts:
   files:
     - '**/*'
