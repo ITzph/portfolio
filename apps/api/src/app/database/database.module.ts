@@ -32,7 +32,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 export class DatabaseModule {
   constructor() {
     console.info('gino', process.env.PORTFOLIO_DB_TYPE);
-    console.info('gino', process.env.PORTFOLIO_DB_TYPE);
+    console.info('gino', process.env.PORTFOLIO_DB_HOST);
     console.info('gino', process.env.PORTFOLIO_DB_PORT);
     console.info('gino', process.env.PORTFOLIO_DB_USERNAME);
     console.info('gino', process.env.PORTFOLIO_DB_PASSWORD);
