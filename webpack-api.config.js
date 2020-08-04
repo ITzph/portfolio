@@ -73,6 +73,7 @@ function generatePackageJson() {
     '@nestjs/platform-express',
     'reflect-metadata',
     'rxjs',
+    'mysql',
   ];
   const dependencies = implicitDeps.reduce((acc, dep) => {
     acc[dep] = packageJson.dependencies[dep];
