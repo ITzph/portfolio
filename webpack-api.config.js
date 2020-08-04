@@ -74,6 +74,7 @@ function generatePackageJson() {
     'reflect-metadata',
     'rxjs',
     'mysql',
+    'typeorm',
   ];
   const dependencies = implicitDeps.reduce((acc, dep) => {
     acc[dep] = packageJson.dependencies[dep];
