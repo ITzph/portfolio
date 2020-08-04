@@ -9,12 +9,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {
         return {
-          type: (configService.get<string>('PORTFOLIO_DB_TYPE') as any) || 'mariadb',
-          host: configService.get<string>('PORTFOLIO_DB_HOST') || '127.0.0.1',
-          port: Number.parseInt(configService.get<string>('PORTFOLIO_DB_PORT') || '6603', 10),
-          username: configService.get<string>('PORTFOLIO_DB_USERNAME') || 'root',
-          password: configService.get<string>('PORTFOLIO_DB_PASSWORD') || 'carlogino',
-          database: configService.get<string>('PORTFOLIO_DB_DATABASE') || 'portfolio',
+          type: configService.get<string>('PORTFOLIO_DB_TYPE') as any,
+          host: configService.get<string>('PORTFOLIO_DB_HOST'),
+          port: Number.parseInt(configService.get<string>('PORTFOLIO_DB_PORT'), 10),
+          username: configService.get<string>('PORTFOLIO_DB_USERNAME'),
+          password: configService.get<string>('PORTFOLIO_DB_PASSWORD'),
+          database: configService.get<string>('PORTFOLIO_DB_DATABASE'),
           entities: [User],
           synchronize: false,
         };
