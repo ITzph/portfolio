@@ -73,8 +73,6 @@ function generatePackageJson() {
     '@nestjs/platform-express',
     'reflect-metadata',
     'rxjs',
-    'mysql',
-    'typeorm',
   ];
   const dependencies = implicitDeps.reduce((acc, dep) => {
     acc[dep] = packageJson.dependencies[dep];
@@ -84,7 +82,7 @@ function generatePackageJson() {
   const basePackageJson = {
     name: 'nestjs-app',
     dependencies,
-    version: '0.0.1',
+    version: '0.0.2',
     private: true,
     scripts: {
       start: 'node main.js',
