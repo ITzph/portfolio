@@ -8,12 +8,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {
-        console.info(configService.get<string>('PORTFOLIO_DB_TYPE'));
-        console.info(configService.get<string>('PORTFOLIO_DB_HOST'));
-        console.info(configService.get<string>('PORTFOLIO_DB_PORT'));
-        console.info(configService.get<string>('PORTFOLIO_DB_USERNAME'));
-        console.info(configService.get<string>('PORTFOLIO_DB_PASSWORD'));
-        console.info(configService.get<string>('PORTFOLIO_DB_DATABASE'));
         return {
           type: configService.get<string>('PORTFOLIO_DB_TYPE') as any,
           host: configService.get<string>('PORTFOLIO_DB_HOST'),
@@ -29,13 +23,4 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
   ],
 })
-export class DatabaseModule {
-  constructor() {
-    console.info('gino', process.env.PORTFOLIO_DB_TYPE);
-    console.info('gino', process.env.PORTFOLIO_DB_HOST);
-    console.info('gino', process.env.PORTFOLIO_DB_PORT);
-    console.info('gino', process.env.PORTFOLIO_DB_USERNAME);
-    console.info('gino', process.env.PORTFOLIO_DB_PASSWORD);
-    console.info('gino', process.env.PORTFOLIO_DB_DATABASE);
-  }
-}
+export class DatabaseModule {}
