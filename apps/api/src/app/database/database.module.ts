@@ -8,13 +8,19 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {
+        console.info(configService.get<string>('PORTFOLIO_DB_TYPE'));
+        console.info(configService.get<string>('PORTFOLIO_DB_HOST'));
+        console.info(configService.get<string>('PORTFOLIO_DB_PORT'));
+        console.info(configService.get<string>('PORTFOLIO_DB_USERNAME'));
+        console.info(configService.get<string>('PORTFOLIO_DB_PASSWORD'));
+        console.info(configService.get<string>('PORTFOLIO_DB_DATABASE'));
         return {
-          type: (configService.get<string>('PORTFOLIO_DB_TYPE') as any) || 'mariadb',
-          host: configService.get<string>('PORTFOLIO_DB_HOST') || '127.0.0.1',
-          port: Number.parseInt(configService.get<string>('PORTFOLIO_DB_PORT') || '6603', 10),
-          username: configService.get<string>('PORTFOLIO_DB_USERNAME') || 'root',
-          password: configService.get<string>('PORTFOLIO_DB_PASSWORD') || 'carlogino',
-          database: configService.get<string>('PORTFOLIO_DB_DATABASE') || 'portfolio',
+          type: configService.get<string>('PORTFOLIO_DB_TYPE') as any,
+          host: configService.get<string>('PORTFOLIO_DB_HOST'),
+          port: Number.parseInt(configService.get<string>('PORTFOLIO_DB_PORT'), 10),
+          username: configService.get<string>('PORTFOLIO_DB_USERNAME'),
+          password: configService.get<string>('PORTFOLIO_DB_PASSWORD'),
+          database: configService.get<string>('PORTFOLIO_DB_DATABASE'),
           entities: [User],
           synchronize: false,
         };
@@ -24,5 +30,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
   ],
 })
 export class DatabaseModule {
-  constructor() {}
+  constructor() {
+    console.info('gino', process.env.PORTFOLIO_DB_TYPE);
+    console.info('gino', process.env.PORTFOLIO_DB_HOST);
+    console.info('gino', process.env.PORTFOLIO_DB_PORT);
+    console.info('gino', process.env.PORTFOLIO_DB_USERNAME);
+    console.info('gino', process.env.PORTFOLIO_DB_PASSWORD);
+    console.info('gino', process.env.PORTFOLIO_DB_DATABASE);
+  }
 }
