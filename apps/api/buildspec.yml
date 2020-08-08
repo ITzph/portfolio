@@ -15,6 +15,7 @@ phases:
       - echo installing dependencies...
       - npm install -g @angular/cli
       - npm install
+      - npm run-script remove-dist
   build:
     commands:
       - echo building...

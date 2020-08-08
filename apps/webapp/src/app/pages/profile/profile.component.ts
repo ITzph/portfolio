@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import * as fromProfile from '../../reducers/profile.reducer';
 import { getCurrentUser } from '../../selectors/profile.selectors';
 import { Observable } from 'rxjs';
-import { Profile } from '@portfolio/api-interfaces';
+import { IUser } from '@portfolio/api-interfaces';
 import { loadProfiles } from '../../actions/profile.actions';
 
 @Component({
@@ -12,7 +12,7 @@ import { loadProfiles } from '../../actions/profile.actions';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  currentUser$: Observable<Profile>;
+  currentUser$: Observable<IUser>;
   constructor(private readonly profileStore: Store<fromProfile.State>) {}
 
   ngOnInit(): void {

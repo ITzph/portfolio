@@ -1,11 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as ProfileActions from '../actions/profile.actions';
-import { Profile } from '@portfolio/api-interfaces';
+import { IUser } from '@portfolio/api-interfaces';
 
 export const profileFeatureKey = 'profile';
 
 export interface State {
-  currentUser: Profile;
+  currentUser: IUser;
 }
 
 export const initialState: State = {
@@ -29,7 +29,7 @@ export const reducer = createReducer(
     (state: State, action): State => {
       return {
         ...state,
-        currentUser: Profile.defaultInstance(),
+        currentUser: null,
       };
     },
   ),

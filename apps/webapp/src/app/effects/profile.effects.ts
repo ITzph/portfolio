@@ -5,7 +5,7 @@ import { EMPTY, of } from 'rxjs';
 
 import * as ProfileActions from '../actions/profile.actions';
 import { HttpClient } from '@angular/common/http';
-import { Profile } from '@portfolio/api-interfaces';
+import { IUser } from '@portfolio/api-interfaces';
 import { environment } from '../../environments/environment';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class ProfileEffects {
     return this.actions$.pipe(
       ofType(ProfileActions.loadProfiles),
       concatMap(() =>
-        this.httpClient.get<Profile>(`${environment.api}/profiles/me`).pipe(
+        this.httpClient.get<IUser>(`${environment.api}/profiles/me`).pipe(
           map((data) => ProfileActions.loadProfilesSuccess({ data })),
           catchError(() => of(ProfileActions.loadProfilesFailure())),
         ),
