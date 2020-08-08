@@ -33,7 +33,7 @@ module.exports = (config, context) => {
  * @returns {Array} An array of Webpack plugins
  */
 function extractRelevantNodeModules(outputPath) {
-  return [generatePackageJson()];
+  return [generatePackageJson(), copyPackageLockFile(outputPath), copyDockerfile(outputPath)];
 }
 
 /**
@@ -44,7 +44,26 @@ function extractRelevantNodeModules(outputPath) {
  * @returns {*} A Webpack plugin
  */
 function copyYarnLockFile(outputPath) {
-  return new CopyPlugin([{ from: 'yarn.lock', to: path.join(outputPath, 'yarn.lock') }]);
+  return new CopyPlugin({
+    patterns: [
+      {
+        from: 'yarn.lock',
+        to: path.join(outputPath, 'yarn.lock'),
+      },
+    ],
+  });
+}
+
+function copyDockerfile(outputPath) {
+  return new CopyPlugin({
+    patterns: [
+      {
+        from: 'api.Dockerfile',
+        to: path.join(outputPath, 'Dockerfile'),
+        toType: 'file',
+      },
+    ],
+  });
 }
 
 /**
@@ -55,9 +74,14 @@ function copyYarnLockFile(outputPath) {
  * @returns {*} A Webpack plugin
  */
 function copyPackageLockFile(outputPath) {
-  const pathToPackageLockJson = path.join(__dirname, 'package-lock.json');
-
-  return new CopyPlugin([{ from: 'package-lock.json', to: pathToPackageLockJson }]);
+  return new CopyPlugin({
+    patterns: [
+      {
+        from: 'package-lock.json',
+        to: path.join(outputPath, 'package-lock.json'),
+      },
+    ],
+  });
 }
 
 /**

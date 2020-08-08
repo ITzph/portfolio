@@ -14,7 +14,7 @@ async function bootstrap() {
 
   app.setGlobalPrefix(GLOBAL_PREFIX);
 
-  const PORT = process.env.PORT || 3333;
+  const PORT = process.env.PORT || 8080;
   const PORTFOLIO_FRONTEND_URL = process.env.PORTFOLIO_URL || 'http://localhost:4200';
 
   app.enableCors({
