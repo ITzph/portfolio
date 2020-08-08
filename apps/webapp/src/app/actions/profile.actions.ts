@@ -1,11 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import { IUser } from '@portfolio/api-interfaces';
 
-export const loadProfiles = createAction('[Profile] Load Profiles');
+export enum ProfileAction {
+  SetProfile = '[Profile] Set',
+}
 
-export const loadProfilesSuccess = createAction(
-  '[Profile] Load Profiles Success',
-  props<{ data: IUser }>(),
-);
-
-export const loadProfilesFailure = createAction('[Profile] Load Profiles Failure');
+export const setProfile = createAction(ProfileAction.SetProfile, props<{ profile: IUser }>());

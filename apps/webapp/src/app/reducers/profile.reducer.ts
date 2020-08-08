@@ -1,4 +1,4 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import * as ProfileActions from '../actions/profile.actions';
 import { IUser } from '@portfolio/api-interfaces';
 
@@ -16,20 +16,11 @@ export const reducer = createReducer(
   initialState,
 
   on(
-    ProfileActions.loadProfilesSuccess,
-    (state: State, action): State => {
+    ProfileActions.setProfile,
+    (state: State, prop): State => {
       return {
         ...state,
-        currentUser: action.data,
-      };
-    },
-  ),
-  on(
-    ProfileActions.loadProfilesFailure,
-    (state: State, action): State => {
-      return {
-        ...state,
-        currentUser: null,
+        currentUser: prop.profile,
       };
     },
   ),

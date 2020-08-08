@@ -1,0 +1,64 @@
+@import '../../../../styles/variables';
+
+:host,
+.cli {
+  width: 100%;
+  margin-bottom: $margin-very-small;
+}
+
+.cli-header {
+  display: flex;
+  background-color: $color-light;
+  padding: $padding-small $padding-very-small;
+  align-items: center;
+  position: relative;
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+
+  &__title {
+    position: absolute;
+    width: 100%;
+  }
+}
+
+.cli-body {
+  background-color: black;
+  color: yellowgreen;
+  padding: $padding-small $padding-very-small;
+  font-size: 2em;
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+
+  &__start {
+    color: $color-light-light;
+    font-weight: bold;
+    margin-right: $padding-very-small;
+  }
+
+  &__content {
+    text-align: left;
+    width: 100%;
+  }
+}
+
+.circle {
+  border-radius: 50%;
+  height: 1.25rem;
+  width: 1.25rem;
+
+  &:not(:last-child) {
+    margin-right: $margin-very-small;
+  }
+
+  &--red {
+    background-color: red;
+  }
+
+  &--yellow {
+    background-color: yellow;
+  }
+
+  &--green {
+    background-color: green;
+  }
+}

@@ -2,16 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { environment } from '../environments/environment';
 import { HmrModule, stateSetter } from '../hmr.module';
 import { CustomSerializer } from './merged-route-serializer';
 import { HeaderModule } from './modules/header/header.module';
+import { HttpHeaderInterceptor } from './interceptors/http-header.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { HeaderModule } from './modules/header/header.module';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     StoreModule.forRoot(
       {},
       {
@@ -29,7 +31,6 @@ import { HeaderModule } from './modules/header/header.module';
         },
       },
     ),
-    EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     HeaderModule,
@@ -38,6 +39,11 @@ import { HeaderModule } from './modules/header/header.module';
     {
       provide: RouterStateSerializer,
       useClass: CustomSerializer,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpHeaderInterceptor,
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],

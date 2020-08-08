@@ -1,0 +1,15 @@
+<section class="cli">
+  <aside class="cli-header">
+    <div class="circle circle--red"></div>
+    <div class="circle circle--yellow"></div>
+    <div class="circle circle--green"></div>
+    <p class="cli-header__title">Greetings</p>
+  </aside>
+  <article class="cli-body">
+    <p class="cli-body__content">
+      <span class="cli-body__start">&#x276F;</span>{{ message$ | async }}
+    </p>
+  </article>
+</section>
+<button (click)="skipAutoType()" *ngIf="isTyping">Skip</button>
+<button (click)="retriggerAutoType()" *ngIf="!isTyping">Repeat</button>
