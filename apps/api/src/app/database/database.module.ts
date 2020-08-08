@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
-console.info('TEST LOG', process.env.PORTPOLIO_DB_TYPE);
+console.info('TEST LOG', process.env.PORTFOLIO_DB_TYPE);
 console.info('TEST LOG', process.env.PORTFOLIO_DB_HOST);
 console.info('TEST LOG', process.env.PORTFOLIO_DB_PORT);
 console.info('TEST LOG', process.env.PORTFOLIO_DB_USERNAME);
@@ -24,7 +24,7 @@ console.info('TEST LOG', process.env.PORTFOLIO_DB_DATABASE);
           database: configService.get<string>('PORTFOLIO_DB_DATABASE'),
         };
 
-        console.info('CONFIGURATIONS', a);
+        console.info('GINO CONFIGURATIONS', a);
         return {
           type: configService.get<string>('PORTFOLIO_DB_TYPE') as any,
           host: configService.get<string>('PORTFOLIO_DB_HOST'),
