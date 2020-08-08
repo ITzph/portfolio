@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Profile } from '@portfolio/api-interfaces';
+import { IUser } from '@portfolio/api-interfaces';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../database/entities/user.entity';
 import { Repository } from 'typeorm';
@@ -22,20 +22,16 @@ export class ProfileService {
     };
   }
 
-  public getCurrentProfile(): Profile {
-    return {
-      name: 'Carlo Gino Catapang',
-      image: '',
-      address: 'Planet Mars',
-      currentCompany: 'Krusty Krab',
-      currentRole: 'Tank',
-      testimonial: 'Hoy',
-      greetings: [
-        'The quick brown fox jumps over the lazy dog.',
-        'Five boxing wizards jump quickly',
-        'Test Changes',
-        'Welcome to my Page!',
-      ],
-    };
+  public getAllUsers() {
+    return this.userRepository.find();
+  }
+
+  public addNewUser(user: User) {
+    return this.userRepository.save(user);
+  }
+
+  public getCurrentProfile(): Promise<IUser> {
+    const dummyRootUser = Number.parseInt(process.env.DUMMY_CURRENT_ID, 10);
+    return this.userRepository.findOne(dummyRootUser);
   }
 }

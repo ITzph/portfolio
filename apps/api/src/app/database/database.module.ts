@@ -8,16 +8,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {
-        const a = {
-          appPort: configService.get<string>('PORT') as any,
-          type: configService.get<string>('PORTFOLIO_DB_TYPE') as any,
-          host: configService.get<string>('PORTFOLIO_DB_HOST'),
-          port: Number.parseInt(configService.get<string>('PORTFOLIO_DB_PORT'), 10),
-          username: configService.get<string>('PORTFOLIO_DB_USERNAME'),
-          password: configService.get<string>('PORTFOLIO_DB_PASSWORD'),
-          database: configService.get<string>('PORTFOLIO_DB_DATABASE'),
-        };
-
         return {
           type: configService.get<string>('PORTFOLIO_DB_TYPE') as any,
           host: configService.get<string>('PORTFOLIO_DB_HOST'),
@@ -26,7 +16,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           password: configService.get<string>('PORTFOLIO_DB_PASSWORD'),
           database: configService.get<string>('PORTFOLIO_DB_DATABASE'),
           entities: [User],
-          synchronize: false,
+          synchronize: true,
         };
       },
       inject: [ConfigService],
