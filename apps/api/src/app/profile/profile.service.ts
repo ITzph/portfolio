@@ -26,7 +26,7 @@ export class ProfileService {
     return {
       name: 'Carlo Gino Catapang',
       image: '',
-      address: 'Planet Earth',
+      address: 'Planet Mars',
       currentCompany: 'Krusty Krab',
       currentRole: 'Tank',
       testimonial: 'Hoy',
