@@ -5,16 +5,18 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import { StoreModule } from '@ngrx/store';
 import * as fromProfile from '../../reducers/profile.reducer';
-import { EffectsModule } from '@ngrx/effects';
-import { ProfileEffects } from '../../effects/profile.effects';
+import { AutoTyperComponent } from './auto-typer/auto-typer.component';
+import { GreetingsTranscriptComponent } from './greetings-transcript/greetings-transcript.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
-  declarations: [ProfileComponent],
+  declarations: [ProfileComponent, AutoTyperComponent, GreetingsTranscriptComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,
+    NgxSpinnerModule,
     StoreModule.forFeature(fromProfile.profileFeatureKey, fromProfile.reducer),
-    EffectsModule.forFeature([ProfileEffects]),
   ],
+  exports: [ProfileComponent, AutoTyperComponent, GreetingsTranscriptComponent],
 })
 export class ProfileModule {}

@@ -1,2 +1,23 @@
-<h1>Test Changes</h1>
-<p>{{ currentUser$ | async | json }}</p>
+<ng-container *ngIf="profile$ | async; let profile; else: loading">
+  <section class="greetings">
+    <portfolio-auto-typer
+      [messages]="profile.greetings"
+      (completed)="toggleTranscript($event)"
+    ></portfolio-auto-typer>
+    <portfolio-greetings-transcript
+      [greetings]="profile.greetings"
+      *ngIf="isTranscriptVisible"
+    ></portfolio-greetings-transcript>
+  </section>
+</ng-container>
+
+<ng-template #loading>
+  <ngx-spinner
+    bdColor="rgba(0, 0, 0, 0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-zig-zag-deflect"
+    [fullScreen]="true"
+    ><p style="color: white;">Weight lungs...</p></ngx-spinner
+  >
+</ng-template>

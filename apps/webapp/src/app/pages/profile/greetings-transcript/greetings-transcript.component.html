@@ -1,0 +1,6 @@
+<button class="toggle-transcript" (click)="toggleTranscript()">Show Transcript</button>
+<ng-container *ngIf="isTranscriptVisible">
+  <p *ngFor="let greeting of greetings">
+    {{ greeting }}
+  </p>
+</ng-container>

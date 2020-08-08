@@ -1,0 +1,11 @@
+@import '../../../../styles/variables';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.toggle-transcript {
+  margin-top: $margin-very-small;
+}
