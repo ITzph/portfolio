@@ -17,6 +17,7 @@ import { UserSkill } from './entities/user-skill.entity';
           password: configService.get<string>('PORTFOLIO_DB_PASSWORD'),
           database: configService.get<string>('PORTFOLIO_DB_DATABASE'),
           entities: [User, UserSkill],
+          synchronize: true,
         };
       },
       inject: [ConfigService],
