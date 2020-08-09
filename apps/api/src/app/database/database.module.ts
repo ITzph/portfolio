@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserSkill } from './entities/user-skill.entity';
+import { UserExperience } from './entities/user-experience.entity';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { UserSkill } from './entities/user-skill.entity';
           username: configService.get<string>('PORTFOLIO_DB_USERNAME'),
           password: configService.get<string>('PORTFOLIO_DB_PASSWORD'),
           database: configService.get<string>('PORTFOLIO_DB_DATABASE'),
-          entities: [User, UserSkill],
+          entities: [User, UserSkill, UserExperience],
+          synchronize: true,
         };
       },
       inject: [ConfigService],

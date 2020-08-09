@@ -13,6 +13,7 @@ export interface IUser {
   currentRole: string;
   currentCompany: string;
   skills: IUserSkill[];
+  experiences: IUserExperience[];
 }
 
 export interface IUserSkill {
@@ -20,4 +21,13 @@ export interface IUserSkill {
   name: string;
   category: string;
   isCurrent: boolean;
+}
+
+export interface IUserExperience {
+  id: number;
+  name: string;
+  role: string;
+  startDate: Date;
+  endDate: Date;
+  events: string[];
 }
