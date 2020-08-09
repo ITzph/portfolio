@@ -16,7 +16,7 @@ export class UserSkill implements IUserSkill {
   @Column('boolean', { name: 'is_current' })
   isCurrent: boolean;
 
-  @ManyToOne('User', 'skills')
-  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  @ManyToOne((type) => User, (user) => user.experiences)
+  @JoinColumn({ name: 'user_id' })
   user: User;
 }
