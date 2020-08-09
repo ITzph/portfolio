@@ -12,4 +12,12 @@ export interface IUser {
   imageUrl: string;
   currentRole: string;
   currentCompany: string;
+  skills: IUserSkill[];
+}
+
+export interface IUserSkill {
+  id: number;
+  name: string;
+  category: string;
+  isCurrent: boolean;
 }

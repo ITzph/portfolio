@@ -1,0 +1,17 @@
+@import '../../../styles/variables';
+
+.skills-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-bottom: $margin-very-small;
+
+  :not(:first-child) {
+    margin-left: $margin-very-very-small;
+  }
+}
+
+.skills-category {
+  display: flex;
+  flex-direction: column;
+}
