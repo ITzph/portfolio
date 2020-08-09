@@ -13,6 +13,7 @@ export interface IUser {
   currentRole: string;
   currentCompany: string;
   skills: IUserSkill[];
+  experiences: IUserExperience[];
 }
 
 export interface IUserSkill {

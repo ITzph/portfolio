@@ -4,11 +4,15 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  margin-bottom: $margin-very-small;
+  margin-bottom: $margin-medium;
 
   :not(:first-child) {
     margin-left: $margin-very-very-small;
   }
+}
+
+.skills-group {
+  justify-content: center;
 }
 
 .skills-category {

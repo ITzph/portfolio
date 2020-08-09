@@ -22,6 +22,9 @@ export class UserExperience implements IUserExperience {
   @Column('simple-array', { name: 'events', default: '' })
   events: string[];
 
+  @Column('boolean', { name: 'is_active' })
+  isActive: boolean;
+
   @ManyToOne(() => User, (user) => user.experiences)
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: User;

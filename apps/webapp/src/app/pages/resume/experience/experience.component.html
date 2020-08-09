@@ -1,0 +1,15 @@
+<ng-container *ngIf="experience">
+  <div class="experience">
+    <div class="title">
+      <p>{{ experience.name }} - {{ experience.role }}</p>
+    </div>
+    <div class="date">
+      <p>{{ experience.startDate }} - {{ experience.endDate }}</p>
+    </div>
+    <ul class="events">
+      <li *ngFor="let event of experience.events" class="event">
+        {{ event }}
+      </li>
+    </ul>
+  </div>
+</ng-container>

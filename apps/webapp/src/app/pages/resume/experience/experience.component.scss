@@ -1,0 +1,21 @@
+.experience {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.date {
+  font-size: 1em;
+}
+
+.events {
+  text-align: justify;
+}
+
+.event {
+  list-style-position: inside;
+}
