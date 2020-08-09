@@ -5,3 +5,13 @@
 @import '../../../libs/styles/base';
 @import '../../../libs/styles/variables';
 @import '../../../libs/styles/responsive';
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
