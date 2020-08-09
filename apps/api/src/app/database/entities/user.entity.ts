@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { IUser } from '@portfolio/api-interfaces';
+import { UserSkill } from './user-skill.entity';
 
 @Entity({ name: 'user' })
 export class User implements IUser {
@@ -35,4 +36,7 @@ export class User implements IUser {
 
   @Column({ name: 'address', nullable: true })
   address: string;
+
+  @OneToMany('UserSkill', 'user', { eager: true })
+  skills: UserSkill[];
 }
