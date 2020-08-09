@@ -40,3 +40,4 @@ Thumbs.db
 
 # environment
 **/*.env
+.angulardoc.json
