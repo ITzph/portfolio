@@ -42,7 +42,6 @@ export interface IUserCertification {
   dateAcquired: Date;
   url: string;
 }
-
 export interface ISocialHandler {
   url: string;
   name: string;
