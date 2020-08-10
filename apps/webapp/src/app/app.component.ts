@@ -1,14 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Message } from '@portfolio/api-interfaces';
+import { Message, IUser } from '@portfolio/api-interfaces';
+import * as fromProfile from './reducers/profile.reducer';
+import { Observable } from 'rxjs';
+import { getCurrentUser } from './selectors/profile.selectors';
+import { ApiService } from './services/api.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { setProfile } from './actions/profile.actions';
+import { finalize } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
 
 @Component({
   selector: 'portfolio-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  hello$ = this.http.get<Message>('/api/hello');
+export class AppComponent implements OnInit {
+  profile$: Observable<IUser>;
+  isTranscriptVisible = false;
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly profileStore: Store<fromProfile.State>,
+    private readonly apiService: ApiService,
+    private readonly spinner: NgxSpinnerService,
+  ) {}
+
+  ngOnInit(): void {
+    // TODO optimize to prevent loading when there is a store value
+    this.profile$ = this.profileStore.pipe(select(getCurrentUser));
+    this.spinner.show();
+    this.apiService
+      .getProfile()
+      .pipe(
+        finalize(() => {
+          this.spinner.hide();
+        }),
+      )
+      .subscribe(
+        (profile) => {
+          this.updateProfile(profile);
+        },
+        (error) => {
+          console.error(error);
+        },
+      );
+  }
+
+  updateProfile(profile: IUser) {
+    this.profileStore.dispatch(setProfile({ profile }));
+  }
 }

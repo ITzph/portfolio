@@ -1,0 +1,10 @@
+<div class="social" (click)="goToUrl(social.url)">
+  <svg-icon
+    [src]="'assets/images/' + social.icon + '.svg'"
+    class="social__icon"
+    [applyClass]="true"
+    svgClass="social__icon animate__animated animate__wobble"
+    [svgStyle]="{ 'width.rem': 2.5 }"
+  ></svg-icon>
+  <p class="name hvr-bounce-to-right">{{ social.name }}</p>
+</div>

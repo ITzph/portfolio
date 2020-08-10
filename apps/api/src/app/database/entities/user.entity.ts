@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { IUser } from '@portfolio/api-interfaces';
+import { IUser, ISocialHandler } from '@portfolio/api-interfaces';
 import { UserSkill } from './user-skill.entity';
 import { UserExperience } from './user-experience.entity';
 import { UserCertification } from './user-certification.entity';
@@ -38,6 +38,9 @@ export class User implements IUser {
 
   @Column({ name: 'address', nullable: true })
   address: string;
+
+  @Column('simple-json', { name: 'social_handlers' })
+  socialHandlers: ISocialHandler[];
 
   @OneToMany('UserSkill', 'user', { eager: true })
   skills: UserSkill[];

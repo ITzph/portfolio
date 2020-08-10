@@ -19,35 +19,10 @@ export class ProfileComponent implements OnInit {
   profile$: Observable<IUser>;
   isTranscriptVisible = false;
 
-  constructor(
-    private readonly profileStore: Store<fromProfile.State>,
-    private readonly apiService: ApiService,
-    private readonly spinner: NgxSpinnerService,
-  ) {}
+  constructor(private readonly profileStore: Store<fromProfile.State>) {}
 
   ngOnInit(): void {
-    // TODO optimize to prevent loading when there is a store value
     this.profile$ = this.profileStore.pipe(select(getCurrentUser));
-    this.spinner.show();
-    this.apiService
-      .getProfile()
-      .pipe(
-        finalize(() => {
-          this.spinner.hide();
-        }),
-      )
-      .subscribe(
-        (profile) => {
-          this.updateProfile(profile);
-        },
-        (error) => {
-          console.error(error);
-        },
-      );
-  }
-
-  updateProfile(profile: IUser) {
-    this.profileStore.dispatch(setProfile({ profile }));
   }
 
   toggleTranscript(isVisible: boolean) {

@@ -15,6 +15,7 @@ export interface IUser {
   skills: IUserSkill[];
   experiences: IUserExperience[];
   certifications: IUserCertification[];
+  socialHandlers: ISocialHandler[];
 }
 
 export interface IUserSkill {
@@ -40,4 +41,10 @@ export interface IUserCertification {
   provider: string;
   dateAcquired: Date;
   url: string;
+}
+export interface ISocialHandler {
+  url: string;
+  name: string;
+  icon: string;
+  description: string;
 }

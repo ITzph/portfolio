@@ -1,0 +1,16 @@
+.social {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  &__icon {
+    &:hover {
+      transform: scale(1.2);
+      transition: all 0.5s;
+    }
+  }
+}
+
+.name {
+  font-size: 0.6em;
+}
