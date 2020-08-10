@@ -4,6 +4,7 @@ import { User } from './entities/user.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserSkill } from './entities/user-skill.entity';
 import { UserExperience } from './entities/user-experience.entity';
+import { UserCertification } from './entities/user-certification.entity';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { UserExperience } from './entities/user-experience.entity';
           username: configService.get<string>('PORTFOLIO_DB_USERNAME'),
           password: configService.get<string>('PORTFOLIO_DB_PASSWORD'),
           database: configService.get<string>('PORTFOLIO_DB_DATABASE'),
-          entities: [User, UserSkill, UserExperience],
+          entities: [User, UserSkill, UserExperience, UserCertification],
           synchronize: true,
         };
       },

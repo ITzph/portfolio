@@ -11,6 +11,16 @@
   }
 }
 
+.certifications-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: $margin-medium;
+
+  :not(:last-child) {
+    margin-bottom: $margin-small;
+  }
+}
+
 .skills-group {
   justify-content: center;
 }

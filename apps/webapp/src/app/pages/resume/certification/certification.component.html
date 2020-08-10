@@ -1,0 +1,19 @@
+<ng-container *ngIf="certification">
+  <div class="certification">
+    <div class="details">
+      <div>
+        {{ certification.name }}
+      </div>
+      <div>
+        {{ certification.provider }}
+      </div>
+      <div>
+        {{ certification.dateAcquired }}
+      </div>
+    </div>
+    <div class="link">
+      <p>{{ certification.description }}</p>
+      <a [href]="certification.url" target="_blank">Link</a>
+    </div>
+  </div>
+</ng-container>

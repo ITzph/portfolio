@@ -2,6 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { IUser } from '@portfolio/api-interfaces';
 import { UserSkill } from './user-skill.entity';
 import { UserExperience } from './user-experience.entity';
+import { UserCertification } from './user-certification.entity';
 
 @Entity({ name: 'user' })
 export class User implements IUser {
@@ -43,4 +44,7 @@ export class User implements IUser {
 
   @OneToMany('UserExperience', 'user', { eager: true })
   experiences: UserExperience[];
+
+  @OneToMany('UserCertification', 'user', { eager: true })
+  certifications: UserCertification[];
 }
