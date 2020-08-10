@@ -25,7 +25,11 @@
             "tsConfig": "apps/webapp/tsconfig.app.json",
             "aot": true,
             "assets": ["apps/webapp/src/favicon.ico", "apps/webapp/src/assets"],
-            "styles": ["apps/webapp/src/styles.scss"],
+            "styles": [
+              "apps/webapp/src/styles.scss",
+              "node_modules/animate.css/animate.min.css",
+              "node_modules/hover.css/css/hover-min.css"
+            ],
             "scripts": []
           },
           "configurations": {
