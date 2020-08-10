@@ -14,6 +14,7 @@ export interface IUser {
   currentCompany: string;
   skills: IUserSkill[];
   experiences: IUserExperience[];
+  certifications: IUserCertification[];
 }
 
 export interface IUserSkill {
@@ -30,4 +31,13 @@ export interface IUserExperience {
   startDate: Date;
   endDate: Date;
   events: string[];
+}
+
+export interface IUserCertification {
+  id: number;
+  name: string;
+  description: string;
+  provider: string;
+  dateAcquired: Date;
+  url: string;
 }

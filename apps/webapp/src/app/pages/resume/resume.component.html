@@ -18,4 +18,11 @@
       <portfolio-experience [experience]="exp"></portfolio-experience>
     </ng-container>
   </div>
+
+  <div class="certifications-wrapper">
+    <h3>Certifications</h3>
+    <ng-container *ngFor="let cert of profile.certifications">
+      <portfolio-certification [certification]="cert"></portfolio-certification>
+    </ng-container>
+  </div>
 </ng-container>

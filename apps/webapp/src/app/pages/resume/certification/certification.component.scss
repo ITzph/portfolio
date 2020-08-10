@@ -1,0 +1,47 @@
+@import '../../../../styles/variables';
+
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+.certification {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border: 1px solid $color-dark-dark;
+  width: 50%;
+  position: relative;
+}
+
+.details {
+  background-color: white;
+  color: $color-primary;
+  z-index: 1;
+  transition: all 0.5s;
+  opacity: 1;
+
+  &:hover {
+    opacity: 0;
+    z-index: 0;
+  }
+}
+
+.link {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: $color-primary;
+  color: $color-primary-contrast;
+  opacity: 0.5;
+  transition: all 0.5s;
+
+  &:hover {
+    opacity: 1;
+    z-index: 1;
+  }
+}

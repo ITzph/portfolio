@@ -7,16 +7,19 @@ export class UserSkill implements IUserSkill {
   @PrimaryGeneratedColumn({ unsigned: true })
   id: number;
 
-  @Column({ name: 'name' })
+  @Column({ name: 'name', nullable: false })
   name: string;
 
-  @Column({ name: 'category' })
+  @Column({ name: 'category', nullable: false })
   category: string;
 
   @Column('boolean', { name: 'is_current' })
   isCurrent: boolean;
 
-  @ManyToOne((type) => User, (user) => user.experiences)
+  @Column({ default: '' })
+  link: string;
+
+  @ManyToOne(() => User, (user) => user.experiences)
   @JoinColumn({ name: 'user_id' })
   user: User;
 }
