@@ -1,0 +1,24 @@
+@import '../../../styles/variables';
+
+.footer {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  height: 10rem;
+  margin-bottom: $margin-very-small;
+  bottom: 0;
+
+  &__content {
+    background-color: $color-dark-dark;
+    color: $color-dark-contrast;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.links,
+.social {
+  border: 1px solid white;
+  margin-bottom: $margin-small;
+}

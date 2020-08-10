@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { HmrModule, stateSetter } from '../hmr.module';
 import { CustomSerializer } from './merged-route-serializer';
 import { HeaderModule } from './modules/header/header.module';
+import { FooterModule } from './modules/footer/footer.module';
 import { HttpHeaderInterceptor } from './interceptors/http-header.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -34,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     StoreRouterConnectingModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     HeaderModule,
+    FooterModule,
   ],
   providers: [
     {
