@@ -1,7 +1,11 @@
 <footer class="footer">
   <div class="footer__content">
     <div class="links">links</div>
-    <div class="social">{{ socialHandlers$ | async | json }}</div>
+    <div class="socials">
+      <ng-container *ngFor="let social of socialHandlers$ | async">
+        <portfolio-social-handler [social]="social"></portfolio-social-handler>
+      </ng-container>
+    </div>
     <div class="copyright">
       All rights reserved 2020
     </div>

@@ -46,5 +46,6 @@ export interface IUserCertification {
 export interface ISocialHandler {
   url: string;
   name: string;
+  icon: string;
   description: string;
 }
