@@ -1,4 +1,14 @@
-import { Controller, Get, Post, UseInterceptors, UploadedFile, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  UseInterceptors,
+  UploadedFile,
+  Res,
+  Delete,
+  Param,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { MemesService } from './memes.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
@@ -42,6 +52,18 @@ export class MemesController {
     return this.memesService.fetchAllMemes();
   }
 
+  @Delete(':id')
+  async deleteImage(@Param('id', ParseIntPipe) id, @Res() res: Response) {
+    try {
+      const result = await this.memesService.deleteImage(id);
+      if (result.affected) {
+        return res.send({ id });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   @Post()
   @UseInterceptors(
     FileInterceptor('image', {
@@ -58,17 +80,17 @@ export class MemesController {
       }),
     }),
   )
-  uploadImage(@UploadedFile() file, @Res() res: Response) {
+  async uploadImage(@UploadedFile() file, @Res() res: Response) {
     try {
-      const image: ImageMetadata = {
+      const image = await this.memesService.saveImageMetadata({
         id: null,
         caption: file.key,
         url: file.location,
         imageName: file.originalname,
-      };
-
-      this.memesService.saveImageMetadata(image);
-      res.send({ location: file.location });
-    } catch (error) {}
+      });
+      res.send(image);
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

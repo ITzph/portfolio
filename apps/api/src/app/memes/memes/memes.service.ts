@@ -9,10 +9,14 @@ export class MemesService {
     @InjectRepository(ImageMetadata) private readonly imageRepository: Repository<ImageMetadata>,
   ) {}
   public fetchAllMemes() {
-    return 'allasdfasdfasdfdsa';
+    return this.imageRepository.find();
   }
 
   public saveImageMetadata(image: ImageMetadata) {
     return this.imageRepository.save(image);
+  }
+
+  public deleteImage(id: number) {
+    return this.imageRepository.delete(id);
   }
 }

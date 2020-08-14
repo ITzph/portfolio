@@ -1,7 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { IImageMetadata } from '@portfolio/api-interfaces';
 
 @Entity({ name: 'image_metadata' })
-export class ImageMetadata {
+export class ImageMetadata implements IImageMetadata {
   @PrimaryGeneratedColumn({ unsigned: true })
   id: number;
 

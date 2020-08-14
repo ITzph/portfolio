@@ -8,6 +8,13 @@
       >Profile</a
     >
     <a
+      [routerLink]="['/memes']"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="link"
+      >Memes</a
+    >
+    <a
       [routerLink]="['/resume']"
       routerLinkActive="active-link"
       [routerLinkActiveOptions]="{ exact: true }"
