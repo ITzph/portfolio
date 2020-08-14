@@ -21,6 +21,12 @@ export class MemesService {
     this.memes.next([...this.memes.getValue(), meme]);
   }
 
+  public deleteMeme(meme: IImageMetadata) {
+    this.http.delete<{ id: number }>(`/api/memes/${meme.id}`).subscribe((res) => {
+      this.memes.next(this.memes.getValue().filter((_meme) => res.id !== _meme.id));
+    });
+  }
+
   imageUpload(imageForm: FormData) {
     return this.http.post<IImageMetadata>('api/memes', imageForm);
   }

@@ -2,21 +2,16 @@
 
 <input (change)="onImagePicked($event)" placeholder="Upload Image" type="file" accept="image/*" />
 <button (click)="onImageUpload()">Upload Image</button>
+<input [(ngModel)]="caption" />
 
 <ng-container *ngFor="let meme of memes$ | async">
   <div class="memes">
     <div class="meme">
-      <img width="200px" [src]="meme.url" />
+      <h3>{{ meme.caption }}</h3>
+      <img width="400px" [src]="meme.url" [title]="meme.imageName" />
+      <!-- <button color="warn" mat-raised-button (click)="onDeleteMeme(meme)">
+        <mat-icon>delete_forever</mat-icon>
+      </button> -->
     </div>
   </div>
 </ng-container>
-
-<!-- <div *ngIf="imageUrl">
-  Preview Image from AWS
-  <br />
-  <img
-    width="200px"
-    src="https://YOUR S3 BUCKET
-     NAME.s3.amazonaws.com/{{ imageUrl }}"
-  />
-</div> -->

@@ -8,10 +8,11 @@ import {
   Delete,
   Param,
   ParseIntPipe,
+  Req,
 } from '@nestjs/common';
 import { MemesService } from './memes.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 
 import * as multerS3 from 'multer-s3';
 import * as aws from 'aws-sdk';
@@ -80,11 +81,13 @@ export class MemesController {
       }),
     }),
   )
-  async uploadImage(@UploadedFile() file, @Res() res: Response) {
+  async uploadImage(@UploadedFile() file, @Req() req: Request, @Res() res: Response) {
+    const body = req.body as { caption: string; title: string };
+
     try {
       const image = await this.memesService.saveImageMetadata({
         id: null,
-        caption: file.key,
+        caption: body?.caption ?? '',
         url: file.location,
         imageName: file.originalname,
       });
