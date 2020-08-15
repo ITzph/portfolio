@@ -18,10 +18,10 @@ export class ImageMetadata implements IImageMetadata {
   @Column({ default: '' })
   description: string;
 
-  @Column({ enum: ImageCategory })
-  category: string;
+  @Column({ length: 20 })
+  category: ImageCategory;
 
-  @Column({ default: '' })
+  @Column({ default: '', length: 50 })
   title: string;
 
   @Column()
