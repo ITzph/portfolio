@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { IImageMetadata } from '@portfolio/api-interfaces';
+import { User } from './user.entity';
 
 @Entity({ name: 'image_metadata' })
 export class ImageMetadata implements IImageMetadata {
@@ -14,4 +15,8 @@ export class ImageMetadata implements IImageMetadata {
 
   @Column()
   url: string;
+
+  @ManyToOne(() => User, (user) => user.experiences)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 }

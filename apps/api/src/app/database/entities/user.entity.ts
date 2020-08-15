@@ -3,6 +3,7 @@ import { IUser, ISocialHandler } from '@portfolio/api-interfaces';
 import { UserSkill } from './user-skill.entity';
 import { UserExperience } from './user-experience.entity';
 import { UserCertification } from './user-certification.entity';
+import { ImageMetadata } from './image.entity';
 
 @Entity({ name: 'user' })
 export class User implements IUser {
@@ -50,4 +51,7 @@ export class User implements IUser {
 
   @OneToMany('UserCertification', 'user', { eager: true })
   certifications: UserCertification[];
+
+  @OneToMany('ImageMetadata', 'user')
+  images: ImageMetadata[];
 }
