@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile/profile.module').then((m) => m.ProfileModule),
   },
   {
+    path: 'memes',
+    loadChildren: () => import('./pages/memes/memes.module').then((m) => m.MemesModule),
+  },
+  {
     path: 'resume',
     loadChildren: () => import('./pages/resume/resume.module').then((m) => m.ResumeModule),
   },

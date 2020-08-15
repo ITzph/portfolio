@@ -48,3 +48,11 @@ export interface ISocialHandler {
   icon: string;
   description: string;
 }
+
+export interface IImageMetadata {
+  id: number;
+  imageName: string;
+  url: string;
+  title: string;
+  description: string;
+}

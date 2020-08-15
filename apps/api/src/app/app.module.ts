@@ -5,9 +5,10 @@ import { AppService } from './app.service';
 import { ProfileModule } from './profile/profile.module';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
+import { MemesModule } from './memes/memes.module';
 
 @Module({
-  imports: [ProfileModule, DatabaseModule, ConfigModule.forRoot({})],
+  imports: [ProfileModule, DatabaseModule, ConfigModule.forRoot({}), MemesModule],
   controllers: [AppController],
   providers: [AppService],
 })

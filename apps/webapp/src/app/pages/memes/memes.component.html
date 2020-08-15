@@ -1,0 +1,17 @@
+<input (change)="onImagePicked($event)" placeholder="Upload Image" type="file" accept="image/*" />
+<button (click)="onImageUpload()">Upload Image</button>
+<input [(ngModel)]="title" />
+<input [(ngModel)]="description" />
+
+<ng-container *ngFor="let meme of memes$ | async">
+  <div class="memes">
+    <div class="meme">
+      <h2>{{ meme.title }}</h2>
+      <img width="400px" [src]="meme.url" [title]="meme.imageName" />
+      <h3>{{ meme.description }}</h3>
+      <!-- <button color="warn" mat-raised-button (click)="onDeleteMeme(meme)">
+        <mat-icon>delete_forever</mat-icon>
+      </button> -->
+    </div>
+  </div>
+</ng-container>
