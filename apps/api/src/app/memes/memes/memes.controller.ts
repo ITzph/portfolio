@@ -16,6 +16,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Response, Request } from 'express';
 
 import { MemesS3Service } from './memes-s3.service';
+import { ImageCategory } from '../../database/entities/image.entity';
 
 @Controller('memes')
 export class MemesController {
@@ -49,7 +50,9 @@ export class MemesController {
     try {
       const image = await this.memesService.saveImageMetadata({
         id: null,
-        caption: body?.caption ?? '',
+        description: body?.caption,
+        category: ImageCategory.MEME,
+        title: body?.title,
         url: file.location,
         imageName: file.originalname,
         user: null,
@@ -68,7 +71,7 @@ export class MemesController {
         if (err) {
           res.status(HttpStatus.NOT_FOUND).send('Image not found');
         } else {
-          res.status(HttpStatus.OK).send(data.Body);
+          res.status(HttpStatus.OK).set('Content-Type', 'image/*').send(data.Body);
         }
       });
   }

@@ -53,5 +53,6 @@ export interface IImageMetadata {
   id: number;
   imageName: string;
   url: string;
-  caption: string;
+  title: string;
+  description: string;
 }

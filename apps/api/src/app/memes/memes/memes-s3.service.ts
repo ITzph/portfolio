@@ -10,7 +10,7 @@ export class MemesS3Service implements MulterOptionsFactory {
   private readonly FILE_LIMIT_SIZE = 123451232132;
 
   constructor(private readonly configService: ConfigService) {
-    const isDevEnv = process.env.NODE_ENV === 'development';
+    const isDevEnv = process.env.S3_ENV === 'local';
 
     this.s3 = new AWS.S3({
       endpoint: isDevEnv ? 'http://localhost:4572' : undefined,
