@@ -19,4 +19,8 @@ export class MemesService {
   public deleteImage(id: number) {
     return this.imageRepository.delete(id);
   }
+
+  public getImageById(id: number) {
+    return this.imageRepository.findOne(id);
+  }
 }

@@ -17,5 +17,7 @@ if (environment.hmr) {
     console.error('Are you using the --hmr flag for ng serve?');
   }
 } else {
-  bootstrap().catch((err) => console.error(err));
+  document.addEventListener('DOMContentLoaded', () => {
+    bootstrap().catch((err) => console.error(err));
+  });
 }

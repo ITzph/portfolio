@@ -15,6 +15,7 @@ export class MemesS3Service implements MulterOptionsFactory {
     this.s3 = new AWS.S3({
       endpoint: isDevEnv ? 'http://localhost:4572' : undefined,
       s3ForcePathStyle: isDevEnv,
+      region: 'ap-southeast-1',
     });
 
     AWS.config.update({
@@ -23,7 +24,7 @@ export class MemesS3Service implements MulterOptionsFactory {
     });
   }
 
-  public s3Instance() {
+  public s3Instance(): AWS.S3 {
     return this.s3;
   }
 

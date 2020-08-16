@@ -32,13 +32,24 @@ export class MemesController {
 
   @Delete(':id')
   async deleteImage(@Param('id', ParseIntPipe) id, @Res() res: Response) {
-    try {
+    const imageToDelete = await this.memesService.getImageById(id);
+
+    if (imageToDelete) {
+      await this.s3Service
+        .s3Instance()
+        .deleteObject({
+          Bucket: process.env.AWS_MEMES_BUCKET_NAME,
+          Key: imageToDelete.imageName,
+        })
+        .promise();
+
       const result = await this.memesService.deleteImage(id);
+
       if (result.affected) {
         return res.send({ id });
       }
-    } catch (error) {
-      console.error(error);
+    } else {
+      res.status(HttpStatus.NOT_FOUND).send({ message: 'Gago ka ba!' });
     }
   }
 
@@ -54,7 +65,7 @@ export class MemesController {
         category: ImageCategory.MEME,
         title: body?.title,
         url: file.location,
-        imageName: file.originalname,
+        imageName: file.key,
         user: null,
       });
       res.send(image);
@@ -64,15 +75,16 @@ export class MemesController {
   }
 
   @Get('image/:id')
-  getImageByName(@Param('id') id: string, @Res() res: Response) {
-    this.s3Service
-      .s3Instance()
-      .getObject({ Bucket: process.env.AWS_MEMES_BUCKET_NAME, Key: id }, (err, data) => {
-        if (err) {
-          res.status(HttpStatus.NOT_FOUND).send('Image not found');
-        } else {
-          res.status(HttpStatus.OK).set('Content-Type', 'image/*').send(data.Body);
-        }
-      });
+  async getImageByName(@Param('id') id: string, @Res() res: Response) {
+    try {
+      const s3GetRes = await this.s3Service
+        .s3Instance()
+        .getObject({ Bucket: process.env.AWS_MEMES_BUCKET_NAME, Key: id })
+        .promise();
+
+      res.status(HttpStatus.OK).set('Content-Type', 'image/*').send(s3GetRes.Body);
+    } catch (error) {
+      res.status(HttpStatus.NOT_FOUND).send('Image not found');
+    }
   }
 }
