@@ -24,7 +24,7 @@ export class MemesS3Service implements MulterOptionsFactory {
     });
   }
 
-  public s3Instance() {
+  public s3Instance(): AWS.S3 {
     return this.s3;
   }
 
