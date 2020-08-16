@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MemesService } from './memes.service';
 import { IImageMetadata } from '@portfolio/api-interfaces';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'portfolio-memes',
@@ -9,12 +10,14 @@ import { IImageMetadata } from '@portfolio/api-interfaces';
 })
 export class MemesComponent implements OnInit {
   imageObj: File;
-  description = 'sample caption';
-  title = 'sample title';
+  memeForm = this.fb.group({
+    title: 'Default Title',
+    description: 'Default  Description',
+  });
 
   ngOnInit(): void {}
 
-  constructor(private readonly memesService: MemesService) {}
+  constructor(private readonly memesService: MemesService, private readonly fb: FormBuilder) {}
 
   onImagePicked(event: Event): void {
     const FILE = (event.target as HTMLInputElement).files[0];
@@ -32,8 +35,8 @@ export class MemesComponent implements OnInit {
   onImageUpload() {
     const imageForm = new FormData();
     imageForm.append('image', this.imageObj);
-    imageForm.append('caption', this.description);
-    imageForm.append('title', this.title);
+    imageForm.append('caption', this.memeForm.value.description);
+    imageForm.append('title', this.memeForm.value.title);
     this.memesService.imageUpload(imageForm).subscribe((res) => {
       this.memesService.addMeme(res);
     });

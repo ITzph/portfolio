@@ -1,7 +1,22 @@
-<input (change)="onImagePicked($event)" placeholder="Upload Image" type="file" accept="image/*" />
-<button (click)="onImageUpload()">Upload Image</button>
-<input [(ngModel)]="title" />
-<input [(ngModel)]="description" />
+<mat-card>
+  <form [formGroup]="memeForm" class="meme-form">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="Ex. Pizza" formControlName="title" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput placeholder="Ex. Pizza" formControlName="description" />
+    </mat-form-field>
+    <input
+      (change)="onImagePicked($event)"
+      placeholder="Upload Image"
+      type="file"
+      accept="image/*"
+    />
+    <button color="primary" mat-raised-button (click)="onImageUpload()">Upload Image</button>
+  </form>
+</mat-card>
 
 <ng-container *ngFor="let meme of memes$ | async">
   <div class="memes">

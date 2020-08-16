@@ -26,7 +26,7 @@
             "aot": true,
             "assets": ["apps/webapp/src/favicon.ico", "apps/webapp/src/assets"],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "apps/webapp/src/styles.scss",
               "node_modules/animate.css/animate.min.css",
               "node_modules/hover.css/css/hover-min.css"
