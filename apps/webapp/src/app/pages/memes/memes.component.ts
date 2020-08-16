@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MemesService } from './memes.service';
 import { IImageMetadata } from '@portfolio/api-interfaces';
-import { FormBuilder } from '@angular/forms';
+import { AddMemeDialogComponent } from './add-meme-dialog/add-meme-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MemeFormData } from './model/meme.model';
 
 @Component({
   selector: 'portfolio-memes',
@@ -9,34 +11,33 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./memes.component.scss'],
 })
 export class MemesComponent implements OnInit {
-  imageObj: File;
-  memeForm = this.fb.group({
-    title: 'Default Title',
-    description: 'Default  Description',
-  });
-
   ngOnInit(): void {}
 
-  constructor(private readonly memesService: MemesService, private readonly fb: FormBuilder) {}
+  constructor(private readonly memesService: MemesService, public dialog: MatDialog) {}
 
-  onImagePicked(event: Event): void {
-    const FILE = (event.target as HTMLInputElement).files[0];
-    this.imageObj = FILE;
+  public onAddNewMeme() {
+    const dialogRef = this.dialog.open(AddMemeDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.onImageUpload(result);
+      }
+    });
   }
 
-  get memes$() {
+  public get memes$() {
     return this.memesService.getMemes$();
   }
 
-  onDeleteMeme(meme: IImageMetadata) {
+  public onDeleteMeme(meme: IImageMetadata) {
     this.memesService.deleteMeme(meme);
   }
 
-  onImageUpload() {
+  private onImageUpload(formData: MemeFormData) {
     const imageForm = new FormData();
-    imageForm.append('image', this.imageObj);
-    imageForm.append('caption', this.memeForm.value.description);
-    imageForm.append('title', this.memeForm.value.title);
+    imageForm.append('image', formData.image);
+    imageForm.append('caption', formData.description);
+    imageForm.append('title', formData.title);
     this.memesService.imageUpload(imageForm).subscribe((res) => {
       this.memesService.addMeme(res);
     });

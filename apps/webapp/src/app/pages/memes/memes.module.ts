@@ -11,9 +11,10 @@ import * as fromProfile from '../../reducers/profile.reducer';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AddMemeDialogComponent } from './add-meme-dialog/add-meme-dialog.component';
 
 @NgModule({
-  declarations: [MemesComponent],
+  declarations: [MemesComponent, AddMemeDialogComponent],
   imports: [
     CommonModule,
     MemesRoutingModule,
