@@ -29,6 +29,6 @@ export class MemesService {
   }
 
   imageUpload(imageForm: FormData) {
-    return this.http.post<IImageMetadata>('api/memes', imageForm);
+    return this.http.post<IImageMetadata>(`${environment.api}/memes`, imageForm);
   }
 }

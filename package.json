@@ -29,7 +29,11 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "format:fix": "pretty-quick --staged"
+    "format:fix": "pretty-quick --staged",
+    "dev:ssr": "ng run webapp:serve-ssr",
+    "serve:ssr": "node dist/webapp/server/main.js",
+    "build:ssr": "ng build --prod && ng run webapp:server:production",
+    "prerender": "ng run webapp:prerender"
   },
   "husky": {
     "hooks": {
@@ -47,6 +51,7 @@
     "@angular/material": "^10.1.3",
     "@angular/platform-browser": "^10.0.0",
     "@angular/platform-browser-dynamic": "^10.0.0",
+    "@angular/platform-server": "^10.0.0",
     "@angular/router": "^10.0.0",
     "@nestjs/common": "^7.0.0",
     "@nestjs/config": "^0.5.0",
@@ -56,10 +61,12 @@
     "@ngrx/effects": "9.1.0",
     "@ngrx/entity": "9.1.0",
     "@ngrx/store": "^9.2.0",
+    "@nguniversal/express-engine": "^10.0.1",
     "@nrwl/angular": "10.0.6",
     "angular-svg-icon": "^10.0.0",
     "animate.css": "^4.1.0",
     "aws-sdk": "^2.733.0",
+    "express": "^4.15.2",
     "hover.css": "^2.3.2",
     "multer-s3": "^2.9.0",
     "mysql": "^2.18.1",
@@ -82,6 +89,7 @@
     "@ngrx/router-store": "^9.1.0",
     "@ngrx/schematics": "9.1.0",
     "@ngrx/store-devtools": "9.1.0",
+    "@nguniversal/builders": "^10.0.1",
     "@nrwl/cypress": "10.0.6",
     "@nrwl/jest": "10.0.6",
     "@nrwl/nest": "10.0.6",
