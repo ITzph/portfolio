@@ -24,4 +24,4 @@ artifacts:
   files:
     - '**/*'
   discard-paths: no
-  base-directory: dist/apps/webapp/browser
+  base-directory: dist/webapp/browser
