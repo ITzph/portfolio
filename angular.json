@@ -24,7 +24,12 @@
             "polyfills": "apps/webapp/src/polyfills.ts",
             "tsConfig": "apps/webapp/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/webapp/src/favicon.ico", "apps/webapp/src/assets"],
+            "assets": [
+              "apps/webapp/src/favicon.ico",
+              "apps/webapp/src/assets",
+              "apps/webapp/src/Dockerfile",
+              "apps/webapp/src/nginx.conf"
+            ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "apps/webapp/src/styles.scss",
