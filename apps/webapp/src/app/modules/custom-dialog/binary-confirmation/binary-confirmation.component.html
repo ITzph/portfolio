@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content>
+  <ng-container *ngFor="let message of data.messages">
+    <p>{{ message }}</p>
+  </ng-container>
+</mat-dialog-content>
+<mat-dialog-actions style="flex-direction: row-reverse;">
+  <button color="primary" mat-raised-button (click)="onOkayHandler()">
+    {{ data.okayLabel }}
+  </button>
+  <button mat-button (click)="onNoHandler()">{{ data.noLabel }}</button>
+</mat-dialog-actions>

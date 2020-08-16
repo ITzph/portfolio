@@ -4,6 +4,7 @@ import { IImageMetadata } from '@portfolio/api-interfaces';
 import { AddMemeDialogComponent } from './add-meme-dialog/add-meme-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MemeFormData } from './model/meme.model';
+import { BinaryConfirmationComponent } from '../../modules/custom-dialog/binary-confirmation/binary-confirmation.component';
 
 @Component({
   selector: 'portfolio-memes',
@@ -30,7 +31,22 @@ export class MemesComponent implements OnInit {
   }
 
   public onDeleteMeme(meme: IImageMetadata) {
-    this.memesService.deleteMeme(meme);
+    const dialogProp = {
+      title: 'Delete Meme',
+      messages: ['Are you sure you want to delete ' + meme.title],
+      okayLabel: 'Okay',
+      noLabel: 'Cancel',
+    };
+
+    const dialogRef = this.dialog.open(BinaryConfirmationComponent, {
+      data: dialogProp,
+    });
+
+    dialogRef.afterClosed().subscribe((isTrue: boolean) => {
+      if (isTrue) {
+        this.memesService.deleteMeme(meme);
+      }
+    });
   }
 
   private onImageUpload(formData: MemeFormData) {

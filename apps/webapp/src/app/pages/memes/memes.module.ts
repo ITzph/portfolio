@@ -12,6 +12,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddMemeDialogComponent } from './add-meme-dialog/add-meme-dialog.component';
+import { CustomDialogModule } from '../../modules/custom-dialog/custom-dialog.module';
 
 @NgModule({
   declarations: [MemesComponent, AddMemeDialogComponent],
@@ -25,6 +26,7 @@ import { AddMemeDialogComponent } from './add-meme-dialog/add-meme-dialog.compon
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
+    CustomDialogModule,
     StoreModule.forFeature(fromProfile.profileFeatureKey, fromProfile.reducer),
   ],
 })
