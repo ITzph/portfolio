@@ -26,8 +26,14 @@ export class MemesController {
   ) {}
 
   @Get()
-  fetchAllImages() {
-    return this.memesService.fetchAllMemes();
+  async fetchAllImages() {
+    const memes = await this.memesService.fetchAllMemes();
+
+    // Remove URL when sending response
+    return memes.map((meme) => {
+      delete meme.url;
+      return meme;
+    });
   }
 
   @Delete(':id')
@@ -74,12 +80,12 @@ export class MemesController {
     }
   }
 
-  @Get('image/:id')
-  async getImageByName(@Param('id') id: string, @Res() res: Response) {
+  @Get('image/:key')
+  async getImageByKey(@Param('key') key: string, @Res() res: Response) {
     try {
       const s3GetRes = await this.s3Service
         .s3Instance()
-        .getObject({ Bucket: process.env.AWS_MEMES_BUCKET_NAME, Key: id })
+        .getObject({ Bucket: process.env.AWS_MEMES_BUCKET_NAME, Key: key })
         .promise();
 
       res.status(HttpStatus.OK).set('Content-Type', 'image/*').send(s3GetRes.Body);

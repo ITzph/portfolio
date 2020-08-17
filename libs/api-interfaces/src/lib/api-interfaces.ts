@@ -52,7 +52,7 @@ export interface ISocialHandler {
 export interface IImageMetadata {
   id: number;
   imageName: string;
-  url: string;
+  url?: string;
   title: string;
   description: string;
 }

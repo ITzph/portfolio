@@ -1,5 +1,5 @@
 export interface MemeFormData {
-  image: File;
+  fileSource: File;
   description: string;
   title: string;
 }

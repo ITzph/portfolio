@@ -8,6 +8,7 @@ export class MemesService {
   constructor(
     @InjectRepository(ImageMetadata) private readonly imageRepository: Repository<ImageMetadata>,
   ) {}
+
   public fetchAllMemes() {
     return this.imageRepository.find();
   }

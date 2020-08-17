@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MemeFormData } from '../model/meme.model';
 
@@ -10,10 +10,11 @@ import { MemeFormData } from '../model/meme.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddMemeDialogComponent implements OnInit {
-  imageObj: File;
   memeForm = this.fb.group({
-    title: 'Default Title',
-    description: 'Default  Description',
+    title: ['', [Validators.required, Validators.minLength(4)]],
+    description: [''],
+    file: ['', [Validators.required]],
+    fileSource: ['', [Validators.required]],
   });
 
   constructor(
@@ -24,16 +25,23 @@ export class AddMemeDialogComponent implements OnInit {
   ngOnInit(): void {}
 
   onImagePicked(event: Event): void {
-    const FILE = (event.target as HTMLInputElement).files[0];
-    this.imageObj = FILE;
+    const fileSource = (event.target as HTMLInputElement).files[0];
+
+    if (fileSource) {
+      this.memeForm.patchValue({
+        fileSource,
+      });
+    }
   }
 
   onUploadHandler() {
-    const { description, title } = this.memeForm.value;
-    this.dialogRef.close({
-      description,
-      title,
-      image: this.imageObj,
-    });
+    if (this.memeForm.valid) {
+      const { description, title, fileSource } = this.memeForm.value;
+      this.dialogRef.close({
+        description,
+        title,
+        fileSource,
+      });
+    }
   }
 }
