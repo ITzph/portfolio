@@ -40,3 +40,5 @@ Thumbs.db
 
 # environment
 **/*.env
+.angulardoc.json
+.vscode/settings.json
