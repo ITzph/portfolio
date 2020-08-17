@@ -1,11 +1,35 @@
 <footer class="footer">
   <div class="footer__content">
-    <div class="links">links</div>
-    <div class="socials">
-      <ng-container *ngFor="let social of socialHandlers$ | async">
-        <portfolio-social-handler [social]="social"></portfolio-social-handler>
-      </ng-container>
-    </div>
+    <nav class="links__wrapper">
+      <a
+        [routerLink]="['/profile']"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="link"
+        >Profile</a
+      >
+      <a
+        [routerLink]="['/memes']"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="link"
+        >Memes</a
+      >
+      <a
+        [routerLink]="['/resume']"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="link"
+        >Resume</a
+      >
+    </nav>
+    <nav class="socials__wrapper">
+      <div class="socials">
+        <ng-container *ngFor="let social of socialHandlers$ | async">
+          <portfolio-social-handler [social]="social"></portfolio-social-handler>
+        </ng-container>
+      </div>
+    </nav>
     <div class="copyright">
       All rights reserved 2020
     </div>

@@ -36,11 +36,11 @@ export class AddMemeDialogComponent implements OnInit {
 
   onUploadHandler() {
     if (this.memeForm.valid) {
-      const { description, title, file } = this.memeForm.value;
+      const { description, title, fileSource } = this.memeForm.value;
       this.dialogRef.close({
         description,
         title,
-        image: file,
+        fileSource,
       });
     }
   }

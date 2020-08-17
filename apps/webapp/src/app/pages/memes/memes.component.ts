@@ -51,7 +51,7 @@ export class MemesComponent implements OnInit {
 
   private onImageUpload(formData: MemeFormData) {
     const imageForm = new FormData();
-    imageForm.append('image', formData.image);
+    imageForm.append('image', formData.fileSource);
     imageForm.append('caption', formData.description);
     imageForm.append('title', formData.title);
     this.memesService.imageUpload(imageForm).subscribe((res) => {
