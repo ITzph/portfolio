@@ -13,9 +13,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddMemeDialogComponent } from './add-meme-dialog/add-meme-dialog.component';
 import { CustomDialogModule } from '../../modules/custom-dialog/custom-dialog.module';
+import { MemesListComponent } from './memes-list/memes-list.component';
 
 @NgModule({
-  declarations: [MemesComponent, AddMemeDialogComponent],
+  declarations: [MemesComponent, AddMemeDialogComponent, MemesListComponent],
   imports: [
     CommonModule,
     MemesRoutingModule,
@@ -29,5 +30,6 @@ import { CustomDialogModule } from '../../modules/custom-dialog/custom-dialog.mo
     CustomDialogModule,
     StoreModule.forFeature(fromProfile.profileFeatureKey, fromProfile.reducer),
   ],
+  exports: [MemesListComponent],
 })
 export class MemesModule {}

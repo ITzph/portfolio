@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { map } from 'rxjs/operators';
 import { AddMemeDialogComponent } from './add-meme-dialog/add-meme-dialog.component';
 import { MemeFormData } from './model/meme.model';
-import { BinaryConfirmationComponent } from '../../modules/custom-dialog/binary-confirmation/binary-confirmation.component';
 import { MemesService } from './memes.service';
 import { environment } from '../../../environments/environment';
 
@@ -17,7 +16,7 @@ import { environment } from '../../../environments/environment';
 export class MemesComponent implements OnInit {
   ngOnInit(): void {}
 
-  constructor(private readonly memesService: MemesService, public dialog: MatDialog) {}
+  constructor(private readonly memesService: MemesService, private readonly dialog: MatDialog) {}
 
   public onAddNewMeme() {
     const dialogRef = this.dialog.open(AddMemeDialogComponent);
@@ -42,25 +41,6 @@ export class MemesComponent implements OnInit {
         );
       }),
     );
-  }
-
-  public onDeleteMeme(meme: IImageMetadata) {
-    const dialogProp = {
-      title: 'Delete Meme',
-      messages: ['Are you sure you want to delete ' + meme.title],
-      okayLabel: 'Okay',
-      noLabel: 'Cancel',
-    };
-
-    const dialogRef = this.dialog.open(BinaryConfirmationComponent, {
-      data: dialogProp,
-    });
-
-    dialogRef.afterClosed().subscribe((isTrue: boolean) => {
-      if (isTrue) {
-        this.memesService.deleteMeme(meme);
-      }
-    });
   }
 
   private onImageUpload(formData: MemeFormData) {
