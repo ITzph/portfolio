@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MemesService } from './memes.service';
 import { IImageMetadata } from '@portfolio/api-interfaces';
 import { AddMemeDialogComponent } from './add-meme-dialog/add-meme-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MemeFormData } from './model/meme.model';
 import { BinaryConfirmationComponent } from '../../modules/custom-dialog/binary-confirmation/binary-confirmation.component';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'portfolio-memes',
   templateUrl: './memes.component.html',
   styleUrls: ['./memes.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MemesComponent implements OnInit {
   ngOnInit(): void {}
@@ -27,7 +29,18 @@ export class MemesComponent implements OnInit {
   }
 
   public get memes$() {
-    return this.memesService.getMemes$();
+    return this.memesService.getMemes$().pipe(
+      map((memes) => {
+        return memes.map(
+          (meme): IImageMetadata => {
+            return {
+              ...meme,
+              url: 'api/memes/image/' + meme.imageName,
+            };
+          },
+        );
+      }),
+    );
   }
 
   public onDeleteMeme(meme: IImageMetadata) {
