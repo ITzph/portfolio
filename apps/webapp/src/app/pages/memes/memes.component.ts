@@ -1,11 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { MemesService } from './memes.service';
 import { IImageMetadata } from '@portfolio/api-interfaces';
-import { AddMemeDialogComponent } from './add-meme-dialog/add-meme-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { MemeFormData } from './model/meme.model';
-import { BinaryConfirmationComponent } from '../../modules/custom-dialog/binary-confirmation/binary-confirmation.component';
 import { map } from 'rxjs/operators';
+import { AddMemeDialogComponent } from './add-meme-dialog/add-meme-dialog.component';
+import { MemeFormData } from './model/meme.model';
+import { MemesService } from './memes.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'portfolio-memes',
@@ -16,7 +16,7 @@ import { map } from 'rxjs/operators';
 export class MemesComponent implements OnInit {
   ngOnInit(): void {}
 
-  constructor(private readonly memesService: MemesService, public dialog: MatDialog) {}
+  constructor(private readonly memesService: MemesService, private readonly dialog: MatDialog) {}
 
   public onAddNewMeme() {
     const dialogRef = this.dialog.open(AddMemeDialogComponent);
@@ -35,31 +35,12 @@ export class MemesComponent implements OnInit {
           (meme): IImageMetadata => {
             return {
               ...meme,
-              url: 'api/memes/image/' + meme.imageName,
+              url: `${environment.api}/memes/image/${meme.imageName}`,
             };
           },
         );
       }),
     );
-  }
-
-  public onDeleteMeme(meme: IImageMetadata) {
-    const dialogProp = {
-      title: 'Delete Meme',
-      messages: ['Are you sure you want to delete ' + meme.title],
-      okayLabel: 'Okay',
-      noLabel: 'Cancel',
-    };
-
-    const dialogRef = this.dialog.open(BinaryConfirmationComponent, {
-      data: dialogProp,
-    });
-
-    dialogRef.afterClosed().subscribe((isTrue: boolean) => {
-      if (isTrue) {
-        this.memesService.deleteMeme(meme);
-      }
-    });
   }
 
   private onImageUpload(formData: MemeFormData) {
