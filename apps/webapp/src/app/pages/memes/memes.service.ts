@@ -3,15 +3,25 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { IImageMetadata } from '@portfolio/api-interfaces';
 import { environment } from '../../../environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { finalize } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class MemesService {
   private memes = new BehaviorSubject<IImageMetadata[]>([]);
 
-  constructor(private readonly http: HttpClient) {
-    this.http.get<IImageMetadata[]>(`${environment.api}/memes`).subscribe((res) => {
-      this.memes.next(res);
-    });
+  constructor(private readonly http: HttpClient, private readonly spinner: NgxSpinnerService) {
+    this.spinner.show('memesSpinner');
+    this.http
+      .get<IImageMetadata[]>(`${environment.api}/memes`)
+      .pipe(
+        finalize(() => {
+          this.spinner.hide('memesSpinner');
+        }),
+      )
+      .subscribe((res) => {
+        this.memes.next(res);
+      });
   }
 
   public getMemes$() {
@@ -23,9 +33,17 @@ export class MemesService {
   }
 
   public deleteMeme(meme: IImageMetadata) {
-    this.http.delete<{ id: number }>(`${environment.api}/memes/${meme.id}`).subscribe((res) => {
-      this.memes.next(this.memes.getValue().filter((_meme) => res.id !== _meme.id));
-    });
+    this.spinner.show('memesSpinner');
+    this.http
+      .delete<{ id: number }>(`${environment.api}/memes/${meme.id}`)
+      .pipe(
+        finalize(() => {
+          this.spinner.hide('memesSpinner');
+        }),
+      )
+      .subscribe((res) => {
+        this.memes.next(this.memes.getValue().filter((_meme) => res.id !== _meme.id));
+      });
   }
 
   imageUpload(imageForm: FormData) {

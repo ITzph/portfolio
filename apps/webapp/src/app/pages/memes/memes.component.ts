@@ -1,11 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { IImageMetadata } from '@portfolio/api-interfaces';
 import { MatDialog } from '@angular/material/dialog';
-import { map } from 'rxjs/operators';
+import { map, tap, finalize } from 'rxjs/operators';
 import { AddMemeDialogComponent } from './add-meme-dialog/add-meme-dialog.component';
 import { MemeFormData } from './model/meme.model';
 import { MemesService } from './memes.service';
 import { environment } from '../../../environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'portfolio-memes',
@@ -16,7 +17,11 @@ import { environment } from '../../../environments/environment';
 export class MemesComponent implements OnInit {
   ngOnInit(): void {}
 
-  constructor(private readonly memesService: MemesService, private readonly dialog: MatDialog) {}
+  constructor(
+    private readonly memesService: MemesService,
+    private readonly dialog: MatDialog,
+    private spinner: NgxSpinnerService,
+  ) {}
 
   public onAddNewMeme() {
     const dialogRef = this.dialog.open(AddMemeDialogComponent);
@@ -48,8 +53,16 @@ export class MemesComponent implements OnInit {
     imageForm.append('image', formData.fileSource);
     imageForm.append('caption', formData.description);
     imageForm.append('title', formData.title);
-    this.memesService.imageUpload(imageForm).subscribe((res) => {
-      this.memesService.addMeme(res);
-    });
+    this.spinner.show('memesSpinner');
+    this.memesService
+      .imageUpload(imageForm)
+      .pipe(
+        finalize(() => {
+          this.spinner.hide('memesSpinner');
+        }),
+      )
+      .subscribe((res) => {
+        this.memesService.addMeme(res);
+      });
   }
 }

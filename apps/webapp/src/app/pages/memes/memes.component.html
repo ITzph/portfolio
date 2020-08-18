@@ -2,5 +2,13 @@
   Add new Meme
   <mat-icon>add</mat-icon>
 </button>
-
 <portfolio-memes-list [memes]="memes$ | async"></portfolio-memes-list>
+
+<ngx-spinner
+  name="memesSpinner"
+  size="medium"
+  color="#fff"
+  type="ball-zig-zag-deflect"
+  [fullScreen]="true"
+  ><p style="color: white;">Weight lungs...</p></ngx-spinner
+>
