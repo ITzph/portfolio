@@ -1,5 +1,12 @@
-<ng-container *ngFor="let meme of memes; trackBy: memeTracker">
+<ng-container
+  *ngFor="
+    let meme of memes | paginate: { itemsPerPage: 3, currentPage: currentPage };
+    trackBy: memeTracker
+  "
+>
   <div class="memes">
     <portfolio-meme-detail [meme]="meme"></portfolio-meme-detail>
   </div>
 </ng-container>
+
+<pagination-controls (pageChange)="currentPage = $event"></pagination-controls>

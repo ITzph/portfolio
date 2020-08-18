@@ -11,6 +11,8 @@ export class MemesListComponent implements OnInit {
   @Input()
   memes: IImageMetadata[];
 
+  currentPage = 0;
+
   ngOnInit(): void {}
 
   public memeTracker(index: number, meme: IImageMetadata) {
