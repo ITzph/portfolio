@@ -1,6 +1,7 @@
+<pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
 <ng-container
   *ngFor="
-    let meme of memes | paginate: { itemsPerPage: 3, currentPage: currentPage };
+    let meme of memes | paginate: { itemsPerPage: PAGE_SIZE_LIMIT, currentPage: currentPage };
     trackBy: memeTracker
   "
 >
@@ -9,4 +10,4 @@
   </div>
 </ng-container>
 
-<pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+<pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>

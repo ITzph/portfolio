@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { IImageMetadata } from '@portfolio/api-interfaces';
+import { MemesService } from '../memes.service';
 
 @Component({
   selector: 'portfolio-memes-list',
@@ -13,7 +14,11 @@ export class MemesListComponent implements OnInit {
 
   currentPage = 0;
 
+  readonly PAGE_SIZE_LIMIT = 4;
+
   ngOnInit(): void {}
+
+  constructor(private readonly memesService: MemesService) {}
 
   public memeTracker(index: number, meme: IImageMetadata) {
     if (meme) {
@@ -21,5 +26,10 @@ export class MemesListComponent implements OnInit {
     }
 
     return index;
+  }
+
+  public onPageChange(page: number) {
+    this.currentPage = page;
+    this.memesService.fetchPaginatedMemes();
   }
 }
