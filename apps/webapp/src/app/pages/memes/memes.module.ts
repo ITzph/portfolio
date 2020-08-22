@@ -15,6 +15,8 @@ import { AddMemeDialogComponent } from './add-meme-dialog/add-meme-dialog.compon
 import { CustomDialogModule } from '../../modules/custom-dialog/custom-dialog.module';
 import { MemesListComponent } from './memes-list/memes-list.component';
 import { MemeDetailComponent } from './meme-detail/meme-detail.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [MemesComponent, AddMemeDialogComponent, MemesListComponent, MemeDetailComponent],
@@ -30,6 +32,8 @@ import { MemeDetailComponent } from './meme-detail/meme-detail.component';
     MatDialogModule,
     CustomDialogModule,
     StoreModule.forFeature(fromProfile.profileFeatureKey, fromProfile.reducer),
+    NgxSpinnerModule,
+    NgxPaginationModule,
   ],
   exports: [MemesComponent, AddMemeDialogComponent, MemesListComponent, MemeDetailComponent],
 })

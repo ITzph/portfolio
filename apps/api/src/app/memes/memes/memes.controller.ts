@@ -10,6 +10,7 @@ import {
   ParseIntPipe,
   Req,
   HttpStatus,
+  Query,
 } from '@nestjs/common';
 import { MemesService } from './memes.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -26,14 +27,13 @@ export class MemesController {
   ) {}
 
   @Get()
-  async fetchAllImages() {
-    const memes = await this.memesService.fetchAllMemes();
-
-    // Remove URL when sending response
-    return memes.map((meme) => {
-      delete meme.url;
-      return meme;
+  async fetchAllImages(@Query('page') page: number, @Query('limit') limit: number) {
+    const paginatednata = await this.memesService.fetchAllMemes({
+      limit,
+      page,
     });
+
+    return paginatednata;
   }
 
   @Delete(':id')
