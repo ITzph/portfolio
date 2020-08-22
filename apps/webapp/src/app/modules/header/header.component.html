@@ -1,4 +1,7 @@
-<header class="main-header">
+<div class="top-bar">
+  Dummy
+</div>
+<header class="main-header" [class.main-header--pinned]="isPinned">
   <nav>
     <a
       [routerLink]="['/profile']"
