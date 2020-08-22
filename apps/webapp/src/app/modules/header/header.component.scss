@@ -28,4 +28,20 @@
 .top-bar {
   height: 5rem;
   background-color: $color-primary;
+  display: flex;
+  justify-content: center;
+
+  &__wrapper {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__socials {
+    display: flex;
+    :not(:last-child) {
+      margin-right: $margin-small;
+    }
+  }
 }

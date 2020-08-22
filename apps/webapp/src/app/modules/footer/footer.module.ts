@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer.component';
-import { AngularSvgIconModule } from 'angular-svg-icon';
-import { SocialHandlerComponent } from './social-handler/social-handler.component';
 import { AppRoutingModule } from '../../app-routing.module';
+import { SocialModule } from '../social/social.module';
 
 @NgModule({
-  declarations: [FooterComponent, SocialHandlerComponent],
-  imports: [CommonModule, AngularSvgIconModule.forRoot(), AppRoutingModule],
-  exports: [FooterComponent, SocialHandlerComponent],
+  declarations: [FooterComponent],
+  imports: [CommonModule, AppRoutingModule, SocialModule],
+  exports: [FooterComponent],
 })
 export class FooterModule {}
