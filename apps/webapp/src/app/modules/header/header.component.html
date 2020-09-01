@@ -1,25 +1,53 @@
-<header class="main-header">
-  <nav>
-    <a
-      [routerLink]="['/profile']"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }"
-      class="link"
-      >Profile</a
-    >
-    <a
-      [routerLink]="['/memes']"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }"
-      class="link"
-      >Memes</a
-    >
-    <a
-      [routerLink]="['/resume']"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }"
-      class="link"
-      >Resume</a
-    >
-  </nav>
+<div class="top-bar">
+  <div class="top-bar__wrapper">
+    <p>
+      <strong>
+        The quick brown fox jumps over the lazy dog.
+      </strong>
+    </p>
+
+    <div class="top-bar__socials">
+      <ng-container *ngFor="let social of socialHandlers$ | async">
+        <portfolio-social-handler [social]="social"></portfolio-social-handler>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<header class="main-header" [class.main-header--pinned]="isPinned">
+  <div class="main-header__wrapper">
+    <div class="brand">
+      <svg-icon
+        [src]="'assets/images/codegino.svg'"
+        [applyClass]="true"
+        svgClass="brand__logo animate__animated animate__wobble hvr-pulse-grow"
+        [svgStyle]="{ 'width.rem': 3 }"
+      ></svg-icon>
+      <h1 style="margin: 0;">
+        Code Gino
+      </h1>
+    </div>
+    <nav>
+      <a
+        [routerLink]="['/profile']"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="link hvr-float"
+        >Profile</a
+      >
+      <a
+        [routerLink]="['/memes']"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="link hvr-float"
+        >Memes</a
+      >
+      <a
+        [routerLink]="['/resume']"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="link hvr-float"
+        >Resume</a
+      >
+    </nav>
+  </div>
 </header>
