@@ -8,10 +8,11 @@
 .app-root__wrapper {
   min-height: 100%;
   padding: 0;
-  overflow: auto;
+  overflow: hidden;
   position: relative;
 }
 
 .main-content {
-  padding-bottom: 10rem;
+  padding-bottom: 12rem; // If value is updated, footer height should match this value
+  box-sizing: border-box;
 }

@@ -27,7 +27,7 @@ html {
   --color-secondary-accent: green;
   --color-secondary-accent-contrast: green;
 
-  --color-dark: #222;
+  --color-dark: #262626;
   --color-dark-contrast: #fff;
   --color-dark-light: #555;
   --color-dark-light-contrast: green;
@@ -103,4 +103,11 @@ p,
 div {
   margin: 0;
   padding: 0;
+}
+
+div,
+section,
+article,
+nav {
+  box-sizing: border-box;
 }
