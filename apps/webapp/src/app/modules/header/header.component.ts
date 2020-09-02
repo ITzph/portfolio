@@ -38,6 +38,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.scrollEvent.next(rect);
     });
 
+    const appRoot = document.getElementById('app-root');
+
+    this.render.listen(appRoot, 'scroll', () => {
+      const rect = this.el.nativeElement.getBoundingClientRect().top;
+      this.scrollEvent.next(rect);
+    });
+
     this.scrollEvent
       .pipe(
         throttleTime(50),
