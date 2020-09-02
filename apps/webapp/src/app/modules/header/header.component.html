@@ -53,7 +53,10 @@
   </div>
 </header>
 <section class="side-nav-section" *ngIf="isSideNavVisible" (click)="showLinks(false)">
-  <nav class="side-nav-links" (click)="$event.stopPropagation()">
+  <nav
+    class="side-nav-links animate__animated animate__slideInRight animate__faster"
+    (click)="$event.stopPropagation()"
+  >
     <a
       [routerLink]="['/profile']"
       routerLinkActive="active-link"
