@@ -26,7 +26,7 @@
         Code Gino
       </h1>
     </div>
-    <nav>
+    <nav class="header-links">
       <a
         [routerLink]="['/profile']"
         routerLinkActive="active-link"
@@ -49,5 +49,37 @@
         >Resume</a
       >
     </nav>
+    <button class="links-button" (click)="showLinks(true)">Hamburger</button>
   </div>
 </header>
+<section class="side-nav-section" *ngIf="isSideNavVisible" (click)="showLinks(false)">
+  <nav
+    class="side-nav-links animate__animated animate__slideInRight animate__faster"
+    (click)="$event.stopPropagation()"
+  >
+    <a
+      [routerLink]="['/profile']"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="link hvr-float"
+      (click)="showLinks(false)"
+      >Profile</a
+    >
+    <a
+      [routerLink]="['/memes']"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="link hvr-float"
+      (click)="showLinks(false)"
+      >Memes</a
+    >
+    <a
+      [routerLink]="['/resume']"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="link hvr-float"
+      (click)="showLinks(false)"
+      >Resume</a
+    >
+  </nav>
+</section>

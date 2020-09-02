@@ -13,6 +13,7 @@ import { getCurrentUser } from '../../selectors/profile.selectors';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   socialHandlers$: Observable<ISocialHandler[]>;
+  isSideNavVisible = false;
 
   constructor(
     private el: ElementRef,
@@ -57,6 +58,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.isPinned = false;
         }
       });
+  }
+
+  showLinks(isVisible: boolean) {
+    this.isSideNavVisible = isVisible;
   }
 
   ngOnDestroy() {
