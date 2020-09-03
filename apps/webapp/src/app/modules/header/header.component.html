@@ -49,7 +49,9 @@
         >Resume</a
       >
     </nav>
-    <button class="links-button" (click)="showLinks(true)">Hamburger</button>
+    <button mat-icon-button class="links-button" (click)="showLinks(true)">
+      <mat-icon>menu</mat-icon>
+    </button>
   </div>
 </header>
 <section class="side-nav-section" *ngIf="isSideNavVisible" (click)="showLinks(false)">
