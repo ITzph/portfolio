@@ -11,6 +11,9 @@ export class SocialHandlerComponent implements OnInit {
   @Input()
   social: ISocialHandler;
 
+  @Input()
+  fillColor = '#000000';
+
   constructor() {}
 
   ngOnInit(): void {}
