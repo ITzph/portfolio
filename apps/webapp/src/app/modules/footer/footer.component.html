@@ -28,7 +28,7 @@
     <nav class="socials__wrapper">
       <div class="socials">
         <ng-container *ngFor="let social of socialHandlers$ | async">
-          <portfolio-social-handler [social]="social"></portfolio-social-handler>
+          <portfolio-social-handler [social]="social" fillColor="#fff"></portfolio-social-handler>
         </ng-container>
       </div>
     </nav>

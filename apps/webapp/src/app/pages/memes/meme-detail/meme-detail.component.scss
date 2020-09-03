@@ -1,7 +1,26 @@
+@import '../../../../styles/variables';
+
 :host {
   display: block;
 }
 
 .meme {
   text-align: center;
+
+  padding: 0;
+  @media #{$xs-device} {
+    padding: 1%;
+  }
+
+  @media #{$sm-device} {
+    padding: 0 20%;
+  }
+
+  @media #{$md-device} {
+    padding: 0 25%;
+  }
+
+  @media #{$lg-device} {
+    padding: 0 30%;
+  }
 }

@@ -3,6 +3,7 @@ import { IImageMetadata } from '@portfolio/api-interfaces';
 import { MemesService } from '../memes.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BinaryConfirmationComponent } from '../../../modules/custom-dialog/binary-confirmation/binary-confirmation.component';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'portfolio-meme-detail',
@@ -14,7 +15,11 @@ export class MemeDetailComponent implements OnInit {
   @Input()
   meme: IImageMetadata;
 
-  constructor(private readonly memesService: MemesService, private readonly dialog: MatDialog) {}
+  constructor(
+    private readonly memesService: MemesService,
+    private readonly dialog: MatDialog,
+    private readonly authService: AuthService,
+  ) {}
 
   ngOnInit(): void {}
 
@@ -35,5 +40,9 @@ export class MemeDetailComponent implements OnInit {
         this.memesService.deleteMeme(meme);
       }
     });
+  }
+
+  get isLoggedIn$() {
+    return this.authService.isLoggedIn$();
   }
 }
