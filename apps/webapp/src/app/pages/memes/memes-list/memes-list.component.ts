@@ -1,6 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { IImageMetadata } from '@portfolio/api-interfaces';
 import { MemesService } from '../memes.service';
+import { AuthService } from '../../../services/auth.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'portfolio-memes-list',

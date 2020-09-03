@@ -1,4 +1,4 @@
-<button mat-raised-button (click)="onAddNewMeme()" title="Add new Meme">
+<button mat-raised-button (click)="onAddNewMeme()" title="Add new Meme" *ngIf="isLoggedIn$ | async">
   Add new Meme
   <mat-icon>add</mat-icon>
 </button>

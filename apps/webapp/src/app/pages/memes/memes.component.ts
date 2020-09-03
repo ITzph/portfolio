@@ -7,6 +7,7 @@ import { MemeFormData } from './model/meme.model';
 import { MemesService } from './memes.service';
 import { environment } from '../../../environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'portfolio-memes',
@@ -20,8 +21,13 @@ export class MemesComponent implements OnInit {
   constructor(
     private readonly memesService: MemesService,
     private readonly dialog: MatDialog,
-    private spinner: NgxSpinnerService,
+    private readonly spinner: NgxSpinnerService,
+    private readonly authService: AuthService,
   ) {}
+
+  get isLoggedIn$() {
+    return this.authService.isLoggedIn$();
+  }
 
   public onAddNewMeme() {
     const dialogRef = this.dialog.open(AddMemeDialogComponent);
