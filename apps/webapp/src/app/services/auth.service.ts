@@ -21,4 +21,8 @@ export class AuthService {
   public isLoggedIn$(): Observable<boolean> {
     return this.getToken().pipe(map((token) => !!token));
   }
+
+  public logout() {
+    this.setToken(null);
+  }
 }

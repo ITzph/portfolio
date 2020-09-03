@@ -48,6 +48,14 @@
         class="link hvr-float"
         >Resume</a
       >
+      <a
+        *ngIf="isLoggedOut$ | async; else forLogout"
+        [routerLink]="['/auth']"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="link hvr-float"
+        >Login</a
+      >
     </nav>
     <button mat-icon-button class="links-button" (click)="showLinks(true)">
       <mat-icon>menu</mat-icon>
@@ -85,3 +93,7 @@
     >
   </nav>
 </section>
+
+<ng-template #forLogout>
+  <button (click)="onLogout()">logout</button>
+</ng-template>
