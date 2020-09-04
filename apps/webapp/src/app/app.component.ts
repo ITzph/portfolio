@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { setProfile } from './actions/profile.actions';
 import { finalize } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'portfolio-root',
@@ -23,7 +24,12 @@ export class AppComponent implements OnInit {
     private readonly profileStore: Store<fromProfile.State>,
     private readonly apiService: ApiService,
     private readonly spinner: NgxSpinnerService,
+    private readonly authService: AuthService,
   ) {}
+
+  get isLoggedIn$() {
+    return this.authService.isLoggedIn$();
+  }
 
   ngOnInit(): void {
     // TODO optimize to prevent loading when there is a store value

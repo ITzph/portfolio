@@ -5,6 +5,7 @@ import { ISocialHandler } from '@portfolio/api-interfaces';
 import { Store, select } from '@ngrx/store';
 import * as fromProfile from '../../reducers/profile.reducer';
 import { getCurrentUser } from '../../selectors/profile.selectors';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'portfolio-header',
@@ -16,10 +17,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isSideNavVisible = false;
 
   constructor(
-    private el: ElementRef,
-    private render: Renderer2,
+    private readonly el: ElementRef,
+    private readonly render: Renderer2,
     private readonly profileStore: Store<fromProfile.State>,
+    private readonly authService: AuthService,
   ) {}
+
+  get isLoggedOut$() {
+    return this.authService.isLoggedIn$().pipe(map((isLoggedIn) => !isLoggedIn));
+  }
 
   isPinned = false;
 
@@ -58,6 +64,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.isPinned = false;
         }
       });
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 
   showLinks(isVisible: boolean) {
