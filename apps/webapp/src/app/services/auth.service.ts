@@ -27,12 +27,12 @@ export class AuthService {
 
   public login(username: string, password: string) {
     this.http
-      .post<{ userName: string; userId: string; token: string }>(environment.api + '/auth/login', {
+      .post<{ access_token: string }>(environment.api + '/auth/login', {
         username,
         password,
       })
       .subscribe((res) => {
-        this.setToken(res.token);
+        this.setToken(res.access_token);
         this.router.navigateByUrl('/');
       });
   }

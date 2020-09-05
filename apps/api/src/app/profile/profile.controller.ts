@@ -1,7 +1,8 @@
-import { Controller, Get, Param, Post, Req, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Param, Post, Req, Res, HttpStatus, UseGuards } from '@nestjs/common';
 import { ProfileService } from './profile.service';
 import { User } from '../database/entities/user.entity';
 import { Request, Response } from 'express';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('profiles')
 export class ProfileController {
@@ -18,6 +19,7 @@ export class ProfileController {
     return await this.profileService.getUserById(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   getAllUsers() {
     return this.profileService.getAllUsers();

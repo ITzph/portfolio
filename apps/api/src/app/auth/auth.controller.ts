@@ -1,20 +1,15 @@
-import { Controller, Post, Req, Res, HttpStatus } from '@nestjs/common';
-import { Request, Response } from 'express';
+import { Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { Request } from 'express';
 import { AuthService } from './auth.service';
+import { LocalAuthGuard } from './local-auth.guard';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @UseGuards(LocalAuthGuard)
   @Post('/login')
-  async login(@Req() req: Request, @Res() res: Response) {
-    const { username, password } = req.body;
-    const user = await this.authService.validate(username, password);
-
-    if (user) {
-      return res.status(HttpStatus.ACCEPTED).send(user);
-    } else {
-      return res.status(HttpStatus.UNAUTHORIZED).send({ message: 'Invalid Credentials' });
-    }
+  async login(@Req() req: Request) {
+    return this.authService.login(req.user);
   }
 }

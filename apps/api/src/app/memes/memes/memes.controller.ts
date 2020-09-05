@@ -11,6 +11,7 @@ import {
   Req,
   HttpStatus,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { MemesService } from './memes.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -18,6 +19,7 @@ import { Response, Request } from 'express';
 
 import { MemesS3Service } from './memes-s3.service';
 import { ImageCategory } from '../../database/entities/image.entity';
+import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 
 @Controller('memes')
 export class MemesController {
@@ -36,6 +38,7 @@ export class MemesController {
     return paginatednata;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async deleteImage(@Param('id', ParseIntPipe) id, @Res() res: Response) {
     const imageToDelete = await this.memesService.getImageById(id);
@@ -59,6 +62,7 @@ export class MemesController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   @UseInterceptors(FileInterceptor('image'))
   async uploadImage(@UploadedFile() file, @Req() req: Request, @Res() res: Response) {
