@@ -13,6 +13,9 @@ export class User implements IUser {
   @Column({ name: 'username', unique: true, nullable: false })
   username: string;
 
+  @Column({ name: 'password' })
+  password: string; // TODO remove passing of password when fetching user
+
   @Column({ name: 'first_name', nullable: false })
   firstName: string;
 

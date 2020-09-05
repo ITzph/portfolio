@@ -26,6 +26,14 @@ export class ProfileService {
     return this.userRepository.find();
   }
 
+  public getUserByUsername(username: string) {
+    return this.userRepository.findOne({
+      where: {
+        username,
+      },
+    });
+  }
+
   public addNewUser(user: User) {
     return this.userRepository.save(user);
   }
