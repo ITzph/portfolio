@@ -10,11 +10,11 @@ export class User implements IUser {
   @PrimaryGeneratedColumn({ unsigned: true })
   id: number;
 
-  @Column({ name: 'username', unique: true, nullable: false })
+  @Column({ name: 'username', unique: true })
   username: string;
 
-  @Column({ name: 'password' })
-  password: string; // TODO remove passing of password when fetching user
+  @Column({ name: 'password', select: false })
+  password: string;
 
   @Column({ name: 'first_name', nullable: false })
   firstName: string;

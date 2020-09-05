@@ -10,22 +10,12 @@ export class AuthService {
   ) {}
 
   public async validateUser(username: string, pass: string) {
-    // if (username === 'carlo' && password === '12345678') {
-    //   return {
-    //     token: 'randomToken',
-    //     userId: 1,
-    //     username,
-    //   };
-    // } else {
-    //   return null;
-    // }
     const user = await this.usersService.getUserByUsername(username);
     if (user && user.password === pass) {
       const { password, ...result } = user;
       return {
         username: result.username,
         userId: result.id,
-        token: 'asdfasdfsa',
       };
     }
     return null;

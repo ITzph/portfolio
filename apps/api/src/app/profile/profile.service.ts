@@ -31,6 +31,7 @@ export class ProfileService {
       where: {
         username,
       },
+      select: ['password', 'id', 'username'],
     });
   }
 
