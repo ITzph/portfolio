@@ -14,7 +14,7 @@ import { JwtStrategy } from './jwt.strategy';
   providers: [AuthService, ProfileService, LocalStrategy, JwtStrategy],
   imports: [
     TypeOrmModule.forFeature([User]),
-    PassportModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       useFactory: async () => ({
         secretOrPrivateKey: process.env.JWT_SECRET_KEY,
