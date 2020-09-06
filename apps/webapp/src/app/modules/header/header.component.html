@@ -107,7 +107,6 @@
       >Login</a
     >
     <a
-      *ngIf="isLoggedIn$ | async"
       [routerLink]="['/admin']"
       routerLinkActive="active-link"
       [routerLinkActiveOptions]="{ exact: true }"

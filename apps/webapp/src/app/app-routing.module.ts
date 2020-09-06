@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CanLoadAuthenticatedGuard } from './guards/can-load-authenticated.guard';
+import { CanActivateAuthenticatedGuard } from './guards/can-activate-authenticated.guard';
 
 const routes: Routes = [
   {

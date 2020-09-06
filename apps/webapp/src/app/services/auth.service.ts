@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -39,5 +39,6 @@ export class AuthService {
 
   public logout() {
     this.setToken(null);
+    this.router.navigateByUrl('/');
   }
 }
