@@ -27,10 +27,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return this.authService.isLoggedIn$().pipe(map((isLoggedIn) => !isLoggedIn));
   }
 
-  get isLoggedIn$() {
-    return this.authService.isLoggedIn$();
-  }
-
   isPinned = false;
 
   isUnsubscribed = false;

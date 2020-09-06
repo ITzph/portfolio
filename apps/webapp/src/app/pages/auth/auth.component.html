@@ -9,7 +9,7 @@
       <form [formGroup]="authForm" class="flex-column">
         <mat-form-field>
           <mat-label>Username</mat-label>
-          <input matInput placeholder="Username" formControlName="username" />
+          <input matInput placeholder="Username" formControlName="username" [autocomplete]="true" />
           <mat-error *ngIf="authForm.get('username').hasError('required')"
             >Username is required</mat-error
           >
@@ -19,7 +19,13 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Password</mat-label>
-          <input matInput type="password" placeholder="Password" formControlName="password" />
+          <input
+            matInput
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+            [autocomplete]="true"
+          />
         </mat-form-field>
       </form>
     </mat-card-content>
