@@ -56,6 +56,14 @@
         class="link hvr-float"
         >Login</a
       >
+      <a
+        *ngIf="isLoggedIn$ | async"
+        [routerLink]="['/admin']"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="link hvr-float"
+        >Admin</a
+      >
     </nav>
     <button mat-icon-button class="links-button" (click)="showLinks(true)">
       <mat-icon>menu</mat-icon>
@@ -90,6 +98,22 @@
       class="link hvr-float"
       (click)="showLinks(false)"
       >Resume</a
+    >
+    <a
+      *ngIf="isLoggedOut$ | async; else forLogout"
+      [routerLink]="['/auth']"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="link hvr-float"
+      >Login</a
+    >
+    <a
+      *ngIf="isLoggedIn$ | async"
+      [routerLink]="['/admin']"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="link hvr-float"
+      >Admin</a
     >
   </nav>
 </section>
