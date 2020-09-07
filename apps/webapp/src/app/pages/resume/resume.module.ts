@@ -9,6 +9,9 @@ import * as fromProfile from '../../reducers/profile.reducer';
 import { StoreModule } from '@ngrx/store';
 import { ExperienceComponent } from './experience/experience.component';
 import { CertificationComponent } from './certification/certification.component';
+import { LayoutModule } from '../../modules/layout/layout.module';
+import { HeaderModule } from '../../modules/header/header.module';
+import { FooterModule } from '../../modules/footer/footer.module';
 
 @NgModule({
   declarations: [ResumeComponent, SkillComponent, ExperienceComponent, CertificationComponent],
@@ -17,6 +20,9 @@ import { CertificationComponent } from './certification/certification.component'
     ResumeRoutingModule,
     NgxSpinnerModule,
     StoreModule.forFeature(fromProfile.profileFeatureKey, fromProfile.reducer),
+    LayoutModule,
+    HeaderModule,
+    FooterModule,
   ],
   exports: [ResumeComponent, SkillComponent, ExperienceComponent, CertificationComponent],
 })

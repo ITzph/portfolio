@@ -17,6 +17,9 @@ import { MemesListComponent } from './memes-list/memes-list.component';
 import { MemeDetailComponent } from './meme-detail/meme-detail.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LayoutModule } from '../../modules/layout/layout.module';
+import { HeaderModule } from '../../modules/header/header.module';
+import { FooterModule } from '../../modules/footer/footer.module';
 
 @NgModule({
   declarations: [MemesComponent, AddMemeDialogComponent, MemesListComponent, MemeDetailComponent],
@@ -34,6 +37,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     StoreModule.forFeature(fromProfile.profileFeatureKey, fromProfile.reducer),
     NgxSpinnerModule,
     NgxPaginationModule,
+    LayoutModule,
+    HeaderModule,
+    FooterModule,
   ],
   exports: [MemesComponent, AddMemeDialogComponent, MemesListComponent, MemeDetailComponent],
 })

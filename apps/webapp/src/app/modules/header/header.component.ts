@@ -33,7 +33,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   scrollEvent: Subject<number> = new Subject();
 
+  // FIX bug header not responding to scroll/wheel events
   ngOnInit() {
+    const appRoot = document.getElementById('app-root');
+
     this.socialHandlers$ = this.profileStore.pipe(
       select(getCurrentUser),
       map((user) => {
@@ -44,8 +47,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       const rect = this.el.nativeElement.getBoundingClientRect().top;
       this.scrollEvent.next(rect);
     });
-
-    const appRoot = document.getElementById('app-root');
 
     this.render.listen(appRoot, 'scroll', () => {
       const rect = this.el.nativeElement.getBoundingClientRect().top;
