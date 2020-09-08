@@ -50,6 +50,8 @@ export class AppComponent implements OnInit {
           console.error(error);
         },
       );
+
+    this.authService.initializeAuthCredentials();
   }
 
   updateProfile(profile: IUser) {
