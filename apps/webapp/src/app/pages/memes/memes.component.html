@@ -2,17 +2,7 @@
   <portfolio-header contentHeader></portfolio-header>
   <portfolio-footer contentFooter></portfolio-footer>
   <section contentBody>
-    <button
-      mat-raised-button
-      (click)="onAddNewMeme()"
-      title="Add new Meme"
-      *ngIf="isLoggedIn$ | async"
-    >
-      Add new Meme
-      <mat-icon>add</mat-icon>
-    </button>
     <portfolio-memes-list [memes]="memes$ | async"></portfolio-memes-list>
-
     <ngx-spinner
       name="memesSpinner"
       size="medium"
