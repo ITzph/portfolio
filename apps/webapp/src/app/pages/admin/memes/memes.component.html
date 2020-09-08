@@ -5,7 +5,8 @@
 </button>
 <div class="memes-list" *ngFor="let meme of memes$ | async">
   <portfolio-meme-detail [meme]="meme"></portfolio-meme-detail>
-  <button color="warn" mat-raised-button (click)="onDeleteMeme(meme)">
+  <button color="warn" mat-icon-button (click)="onDeleteMeme(meme)">
     <mat-icon>delete_forever</mat-icon>
   </button>
+  <button mat-icon-button><mat-icon>edit</mat-icon></button>
 </div>
