@@ -2,7 +2,4 @@
   <h2>{{ meme.title }}</h2>
   <img width="100%" [src]="meme.url" [title]="meme.imageName" />
   <h3>{{ meme.description }}</h3>
-  <button color="warn" mat-raised-button (click)="onDeleteMeme(meme)" *ngIf="isLoggedIn$ | async">
-    <mat-icon>delete_forever</mat-icon>
-  </button>
 </div>
