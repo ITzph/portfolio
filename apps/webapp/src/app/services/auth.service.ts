@@ -17,7 +17,9 @@ export class AuthService {
   private authToken = new BehaviorSubject<string>(null);
   private username = new BehaviorSubject<string>(null);
 
-  constructor(private readonly http: HttpClient, private readonly router: Router) {}
+  constructor(private readonly http: HttpClient, private readonly router: Router) {
+    this.initializeAuthCredentials();
+  }
 
   public getToken() {
     return this.authToken.asObservable();
@@ -64,5 +66,7 @@ export class AuthService {
     this.router.navigateByUrl('/');
     localStorage.removeItem(LOCAL_STORAGE_KEY.USERNAME);
     localStorage.removeItem(LOCAL_STORAGE_KEY.AUTH_TOKEN);
+    this.authToken.next(null);
+    this.username.next(null);
   }
 }

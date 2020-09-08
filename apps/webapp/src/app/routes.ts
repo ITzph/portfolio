@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { CanLoadAuthenticatedGuard } from './guards/can-load-authenticated.guard';
+import { CanActivateAuthenticatedGuard } from './guards/can-activate-authenticated.guard';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,7 @@ export const routes: Routes = [
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin.module').then((m) => m.AdminModule),
     canLoad: [CanLoadAuthenticatedGuard],
+    canActivate: [CanActivateAuthenticatedGuard],
   },
   {
     path: '',
