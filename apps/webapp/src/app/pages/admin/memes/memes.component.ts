@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddMemeDialogComponent } from './add-meme-dialog/add-meme-dialog.component';
 import { MemeFormData } from '../../memes/model/meme.model';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { UpdateMemeDialogComponent } from './update-meme-dialog/update-meme-dialog.component';
+import { trackByIdOrIndex } from '../../../utils/tracker-by-id.util';
 
 @Component({
   selector: 'portfolio-admin-memes',
@@ -47,6 +49,22 @@ export class MemesComponent implements OnInit {
         this.onImageUpload(result);
       }
     });
+  }
+
+  public onUpdateMeme(meme: IImageMetadata) {
+    const dialogRef = this.dialog.open(UpdateMemeDialogComponent, {
+      data: meme,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // this.onImageUpload(result);
+      }
+    });
+  }
+
+  public memeTracker(index: number, meme: IImageMetadata) {
+    return trackByIdOrIndex(index, meme);
   }
 
   public onDeleteMeme(meme: IImageMetadata) {

@@ -11,9 +11,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddMemeDialogComponent } from './memes/add-meme-dialog/add-meme-dialog.component';
+import { UpdateMemeDialogComponent } from './memes/update-meme-dialog/update-meme-dialog.component';
 
 @NgModule({
-  declarations: [AdminComponent, MemesComponent, AddMemeDialogComponent],
+  declarations: [AdminComponent, MemesComponent, AddMemeDialogComponent, UpdateMemeDialogComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -26,6 +27,6 @@ import { AddMemeDialogComponent } from './memes/add-meme-dialog/add-meme-dialog.
     MatButtonModule,
     MatDialogModule,
   ],
-  exports: [AdminComponent, MemesComponent, AddMemeDialogComponent],
+  exports: [AdminComponent, MemesComponent, AddMemeDialogComponent, UpdateMemeDialogComponent],
 })
 export class AdminModule {}
