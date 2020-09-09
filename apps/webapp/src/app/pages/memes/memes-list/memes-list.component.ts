@@ -1,9 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { IImageMetadata } from '@portfolio/api-interfaces';
 import { MemesService } from '../memes.service';
-import { AuthService } from '../../../services/auth.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { trackByIdOrIndex } from '../../../utils/tracker-by-id.util';
 
 @Component({
   selector: 'portfolio-memes-list',
@@ -24,11 +22,7 @@ export class MemesListComponent implements OnInit {
   constructor(private readonly memesService: MemesService) {}
 
   public memeTracker(index: number, meme: IImageMetadata) {
-    if (meme) {
-      return meme.id;
-    }
-
-    return index;
+    return trackByIdOrIndex(index, meme);
   }
 
   public onPageChange(page: number) {
