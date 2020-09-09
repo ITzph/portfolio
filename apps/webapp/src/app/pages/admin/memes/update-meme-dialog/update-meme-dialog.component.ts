@@ -17,7 +17,7 @@ export class UpdateMemeDialogComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly dialogRef: MatDialogRef<UpdateMemeDialogComponent, MemeFormData>,
+    private readonly dialogRef: MatDialogRef<UpdateMemeDialogComponent, Partial<MemeFormData>>,
     @Inject(MAT_DIALOG_DATA) private data: MemeFormData,
   ) {}
 
@@ -39,7 +39,6 @@ export class UpdateMemeDialogComponent implements OnInit {
       this.dialogRef.close({
         description,
         title,
-        fileSource: null, // TODO Remove this later
       });
     }
   }

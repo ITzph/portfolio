@@ -56,9 +56,9 @@ export class MemesComponent implements OnInit {
       data: meme,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((result: { id: number; meme: Partial<IImageMetadata> }) => {
       if (result) {
-        // this.onImageUpload(result);
+        this.memesService.updateMeme(meme.id, result.meme);
       }
     });
   }
