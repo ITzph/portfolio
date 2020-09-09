@@ -5,7 +5,7 @@ import { MemesService } from '../../memes/memes.service';
 import { environment } from '../../../../environments/environment';
 import { BinaryConfirmationComponent } from '../../../modules/custom-dialog/binary-confirmation/binary-confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
-import { AddMemeDialogComponent } from '../../memes/add-meme-dialog/add-meme-dialog.component';
+import { AddMemeDialogComponent } from './add-meme-dialog/add-meme-dialog.component';
 import { MemeFormData } from '../../memes/model/meme.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 

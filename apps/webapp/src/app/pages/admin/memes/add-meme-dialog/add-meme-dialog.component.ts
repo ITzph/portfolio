@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { MemeFormData } from '../model/meme.model';
+import { MemeFormData } from '../../../memes/model/meme.model';
 
 @Component({
   selector: 'portfolio-add-meme-dialog',
