@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { IImageMetadata } from '@portfolio/api-interfaces';
 import { environment } from '../../../environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { finalize, take } from 'rxjs/operators';
+import { finalize, take, catchError } from 'rxjs/operators';
 import { Pagination } from '@portfolio/api-interfaces';
 
 @Injectable({ providedIn: 'root' })
@@ -50,6 +50,35 @@ export class MemesService {
 
   public addMeme(meme: IImageMetadata) {
     this.memes.next([...this.memes.getValue(), meme]);
+  }
+
+  public updateMeme(id: number, meme: Partial<IImageMetadata>) {
+    this.spinner.show('memesSpinner');
+    this.http
+      .patch<Partial<IImageMetadata>>(`${environment.api}/memes/${id}`, meme)
+      .pipe(
+        finalize(() => {
+          this.spinner.hide('memesSpinner');
+        }),
+        catchError((err) => {
+          throw { message: err };
+        }),
+      )
+      .subscribe((res) => {
+        // TODO handle result properly, check why result was id
+        this.memes.next(
+          this.memes.getValue().map((_meme) => {
+            if (id === _meme.id) {
+              return {
+                ..._meme,
+                ...res,
+              };
+            }
+
+            return _meme;
+          }),
+        );
+      });
   }
 
   public deleteMeme(meme: IImageMetadata) {

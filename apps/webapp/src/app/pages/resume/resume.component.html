@@ -1,28 +1,34 @@
-<ng-container *ngIf="profile$ | async; let profile">
-  <div class="skills-wrapper">
-    <h2>Work Skills</h2>
-    <ng-container *ngFor="let category of categorizedSkill$ | async">
-      <div class="skills-category">
-        <h3>{{ category.category }}</h3>
-        <aside class="flex-row skills-group">
-          <ng-container *ngFor="let skill of category.skills">
-            <portfolio-skill [skill]="skill"></portfolio-skill>
-          </ng-container>
-        </aside>
+<portfolio-public-layout>
+  <portfolio-header contentHeader></portfolio-header>
+  <portfolio-footer contentFooter></portfolio-footer>
+  <section contentBody>
+    <ng-container *ngIf="profile$ | async; let profile">
+      <div class="skills-wrapper">
+        <h2>Work Skills</h2>
+        <ng-container *ngFor="let category of categorizedSkill$ | async">
+          <div class="skills-category">
+            <h3>{{ category.category }}</h3>
+            <aside class="flex-row skills-group">
+              <ng-container *ngFor="let skill of category.skills">
+                <portfolio-skill [skill]="skill"></portfolio-skill>
+              </ng-container>
+            </aside>
+          </div>
+        </ng-container>
+      </div>
+      <div class="experiences-wrapper">
+        <h3>Work Experience</h3>
+        <ng-container *ngFor="let exp of profile.experiences">
+          <portfolio-experience [experience]="exp"></portfolio-experience>
+        </ng-container>
+      </div>
+
+      <div class="certifications-wrapper">
+        <h3>Certifications</h3>
+        <ng-container *ngFor="let cert of profile.certifications">
+          <portfolio-certification [certification]="cert"></portfolio-certification>
+        </ng-container>
       </div>
     </ng-container>
-  </div>
-  <div class="experiences-wrapper">
-    <h3>Work Experience</h3>
-    <ng-container *ngFor="let exp of profile.experiences">
-      <portfolio-experience [experience]="exp"></portfolio-experience>
-    </ng-container>
-  </div>
-
-  <div class="certifications-wrapper">
-    <h3>Certifications</h3>
-    <ng-container *ngFor="let cert of profile.certifications">
-      <portfolio-certification [certification]="cert"></portfolio-certification>
-    </ng-container>
-  </div>
-</ng-container>
+  </section>
+</portfolio-public-layout>

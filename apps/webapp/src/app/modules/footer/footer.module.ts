@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer.component';
-import { AppRoutingModule } from '../../app-routing.module';
 import { SocialModule } from '../social/social.module';
+import { routes } from '../../routes';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [FooterComponent],
-  imports: [CommonModule, AppRoutingModule, SocialModule],
+  imports: [CommonModule, SocialModule, RouterModule.forChild(routes)],
   exports: [FooterComponent],
 })
 export class FooterModule {}

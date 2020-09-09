@@ -8,6 +8,9 @@ import * as fromProfile from '../../reducers/profile.reducer';
 import { AutoTyperComponent } from './auto-typer/auto-typer.component';
 import { GreetingsTranscriptComponent } from './greetings-transcript/greetings-transcript.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { LayoutModule } from '../../modules/layout/layout.module';
+import { HeaderModule } from '../../modules/header/header.module';
+import { FooterModule } from '../../modules/footer/footer.module';
 
 @NgModule({
   declarations: [ProfileComponent, AutoTyperComponent, GreetingsTranscriptComponent],
@@ -16,6 +19,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ProfileRoutingModule,
     NgxSpinnerModule,
     StoreModule.forFeature(fromProfile.profileFeatureKey, fromProfile.reducer),
+    LayoutModule,
+    HeaderModule,
+    FooterModule,
   ],
   exports: [ProfileComponent, AutoTyperComponent, GreetingsTranscriptComponent],
 })

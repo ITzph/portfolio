@@ -37,6 +37,13 @@ export class MemesService {
     return this.imageRepository.save(image);
   }
 
+  public patchImage(id: number, image: Partial<{ title: string; description: string }>) {
+    return this.imageRepository.save({
+      id,
+      ...image,
+    });
+  }
+
   public deleteImage(id: number) {
     return this.imageRepository.delete(id);
   }

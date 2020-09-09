@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Add Meme</h2>
+<mat-dialog-content>
+  <form [formGroup]="memeForm" class="meme-form">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="Title" formControlName="title" />
+      <mat-error *ngIf="memeForm.get('title').hasError('required')">Title is required</mat-error>
+      <mat-error *ngIf="memeForm.get('title').hasError('minlength')"
+        >Minimum length of 4 characters</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput placeholder="Description" formControlName="description" />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    color="primary"
+    mat-raised-button
+    (click)="onUploadHandler()"
+    [disabled]="!memeForm.valid"
+  >
+    Update Image
+  </button>
+</mat-dialog-actions>

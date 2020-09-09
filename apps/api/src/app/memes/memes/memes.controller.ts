@@ -12,6 +12,7 @@ import {
   HttpStatus,
   Query,
   UseGuards,
+  Patch,
 } from '@nestjs/common';
 import { MemesService } from './memes.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -36,6 +37,24 @@ export class MemesController {
     });
 
     return paginatednata;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch(':id')
+  async patchImage(
+    @Param('id', ParseIntPipe) id: number,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    try {
+      const body = req.body as Partial<{ title: string; description: string }>;
+
+      const result = await this.memesService.patchImage(id, body);
+
+      res.status(HttpStatus.ACCEPTED).send(result);
+    } catch (error) {
+      res.status(HttpStatus.METHOD_NOT_ALLOWED).send('Operation not allowed');
+    }
   }
 
   @UseGuards(JwtAuthGuard)
