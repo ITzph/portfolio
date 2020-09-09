@@ -98,6 +98,7 @@ function generatePackageJson() {
     'reflect-metadata',
     'rxjs',
     'mysql',
+    'passport',
   ];
   const dependencies = implicitDeps.reduce((acc, dep) => {
     acc[dep] = packageJson.dependencies[dep];
