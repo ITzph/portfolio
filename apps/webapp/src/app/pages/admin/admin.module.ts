@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
-import { MemesComponent } from './memes/memes.component';
-import { MemesModule } from '../memes/memes.module';
+import { AdminMemesComponent } from './memes/memes.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,13 +11,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddMemeDialogComponent } from './memes/add-meme-dialog/add-meme-dialog.component';
 import { UpdateMemeDialogComponent } from './memes/update-meme-dialog/update-meme-dialog.component';
+import { PhotoModule } from '../../modules/photo/photo.module';
 
 @NgModule({
-  declarations: [AdminComponent, MemesComponent, AddMemeDialogComponent, UpdateMemeDialogComponent],
+  declarations: [
+    AdminComponent,
+    AdminMemesComponent,
+    AddMemeDialogComponent,
+    UpdateMemeDialogComponent,
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    MemesModule,
     MatIconModule,
     MatButtonModule,
     FormsModule,
@@ -26,7 +30,8 @@ import { UpdateMemeDialogComponent } from './memes/update-meme-dialog/update-mem
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
+    PhotoModule,
   ],
-  exports: [AdminComponent, MemesComponent, AddMemeDialogComponent, UpdateMemeDialogComponent],
+  exports: [AdminComponent, AdminMemesComponent, AddMemeDialogComponent, UpdateMemeDialogComponent],
 })
 export class AdminModule {}

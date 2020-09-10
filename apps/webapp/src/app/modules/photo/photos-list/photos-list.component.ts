@@ -1,15 +1,15 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { IImageMetadata } from '@portfolio/api-interfaces';
-import { MemesService } from '../memes.service';
+import { MemesService } from '../../../pages/memes/memes.service';
 import { trackByIdOrIndex } from '../../../utils/tracker-by-id.util';
 
 @Component({
-  selector: 'portfolio-memes-list',
-  templateUrl: './memes-list.component.html',
-  styleUrls: ['./memes-list.component.scss'],
+  selector: 'portfolio-photos-list',
+  templateUrl: './photos-list.component.html',
+  styleUrls: ['./photos-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MemesListComponent implements OnInit {
+export class PhotosListComponent implements OnInit {
   @Input()
   memes: IImageMetadata[];
 

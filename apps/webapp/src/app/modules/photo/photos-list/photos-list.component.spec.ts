@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MemeDetailComponent } from './meme-detail.component';
+import { PhotosListComponent } from './photos-list.component';
 
-describe('MemeDetailComponent', () => {
-  let component: MemeDetailComponent;
-  let fixture: ComponentFixture<MemeDetailComponent>;
+describe('MemesListComponent', () => {
+  let component: PhotosListComponent;
+  let fixture: ComponentFixture<PhotosListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MemeDetailComponent],
+      declarations: [PhotosListComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MemeDetailComponent);
+    fixture = TestBed.createComponent(PhotosListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
