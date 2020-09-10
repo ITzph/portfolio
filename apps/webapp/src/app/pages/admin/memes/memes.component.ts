@@ -17,7 +17,7 @@ import { trackByIdOrIndex } from '../../../utils/tracker-by-id.util';
   styleUrls: ['./memes.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MemesComponent implements OnInit {
+export class AdminMemesComponent implements OnInit {
   constructor(
     private readonly memesService: MemesService,
     private readonly dialog: MatDialog,
