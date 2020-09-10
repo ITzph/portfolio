@@ -1,4 +1,12 @@
-import { Component, OnInit, Renderer2, ElementRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Renderer2,
+  ElementRef,
+  OnDestroy,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { throttleTime, takeWhile, map } from 'rxjs/operators';
 import { ISocialHandler } from '@portfolio/api-interfaces';
@@ -11,6 +19,7 @@ import { AuthService } from '../../services/auth.service';
   selector: 'portfolio-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   socialHandlers$: Observable<ISocialHandler[]>;
@@ -21,6 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private readonly render: Renderer2,
     private readonly profileStore: Store<fromProfile.State>,
     private readonly authService: AuthService,
+    private readonly cdr: ChangeDetectorRef,
   ) {}
 
   get isLoggedOut$() {
@@ -64,9 +74,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
       )
       .subscribe((rect) => {
         if (rect < -20) {
-          this.isPinned = true;
+          if (!this.isPinned) {
+            this.isPinned = true;
+            this.cdr.detectChanges();
+          }
         } else {
-          this.isPinned = false;
+          if (this.isPinned) {
+            this.isPinned = false;
+            this.cdr.detectChanges();
+          }
         }
       });
   }
