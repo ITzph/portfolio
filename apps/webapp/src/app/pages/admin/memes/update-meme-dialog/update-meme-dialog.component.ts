@@ -23,16 +23,6 @@ export class UpdateMemeDialogComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onImagePicked(event: Event): void {
-    const fileSource = (event.target as HTMLInputElement).files[0];
-
-    if (fileSource) {
-      this.memeForm.patchValue({
-        fileSource,
-      });
-    }
-  }
-
   onUploadHandler() {
     if (this.memeForm.valid) {
       const { description, title } = this.memeForm.value;
