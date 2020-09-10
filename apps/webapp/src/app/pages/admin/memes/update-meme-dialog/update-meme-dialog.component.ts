@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MemeFormData } from '../../../memes/model/meme.model';
+import { PhotoFormData } from '../../../../modules/photo/model/photo.model';
 
 @Component({
   selector: 'portfolio-update-meme-dialog',
@@ -17,8 +17,8 @@ export class UpdateMemeDialogComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly dialogRef: MatDialogRef<UpdateMemeDialogComponent, Partial<MemeFormData>>,
-    @Inject(MAT_DIALOG_DATA) private data: MemeFormData,
+    private readonly dialogRef: MatDialogRef<UpdateMemeDialogComponent, Partial<PhotoFormData>>,
+    @Inject(MAT_DIALOG_DATA) private data: PhotoFormData,
   ) {}
 
   ngOnInit(): void {}

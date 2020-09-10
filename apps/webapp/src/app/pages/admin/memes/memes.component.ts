@@ -6,10 +6,10 @@ import { environment } from '../../../../environments/environment';
 import { BinaryConfirmationComponent } from '../../../modules/custom-dialog/binary-confirmation/binary-confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AddMemeDialogComponent } from './add-meme-dialog/add-meme-dialog.component';
-import { MemeFormData } from '../../memes/model/meme.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UpdateMemeDialogComponent } from './update-meme-dialog/update-meme-dialog.component';
 import { trackByIdOrIndex } from '../../../utils/tracker-by-id.util';
+import { PhotoFormData } from '../../../modules/photo/model/photo.model';
 
 @Component({
   selector: 'portfolio-admin-memes',
@@ -86,7 +86,7 @@ export class AdminMemesComponent implements OnInit {
     });
   }
 
-  private onImageUpload(formData: MemeFormData) {
+  private onImageUpload(formData: PhotoFormData) {
     const imageForm = new FormData();
     imageForm.append('image', formData.fileSource);
     imageForm.append('caption', formData.description);

@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 import { IImageMetadata } from '@portfolio/api-interfaces';
 
 @Component({
-  selector: 'portfolio-meme-detail',
+  selector: 'portfolio-photo-detail',
   templateUrl: './photo-detail.component.html',
   styleUrls: ['./photo-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -4,7 +4,7 @@
   <mat-icon>add</mat-icon>
 </button>
 <div class="memes-list" *ngFor="let meme of memes$ | async; trackBy: memeTracker">
-  <portfolio-meme-detail [meme]="meme"></portfolio-meme-detail>
+  <portfolio-photo-detail [meme]="meme"></portfolio-photo-detail>
   <button color="warn" mat-icon-button (click)="onDeleteMeme(meme)">
     <mat-icon>delete_forever</mat-icon>
   </button>

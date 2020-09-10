@@ -4,7 +4,7 @@ import { MemesService } from '../../../pages/memes/memes.service';
 import { trackByIdOrIndex } from '../../../utils/tracker-by-id.util';
 
 @Component({
-  selector: 'portfolio-memes-list',
+  selector: 'portfolio-photos-list',
   templateUrl: './photos-list.component.html',
   styleUrls: ['./photos-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
