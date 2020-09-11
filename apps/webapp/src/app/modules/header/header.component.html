@@ -27,43 +27,7 @@
       </h1>
     </div>
     <nav class="header-links">
-      <a
-        [routerLink]="['/profile']"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="link hvr-float"
-        >Profile</a
-      >
-      <a
-        [routerLink]="['/memes']"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="link hvr-float"
-        >Memes</a
-      >
-      <a
-        [routerLink]="['/resume']"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="link hvr-float"
-        >Resume</a
-      >
-      <a
-        *ngIf="isLoggedIn$ | async"
-        [routerLink]="['/admin']"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="link hvr-float"
-        >Admin</a
-      >
-      <a
-        *ngIf="isLoggedOut$ | async; else forLogout"
-        [routerLink]="['/auth']"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="link hvr-float"
-        >Login</a
-      >
+      <ng-component *ngTemplateOutlet="links"></ng-component>
     </nav>
     <button mat-icon-button class="links-button" (click)="showLinks(true)">
       <mat-icon>menu</mat-icon>
@@ -75,45 +39,7 @@
     class="side-nav-links animate__animated animate__slideInRight animate__faster"
     (click)="$event.stopPropagation()"
   >
-    <a
-      [routerLink]="['/profile']"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }"
-      class="link hvr-float"
-      (click)="showLinks(false)"
-      >Profile</a
-    >
-    <a
-      [routerLink]="['/memes']"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }"
-      class="link hvr-float"
-      (click)="showLinks(false)"
-      >Memes</a
-    >
-    <a
-      [routerLink]="['/resume']"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }"
-      class="link hvr-float"
-      (click)="showLinks(false)"
-      >Resume</a
-    >
-    <a
-      *ngIf="isLoggedOut$ | async; else forLogout"
-      [routerLink]="['/auth']"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }"
-      class="link hvr-float"
-      >Login</a
-    >
-    <a
-      [routerLink]="['/admin']"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }"
-      class="link hvr-float"
-      >Admin</a
-    >
+    <ng-component *ngTemplateOutlet="links"></ng-component>
   </nav>
 </section>
 
@@ -121,4 +47,44 @@
   <button mat-icon-button (click)="onLogout()" style="color: red;" title="Logout">
     <mat-icon>power_settings_new</mat-icon>
   </button>
+</ng-template>
+
+<ng-template #links>
+  <a
+    [routerLink]="['/profile']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-float"
+    >Profile</a
+  >
+  <a
+    [routerLink]="['/memes']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-float"
+    >Memes</a
+  >
+  <a
+    [routerLink]="['/resume']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-float"
+    >Resume</a
+  >
+  <a
+    *ngIf="isLoggedIn$ | async"
+    [routerLink]="['/admin']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-float"
+    >Admin</a
+  >
+  <a
+    *ngIf="isLoggedOut$ | async; else forLogout"
+    [routerLink]="['/auth']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-float"
+    >Login</a
+  >
 </ng-template>

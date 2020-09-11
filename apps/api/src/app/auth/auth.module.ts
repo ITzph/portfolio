@@ -8,11 +8,13 @@ import { LocalStrategy } from './local.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
+import { LoggerModule } from '../logger/logger.module';
 
 @Module({
   controllers: [AuthController],
   providers: [AuthService, ProfileService, LocalStrategy, JwtStrategy],
   imports: [
+    LoggerModule,
     TypeOrmModule.forFeature([User]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({

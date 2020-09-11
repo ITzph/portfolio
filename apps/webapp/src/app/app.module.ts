@@ -15,7 +15,6 @@ import { FooterModule } from './modules/footer/footer.module';
 import { HttpHeaderInterceptor } from './interceptors/http-header.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import * as fromProfile from './reducers/profile.reducer';
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
