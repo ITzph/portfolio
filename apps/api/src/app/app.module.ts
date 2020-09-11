@@ -7,9 +7,17 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { MemesModule } from './memes/memes.module';
 import { AuthModule } from './auth/auth.module';
+import { LoggerModule } from './logger/logger.module';
 
 @Module({
-  imports: [ProfileModule, DatabaseModule, ConfigModule.forRoot({}), MemesModule, AuthModule],
+  imports: [
+    ProfileModule,
+    DatabaseModule,
+    ConfigModule.forRoot({}),
+    MemesModule,
+    AuthModule,
+    LoggerModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

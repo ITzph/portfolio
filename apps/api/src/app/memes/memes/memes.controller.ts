@@ -21,12 +21,14 @@ import { Response, Request } from 'express';
 import { MemesS3Service } from './memes-s3.service';
 import { ImageCategory } from '../../database/entities/image.entity';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
+import { PortfolioLoggerService } from '../../logger/logger.service';
 
 @Controller('memes')
 export class MemesController {
   constructor(
     private readonly memesService: MemesService,
     private readonly s3Service: MemesS3Service,
+    private readonly logger: PortfolioLoggerService,
   ) {}
 
   @Get()
@@ -46,6 +48,7 @@ export class MemesController {
     @Req() req: Request,
     @Res() res: Response,
   ) {
+    this.logger.log('PATCH memes/:id');
     try {
       const body = req.body as Partial<{ title: string; description: string }>;
 
@@ -60,6 +63,7 @@ export class MemesController {
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async deleteImage(@Param('id', ParseIntPipe) id, @Res() res: Response) {
+    this.logger.log('DELETE memes/:id');
     const imageToDelete = await this.memesService.getImageById(id);
 
     if (imageToDelete) {
@@ -85,6 +89,7 @@ export class MemesController {
   @Post()
   @UseInterceptors(FileInterceptor('image'))
   async uploadImage(@UploadedFile() file, @Req() req: Request, @Res() res: Response) {
+    this.logger.log('POST memes');
     const body = req.body as { caption: string; title: string };
 
     try {
@@ -105,6 +110,7 @@ export class MemesController {
 
   @Get('image/:key')
   async getImageByKey(@Param('key') key: string, @Res() res: Response) {
+    this.logger.log('GET memes/:key');
     try {
       const s3GetRes = await this.s3Service
         .s3Instance()
