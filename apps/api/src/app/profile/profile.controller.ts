@@ -18,13 +18,6 @@ export class ProfileController {
     return await this.profileService.getCurrentProfile();
   }
 
-  @Get(':id')
-  async getById(@Param() params) {
-    const { id } = params;
-    this.logger.log('GET profiles/:idk');
-    return await this.profileService.getUserById(id);
-  }
-
   @UseGuards(JwtAuthGuard)
   @Get()
   getAllUsers() {
