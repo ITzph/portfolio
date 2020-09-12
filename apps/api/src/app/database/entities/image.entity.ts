@@ -27,6 +27,9 @@ export class ImageMetadata implements IImageMetadata {
   @Column()
   url: string;
 
+  @Column('simple-array', { name: 'image_tags' })
+  tags: string[];
+
   @ManyToOne(() => User, (user) => user.experiences)
   @JoinColumn({ name: 'user_id' })
   user: User;
