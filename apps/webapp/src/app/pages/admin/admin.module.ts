@@ -12,6 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AddMemeDialogComponent } from './memes/add-meme-dialog/add-meme-dialog.component';
 import { UpdateMemeDialogComponent } from './memes/update-meme-dialog/update-meme-dialog.component';
 import { PhotoModule } from '../../modules/photo/photo.module';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { PhotoModule } from '../../modules/photo/photo.module';
     MatButtonModule,
     MatDialogModule,
     PhotoModule,
+    MatChipsModule,
   ],
   exports: [AdminComponent, AdminMemesComponent, AddMemeDialogComponent, UpdateMemeDialogComponent],
 })

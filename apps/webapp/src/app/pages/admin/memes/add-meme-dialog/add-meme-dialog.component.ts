@@ -41,6 +41,7 @@ export class AddMemeDialogComponent implements OnInit {
         description,
         title,
         fileSource,
+        tags: [],
       });
     }
   }
