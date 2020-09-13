@@ -91,6 +91,7 @@ export class AdminMemesComponent implements OnInit {
     imageForm.append('image', formData.fileSource);
     imageForm.append('caption', formData.description);
     imageForm.append('title', formData.title);
+    imageForm.append('tags', JSON.stringify(formData.tags));
     this.spinner.show('memesSpinner');
     this.memesService
       .imageUpload(imageForm)

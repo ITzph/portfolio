@@ -25,6 +25,27 @@
         >Field is required</mat-error
       >
     </ng-container>
+
+    <mat-form-field class="example-chip-list">
+      <mat-chip-list #chipList aria-label="Fruit selection" formControlName="tags">
+        <mat-chip
+          *ngFor="let tag of tags.value; let i = index"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="removeTag(tag, i)"
+        >
+          {{ tag }}
+          <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="Tags"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="addTag($event)"
+        />
+      </mat-chip-list>
+    </mat-form-field>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
