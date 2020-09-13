@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { routes } from '../../routes';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -14,6 +16,8 @@ import { routes } from '../../routes';
     SocialModule,
     MatButtonModule,
     MatIconModule,
+    MatSnackBarModule,
+    MatDialogModule,
     RouterModule.forChild(routes),
   ],
   exports: [HeaderComponent],

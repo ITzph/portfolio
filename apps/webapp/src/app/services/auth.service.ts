@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 
 enum LOCAL_STORAGE_KEY {
   AUTH_TOKEN = 'auth_token',
@@ -63,10 +63,10 @@ export class AuthService {
 
   public logout() {
     this.setToken(null);
-    this.router.navigateByUrl('/');
     localStorage.removeItem(LOCAL_STORAGE_KEY.USERNAME);
     localStorage.removeItem(LOCAL_STORAGE_KEY.AUTH_TOKEN);
     this.authToken.next(null);
     this.username.next(null);
+    this.router.navigateByUrl('/');
   }
 }

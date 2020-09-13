@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [AuthComponent],
@@ -18,6 +19,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
+    MatSnackBarModule,
     MatCardModule,
     NgxSpinnerModule,
   ],
