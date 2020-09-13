@@ -1,9 +1,9 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialogRef } from '@angular/material/dialog';
 import { PhotoFormData } from '../../../../modules/photo/model/photo.model';
+import { ImageDialogAbstract } from '../image-dialog.abtract';
 
 @Component({
   selector: 'portfolio-add-meme-dialog',
@@ -11,7 +11,7 @@ import { PhotoFormData } from '../../../../modules/photo/model/photo.model';
   styleUrls: ['./add-meme-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddMemeDialogComponent implements OnInit {
+export class AddMemeDialogComponent extends ImageDialogAbstract implements OnInit {
   visible = true;
   selectable = true;
   removable = true;
@@ -29,7 +29,9 @@ export class AddMemeDialogComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly dialogRef: MatDialogRef<AddMemeDialogComponent, PhotoFormData>,
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {}
 
@@ -52,37 +54,6 @@ export class AddMemeDialogComponent implements OnInit {
         fileSource,
         tags,
       });
-    }
-  }
-
-  get tags() {
-    return this.memeForm.get('tags');
-  }
-
-  removeTag(tag: string, index: number): void {
-    if (index >= 0) {
-      const tags: string[] = [...this.tags.value];
-      const tagsSet = new Set(tags);
-      tagsSet.delete(tag);
-      this.tags.setValue(Array.from(tagsSet));
-    }
-  }
-
-  // TODO extract to common class
-  addTag(event: MatChipInputEvent): void {
-    const { value, input } = event;
-
-    if ((value || '').trim()) {
-      const tags: string[] = [...this.tags.value];
-      // This is needed to avoid duplicate tag
-      const tagsSet = new Set(tags);
-      tagsSet.add(value.trim());
-      this.tags.setValue(Array.from(tagsSet));
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
     }
   }
 }
