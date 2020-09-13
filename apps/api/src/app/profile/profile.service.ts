@@ -8,20 +8,6 @@ import { Repository } from 'typeorm';
 export class ProfileService {
   constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
 
-  public async getUserById(id: string) {
-    const user = await this.userRepository.findOne(id);
-
-    return {
-      name: `${user.firstName} ${user.lastName}`,
-      image: '',
-      address: 'Planet Earth',
-      currentCompany: 'Krusty Krab',
-      currentRole: 'Tank',
-      testimonial: 'Hoy',
-      greetings: [],
-    };
-  }
-
   public getAllUsers() {
     return this.userRepository.find();
   }
@@ -40,7 +26,11 @@ export class ProfileService {
   }
 
   public getCurrentProfile(): Promise<IUser> {
-    const dummyRootUser = Number.parseInt(process.env.DUMMY_CURRENT_ID, 10);
-    return this.userRepository.findOne(dummyRootUser);
+    const username = process.env.MY_USERNAME;
+    return this.userRepository.findOne({
+      where: {
+        username,
+      },
+    });
   }
 }

@@ -90,7 +90,7 @@ export class MemesController {
   @UseInterceptors(FileInterceptor('image'))
   async uploadImage(@UploadedFile() file, @Req() req: Request, @Res() res: Response) {
     this.logger.log('POST memes');
-    const body = req.body as { caption: string; title: string };
+    const body = req.body as { caption: string; title: string; tags: string };
 
     try {
       const image = await this.memesService.saveImageMetadata({
@@ -101,6 +101,7 @@ export class MemesController {
         url: file.location,
         imageName: file.key,
         user: null,
+        tags: JSON.parse(body?.tags ?? '[]') || [],
       });
       res.send(image);
     } catch (error) {

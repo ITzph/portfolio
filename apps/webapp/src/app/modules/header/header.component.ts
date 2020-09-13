@@ -14,6 +14,9 @@ import { Store, select } from '@ngrx/store';
 import * as fromProfile from '../../reducers/profile.reducer';
 import { getCurrentUser } from '../../selectors/profile.selectors';
 import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { BinaryConfirmationComponent } from '../custom-dialog/binary-confirmation/binary-confirmation.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'portfolio-header',
@@ -31,6 +34,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private readonly profileStore: Store<fromProfile.State>,
     private readonly authService: AuthService,
     private readonly cdr: ChangeDetectorRef,
+    private readonly snackBar: MatSnackBar,
+    private readonly dialog: MatDialog,
   ) {}
 
   get isLoggedOut$() {
@@ -88,7 +93,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
-    this.authService.logout();
+    const dialogProp = {
+      title: 'Logout',
+      messages: [`Are you sure you want to logout`],
+      okayLabel: 'Yes',
+      noLabel: 'No',
+    };
+
+    const dialogRef = this.dialog.open(BinaryConfirmationComponent, {
+      data: dialogProp,
+    });
+
+    dialogRef.afterClosed().subscribe((isTrue: boolean) => {
+      if (isTrue) {
+        this.authService.logout();
+        this.snackBar.open('Logout successfully', 'success', {
+          duration: 2000,
+        });
+      }
+    });
   }
 
   showLinks(isVisible: boolean) {

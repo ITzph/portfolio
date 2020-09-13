@@ -1,7 +1,9 @@
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { PhotoFormData } from '../../../../modules/photo/model/photo.model';
+import { ImageDialogAbstract } from '../image-dialog.abtract';
 
 @Component({
   selector: 'portfolio-add-meme-dialog',
@@ -9,18 +11,27 @@ import { PhotoFormData } from '../../../../modules/photo/model/photo.model';
   styleUrls: ['./add-meme-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddMemeDialogComponent implements OnInit {
+export class AddMemeDialogComponent extends ImageDialogAbstract implements OnInit {
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
   memeForm = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(4)]],
     description: [''],
     file: ['', [Validators.required]],
     fileSource: ['', [Validators.required]],
+    tags: [[]],
   });
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly dialogRef: MatDialogRef<AddMemeDialogComponent, PhotoFormData>,
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {}
 
@@ -36,11 +47,12 @@ export class AddMemeDialogComponent implements OnInit {
 
   onUploadHandler() {
     if (this.memeForm.valid) {
-      const { description, title, fileSource } = this.memeForm.value;
+      const { description, title, fileSource, tags } = this.memeForm.value;
       this.dialogRef.close({
         description,
         title,
         fileSource,
+        tags,
       });
     }
   }
