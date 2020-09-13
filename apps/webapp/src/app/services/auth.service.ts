@@ -34,18 +34,18 @@ export class AuthService {
   }
 
   public login(username: string, password: string) {
-    this.http
-      .post<{ access_token: string }>(environment.api + '/auth/login', {
-        username,
-        password,
-      })
-      .subscribe((res) => {
-        this.setToken(res.access_token);
-        this.username.next(username);
-        localStorage.setItem(LOCAL_STORAGE_KEY.AUTH_TOKEN, res.access_token);
-        localStorage.setItem(LOCAL_STORAGE_KEY.USERNAME, username);
-        this.router.navigateByUrl('/');
-      });
+    return this.http.post<{ access_token: string }>(environment.api + '/auth/login', {
+      username,
+      password,
+    });
+  }
+
+  public handleLoginSuccessful(username: string, accessToken: string) {
+    this.setToken(accessToken);
+    this.username.next(username);
+    localStorage.setItem(LOCAL_STORAGE_KEY.AUTH_TOKEN, accessToken);
+    localStorage.setItem(LOCAL_STORAGE_KEY.USERNAME, username);
+    this.router.navigateByUrl('/');
   }
 
   public initializeAuthCredentials() {

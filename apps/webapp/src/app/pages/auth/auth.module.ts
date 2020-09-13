@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [AuthComponent],
@@ -18,6 +19,7 @@ import { MatCardModule } from '@angular/material/card';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
+    NgxSpinnerModule,
   ],
 })
 export class AuthModule {}

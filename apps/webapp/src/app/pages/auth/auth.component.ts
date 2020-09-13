@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'portfolio-auth',
@@ -11,15 +12,39 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class AuthComponent implements OnInit {
   authForm = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(4)]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
+    password: ['', [Validators.required]],
   });
 
-  constructor(private readonly authService: AuthService, private readonly fb: FormBuilder) {}
+  isInvalidCredentials = false;
+
+  constructor(
+    private readonly authService: AuthService,
+    private readonly fb: FormBuilder,
+    private readonly spinner: NgxSpinnerService,
+  ) {}
 
   ngOnInit(): void {}
 
   onLogin() {
-    const { username, password } = this.authForm.value;
-    this.authService.login(username, password);
+    if (this.authForm.valid) {
+      this.spinner.show('authSpinner');
+      const { username, password } = this.authForm.value;
+      this.authService
+        .login(username, password)
+        .pipe(finalize(() => this.spinner.hide('authSpinner')))
+        .subscribe(
+          (res) => {
+            this.isInvalidCredentials = false;
+            this.authService.handleLoginSuccessful(username, res.access_token);
+          },
+          (error) => {
+            if (error.status === 401) {
+              this.isInvalidCredentials = true;
+            } else {
+              console.error(error);
+            }
+          },
+        );
+    }
   }
 }
