@@ -1,0 +1,64 @@
+<header class="main-header">
+  <div class="main-header__wrapper">
+    <div class="brand">
+      <svg-icon
+        [src]="'assets/images/codegino.svg'"
+        [applyClass]="true"
+        svgClass="brand__logo animate__animated animate__wobble hvr-pulse-grow"
+        [svgStyle]="{ 'width.rem': 3 }"
+      ></svg-icon>
+      <h1 style="margin: 0;">
+        Code Gino
+      </h1>
+    </div>
+    <nav class="header-links">
+      <ng-component *ngTemplateOutlet="links"></ng-component>
+    </nav>
+  </div>
+</header>
+
+<ng-template #links>
+  <a
+    [routerLink]="['/profile']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-float"
+    >Profile</a
+  >
+  <a
+    [routerLink]="['/memes']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-float"
+    >Memes</a
+  >
+  <a
+    [routerLink]="['/resume']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-float"
+    >Resume</a
+  >
+  <a
+    *ngIf="isLoggedIn$ | async"
+    [routerLink]="['/admin']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-float"
+    >Admin</a
+  >
+  <a
+    *ngIf="isLoggedOut$ | async; else forLogout"
+    [routerLink]="['/auth']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-float"
+    >Login</a
+  >
+</ng-template>
+
+<ng-template #forLogout>
+  <button mat-icon-button (click)="onLogout()" style="color: red;" title="Logout">
+    <mat-icon>power_settings_new</mat-icon>
+  </button>
+</ng-template>
