@@ -26,26 +26,18 @@
     >Profile</a
   >
   <a
-    [routerLink]="['/memes']"
+    [routerLink]="['admin/memes']"
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
     class="link hvr-float"
     >Memes</a
   >
   <a
-    [routerLink]="['/resume']"
+    [routerLink]="['admin/resume']"
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
     class="link hvr-float"
     >Resume</a
-  >
-  <a
-    *ngIf="isLoggedIn$ | async"
-    [routerLink]="['/admin']"
-    routerLinkActive="active-link"
-    [routerLinkActiveOptions]="{ exact: true }"
-    class="link hvr-float"
-    >Admin</a
   >
   <a
     *ngIf="isLoggedOut$ | async; else forLogout"
