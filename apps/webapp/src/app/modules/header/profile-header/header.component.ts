@@ -11,12 +11,12 @@ import { Subject, Observable } from 'rxjs';
 import { throttleTime, takeWhile, map } from 'rxjs/operators';
 import { ISocialHandler } from '@portfolio/api-interfaces';
 import { Store, select } from '@ngrx/store';
-import * as fromProfile from '../../reducers/profile.reducer';
-import { getCurrentUser } from '../../selectors/profile.selectors';
-import { AuthService } from '../../services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { BinaryConfirmationComponent } from '../custom-dialog/binary-confirmation/binary-confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import * as fromProfile from '../../../reducers/profile.reducer';
+import { getCurrentUser } from '../../../selectors/profile.selectors';
+import { AuthService } from '../../../services/auth.service';
+import { BinaryConfirmationComponent } from '../../custom-dialog/binary-confirmation/binary-confirmation.component';
 
 @Component({
   selector: 'portfolio-header',
@@ -52,7 +52,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   scrollEvent: Subject<number> = new Subject();
 
-  // FIX bug header not responding to scroll/wheel events
   ngOnInit() {
     const appRoot = document.getElementById('app-root');
 
