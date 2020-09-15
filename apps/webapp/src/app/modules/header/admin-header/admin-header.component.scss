@@ -47,3 +47,9 @@
     box-shadow: 0 0px 5px rgba(0, 255, 0, 1);
   }
 }
+
+.active-link {
+  color: $color-primary;
+  text-decoration: underline;
+  text-decoration-color: $color-primary-dark;
+}

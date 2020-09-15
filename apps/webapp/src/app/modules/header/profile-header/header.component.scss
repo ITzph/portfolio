@@ -106,6 +106,12 @@
   }
 }
 
+.active-link {
+  color: $color-primary;
+  text-decoration: underline;
+  text-decoration-color: $color-primary-dark;
+}
+
 .side-nav {
   &-section {
     position: fixed;
