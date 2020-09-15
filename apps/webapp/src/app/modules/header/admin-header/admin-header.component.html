@@ -23,17 +23,24 @@
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
     class="link hvr-float"
+    >Home</a
+  >
+  <a
+    [routerLink]="['profile']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-float"
     >Profile</a
   >
   <a
-    [routerLink]="['admin/memes']"
+    [routerLink]="['memes']"
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
     class="link hvr-float"
     >Memes</a
   >
   <a
-    [routerLink]="['admin/resume']"
+    [routerLink]="['resume']"
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
     class="link hvr-float"
@@ -41,7 +48,7 @@
   >
   <a
     *ngIf="isLoggedOut$ | async; else forLogout"
-    [routerLink]="['/auth']"
+    [routerLink]="['auth']"
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
     class="link hvr-float"

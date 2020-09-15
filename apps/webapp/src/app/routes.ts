@@ -5,18 +5,22 @@ import { CanActivateAuthenticatedGuard } from './guards/can-activate-authenticat
 export const routes: Routes = [
   {
     path: 'auth',
+    pathMatch: 'full',
     loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'profile',
+    pathMatch: 'full',
     loadChildren: () => import('./pages/profile/profile.module').then((m) => m.ProfileModule),
   },
   {
     path: 'memes',
+    pathMatch: 'full',
     loadChildren: () => import('./pages/memes/memes.module').then((m) => m.MemesModule),
   },
   {
     path: 'resume',
+    pathMatch: 'full',
     loadChildren: () => import('./pages/resume/resume.module').then((m) => m.ResumeModule),
   },
   {
