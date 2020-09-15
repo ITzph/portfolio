@@ -14,6 +14,8 @@ import { UpdateMemeDialogComponent } from './memes/update-meme-dialog/update-mem
 import { PhotoModule } from '../../modules/photo/photo.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { HeaderModule } from '../../modules/header/header.module';
+import { AdminProfileComponent } from './profile/admin-profile/admin-profile.component';
+import { AdminResumeComponent } from './resume/admin-resume/admin-resume.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { HeaderModule } from '../../modules/header/header.module';
     AdminMemesComponent,
     AddMemeDialogComponent,
     UpdateMemeDialogComponent,
+    AdminProfileComponent,
+    AdminResumeComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +40,13 @@ import { HeaderModule } from '../../modules/header/header.module';
     MatChipsModule,
     HeaderModule,
   ],
-  exports: [AdminComponent, AdminMemesComponent, AddMemeDialogComponent, UpdateMemeDialogComponent],
+  exports: [
+    AdminComponent,
+    AdminMemesComponent,
+    AddMemeDialogComponent,
+    UpdateMemeDialogComponent,
+    AdminProfileComponent,
+    AdminResumeComponent,
+  ],
 })
 export class AdminModule {}
