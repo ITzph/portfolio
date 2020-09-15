@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { CanLoadAuthenticatedGuard } from './guards/can-load-authenticated.guard';
 import { CanActivateAuthenticatedGuard } from './guards/can-activate-authenticated.guard';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
   {
@@ -33,5 +34,9 @@ export const routes: Routes = [
     path: '',
     redirectTo: '/profile',
     pathMatch: 'full',
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
