@@ -13,7 +13,7 @@ export class MemesS3Service implements MulterOptionsFactory {
     const isDevEnv = process.env.S3_ENV === 'local';
 
     this.s3 = new AWS.S3({
-      endpoint: isDevEnv ? 'http://localhost:4572' : undefined,
+      endpoint: isDevEnv ? 'http://localhost:4566' : undefined,
       s3ForcePathStyle: isDevEnv,
       region: 'ap-southeast-1',
     });
