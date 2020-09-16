@@ -1,0 +1,16 @@
+:host {
+  display: block;
+}
+
+.message {
+  align-items: center;
+  &__code {
+    color: red;
+  }
+
+  &__icon {
+    font-size: 20rem;
+    height: 20rem;
+    width: 20rem;
+  }
+}

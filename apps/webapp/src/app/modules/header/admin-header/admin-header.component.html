@@ -19,6 +19,13 @@
 
 <ng-template #links>
   <a
+    [routerLink]="['admin/profile123']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-skew-forward"
+    >Invalid URL</a
+  >
+  <a
     [routerLink]="['/profile']"
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
