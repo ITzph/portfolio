@@ -1,39 +1,66 @@
 <div id="auth">
-  <mat-card class="fex-column auth-form-container">
-    <mat-card-title>
-      <h2>
-        Please login
+  <div class="auth-wrapper">
+    <div>
+      <div class="brand">
+        <svg-icon
+          [src]="'assets/images/codegino.svg'"
+          [applyClass]="true"
+          svgClass="brand__logo animate__animated animate__wobble"
+          [svgStyle]="{ 'width.rem': 3 }"
+        ></svg-icon>
+        <h1 style="margin: 0;">
+          Code Gino
+        </h1>
+      </div>
+      <h2 style="max-width: 40rem; margin-top: 1rem;">
+        Thou shall not pass! You need to verify your credential first.
       </h2>
-      <h3 *ngIf="isInvalidCredentials" style="color: red;">
-        Invalid username or password
-      </h3>
-    </mat-card-title>
-    <mat-card-content>
-      <form [formGroup]="authForm" class="flex-column">
-        <mat-form-field>
-          <mat-label>Username</mat-label>
-          <input matInput placeholder="Username" formControlName="username" [autocomplete]="true" />
-          <mat-error *ngIf="authForm.get('username').hasError('required')"
-            >Username is required</mat-error
-          >
-          <mat-error *ngIf="authForm.get('username').hasError('minlength')"
-            >Minimum length of 4 characters</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Password</mat-label>
-          <input
-            matInput
-            type="password"
-            placeholder="Password"
-            formControlName="password"
-            [autocomplete]="true"
-          />
-        </mat-form-field>
-        <button type="submit" mat-raised-button (click)="onLogin()">Login</button>
-      </form>
-    </mat-card-content>
-  </mat-card>
+    </div>
+    <mat-card class="fex-column auth-form-container">
+      <mat-card-title>
+        <h2>
+          Please login
+        </h2>
+        <h3 *ngIf="isInvalidCredentials" style="color: red;">
+          Invalid username or password
+        </h3>
+      </mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="authForm" class="flex-column">
+          <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input
+              matInput
+              placeholder="Username"
+              formControlName="username"
+              [autocomplete]="true"
+            />
+            <mat-error *ngIf="authForm.get('username').hasError('required')"
+              >Username is required</mat-error
+            >
+            <mat-error *ngIf="authForm.get('username').hasError('minlength')"
+              >Minimum length of 4 characters</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              type="password"
+              placeholder="Password"
+              formControlName="password"
+              [autocomplete]="true"
+            />
+          </mat-form-field>
+          <button type="submit" color="primary" mat-raised-button (click)="onLogin()">Login</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <footer class="footer">
+    <p class="copyright">Copyrights. All rights reserved 2020</p>
+  </footer>
 </div>
 
 <ngx-spinner

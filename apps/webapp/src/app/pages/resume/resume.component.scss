@@ -11,13 +11,50 @@
   }
 }
 
-.certifications-wrapper {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: $margin-medium;
+.certifications {
+  &__wrapper {
+    display: grid;
+    margin: 2rem;
 
-  :not(:last-child) {
-    margin-bottom: $margin-small;
+    row-gap: 1rem;
+    column-gap: 1rem;
+  }
+
+  &__title {
+    grid-column: span 1;
+    @media #{$xs-device} {
+      grid-column: span 1;
+    }
+
+    @media #{$sm-device} {
+      grid-column: span 2;
+    }
+
+    @media #{$md-device} {
+      grid-column: span 2;
+    }
+
+    @media #{$lg-device} {
+      grid-column: span 2;
+    }
+  }
+
+  &__wrapper {
+    @media #{$xs-device} {
+      grid-template-columns: repeat(1, minmax(100px, 1fr));
+    }
+
+    @media #{$sm-device} {
+      grid-template-columns: repeat(2, minmax(100px, 1fr));
+    }
+
+    @media #{$md-device} {
+      grid-template-columns: repeat(2, minmax(100px, 1fr));
+    }
+
+    @media #{$lg-device} {
+      grid-template-columns: repeat(2, minmax(100px, 1fr));
+    }
   }
 }
 

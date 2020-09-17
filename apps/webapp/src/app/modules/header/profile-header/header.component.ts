@@ -11,12 +11,12 @@ import { Subject, Observable } from 'rxjs';
 import { throttleTime, takeWhile, map } from 'rxjs/operators';
 import { ISocialHandler } from '@portfolio/api-interfaces';
 import { Store, select } from '@ngrx/store';
-import * as fromProfile from '../../reducers/profile.reducer';
-import { getCurrentUser } from '../../selectors/profile.selectors';
-import { AuthService } from '../../services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { BinaryConfirmationComponent } from '../custom-dialog/binary-confirmation/binary-confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import * as fromProfile from '../../../reducers/profile.reducer';
+import { getCurrentUser } from '../../../selectors/profile.selectors';
+import { AuthService } from '../../../services/auth.service';
+import { HeaderAbstract } from '../header.abstract';
 
 @Component({
   selector: 'portfolio-header',
@@ -24,7 +24,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent extends HeaderAbstract implements OnInit, OnDestroy {
   socialHandlers$: Observable<ISocialHandler[]>;
   isSideNavVisible = false;
 
@@ -32,18 +32,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private readonly el: ElementRef,
     private readonly render: Renderer2,
     private readonly profileStore: Store<fromProfile.State>,
-    private readonly authService: AuthService,
+    authService: AuthService,
     private readonly cdr: ChangeDetectorRef,
-    private readonly snackBar: MatSnackBar,
-    private readonly dialog: MatDialog,
-  ) {}
-
-  get isLoggedOut$() {
-    return this.authService.isLoggedIn$().pipe(map((isLoggedIn) => !isLoggedIn));
-  }
-
-  get isLoggedIn$() {
-    return this.authService.isLoggedIn$();
+    snackBar: MatSnackBar,
+    dialog: MatDialog,
+  ) {
+    super(authService, dialog, snackBar);
   }
 
   isPinned = false;
@@ -52,7 +46,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   scrollEvent: Subject<number> = new Subject();
 
-  // FIX bug header not responding to scroll/wheel events
   ngOnInit() {
     const appRoot = document.getElementById('app-root');
 
@@ -90,28 +83,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
           }
         }
       });
-  }
-
-  onLogout() {
-    const dialogProp = {
-      title: 'Logout',
-      messages: [`Are you sure you want to logout`],
-      okayLabel: 'Yes',
-      noLabel: 'No',
-    };
-
-    const dialogRef = this.dialog.open(BinaryConfirmationComponent, {
-      data: dialogProp,
-    });
-
-    dialogRef.afterClosed().subscribe((isTrue: boolean) => {
-      if (isTrue) {
-        this.authService.logout();
-        this.snackBar.open('Logout successfully', 'success', {
-          duration: 2000,
-        });
-      }
-    });
   }
 
   showLinks(isVisible: boolean) {

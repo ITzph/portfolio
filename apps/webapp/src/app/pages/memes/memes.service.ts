@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { finalize, take, catchError } from 'rxjs/operators';
 import { Pagination } from '@portfolio/api-interfaces';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({ providedIn: 'root' })
 export class MemesService {
@@ -13,7 +14,11 @@ export class MemesService {
   private readonly PAGE_SIZE_LIMIT = 5;
   private memes = new BehaviorSubject<IImageMetadata[]>([]);
 
-  constructor(private readonly http: HttpClient, private readonly spinner: NgxSpinnerService) {
+  constructor(
+    private readonly http: HttpClient,
+    private readonly spinner: NgxSpinnerService,
+    private readonly snackBar: MatSnackBar,
+  ) {
     this.spinner.show('memesSpinner');
 
     this.fetchPaginatedMemes();
@@ -78,6 +83,10 @@ export class MemesService {
             return _meme;
           }),
         );
+
+        this.snackBar.open(`Updated ${meme.title} successfully`, 'success', {
+          duration: 2000,
+        });
       });
   }
 
@@ -92,6 +101,9 @@ export class MemesService {
       )
       .subscribe((res) => {
         this.memes.next(this.memes.getValue().filter((_meme) => res.id !== _meme.id));
+        this.snackBar.open(`Deleted ${meme.title} successfully`, 'success', {
+          duration: 2000,
+        });
       });
   }
 
