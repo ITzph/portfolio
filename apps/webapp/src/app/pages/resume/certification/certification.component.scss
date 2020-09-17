@@ -5,21 +5,33 @@
   justify-content: center;
 }
 
+$certification-height: 15rem;
+
 .certification {
   display: flex;
   flex-direction: column;
   text-align: center;
-  border: 1px solid $color-dark-dark;
   width: 50%;
+  height: $certification-height;
   position: relative;
 }
 
+@mixin certification-mixin($right-padding) {
+  display: flex;
+  padding: 1rem $right-padding;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .details {
-  background-color: white;
-  color: $color-primary;
+  box-shadow: #aaa 0px 0px 2px 1px;
+  background-color: $color-light;
+  color: $color-dark;
   z-index: 1;
   transition: all 0.5s;
   opacity: 1;
+  height: $certification-height;
+  @include certification-mixin(1rem);
 
   &:hover {
     opacity: 0;
@@ -29,19 +41,31 @@
 
 .link {
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
-  background-color: $color-primary;
+  background-color: $color-primary-dark;
   color: $color-primary-contrast;
   opacity: 0.5;
   transition: all 0.5s;
+  @include certification-mixin(3rem);
+
+  &__url {
+    color: $color-light-light;
+
+    &:hover {
+      background-color: $color-light-light;
+      color: $color-primary-dark;
+      padding: 0 1rem;
+    }
+  }
 
   &:hover {
     opacity: 1;
     z-index: 1;
   }
+}
+
+.certification {
+  width: 100%;
 }
