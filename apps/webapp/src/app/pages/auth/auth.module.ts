@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
   declarations: [AuthComponent],
@@ -22,6 +23,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSnackBarModule,
     MatCardModule,
     NgxSpinnerModule,
+    AngularSvgIconModule,
   ],
 })
 export class AuthModule {}
