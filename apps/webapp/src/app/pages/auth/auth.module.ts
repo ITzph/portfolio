@@ -16,6 +16,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
   imports: [
     CommonModule,
     AuthRoutingModule,
+    AngularSvgIconModule,
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
@@ -23,7 +24,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     MatSnackBarModule,
     MatCardModule,
     NgxSpinnerModule,
-    AngularSvgIconModule,
   ],
+  exports: [AuthComponent],
 })
 export class AuthModule {}
