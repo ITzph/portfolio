@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { SanitizeStringHtmlPipe } from '../../../pipes/sanitize-string-html.pipe';
 
 import { ExperienceComponent } from './experience.component';
 
@@ -8,7 +9,7 @@ describe('ExperienceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ExperienceComponent],
+      declarations: [ExperienceComponent, SanitizeStringHtmlPipe],
     }).compileComponents();
   }));
 

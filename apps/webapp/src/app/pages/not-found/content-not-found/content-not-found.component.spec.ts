@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 
 import { ContentNotFoundComponent } from './content-not-found.component';
 
@@ -9,6 +10,7 @@ describe('ContentNotFoundComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ContentNotFoundComponent],
+      imports: [MatIconModule],
     }).compileComponents();
   }));
 

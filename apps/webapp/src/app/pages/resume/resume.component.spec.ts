@@ -1,6 +1,12 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NotFoundModule } from '../not-found/not-found.module';
 
+import { StoreModule } from '@ngrx/store';
+import * as fromProfile from '../../reducers/profile.reducer';
 import { ResumeComponent } from './resume.component';
+import { ResumeModule } from './resume.module';
 
 describe('ResumeComponent', () => {
   let component: ResumeComponent;
@@ -8,7 +14,14 @@ describe('ResumeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ResumeComponent],
+      imports: [
+        ResumeModule,
+        RouterTestingModule,
+        HttpClientTestingModule,
+        NotFoundModule,
+        StoreModule.forRoot({}),
+        StoreModule.forFeature(fromProfile.profileFeatureKey, fromProfile.reducer),
+      ],
     }).compileComponents();
   }));
 

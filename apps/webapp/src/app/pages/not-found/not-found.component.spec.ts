@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
+import * as fromProfile from '../../reducers/profile.reducer';
+import { StoreModule } from '@ngrx/store';
 import { NotFoundComponent } from './not-found.component';
+import { NotFoundModule } from './not-found.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('NotFoundComponent', () => {
   let component: NotFoundComponent;
@@ -8,7 +13,13 @@ describe('NotFoundComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NotFoundComponent],
+      imports: [
+        NotFoundModule,
+        RouterTestingModule,
+        HttpClientTestingModule,
+        StoreModule.forRoot({}),
+        StoreModule.forFeature(fromProfile.profileFeatureKey, fromProfile.reducer),
+      ],
     }).compileComponents();
   }));
 
