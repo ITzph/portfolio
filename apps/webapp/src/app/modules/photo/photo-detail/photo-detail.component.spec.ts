@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { PhotoModule } from '../photo.module';
 
 import { PhotoDetailComponent } from './photo-detail.component';
 
@@ -8,7 +9,7 @@ describe('MemeDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PhotoDetailComponent],
+      imports: [PhotoModule],
     }).compileComponents();
   }));
 

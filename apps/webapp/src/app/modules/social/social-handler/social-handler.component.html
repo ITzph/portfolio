@@ -1,4 +1,4 @@
-<div class="social" (click)="goToUrl(social.url)">
+<div class="social" (click)="goToUrl(social.url)" *ngIf="social; else invalidSocialInfo">
   <svg-icon
     [src]="'assets/images/' + social.icon + '.svg'"
     class="social__icon"
@@ -8,3 +8,7 @@
   ></svg-icon>
   <p class="name hvr-bounce-to-right" [style.color]="fillColor">{{ social.name }}</p>
 </div>
+
+<ng-template #invalidSocialInfo>
+  <p>Invalid Info</p>
+</ng-template>
