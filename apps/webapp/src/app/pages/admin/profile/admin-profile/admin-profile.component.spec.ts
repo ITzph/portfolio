@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AdminModule } from '../../admin.module';
 
 import { AdminProfileComponent } from './admin-profile.component';
 
@@ -8,7 +9,7 @@ describe('AdminProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AdminProfileComponent],
+      imports: [AdminModule],
     }).compileComponents();
   }));
 
