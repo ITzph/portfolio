@@ -1,4 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AdminModule } from '../../admin.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { UpdateMemeDialogComponent } from './update-meme-dialog.component';
 
@@ -8,7 +11,11 @@ describe('UpdateMemeDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [UpdateMemeDialogComponent],
+      imports: [AdminModule, NoopAnimationsModule],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+      ],
     }).compileComponents();
   }));
 

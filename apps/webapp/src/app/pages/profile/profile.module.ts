@@ -11,6 +11,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { LayoutModule } from '../../modules/layout/layout.module';
 import { HeaderModule } from '../../modules/header/header.module';
 import { FooterModule } from '../../modules/footer/footer.module';
+import { NotFoundModule } from '../not-found/not-found.module';
 
 @NgModule({
   declarations: [ProfileComponent, AutoTyperComponent, GreetingsTranscriptComponent],
@@ -19,6 +20,7 @@ import { FooterModule } from '../../modules/footer/footer.module';
     ProfileRoutingModule,
     NgxSpinnerModule,
     StoreModule.forFeature(fromProfile.profileFeatureKey, fromProfile.reducer),
+    NotFoundModule,
     LayoutModule,
     HeaderModule,
     FooterModule,

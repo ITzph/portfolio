@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { Repository } from 'typeorm';
 import { MemesService } from './memes.service';
 
 describe('MemesService', () => {
@@ -6,7 +7,13 @@ describe('MemesService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [MemesService],
+      providers: [
+        MemesService,
+        {
+          provide: 'ImageMetadataRepository',
+          useClass: Repository,
+        },
+      ],
     }).compile();
 
     service = module.get<MemesService>(MemesService);

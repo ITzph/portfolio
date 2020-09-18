@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AdminModule } from '../admin.module';
 
 import { AdminMemesComponent } from './memes.component';
 
@@ -8,7 +10,7 @@ describe('MemesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AdminMemesComponent],
+      imports: [AdminModule, HttpClientTestingModule],
     }).compileComponents();
   }));
 

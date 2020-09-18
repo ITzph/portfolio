@@ -11,7 +11,7 @@ import { trackByIdOrIndex } from '../../../utils/tracker-by-id.util';
 })
 export class PhotosListComponent implements OnInit {
   @Input()
-  memes: IImageMetadata[];
+  memes: IImageMetadata[] = [];
 
   currentPage = 0;
 

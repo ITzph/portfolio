@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { SocialModule } from '../social.module';
 
 import { SocialHandlerComponent } from './social-handler.component';
 
@@ -8,7 +10,7 @@ describe('SocialHandlerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SocialHandlerComponent],
+      imports: [SocialModule, HttpClientTestingModule],
     }).compileComponents();
   }));
 

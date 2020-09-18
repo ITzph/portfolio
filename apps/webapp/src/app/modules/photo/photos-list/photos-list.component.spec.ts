@@ -1,4 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { PhotoModule } from '../photo.module';
 
 import { PhotosListComponent } from './photos-list.component';
 
@@ -8,7 +11,7 @@ describe('MemesListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PhotosListComponent],
+      imports: [PhotoModule, HttpClientTestingModule, MatSnackBarModule],
     }).compileComponents();
   }));
 

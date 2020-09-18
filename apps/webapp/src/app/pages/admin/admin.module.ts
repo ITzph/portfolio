@@ -16,6 +16,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { HeaderModule } from '../../modules/header/header.module';
 import { AdminProfileComponent } from './profile/admin-profile/admin-profile.component';
 import { AdminResumeComponent } from './resume/admin-resume/admin-resume.component';
+import { NotFoundModule } from '../not-found/not-found.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { AdminResumeComponent } from './resume/admin-resume/admin-resume.compone
     PhotoModule,
     MatChipsModule,
     HeaderModule,
+    NotFoundModule,
   ],
   exports: [
     AdminComponent,

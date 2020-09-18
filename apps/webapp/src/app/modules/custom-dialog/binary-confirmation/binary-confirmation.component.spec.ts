@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BinaryConfirmationComponent } from './binary-confirmation.component';
+import { CustomDialogModule } from '../custom-dialog.module';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 describe('BinaryConfirmationComponent', () => {
   let component: BinaryConfirmationComponent;
@@ -8,7 +10,11 @@ describe('BinaryConfirmationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BinaryConfirmationComponent],
+      imports: [CustomDialogModule],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+      ],
     }).compileComponents();
   }));
 

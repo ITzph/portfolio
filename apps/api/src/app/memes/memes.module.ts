@@ -20,5 +20,6 @@ import { LoggerModule } from '../logger/logger.module';
     }),
     ConfigModule,
   ],
+  exports: [TypeOrmModule, MemesService, MemesS3Service],
 })
 export class MemesModule {}
