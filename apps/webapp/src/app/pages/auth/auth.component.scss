@@ -15,6 +15,10 @@
   background-color: #f0f2f5;
 }
 
+.invalid-credentials {
+  color: red;
+}
+
 .auth-wrapper {
   display: flex;
   flex-direction: row;

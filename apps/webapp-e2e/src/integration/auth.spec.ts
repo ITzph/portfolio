@@ -11,11 +11,23 @@ describe('webapp authentication', () => {
     getInputByName('password').should('be.visible');
   });
 
-  it('should loging when valid credentials is used', () => {
+  it('should loggin when valid credentials are used', () => {
     getInputByName('username').type('carlo');
     getInputByName('password').type('password');
     getButtonByName('login').click();
 
     cy.location('pathname').should('eq', '/profile');
+  });
+
+  it('should display error message when credentials are invalid', () => {
+    getInputByName('username').type('carlo1');
+    getInputByName('password').type('password');
+    getButtonByName('login').click();
+
+    cy.get('h3.invalid-credentials')
+      .should('be.visible')
+      .should('contain', 'Invalid username or password');
+
+    cy.location('pathname').should('eq', '/auth');
   });
 });
