@@ -1,4 +1,4 @@
-import { getPageNavLink } from '../support/app.po';
+import { getLinkByName } from '../support/app.po';
 
 describe('webapp page', () => {
   before(() => {
@@ -13,7 +13,7 @@ describe('webapp page', () => {
 
   it('should navigate to profile page when link is clicked', () => {
     cy.visit('/memes');
-    getPageNavLink().click();
+    getLinkByName('profile').click();
     cy.location('pathname').should('eq', '/profile');
   });
 
@@ -24,17 +24,17 @@ describe('webapp page', () => {
   });
 
   it('should navigate to memes page when link is clicked', () => {
-    cy.get('a[name=memes]').click();
+    getLinkByName('memes').click();
     cy.location('pathname').should('eq', '/memes');
   });
 
   it('should navigate to resume page when link is clicked', () => {
-    cy.get('a[name=resume]').click();
+    getLinkByName('resume').click();
     cy.location('pathname').should('eq', '/resume');
   });
 
   it('should navigate to login page when link is clicked', () => {
-    cy.get('a[name=login]').click();
+    getLinkByName('login').click();
     cy.location('pathname').should('eq', '/auth');
   });
 });

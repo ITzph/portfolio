@@ -1,3 +1,5 @@
-export const getGreeting = () => cy.get('h1');
+export const getLinkByName = (name: string) => cy.get(`a[name=${name}]`);
 
-export const getPageNavLink = () => cy.get('a[name=profile]');
+export const getInputByName = (name: string) => cy.get(`input[name=${name}]`);
+
+export const getButtonByName = (name: string) => cy.get(`button[name=${name}]`);
