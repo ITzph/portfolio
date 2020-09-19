@@ -2,13 +2,14 @@ const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql');
 const process = require('process');
+require('dotenv').config();
 
 const connection = mysql.createConnection({
   multipleStatements: true,
-  host: 'localhost',
-  user: 'root',
-  password: 'carlogino',
-  port: 3306,
+  host: process.env.PORTFOLIO_DB_HOST,
+  user: process.env.PORTFOLIO_DB_USERNAME,
+  password: process.env.PORTFOLIO_DB_PASSWORD,
+  port: process.env.PORTFOLIO_DB_PORT,
 });
 
 connection.connect(async (err) => {
