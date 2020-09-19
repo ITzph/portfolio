@@ -33,6 +33,7 @@
               matInput
               placeholder="Username"
               formControlName="username"
+              name="username"
               [autocomplete]="true"
             />
             <mat-error *ngIf="authForm.get('username').hasError('required')"
@@ -48,11 +49,14 @@
               matInput
               type="password"
               placeholder="Password"
+              name="password"
               formControlName="password"
               [autocomplete]="true"
             />
           </mat-form-field>
-          <button type="submit" color="primary" mat-raised-button (click)="onLogin()">Login</button>
+          <button type="submit" name="submit" color="primary" mat-raised-button (click)="onLogin()">
+            Login
+          </button>
         </form>
       </mat-card-content>
     </mat-card>
