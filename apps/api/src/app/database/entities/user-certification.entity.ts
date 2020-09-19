@@ -19,7 +19,7 @@ export class UserCertification implements IUserCertification {
   @Column({ name: 'provider', nullable: true })
   provider: string;
 
-  @Column('date', { name: 'date_aqcuired' })
+  @Column('date', { name: 'date_acquired' })
   dateAcquired: Date;
 
   @ManyToOne(() => User, (user) => user.experiences)
