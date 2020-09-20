@@ -30,4 +30,18 @@ describe('webapp authentication', () => {
 
     cy.location('pathname').should('eq', '/auth');
   });
+
+  it('should store token and user name during successful login', () => {
+    cy.server();
+    cy.route('POST', '/api/auth/login', { access_token: 'whatever' });
+
+    getInputByName('username').type('carlo');
+    getInputByName('password').type('password');
+    getButtonByName('login')
+      .click()
+      .should(() => {
+        expect(localStorage.getItem('auth_token')).to.eq('whatever');
+        expect(localStorage.getItem('username')).to.eq('carlo');
+      });
+  });
 });
