@@ -1,4 +1,4 @@
-import { getInputByName, getButtonByName } from '../support/app.po';
+import { getInputByName, getButtonByName, getLinkByName } from '../support/app.po';
 describe('webapp admin', () => {
   before(() => {
     cy.exec('npm run seed-database', { timeout: 20000 });
@@ -19,5 +19,22 @@ describe('webapp admin', () => {
 
     cy.visit('/admin');
     cy.location('pathname').should('eq', '/admin');
+  });
+
+  it('should not display admin link when unauthenticated', () => {
+    cy.visit('/');
+
+    getLinkByName('admin').should('not.be.visible');
+  });
+
+  it('should display admin link when authenticated', () => {
+    cy.visit('/auth');
+    getInputByName('username').type('carlo');
+    getInputByName('password').type('password');
+    getButtonByName('login').click();
+
+    cy.visit('/');
+    getLinkByName('admin').should('be.visible');
+    getButtonByName('logout').should('be.visible');
   });
 });
