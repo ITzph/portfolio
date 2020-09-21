@@ -19,4 +19,18 @@ describe('webapp basic ui', () => {
     cy.get('header.top-bar').find('p.name').should('have.length', 3);
     cy.get('footer.footer').find('p.name').should('have.length', 3);
   });
+
+  it('should contain header component', () => {
+    cy.visit('/');
+
+    cy.get('header.top-bar').should('be.visible');
+    cy.get('header.main-header').should('be.visible');
+  });
+
+  it('should contain footer component', () => {
+    cy.visit('/');
+
+    cy.get('footer.footer').find('nav.links__wrapper').should('be.visible');
+    cy.get('footer.footer').find('nav.socials__wrapper').should('be.visible');
+  });
 });

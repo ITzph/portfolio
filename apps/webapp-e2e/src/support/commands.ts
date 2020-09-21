@@ -8,15 +8,13 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 // eslint-disable-next-line @typescript-eslint/no-namespace
-declare namespace Cypress {
-  interface Chainable<Subject> {
-    login(email: string, password: string): void;
-  }
-}
-//
-// -- This is a parent command --
-Cypress.Commands.add('login', (email, password) => {
-  console.info('Custom command example: Login', email, password);
+
+import { getButtonByName, getInputByName } from './app.po';
+
+Cypress.Commands.add('login', (username: string, password: string) => {
+  getInputByName('username').type(username);
+  getInputByName('password').type(password);
+  return getButtonByName('login').click();
 });
 //
 // -- This is a child command --

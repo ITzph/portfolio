@@ -1,4 +1,7 @@
-import { getInputByName, getButtonByName } from '../support/app.po';
+import { getInputByName } from '../support/app.po';
+
+/// <reference path="../support/index.d.ts" />
+
 describe('webapp authentication', () => {
   before(() => {
     cy.exec('npm run seed-database', { timeout: 20000 });
@@ -12,17 +15,13 @@ describe('webapp authentication', () => {
   });
 
   it('should loggin when valid credentials are used', () => {
-    getInputByName('username').type('carlo');
-    getInputByName('password').type('password');
-    getButtonByName('login').click();
+    cy.login('carlo', 'password');
 
     cy.location('pathname').should('eq', '/profile');
   });
 
   it('should display error message when credentials are invalid', () => {
-    getInputByName('username').type('carlo1');
-    getInputByName('password').type('password');
-    getButtonByName('login').click();
+    cy.login('carlo1', 'password');
 
     cy.get('h3.invalid-credentials')
       .should('be.visible')
@@ -35,13 +34,9 @@ describe('webapp authentication', () => {
     cy.server();
     cy.route('POST', '/api/auth/login', { access_token: 'whatever' });
 
-    getInputByName('username').type('carlo');
-    getInputByName('password').type('password');
-    getButtonByName('login')
-      .click()
-      .should(() => {
-        expect(localStorage.getItem('auth_token')).to.eq('whatever');
-        expect(localStorage.getItem('username')).to.eq('carlo');
-      });
+    cy.login('carlo', 'password').should(() => {
+      expect(localStorage.getItem('auth_token')).to.eq('whatever');
+      expect(localStorage.getItem('username')).to.eq('carlo');
+    });
   });
 });

@@ -1,3 +1,5 @@
+/// <reference path="../support/index.d.ts" />
+
 import { getInputByName, getButtonByName, getLinkByName } from '../support/app.po';
 describe('webapp admin', () => {
   before(() => {
@@ -13,9 +15,7 @@ describe('webapp admin', () => {
 
   it('should be able to visit admin page when authenticated', () => {
     cy.visit('/auth');
-    getInputByName('username').type('carlo');
-    getInputByName('password').type('password');
-    getButtonByName('login').click();
+    cy.login('carlo', 'password');
 
     cy.visit('/admin');
     cy.location('pathname').should('eq', '/admin');
@@ -29,9 +29,7 @@ describe('webapp admin', () => {
 
   it('should display admin link when authenticated', () => {
     cy.visit('/auth');
-    getInputByName('username').type('carlo');
-    getInputByName('password').type('password');
-    getButtonByName('login').click();
+    cy.login('carlo', 'password');
 
     cy.visit('/');
     getLinkByName('admin').should('be.visible');
