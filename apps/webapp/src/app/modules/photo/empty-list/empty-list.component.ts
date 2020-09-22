@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'portfolio-empty-list',
@@ -7,6 +7,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmptyListComponent implements OnInit {
+  @Input() text = 'Empty list';
+  @Input() icon = 'sentiment_dissatisfied';
   constructor() {}
 
   ngOnInit(): void {}
