@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-list {
+  &__logo {
+    font-size: 30rem;
+    width: 30rem;
+  }
+}
