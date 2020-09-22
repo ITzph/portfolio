@@ -32,8 +32,8 @@ INSERT INTO user (`id`, `username`, `first_name`, `last_name`, `isActive`, `pass
   }
 ]');
 
-INSERT INTO image_metadata (`id`, `image_name`, `description`, `url`, `user_id`, `category`, `title`, `image_tags`)
-  VALUES(1, "test1231321.png", "description", "http://localhost/test", 1, "MEME", "title", "");
+-- INSERT INTO image_metadata (`id`, `image_name`, `description`, `url`, `user_id`, `category`, `title`, `image_tags`)
+--   VALUES(1, "test1231321.png", "description", "http://localhost/test", 1, "MEME", "title", "");
 
 INSERT INTO user_skill (`id`, `user_id`, `name`, `category`, `is_current`, `link`)
   VALUES(1, 1, "React", "Frontend", 1, "");
