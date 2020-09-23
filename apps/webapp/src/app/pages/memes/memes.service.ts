@@ -27,7 +27,7 @@ export class MemesService {
   public fetchPaginatedMemes() {
     this.http
       .get<Pagination<IImageMetadata>>(
-        `${environment.api}/memes?page=${this.currentPage}&limit=${this.PAGE_SIZE_LIMIT}`,
+        `${environment.api}/memes?page=${this.currentPage}&limit=${this.PAGE_SIZE_LIMIT}&orderBy=createdAt.ASC`,
       )
       .pipe(
         take(1),

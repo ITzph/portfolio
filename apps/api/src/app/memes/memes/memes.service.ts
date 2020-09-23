@@ -10,10 +10,18 @@ export class MemesService {
     @InjectRepository(ImageMetadata) private readonly imageRepository: Repository<ImageMetadata>,
   ) {}
 
-  public async fetchAllMemes(options: IPaginationOptions): Promise<Pagination<IImageMetadata>> {
+  public async fetchAllMemes(
+    options: IPaginationOptions,
+    order: { key: keyof IImageMetadata; order: 'ASC' | 'DESC' },
+  ): Promise<Pagination<IImageMetadata>> {
     const [memes, totalItems] = await this.imageRepository.findAndCount({
       take: options.limit,
       skip: options.page,
+      order: !!order
+        ? {
+            [order.key]: order.order,
+          }
+        : undefined,
     });
 
     return {
