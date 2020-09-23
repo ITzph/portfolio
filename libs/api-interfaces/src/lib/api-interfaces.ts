@@ -55,6 +55,7 @@ export interface IImageMetadata {
   url?: string;
   title: string;
   description: string;
+  createdAt: Date;
   tags: string[];
 }
 
