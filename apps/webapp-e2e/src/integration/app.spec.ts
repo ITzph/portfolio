@@ -1,13 +1,40 @@
-import { getGreeting } from '../support/app.po';
+import { getLinkByName } from '../support/app.po';
 
-describe('webapp', () => {
+describe('webapp page', () => {
+  before(() => {
+    cy.exec('npm run seed-database', { timeout: 20000 });
+  });
+
   beforeEach(() => cy.visit('/'));
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+  it('should contain page name', () => {
+    cy.get('h1').contains('Code Gino');
+  });
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome to webapp!');
+  it('should navigate to profile page when link is clicked', () => {
+    cy.visit('/memes');
+    getLinkByName('profile').click();
+    cy.location('pathname').should('eq', '/profile');
+  });
+
+  it('should display 404 information when accessing invalid URL', () => {
+    cy.visit('/notexisting');
+    cy.get('span.message__code').should('contain', '404');
+    cy.get('h1.message').should('contain', 'Page not found!');
+  });
+
+  it('should navigate to memes page when link is clicked', () => {
+    getLinkByName('memes').click();
+    cy.location('pathname').should('eq', '/memes');
+  });
+
+  it('should navigate to resume page when link is clicked', () => {
+    getLinkByName('resume').click();
+    cy.location('pathname').should('eq', '/resume');
+  });
+
+  it('should navigate to login page when link is clicked', () => {
+    getLinkByName('login').click();
+    cy.location('pathname').should('eq', '/auth');
   });
 });

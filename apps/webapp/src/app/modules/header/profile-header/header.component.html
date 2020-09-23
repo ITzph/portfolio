@@ -1,4 +1,4 @@
-<div class="top-bar">
+<header class="top-bar">
   <div class="top-bar__wrapper">
     <p>
       <strong>
@@ -12,7 +12,7 @@
       </ng-container>
     </div>
   </div>
-</div>
+</header>
 <header class="main-header" [class.main-header--pinned]="isPinned">
   <div class="main-header__wrapper">
     <div class="brand">
@@ -44,7 +44,7 @@
 </section>
 
 <ng-template #forLogout>
-  <button mat-icon-button (click)="onLogout()" style="color: red;" title="Logout">
+  <button mat-icon-button (click)="onLogout()" name="logout" class="logout" title="Logout">
     <mat-icon>power_settings_new</mat-icon>
   </button>
 </ng-template>
@@ -55,6 +55,7 @@
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
     class="link hvr-skew-forward"
+    name="profile"
     >Profile</a
   >
   <a
@@ -62,6 +63,7 @@
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
     class="link hvr-skew-forward"
+    name="memes"
     >Memes</a
   >
   <a
@@ -69,6 +71,7 @@
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
     class="link hvr-skew-forward"
+    name="resume"
     >Resume</a
   >
   <a
@@ -77,6 +80,7 @@
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
     class="link hvr-skew-forward"
+    name="admin"
     >Admin</a
   >
   <a
@@ -85,6 +89,7 @@
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
     class="link hvr-skew-forward"
+    name="login"
     >Login</a
   >
 </ng-template>

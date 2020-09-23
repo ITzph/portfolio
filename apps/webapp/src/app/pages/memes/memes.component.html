@@ -2,7 +2,12 @@
   <portfolio-header contentHeader></portfolio-header>
   <portfolio-footer contentFooter></portfolio-footer>
   <section contentBody>
-    <portfolio-photos-list [memes]="memes$ | async"></portfolio-photos-list>
+    <ng-container *ngIf="memes$ | async; let memes">
+      <portfolio-photos-list
+        [memes]="memes"
+        *ngIf="memes.length > 0; else emptyList"
+      ></portfolio-photos-list>
+    </ng-container>
     <ngx-spinner
       name="memesSpinner"
       size="medium"
@@ -13,3 +18,7 @@
     >
   </section>
 </portfolio-public-layout>
+
+<ng-template #emptyList>
+  <portfolio-empty-list text="Empty memes. Please add one master!"></portfolio-empty-list>
+</ng-template>
