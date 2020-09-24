@@ -8,6 +8,7 @@ import { EmptyListComponent } from './empty-list/empty-list.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FilterByTagComponent } from './filter-by-tag/filter-by-tag.component';
 import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,14 @@ import { FormsModule } from '@angular/forms';
     EmptyListComponent,
     FilterByTagComponent,
   ],
-  imports: [CommonModule, NgxPaginationModule, MatChipsModule, MatIconModule, FormsModule],
+  imports: [
+    CommonModule,
+    NgxPaginationModule,
+    MatChipsModule,
+    MatIconModule,
+    FormsModule,
+    MatInputModule,
+  ],
   exports: [PhotosListComponent, PhotoDetailComponent, EmptyListComponent, FilterByTagComponent],
 })
 export class PhotoModule {}

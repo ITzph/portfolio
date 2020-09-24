@@ -21,6 +21,12 @@ export class PhotosListComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  get filteredMemes() {
+    return !!this.filterValue
+      ? this.memes.filter((meme) => !!meme.tags.find((tag) => tag.includes(this.filterValue)))
+      : this.memes;
+  }
+
   constructor(private readonly memesService: MemesService) {}
 
   public memeTracker(index: number, meme: IImageMetadata) {

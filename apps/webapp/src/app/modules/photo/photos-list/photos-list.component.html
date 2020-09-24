@@ -1,9 +1,9 @@
 <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
 <portfolio-filter-by-tag (filterValueChange)="filterValue = $event"></portfolio-filter-by-tag>
-{{ filterValue }}
 <ng-container
   *ngFor="
-    let meme of memes | paginate: { itemsPerPage: PAGE_SIZE_LIMIT, currentPage: currentPage };
+    let meme of filteredMemes
+      | paginate: { itemsPerPage: PAGE_SIZE_LIMIT, currentPage: currentPage };
     trackBy: memeTracker
   "
 >
