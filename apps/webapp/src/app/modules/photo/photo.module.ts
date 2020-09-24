@@ -6,10 +6,17 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MatChipsModule } from '@angular/material/chips';
 import { EmptyListComponent } from './empty-list/empty-list.component';
 import { MatIconModule } from '@angular/material/icon';
+import { FilterByTagComponent } from './filter-by-tag/filter-by-tag.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [PhotosListComponent, PhotoDetailComponent, EmptyListComponent],
-  imports: [CommonModule, NgxPaginationModule, MatChipsModule, MatIconModule],
-  exports: [PhotosListComponent, PhotoDetailComponent, EmptyListComponent],
+  declarations: [
+    PhotosListComponent,
+    PhotoDetailComponent,
+    EmptyListComponent,
+    FilterByTagComponent,
+  ],
+  imports: [CommonModule, NgxPaginationModule, MatChipsModule, MatIconModule, FormsModule],
+  exports: [PhotosListComponent, PhotoDetailComponent, EmptyListComponent, FilterByTagComponent],
 })
 export class PhotoModule {}

@@ -13,6 +13,8 @@ export class PhotosListComponent implements OnInit {
   @Input()
   memes: IImageMetadata[] = [];
 
+  filterValue = '';
+
   currentPage = 0;
 
   readonly PAGE_SIZE_LIMIT = 4;

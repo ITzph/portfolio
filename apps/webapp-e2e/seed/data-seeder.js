@@ -18,7 +18,7 @@ connection.connect(async (err) => {
 
   const query = await connection.query(users, (err, result) => {
     if (err) {
-      console.log(err);
+      console.error(err);
     }
   });
   process.exit();
