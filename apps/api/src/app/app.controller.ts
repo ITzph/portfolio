@@ -1,7 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
 
-import { Message } from '@portfolio/api-interfaces';
-
 import { AppService } from './app.service';
 import { PortfolioLoggerService } from './logger/logger.service';
 
@@ -15,7 +13,7 @@ export class AppController {
   }
 
   @Get('')
-  getData(): Message {
+  getData() {
     this.logger.log('Accessing api test endpoint');
     return this.appService.getData();
   }

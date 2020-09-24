@@ -1,6 +1,3 @@
-export interface Message {
-  message: string;
-}
 export interface IUser {
   id: number;
   username: string;
