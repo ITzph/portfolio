@@ -14,6 +14,7 @@ export class PhotosListComponent implements OnInit {
   memes: IImageMetadata[] = [];
 
   filterValue = '';
+  filterKey: keyof IImageMetadata = 'tags';
 
   currentPage = 0;
 
@@ -23,8 +24,23 @@ export class PhotosListComponent implements OnInit {
 
   get filteredMemes() {
     return !!this.filterValue
-      ? this.memes.filter((meme) => !!meme.tags.find((tag) => tag.includes(this.filterValue)))
+      ? this.memes.filter((meme) => {
+          if (this.filterKey === 'tags') {
+            return !!meme.tags.find((tag) => tag.includes(this.filterValue));
+          } else {
+            if (['title', 'description'].includes(this.filterKey)) {
+              return (meme[this.filterKey] as string).includes(this.filterValue);
+            }
+          }
+        })
       : this.memes;
+  }
+
+  onFilterChange(event: { key: keyof IImageMetadata; value: string }) {
+    if (event) {
+      this.filterValue = event?.value;
+      this.filterKey = event?.key;
+    }
   }
 
   constructor(private readonly memesService: MemesService) {}

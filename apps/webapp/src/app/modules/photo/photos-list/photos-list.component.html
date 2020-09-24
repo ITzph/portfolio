@@ -1,5 +1,5 @@
 <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
-<portfolio-filter-by-tag (filterValueChange)="filterValue = $event"></portfolio-filter-by-tag>
+<portfolio-filter-by-tag (filterValueChange)="onFilterChange($event)"></portfolio-filter-by-tag>
 <ng-container
   *ngFor="
     let meme of filteredMemes

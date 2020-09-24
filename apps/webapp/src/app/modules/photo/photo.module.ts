@@ -7,8 +7,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { EmptyListComponent } from './empty-list/empty-list.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FilterByTagComponent } from './filter-by-tag/filter-by-tag.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,9 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     FormsModule,
     MatInputModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatSelectModule,
   ],
   exports: [PhotosListComponent, PhotoDetailComponent, EmptyListComponent, FilterByTagComponent],
 })

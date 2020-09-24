@@ -1,1 +1,37 @@
-<input matInput [value]="filterValue" (input)="onFilterValueChange($event)" />
+<!-- <input matInput [value]="filterValue" (input)="onFilterValueChange($event)" /> -->
+
+<form class="example-form">
+  <mat-form-field>
+    <mat-select [formControl]="filterKey" (selectionChange)="onOptionChange($event, 'key')">
+      <mat-option value="title">
+        Title
+      </mat-option>
+      <mat-option value="description">
+        Description
+      </mat-option>
+      <mat-option value="tags">
+        Tags
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input
+      type="text"
+      placeholder="Enter a value"
+      aria-label="Number"
+      matInput
+      [formControl]="filterValue"
+      [matAutocomplete]="auto"
+      (input)="onFilterValueChange($event)"
+    />
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option
+        *ngFor="let option of filteredOptions"
+        [value]="option"
+        (onSelectionChange)="onOptionChange($event, 'value')"
+      >
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
