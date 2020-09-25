@@ -18,7 +18,7 @@ export class PhotosListComponent implements OnInit {
 
   currentPage = 0;
 
-  readonly PAGE_SIZE_LIMIT = 4;
+  readonly PAGE_SIZE_LIMIT = 20;
 
   ngOnInit(): void {}
 
