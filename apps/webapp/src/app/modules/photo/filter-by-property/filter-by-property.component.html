@@ -1,5 +1,16 @@
-<form class="example-form">
-  <mat-form-field>
+<div class="search-wrapper">
+  <mat-form-field style="width: 25rem; margin-right: 0.5rem;">
+    <input
+      type="text"
+      placeholder="Enter the filter value"
+      matInput
+      [formControl]="filterValue"
+      (input)="onFilterValueChange($event)"
+      (keyup.enter)="onUpdateFilter()"
+    />
+    <mat-icon class="search-icon" (click)="onUpdateFilter()">search</mat-icon>
+  </mat-form-field>
+  <mat-form-field style="width: 10rem;">
     <mat-select [formControl]="filterKey" (selectionChange)="onOptionChange($event, 'key')">
       <mat-option value="title">
         Title
@@ -12,25 +23,4 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <input
-      type="text"
-      placeholder="Enter a value"
-      aria-label="Number"
-      matInput
-      [formControl]="filterValue"
-      [matAutocomplete]="auto"
-      (input)="onFilterValueChange($event)"
-    />
-    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-      <mat-option
-        *ngFor="let option of filteredOptions"
-        [value]="option"
-        (onSelectionChange)="onOptionChange($event, 'value')"
-      >
-        {{ option }}
-      </mat-option>
-    </mat-autocomplete>
-    <mat-icon class="search-icon" (click)="onUpdateFilter()">search</mat-icon>
-  </mat-form-field>
-</form>
+</div>
