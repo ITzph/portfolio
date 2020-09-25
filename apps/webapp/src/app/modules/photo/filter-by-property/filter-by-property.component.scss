@@ -1,3 +1,13 @@
 :host {
   display: block;
 }
+
+.search-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2rem;
+  width: 2rem;
+  font-size: 2rem;
+  cursor: pointer;
+}

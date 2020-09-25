@@ -26,7 +26,6 @@ export class FilterByTagComponent implements OnInit {
     const { value } = event.target as HTMLInputElement;
 
     this.filterValue.setValue(value);
-    this.filterValueChange.emit({ key: this.filterKey.value, value });
   }
 
   onOptionChange(event: MatOptionSelectionChange, property: 'key' | 'value') {
@@ -39,7 +38,9 @@ export class FilterByTagComponent implements OnInit {
     } else {
       throw { message: 'Invalid option' };
     }
+  }
 
+  onUpdateFilter() {
     this.filterValueChange.emit({ key: this.filterKey.value, value: this.filterValue.value });
   }
 }
