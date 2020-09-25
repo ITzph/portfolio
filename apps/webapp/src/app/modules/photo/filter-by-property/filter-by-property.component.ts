@@ -4,8 +4,8 @@ import { MatOptionSelectionChange } from '@angular/material/core';
 
 @Component({
   selector: 'portfolio-filter-by-tag',
-  templateUrl: './filter-by-tag.component.html',
-  styleUrls: ['./filter-by-tag.component.scss'],
+  templateUrl: './filter-by-property.component.html',
+  styleUrls: ['./filter-by-property.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterByTagComponent implements OnInit {

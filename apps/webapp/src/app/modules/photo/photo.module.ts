@@ -6,7 +6,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MatChipsModule } from '@angular/material/chips';
 import { EmptyListComponent } from './empty-list/empty-list.component';
 import { MatIconModule } from '@angular/material/icon';
-import { FilterByTagComponent } from './filter-by-tag/filter-by-tag.component';
+import { FilterByTagComponent } from './filter-by-property/filter-by-property.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';

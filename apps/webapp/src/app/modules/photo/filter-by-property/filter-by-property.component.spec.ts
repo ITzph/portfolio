@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FilterByTagComponent } from './filter-by-tag.component';
+import { FilterByTagComponent } from './filter-by-property.component';
 
 describe('FilterByTagComponent', () => {
   let component: FilterByTagComponent;
