@@ -11,7 +11,11 @@
     <mat-icon class="search-icon" (click)="onUpdateFilter()">search</mat-icon>
   </mat-form-field>
   <mat-form-field style="width: 10rem;">
-    <mat-select [formControl]="filterKey" (selectionChange)="onOptionChange($event, 'key')">
+    <mat-select
+      [formControl]="filterKey"
+      (selectionChange)="onOptionChange($event, 'key')"
+      placeholder="Filter by"
+    >
       <mat-option value="title">
         Title
       </mat-option>
