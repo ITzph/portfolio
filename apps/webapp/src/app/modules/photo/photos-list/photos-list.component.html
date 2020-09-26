@@ -1,4 +1,8 @@
-<portfolio-filter-by-tag (filterValueChange)="onFilterChange($event)"></portfolio-filter-by-tag>
+<div style="display: flex;">
+  <portfolio-sort-by-property (orderChange)="onOrderChange($event)"></portfolio-sort-by-property>
+  <portfolio-filter-by-tag (filterValueChange)="onFilterChange($event)"></portfolio-filter-by-tag>
+</div>
+
 <ng-container *ngIf="filteredMemes.length > 0; else emptyList">
   <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
   <ng-container

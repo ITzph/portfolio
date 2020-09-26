@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 import { IImageMetadata } from '@portfolio/api-interfaces';
 import { MemesService } from '../../../pages/memes/memes.service';
 import { trackByIdOrIndex } from '../../../utils/tracker-by-id.util';
+import { OrderByEventProp } from '../photo.model';
 
 @Component({
   selector: 'portfolio-photos-list',
@@ -23,7 +24,7 @@ export class PhotosListComponent implements OnInit {
   ngOnInit(): void {}
 
   get filteredMemes() {
-    return !!this.filterValue
+    const memes = !!this.filterValue
       ? this.memes.filter((meme) => {
           if (this.filterKey === 'tags') {
             return !!meme.tags.find((tag) => tag.includes(this.filterValue));
@@ -34,6 +35,10 @@ export class PhotosListComponent implements OnInit {
           }
         })
       : this.memes;
+
+    return memes.sort((a, b) => {
+      return a.title.localeCompare(b.title);
+    });
   }
 
   onFilterChange(event: { key: keyof IImageMetadata; value: string }) {
@@ -42,6 +47,8 @@ export class PhotosListComponent implements OnInit {
       this.filterKey = event?.key;
     }
   }
+
+  onOrderChange(event: OrderByEventProp) {}
 
   constructor(private readonly memesService: MemesService) {}
 

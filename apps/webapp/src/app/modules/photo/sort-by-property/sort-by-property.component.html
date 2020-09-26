@@ -1,0 +1,28 @@
+<mat-form-field style="width: 10rem;">
+  <mat-select
+    [formControl]="orderByFC"
+    (selectionChange)="onOptionChange($event, 'orderBy')"
+    placeholder="Order"
+  >
+    <mat-option value="title">
+      Title
+    </mat-option>
+    <mat-option value="description">
+      Description
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field style="width: 10rem;">
+  <mat-select
+    [formControl]="orderFC"
+    (selectionChange)="onOptionChange($event, 'order')"
+    placeholder="Order"
+  >
+    <mat-option [value]="ORDER.ASC">
+      {{ ORDER.ASC }}
+    </mat-option>
+    <mat-option [value]="ORDER.DESC">
+      {{ ORDER.DESC }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

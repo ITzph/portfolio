@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
+import { SortByPropertyComponent } from './sort-by-property/sort-by-property.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
     PhotoDetailComponent,
     EmptyListComponent,
     FilterByTagComponent,
+    SortByPropertyComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,12 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     MatSelectModule,
   ],
-  exports: [PhotosListComponent, PhotoDetailComponent, EmptyListComponent, FilterByTagComponent],
+  exports: [
+    PhotosListComponent,
+    PhotoDetailComponent,
+    EmptyListComponent,
+    FilterByTagComponent,
+    SortByPropertyComponent,
+  ],
 })
 export class PhotoModule {}
