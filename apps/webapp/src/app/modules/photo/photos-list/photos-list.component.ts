@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 import { IImageMetadata } from '@portfolio/api-interfaces';
 import { MemesService } from '../../../pages/memes/memes.service';
 import { trackByIdOrIndex } from '../../../utils/tracker-by-id.util';
-import { OrderByEventProp, ORDER } from '../photo.model';
+import { OrderByEventProp, ORDER, ORDER_BY } from '../photo.model';
 
 @Component({
   selector: 'portfolio-photos-list',
@@ -16,7 +16,7 @@ export class PhotosListComponent implements OnInit {
 
   filterValue = '';
   filterKey: keyof IImageMetadata = 'tags';
-  orderBy = 'title';
+  orderBy = ORDER_BY.CREATED_DATE;
   order = ORDER.DESC;
 
   currentPage = 0;
@@ -38,11 +38,20 @@ export class PhotosListComponent implements OnInit {
         })
       : this.memes;
 
+    const { order, orderBy } = this;
     return memes.sort((a, b) => {
-      if (this.order === ORDER.DESC) {
-        return a[this.orderBy].localeCompare(b[this.orderBy]);
-      } else if (this.order === ORDER.ASC) {
-        return b[this.orderBy].localeCompare(a[this.orderBy]);
+      if (order === ORDER.ASC) {
+        if (orderBy === ORDER_BY.DESCRIPTION || orderBy === ORDER_BY.TITLE) {
+          return a[orderBy].localeCompare(b[orderBy]);
+        } else if (orderBy === ORDER_BY.CREATED_DATE) {
+          return new Date(a[orderBy]).getTime() - new Date(b[orderBy]).getTime();
+        }
+      } else if (order === ORDER.DESC) {
+        if (orderBy === ORDER_BY.DESCRIPTION || orderBy === ORDER_BY.TITLE) {
+          return b[orderBy].localeCompare(a[orderBy]);
+        } else if (orderBy === ORDER_BY.CREATED_DATE) {
+          return new Date(b[orderBy]).getTime() - new Date(a[orderBy]).getTime();
+        }
       } else {
         throw { message: 'should not come to this point' };
       }

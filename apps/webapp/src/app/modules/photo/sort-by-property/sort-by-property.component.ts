@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatOptionSelectionChange } from '@angular/material/core';
-import { ORDER } from '../photo.model';
+import { ORDER, ORDER_BY } from '../photo.model';
 
 @Component({
   selector: 'portfolio-sort-by-property',
@@ -13,9 +13,10 @@ export class SortByPropertyComponent implements OnInit {
   @Output() orderChange = new EventEmitter<{ orderBy: 'name' | 'description'; order: ORDER }>();
 
   orderFC = new FormControl(ORDER.DESC);
-  orderByFC = new FormControl('name');
+  orderByFC = new FormControl(ORDER_BY.CREATED_DATE);
 
   readonly ORDER = ORDER;
+  readonly ORDER_BY = ORDER_BY;
 
   constructor() {}
 

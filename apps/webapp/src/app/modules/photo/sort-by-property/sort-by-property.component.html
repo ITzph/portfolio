@@ -4,10 +4,13 @@
     (selectionChange)="onOptionChange($event, 'orderBy')"
     placeholder="Order"
   >
-    <mat-option value="title">
+    <mat-option [value]="ORDER_BY.CREATED_DATE">
+      Date Created
+    </mat-option>
+    <mat-option [value]="ORDER_BY.TITLE">
       Title
     </mat-option>
-    <mat-option value="description">
+    <mat-option [value]="ORDER_BY.DESCRIPTION">
       Description
     </mat-option>
   </mat-select>

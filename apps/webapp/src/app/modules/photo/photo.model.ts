@@ -3,7 +3,13 @@ export enum ORDER {
   DESC = 'DESC',
 }
 
+export enum ORDER_BY {
+  TITLE = 'title',
+  DESCRIPTION = 'description',
+  CREATED_DATE = 'createdAt',
+}
+
 export interface OrderByEventProp {
-  orderBy: 'title' | 'description';
+  orderBy: ORDER_BY;
   order: ORDER;
 }
