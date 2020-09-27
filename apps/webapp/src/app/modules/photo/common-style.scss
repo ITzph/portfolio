@@ -1,12 +1,18 @@
+@import '../../../styles/variables';
+
 @mixin common-wrapper {
   border: 1px solid #dfe1e5;
   height: 4.4rem;
   background-color: #fff;
-  width: fit-content;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   padding: 0 1rem;
+  width: 30rem;
+
+  @media #{$sm-device} {
+    width: 40rem;
+  }
 
   &:hover {
     box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
