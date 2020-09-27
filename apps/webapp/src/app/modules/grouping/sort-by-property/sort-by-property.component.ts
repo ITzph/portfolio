@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatOptionSelectionChange } from '@angular/material/core';
-import { ORDER, ORDER_BY } from '../photo.model';
+import { ORDER, ORDER_BY } from '../grouping.model';
 
 @Component({
   selector: 'portfolio-sort-by-property',
