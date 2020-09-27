@@ -1,0 +1,30 @@
+<div class="search-wrapper">
+  <mat-form-field style="width: 25rem; margin-right: 0.5rem;">
+    <input
+      type="text"
+      placeholder="Enter the filter value"
+      matInput
+      [formControl]="filterValue"
+      (input)="onFilterValueChange($event)"
+      (keyup.enter)="onUpdateFilter()"
+    />
+    <mat-icon class="search-icon" (click)="onUpdateFilter()">search</mat-icon>
+  </mat-form-field>
+  <mat-form-field style="width: 10rem;">
+    <mat-select
+      [formControl]="filterKey"
+      (selectionChange)="onOptionChange($event, 'key')"
+      placeholder="Filter by"
+    >
+      <mat-option value="title">
+        Title
+      </mat-option>
+      <mat-option value="description">
+        Description
+      </mat-option>
+      <mat-option value="tags">
+        Tags
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

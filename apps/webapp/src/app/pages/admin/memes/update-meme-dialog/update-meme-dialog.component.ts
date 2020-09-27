@@ -34,14 +34,29 @@ export class UpdateMemeDialogComponent extends ImageDialogAbstract implements On
 
   ngOnInit(): void {}
 
+  get isValueChanged() {
+    const { description, title, tags } = this.memeForm.value;
+    const isTagsTheSame =
+      tags.length === this.data.tags.length &&
+      tags.every((value, index) => value === this.data.tags[index]);
+
+    const isValueChanged =
+      description !== this.data.description || title !== this.data.title || !isTagsTheSame;
+
+    return isValueChanged;
+  }
+
   onUploadHandler() {
     if (this.memeForm.valid) {
       const { description, title, tags } = this.memeForm.value;
-      this.dialogRef.close({
-        description,
-        title,
-        tags,
-      });
+
+      if (this.isValueChanged) {
+        this.dialogRef.close({
+          description,
+          title,
+          tags,
+        });
+      }
     }
   }
 }

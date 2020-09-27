@@ -1,13 +1,25 @@
-<pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
-<ng-container
-  *ngFor="
-    let meme of memes | paginate: { itemsPerPage: PAGE_SIZE_LIMIT, currentPage: currentPage };
-    trackBy: memeTracker
-  "
->
-  <div class="memes">
-    <portfolio-photo-detail [meme]="meme"></portfolio-photo-detail>
-  </div>
+<div style="display: flex;">
+  <portfolio-sort-by-property (orderChange)="onOrderChange($event)"></portfolio-sort-by-property>
+  <portfolio-filter-by-tag (filterValueChange)="onFilterChange($event)"></portfolio-filter-by-tag>
+</div>
+
+<ng-container *ngIf="filteredMemes.length > 0; else emptyList">
+  <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+  <ng-container
+    *ngFor="
+      let meme of filteredMemes
+        | paginate: { itemsPerPage: PAGE_SIZE_LIMIT, currentPage: currentPage };
+      trackBy: memeTracker
+    "
+  >
+    <div class="memes">
+      <portfolio-photo-detail [meme]="meme"></portfolio-photo-detail>
+    </div>
+  </ng-container>
+
+  <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
 </ng-container>
 
-<pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+<ng-template #emptyList>
+  <portfolio-empty-list></portfolio-empty-list>
+</ng-template>

@@ -42,7 +42,7 @@
     color="primary"
     mat-raised-button
     (click)="onUploadHandler()"
-    [disabled]="!memeForm.valid"
+    [disabled]="!memeForm.valid || !isValueChanged"
   >
     Update Image
   </button>

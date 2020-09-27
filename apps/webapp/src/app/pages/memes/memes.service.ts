@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable({ providedIn: 'root' })
 export class MemesService {
   private currentPage = 0;
-  private readonly PAGE_SIZE_LIMIT = 5;
+  private readonly PAGE_SIZE_LIMIT = 20;
   private memes = new BehaviorSubject<IImageMetadata[]>([]);
 
   constructor(
@@ -27,7 +27,7 @@ export class MemesService {
   public fetchPaginatedMemes() {
     this.http
       .get<Pagination<IImageMetadata>>(
-        `${environment.api}/memes?page=${this.currentPage}&limit=${this.PAGE_SIZE_LIMIT}`,
+        `${environment.api}/memes?page=${this.currentPage}&limit=${this.PAGE_SIZE_LIMIT}&orderBy=createdAt.ASC`,
       )
       .pipe(
         take(1),

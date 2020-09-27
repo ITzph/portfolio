@@ -30,6 +30,9 @@ export class ImageMetadata implements IImageMetadata {
   @Column('simple-array', { name: 'image_tags' })
   tags: string[];
 
+  @Column('datetime', { name: 'created_at' })
+  createdAt: Date;
+
   @ManyToOne(() => User, (user) => user.experiences)
   @JoinColumn({ name: 'user_id' })
   user: User;

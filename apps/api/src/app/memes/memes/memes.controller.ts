@@ -22,6 +22,7 @@ import { MemesS3Service } from './memes-s3.service';
 import { ImageCategory } from '../../database/entities/image.entity';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 import { PortfolioLoggerService } from '../../logger/logger.service';
+import { IImageMetadata } from '@portfolio/api-interfaces';
 
 @Controller('memes')
 export class MemesController {
@@ -32,11 +33,33 @@ export class MemesController {
   ) {}
 
   @Get()
-  async fetchAllImages(@Query('page') page: number, @Query('limit') limit: number) {
-    const paginatednata = await this.memesService.fetchAllMemes({
-      limit,
-      page,
-    });
+  async fetchAllImages(
+    @Query('orderBy') orderBy: string,
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+  ) {
+    let orderQuery: {
+      key: keyof IImageMetadata;
+      order: 'ASC' | 'DESC';
+    };
+
+    if (orderBy) {
+      // TODO remove as any
+      const [key, order] = orderBy.split('.') as any;
+
+      orderQuery = {
+        key,
+        order,
+      };
+    }
+
+    const paginatednata = await this.memesService.fetchAllMemes(
+      {
+        limit,
+        page,
+      },
+      orderQuery,
+    );
 
     return paginatednata;
   }
@@ -102,6 +125,7 @@ export class MemesController {
         imageName: file.key,
         user: null,
         tags: JSON.parse(body?.tags ?? '[]') || [],
+        createdAt: new Date(),
       });
       res.send(image);
     } catch (error) {

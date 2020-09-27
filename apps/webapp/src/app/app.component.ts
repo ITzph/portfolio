@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Message, IUser } from '@portfolio/api-interfaces';
+import { IUser } from '@portfolio/api-interfaces';
 import * as fromProfile from './reducers/profile.reducer';
 import { Observable } from 'rxjs';
 import { getCurrentUser } from './selectors/profile.selectors';

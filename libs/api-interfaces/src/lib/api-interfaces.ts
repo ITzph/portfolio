@@ -1,6 +1,3 @@
-export interface Message {
-  message: string;
-}
 export interface IUser {
   id: number;
   username: string;
@@ -55,6 +52,7 @@ export interface IImageMetadata {
   url?: string;
   title: string;
   description: string;
+  createdAt: Date;
   tags: string[];
 }
 
