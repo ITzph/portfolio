@@ -1,7 +1,8 @@
+@import '../common-style.scss';
+
 :host {
   display: flex;
   justify-content: flex-end;
-  padding-right: 2rem;
 }
 
 .search-icon {
@@ -15,16 +16,6 @@
 }
 
 .search-wrapper {
-  border: 1px solid #dfe1e5;
-  height: 4.4rem;
-  background-color: #fff;
-  width: 38rem;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-
-  &:hover {
-    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-    border-color: rgba(223, 225, 229, 0);
-  }
+  @include common-wrapper();
+  margin-right: 0.5rem;
 }

@@ -1,3 +1,9 @@
 :host {
   display: block;
 }
+
+.filter-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 1rem;
+}
