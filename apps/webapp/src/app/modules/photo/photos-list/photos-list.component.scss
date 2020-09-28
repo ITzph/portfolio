@@ -1,3 +1,43 @@
+@import '../../../../styles/variables';
+
 :host {
   display: block;
+}
+
+.filter-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 $padding-small;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: $margin-small;
+
+  :first-child {
+    margin-bottom: $margin-very-small;
+    margin-right: 0;
+  }
+
+  @media #{$sm-device} {
+    flex-direction: row;
+    align-items: flex-end;
+    :first-child {
+      margin-bottom: 0;
+      margin-right: $margin-very-small;
+    }
+  }
+}
+
+.memes {
+  margin-bottom: $margin-small;
+  padding: $padding-small;
+
+  &-wrapper {
+    :not(:first-child) {
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    :first-child {
+      margin-top: $margin-small;
+    }
+  }
 }

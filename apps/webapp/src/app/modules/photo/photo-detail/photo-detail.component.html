@@ -1,5 +1,5 @@
-<div class="meme" *ngIf="meme; else invalidImage">
-  <h2>{{ meme.title }}</h2>
+<section class="meme" *ngIf="meme; else invalidImage">
+  <h2 style="margin-bottom: 0.25rem;">{{ meme.title }}</h2>
   <img width="100%" [src]="meme.url" [title]="meme.imageName" />
   <h4>{{ meme.description }}</h4>
   <mat-chip-list class="example-chip">
@@ -7,7 +7,7 @@
       {{ tag }}
     </mat-chip>
   </mat-chip-list>
-</div>
+</section>
 
 <ng-template #invalidImage>
   <p>Invalid Image</p>

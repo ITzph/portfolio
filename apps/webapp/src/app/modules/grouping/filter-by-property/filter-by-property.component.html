@@ -1,5 +1,5 @@
 <div class="search-wrapper">
-  <mat-form-field style="width: 25rem; margin-right: 0.5rem;">
+  <mat-form-field style="width: 70%; margin-right: 0.5rem;">
     <input
       type="text"
       placeholder="Enter the filter value"
@@ -10,7 +10,7 @@
     />
     <mat-icon class="search-icon" (click)="onUpdateFilter()">search</mat-icon>
   </mat-form-field>
-  <mat-form-field style="width: 10rem;">
+  <mat-form-field style="width: 30%;">
     <mat-select
       [formControl]="filterKey"
       (selectionChange)="onOptionChange($event, 'key')"

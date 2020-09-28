@@ -43,10 +43,16 @@ export class AuthComponent implements OnInit {
             });
           },
           (error) => {
-            if (error.status === 401) {
+            if (error.status === 504) {
+              this.snackBar.open('Could not connect to server', 'error', {
+                duration: 2000,
+              });
+            } else if (error.status === 401) {
               this.isInvalidCredentials = true;
             } else {
-              console.error(error);
+              this.snackBar.open('Unknown error', 'error', {
+                duration: 2000,
+              });
             }
           },
         );

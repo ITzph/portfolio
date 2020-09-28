@@ -21,9 +21,9 @@
         <h2>
           Please login
         </h2>
-        <h3 *ngIf="isInvalidCredentials" class="invalid-credentials">
+        <p *ngIf="isInvalidCredentials" class="invalid-credentials">
           Invalid username or password
-        </h3>
+        </p>
       </mat-card-title>
       <mat-card-content>
         <form [formGroup]="authForm" class="flex-column">

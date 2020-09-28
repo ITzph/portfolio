@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 import { IImageMetadata } from '@portfolio/api-interfaces';
 import { MemesService } from '../../../pages/memes/memes.service';
 import { trackByIdOrIndex } from '../../../utils/tracker-by-id.util';
-import { OrderByEventProp, ORDER, ORDER_BY } from '../photo.model';
+import { OrderByEventProp, ORDER, ORDER_BY } from '../../grouping/grouping.model';
 
 @Component({
   selector: 'portfolio-photos-list',

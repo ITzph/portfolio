@@ -1,0 +1,9 @@
+@import '../common-style.scss';
+
+:host {
+  display: block;
+}
+
+.sort-wrapper {
+  @include common-wrapper();
+}

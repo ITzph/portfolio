@@ -12,6 +12,10 @@ import { LayoutModule } from '../../modules/layout/layout.module';
 import { HeaderModule } from '../../modules/header/header.module';
 import { FooterModule } from '../../modules/footer/footer.module';
 import { NotFoundModule } from '../not-found/not-found.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [ProfileComponent, AutoTyperComponent, GreetingsTranscriptComponent],
@@ -24,6 +28,9 @@ import { NotFoundModule } from '../not-found/not-found.module';
     LayoutModule,
     HeaderModule,
     FooterModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
   ],
   exports: [ProfileComponent, AutoTyperComponent, GreetingsTranscriptComponent],
 })
