@@ -1,5 +1,21 @@
+@import '../../../styles/variables';
+
 .greetings {
   width: 100%;
   box-sizing: border-box;
   text-align: center;
+
+  padding: 0;
+
+  @media #{$xs-device} {
+    padding: 0 1%;
+  }
+
+  @media #{$sm-device} {
+    padding: 0 5%;
+  }
+
+  @media #{$md-device} {
+    padding: 0 10%;
+  }
 }
