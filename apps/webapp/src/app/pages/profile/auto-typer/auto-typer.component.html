@@ -11,5 +11,21 @@
     </p>
   </article>
 </section>
-<button (click)="skipAutoType()" *ngIf="isTyping">Skip</button>
-<button (click)="retriggerAutoType()" *ngIf="!isTyping">Repeat</button>
+<button
+  mat-icon-button
+  (click)="skipAutoType()"
+  *ngIf="isTyping"
+  matTooltip="Skip"
+  matTooltipPosition="right"
+>
+  <mat-icon>skip_next</mat-icon>
+</button>
+<button
+  mat-icon-button
+  (click)="retriggerAutoType()"
+  *ngIf="!isTyping"
+  matTooltip="Repeat"
+  matTooltipPosition="right"
+>
+  <mat-icon>refresh</mat-icon>
+</button>
