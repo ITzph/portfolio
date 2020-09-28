@@ -4,19 +4,21 @@
 </div>
 
 <ng-container *ngIf="filteredMemes.length > 0; else emptyList">
-  <ng-container
-    *ngFor="
-      let meme of filteredMemes
-        | paginate: { itemsPerPage: PAGE_SIZE_LIMIT, currentPage: currentPage };
-      trackBy: memeTracker
-    "
-  >
-    <div class="memes">
-      <portfolio-photo-detail [meme]="meme"></portfolio-photo-detail>
-    </div>
-  </ng-container>
+  <div class="memes-wrapper">
+    <ng-container
+      *ngFor="
+        let meme of filteredMemes
+          | paginate: { itemsPerPage: PAGE_SIZE_LIMIT, currentPage: currentPage };
+        trackBy: memeTracker
+      "
+    >
+      <div class="memes">
+        <portfolio-photo-detail [meme]="meme"></portfolio-photo-detail>
+      </div>
+    </ng-container>
 
-  <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+    <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+  </div>
 </ng-container>
 
 <ng-template #emptyList>
