@@ -17,4 +17,10 @@
 
 .search-wrapper {
   @include common-wrapper();
+
+  width: 30rem;
+
+  @media #{$sm-device} {
+    width: 32rem;
+  }
 }
