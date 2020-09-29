@@ -1,6 +1,24 @@
 <div class="filter-wrapper">
-  <portfolio-filter-by-tag (filterValueChange)="onFilterChange($event)"></portfolio-filter-by-tag>
-  <portfolio-sort-by-property (orderChange)="onOrderChange($event)"></portfolio-sort-by-property>
+  <portfolio-filter-by-tag
+    [filterValue]="filterValue"
+    [filterKey]="filterKey"
+    (filterValueChange)="onFilterChange($event)"
+  ></portfolio-filter-by-tag>
+  <div class="flex-row">
+    <portfolio-sort-by-property
+      [order]="order"
+      [orderBy]="orderBy"
+      (orderChange)="onOrderChange($event)"
+    ></portfolio-sort-by-property>
+    <button
+      mat-icon-button
+      (click)="onResetFilter()"
+      matTooltip="Reset filter"
+      matTooltipPosition="left"
+    >
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
 </div>
 
 <ng-container *ngIf="filteredMemes.length > 0; else emptyList">
@@ -17,7 +35,10 @@
       </div>
     </ng-container>
 
-    <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+    <pagination-controls
+      (pageChange)="onPageChange($event)"
+      *ngIf="filteredMemes.length > PAGE_SIZE_LIMIT"
+    ></pagination-controls>
   </div>
 </ng-container>
 

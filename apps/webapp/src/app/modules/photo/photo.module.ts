@@ -7,10 +7,20 @@ import { MatChipsModule } from '@angular/material/chips';
 import { EmptyListComponent } from './empty-list/empty-list.component';
 import { MatIconModule } from '@angular/material/icon';
 import { GroupingModule } from '../grouping/grouping.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [PhotosListComponent, PhotoDetailComponent, EmptyListComponent],
-  imports: [CommonModule, NgxPaginationModule, MatChipsModule, MatIconModule, GroupingModule],
+  imports: [
+    CommonModule,
+    NgxPaginationModule,
+    MatChipsModule,
+    MatIconModule,
+    GroupingModule,
+    MatButtonModule,
+    MatTooltipModule,
+  ],
   exports: [PhotosListComponent, PhotoDetailComponent, EmptyListComponent],
 })
 export class PhotoModule {}

@@ -1,4 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+  Input,
+  SimpleChanges,
+  OnChanges,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatOptionSelectionChange } from '@angular/material/core';
 
@@ -8,39 +16,45 @@ import { MatOptionSelectionChange } from '@angular/material/core';
   styleUrls: ['./filter-by-property.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FilterByTagComponent implements OnInit {
+export class FilterByTagComponent implements OnChanges {
+  @Input() filterValue = '';
+  @Input() filterKey = 'tags';
   @Output() filterValueChange = new EventEmitter<{ key: string; value: string }>();
 
-  filterValue = new FormControl('');
-  filterKey = new FormControl('tags');
+  filterValueFC = new FormControl(this.filterValue);
+  filterKeyFC = new FormControl(this.filterKey);
 
-  constructor() {}
+  ngOnChanges(changes: SimpleChanges) {
+    const { filterKey, filterValue } = changes;
 
-  ngOnInit(): void {}
+    if (!filterKey?.firstChange && filterKey?.previousValue !== filterKey?.currentValue) {
+      this.filterKeyFC.setValue(filterKey.currentValue);
+    }
 
-  get filteredOptions(): string[] {
-    return ['tag1', 'tag2', 'tag3'];
+    if (!filterValue?.firstChange && filterValue?.previousValue !== filterValue?.currentValue) {
+      this.filterValueFC.setValue(filterValue.currentValue);
+    }
   }
 
   onFilterValueChange(event) {
     const { value } = event.target as HTMLInputElement;
 
-    this.filterValue.setValue(value);
+    this.filterValueFC.setValue(value);
   }
 
   onOptionChange(event: MatOptionSelectionChange, property: 'key' | 'value') {
     const { value } = event.source;
 
     if (property === 'value') {
-      this.filterValue.setValue(value);
+      this.filterValueFC.setValue(value);
     } else if (property === 'key') {
-      this.filterKey.setValue(value);
+      this.filterKeyFC.setValue(value);
     } else {
       throw { message: 'Invalid option' };
     }
   }
 
   onUpdateFilter() {
-    this.filterValueChange.emit({ key: this.filterKey.value, value: this.filterValue.value });
+    this.filterValueChange.emit({ key: this.filterKeyFC.value, value: this.filterValueFC.value });
   }
 }

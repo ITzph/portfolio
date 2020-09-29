@@ -6,4 +6,10 @@
 
 .sort-wrapper {
   @include common-wrapper();
+
+  width: 26rem;
+
+  @media #{$sm-device} {
+    width: 32rem;
+  }
 }

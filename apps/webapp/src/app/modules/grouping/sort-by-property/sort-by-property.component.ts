@@ -1,4 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  EventEmitter,
+  Output,
+  Input,
+  SimpleChanges,
+  OnChanges,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatOptionSelectionChange } from '@angular/material/core';
 import { ORDER, ORDER_BY } from '../grouping.model';
@@ -9,18 +17,28 @@ import { ORDER, ORDER_BY } from '../grouping.model';
   styleUrls: ['./sort-by-property.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SortByPropertyComponent implements OnInit {
+export class SortByPropertyComponent implements OnChanges {
+  @Input() order = ORDER.DESC;
+  @Input() orderBy = ORDER_BY.CREATED_DATE;
   @Output() orderChange = new EventEmitter<{ orderBy: 'name' | 'description'; order: ORDER }>();
 
-  orderFC = new FormControl(ORDER.DESC);
-  orderByFC = new FormControl(ORDER_BY.CREATED_DATE);
+  orderFC = new FormControl(this.order);
+  orderByFC = new FormControl(this.orderBy);
 
   readonly ORDER = ORDER;
   readonly ORDER_BY = ORDER_BY;
 
-  constructor() {}
+  ngOnChanges(changes: SimpleChanges) {
+    const { order, orderBy } = changes;
 
-  ngOnInit(): void {}
+    if (!order?.firstChange && order?.previousValue !== order?.currentValue) {
+      this.orderFC.setValue(order.currentValue);
+    }
+
+    if (!orderBy?.firstChange && orderBy?.previousValue !== orderBy?.currentValue) {
+      this.orderByFC.setValue(orderBy.currentValue);
+    }
+  }
 
   onOptionChange(event: MatOptionSelectionChange, property: 'order' | 'orderBy') {
     const { value } = event.source;
