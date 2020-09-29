@@ -1,6 +1,22 @@
 <div class="filter-wrapper">
-  <portfolio-filter-by-tag (filterValueChange)="onFilterChange($event)"></portfolio-filter-by-tag>
-  <portfolio-sort-by-property (orderChange)="onOrderChange($event)"></portfolio-sort-by-property>
+  <button
+    mat-icon-button
+    (click)="onResetFilter()"
+    matTooltip="Reset filter"
+    matTooltipPosition="left"
+  >
+    <mat-icon>refresh</mat-icon>
+  </button>
+  <portfolio-filter-by-tag
+    [filterValue]="filterValue"
+    [filterKey]="filterKey"
+    (filterValueChange)="onFilterChange($event)"
+  ></portfolio-filter-by-tag>
+  <portfolio-sort-by-property
+    [order]="order"
+    [orderBy]="orderBy"
+    (orderChange)="onOrderChange($event)"
+  ></portfolio-sort-by-property>
 </div>
 
 <ng-container *ngIf="filteredMemes.length > 0; else emptyList">

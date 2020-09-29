@@ -58,6 +58,13 @@ export class PhotosListComponent implements OnInit {
     });
   }
 
+  onResetFilter() {
+    this.filterValue = '';
+    this.filterKey = 'tags';
+    this.orderBy = ORDER_BY.CREATED_DATE;
+    this.order = ORDER.DESC;
+  }
+
   onFilterChange(event: { key: keyof IImageMetadata; value: string }) {
     if (event) {
       this.filterValue = event?.value;
