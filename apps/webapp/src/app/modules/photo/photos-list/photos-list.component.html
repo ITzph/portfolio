@@ -35,7 +35,10 @@
       </div>
     </ng-container>
 
-    <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+    <pagination-controls
+      (pageChange)="onPageChange($event)"
+      *ngIf="filteredMemes.length > PAGE_SIZE_LIMIT"
+    ></pagination-controls>
   </div>
 </ng-container>
 
