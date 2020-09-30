@@ -18,4 +18,8 @@ export class ContactMeComponent implements OnInit {
   constructor(private readonly fb: FormBuilder) {}
 
   ngOnInit(): void {}
+
+  onSubmitHandler() {
+    const formValue = this.contactDetailsForm.value;
+  }
 }

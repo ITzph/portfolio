@@ -18,7 +18,14 @@
       <mat-form-field style="width: 100%;">
         <textarea placeholder="Enter your message" matInput formControlName="message"></textarea>
       </mat-form-field>
-      <button mat-raised-button>Submit</button>
+      <button
+        [disabled]="!contactDetailsForm.valid"
+        type="submit"
+        mat-raised-button
+        (click)="onSubmitHandler()"
+      >
+        Submit
+      </button>
     </form>
   </mat-card-content>
 </mat-card>
