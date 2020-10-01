@@ -15,7 +15,7 @@ import { NotFoundModule } from '../not-found/not-found.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ContactMeModule } from '../../modules/contact-me/contact-me.module';
 
 @NgModule({
   declarations: [ProfileComponent, AutoTyperComponent, GreetingsTranscriptComponent],
@@ -31,6 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
+    ContactMeModule,
   ],
   exports: [ProfileComponent, AutoTyperComponent, GreetingsTranscriptComponent],
 })

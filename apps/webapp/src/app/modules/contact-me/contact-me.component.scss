@@ -1,0 +1,15 @@
+@import '../../../styles/variables';
+
+:host {
+  display: flex;
+  justify-content: center;
+  margin-top: $margin-medium;
+}
+
+.form-wrapper {
+  width: 100%;
+
+  @media #{$sm-device} {
+    width: 70%;
+  }
+}
