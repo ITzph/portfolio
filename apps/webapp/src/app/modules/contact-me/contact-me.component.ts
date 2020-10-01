@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { environment } from '../../../environments/environment';
+import { EmailService } from './email.service';
 
 @Component({
   selector: 'portfolio-contact-me',
@@ -17,13 +16,17 @@ export class ContactMeComponent implements OnInit {
     message: ['', [Validators.required, Validators.minLength(2)]],
   });
 
-  constructor(private readonly fb: FormBuilder, private readonly http: HttpClient) {}
+  constructor(private readonly fb: FormBuilder, private readonly emailService: EmailService) {}
 
   ngOnInit(): void {}
 
   onSubmitHandler() {
     const formValue = this.contactDetailsForm.value;
 
-    this.http.post(environment.api + '/email', formValue).subscribe((res) => {});
+    this.emailService.sendContactMeMessage(formValue).subscribe((res) => {
+      if (res.result) {
+        this.contactDetailsForm.reset();
+      }
+    });
   }
 }
