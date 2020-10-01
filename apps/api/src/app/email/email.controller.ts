@@ -1,5 +1,5 @@
-import { Controller, Post, Req } from '@nestjs/common';
-import { Request } from 'express';
+import { Controller, HttpStatus, Post, Req, Res } from '@nestjs/common';
+import { Request, Response } from 'express';
 import { ContactMeDetails } from '@portfolio/api-interfaces';
 import { EmailService } from './email.service';
 
@@ -8,9 +8,18 @@ export class EmailController {
   constructor(private readonly emailService: EmailService) {}
 
   @Post()
-  async sendEmail(@Req() req: Request) {
+  async sendEmail(@Req() req: Request, @Res() res: Response<{ message: string; result: boolean }>) {
     const body = req.body as ContactMeDetails;
 
-    this.emailService.contactMe(body);
+    try {
+      this.emailService.contactMe(body);
+      return res
+        .status(HttpStatus.CREATED)
+        .send({ result: true, message: 'Successfully sent email' });
+    } catch (error) {
+      return res
+        .status(HttpStatus.BAD_REQUEST)
+        .send({ result: false, message: 'There is an error' });
+    }
   }
 }
