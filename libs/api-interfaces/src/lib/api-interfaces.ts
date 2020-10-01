@@ -129,3 +129,10 @@ export interface IPaginationLinks {
    */
   last?: string;
 }
+
+export interface ContactMeDetails {
+  firstName: string;
+  lastName: string;
+  email: string;
+  message: string;
+}
