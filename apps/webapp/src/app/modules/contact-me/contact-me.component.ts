@@ -10,6 +10,8 @@ import { EmailService } from './email.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactMeComponent implements OnInit {
+  isContactByEmailVisible = false;
+
   contactDetailsForm = this.fb.group({
     firstName: ['', [Validators.required]],
     lastName: [''],
@@ -32,7 +34,7 @@ export class ContactMeComponent implements OnInit {
       (res) => {
         if (res.result) {
           this.contactDetailsForm.reset();
-
+          this.isContactByEmailVisible = false;
           this.snackBar.open(res.message, 'success', {
             duration: 2000,
           });
