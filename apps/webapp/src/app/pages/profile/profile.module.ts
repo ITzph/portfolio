@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ContactMeModule } from '../../modules/contact-me/contact-me.module';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [ProfileComponent, AutoTyperComponent, GreetingsTranscriptComponent],
@@ -31,6 +32,7 @@ import { ContactMeModule } from '../../modules/contact-me/contact-me.module';
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
+    MatCardModule,
     ContactMeModule,
   ],
   exports: [ProfileComponent, AutoTyperComponent, GreetingsTranscriptComponent],

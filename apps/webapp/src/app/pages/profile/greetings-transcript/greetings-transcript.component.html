@@ -7,9 +7,11 @@
   Show Transcript
 </button>
 <ng-container *ngIf="isTranscriptVisible">
-  <section class="transcript">
-    <p *ngFor="let greeting of greetings">
-      {{ greeting }}
-    </p>
-  </section>
+  <mat-card class="transcript">
+    <mat-card-content>
+      <p *ngFor="let greeting of greetings">
+        {{ greeting }}
+      </p>
+    </mat-card-content>
+  </mat-card>
 </ng-container>
