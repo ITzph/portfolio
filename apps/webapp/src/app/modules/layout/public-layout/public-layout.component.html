@@ -1,9 +1,9 @@
 <main id="app-root" class="app-root">
   <div class="app-root__wrapper">
     <div class="main-content">
-      <ng-content></ng-content>
-      <ng-content></ng-content>
+      <ng-content select="[contentHeader]"></ng-content>
+      <ng-content select="[contentBody]"></ng-content>
     </div>
-    <ng-content></ng-content>
+    <ng-content select="[contentFooter]"></ng-content>
   </div>
 </main>
