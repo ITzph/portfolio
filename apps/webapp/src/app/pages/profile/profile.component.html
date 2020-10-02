@@ -1,6 +1,5 @@
 <portfolio-public-layout>
   <portfolio-header contentHeader></portfolio-header>
-  <portfolio-footer contentFooter></portfolio-footer>
   <ng-container *ngIf="profile$ | async; let profile; else: loading">
     <section class="greetings" contentBody>
       <portfolio-auto-typer
@@ -14,6 +13,7 @@
       <portfolio-contact-me></portfolio-contact-me>
     </section>
   </ng-container>
+  <portfolio-footer contentFooter></portfolio-footer>
 </portfolio-public-layout>
 
 <ng-template #loading>
