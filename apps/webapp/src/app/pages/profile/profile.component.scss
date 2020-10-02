@@ -19,3 +19,9 @@
     padding: 0 10%;
   }
 }
+
+.separator {
+  margin: $margin-medium 0;
+  height: 0.3rem;
+  background-color: $color-primary-dark;
+}

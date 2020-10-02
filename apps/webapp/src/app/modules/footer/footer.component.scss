@@ -4,8 +4,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  height: 12rem; // If value is updated, padding-bottom in app component should match this value
-  position: absolute;
+  height: 12rem;
+  position: relative;
   bottom: 0;
   left: 0;
   flex-direction: column;
@@ -71,9 +71,9 @@
   background-color: $color-dark-dark;
   color: $color-light-light;
   height: 2.5rem;
-  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
   bottom: 0;
 }

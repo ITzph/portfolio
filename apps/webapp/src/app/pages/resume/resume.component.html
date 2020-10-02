@@ -1,6 +1,5 @@
 <portfolio-public-layout>
   <portfolio-header contentHeader></portfolio-header>
-  <portfolio-footer contentFooter></portfolio-footer>
   <section contentBody>
     <ng-container *ngIf="profile$ | async; let profile">
       <div class="skills-wrapper">
@@ -31,4 +30,5 @@
       </div>
     </ng-container>
   </section>
+  <portfolio-footer contentFooter></portfolio-footer>
 </portfolio-public-layout>

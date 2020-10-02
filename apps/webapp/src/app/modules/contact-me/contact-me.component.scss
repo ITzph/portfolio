@@ -13,3 +13,16 @@
     width: 70%;
   }
 }
+
+.social-handlers {
+  display: grid;
+  grid-template-columns: 7fr repeat(3, 1fr);
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  padding: 1rem 0;
+}
+
+.or-separator {
+  margin: 1rem 0;
+  font-size: 3em;
+}

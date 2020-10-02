@@ -1,6 +1,5 @@
 <portfolio-public-layout>
   <portfolio-header contentHeader></portfolio-header>
-  <portfolio-footer contentFooter></portfolio-footer>
   <section contentBody>
     <ng-container *ngIf="memes$ | async; let memes">
       <portfolio-photos-list
@@ -17,6 +16,7 @@
       ><p style="color: white;">Weight lungs...</p></ngx-spinner
     >
   </section>
+  <portfolio-footer contentFooter></portfolio-footer>
 </portfolio-public-layout>
 
 <ng-template #emptyList>
