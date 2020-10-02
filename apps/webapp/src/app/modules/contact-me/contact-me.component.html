@@ -10,10 +10,8 @@
       </ng-container>
     </div>
     <p class="or-separator">OR</p>
-    <button mat-raised-button color="primary" (click)="isContactByEmailVisible = true">
-      Send by Email
-    </button>
-    <form [formGroup]="contactDetailsForm" class="flex-column" *ngIf="isContactByEmailVisible">
+    <h3>Send me a message via email</h3>
+    <form [formGroup]="contactDetailsForm" class="flex-column">
       <div class="flex-row">
         <mat-form-field style="width: 70%; margin-right: 0.5rem;">
           <input type="text" placeholder="First name" matInput formControlName="firstName" />

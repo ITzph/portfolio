@@ -14,8 +14,6 @@ import { map } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactMeComponent implements OnInit {
-  isContactByEmailVisible = false;
-
   contactDetailsForm = this.fb.group({
     firstName: ['', [Validators.required]],
     lastName: [''],
@@ -47,11 +45,10 @@ export class ContactMeComponent implements OnInit {
     this.emailService.sendContactMeMessage(formValue).subscribe(
       (res) => {
         if (res.result) {
-          this.contactDetailsForm.reset();
-          this.isContactByEmailVisible = false;
           this.snackBar.open(res.message, 'success', {
             duration: 2000,
           });
+          this.contactDetailsForm.reset();
         }
       },
       (err) => {
