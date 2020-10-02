@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { SocialModule } from '../social/social.module';
 
 @NgModule({
   declarations: [ContactMeComponent],
@@ -16,6 +17,7 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
+    SocialModule,
   ],
   exports: [ContactMeComponent],
 })
