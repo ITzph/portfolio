@@ -1,5 +1,4 @@
-<p>admin-blogs works!</p>
-<quill-editor>
+<quill-editor [formControl]="blogContent">
   <!-- <div quill-editor-toolbar>
     <span class="ql-formats">
       <button class="ql-bold" [title]="'Bold'"></button>
@@ -20,3 +19,8 @@
     </span>
   </div> -->
 </quill-editor>
+<button mat-raised-button (click)="onSaveBlog()">Save Blog</button>
+
+<h3>
+  {{ blogs$ | async | json }}
+</h3>
