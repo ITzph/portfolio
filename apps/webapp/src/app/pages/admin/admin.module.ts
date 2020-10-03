@@ -18,6 +18,7 @@ import { AdminProfileComponent } from './profile/admin-profile/admin-profile.com
 import { AdminResumeComponent } from './resume/admin-resume/admin-resume.component';
 import { NotFoundModule } from '../not-found/not-found.module';
 import { AdminBlogsComponent } from './blogs/admin-blogs.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,8 @@ import { AdminBlogsComponent } from './blogs/admin-blogs.component';
     MatChipsModule,
     HeaderModule,
     NotFoundModule,
+    // TODO extract to submodule
+    QuillModule.forRoot(),
   ],
   exports: [
     AdminComponent,
