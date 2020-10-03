@@ -17,6 +17,7 @@ import { HeaderModule } from '../../modules/header/header.module';
 import { AdminProfileComponent } from './profile/admin-profile/admin-profile.component';
 import { AdminResumeComponent } from './resume/admin-resume/admin-resume.component';
 import { NotFoundModule } from '../not-found/not-found.module';
+import { AdminBlogsComponent } from './blogs/admin-blogs.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NotFoundModule } from '../not-found/not-found.module';
     UpdateMemeDialogComponent,
     AdminProfileComponent,
     AdminResumeComponent,
+    AdminBlogsComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +51,7 @@ import { NotFoundModule } from '../not-found/not-found.module';
     UpdateMemeDialogComponent,
     AdminProfileComponent,
     AdminResumeComponent,
+    AdminBlogsComponent,
   ],
 })
 export class AdminModule {}
