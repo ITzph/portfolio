@@ -21,6 +21,7 @@ import { AdminBlogsComponent } from './blogs/admin-blogs.component';
 import { QuillModule } from 'ngx-quill';
 import { StoreModule } from '@ngrx/store';
 import * as fromBlogs from '../../reducers/blog.reducer';
+import * as fromMemes from '../../reducers/meme.reducer';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import * as fromBlogs from '../../reducers/blog.reducer';
     // TODO extract to submodule
     QuillModule.forRoot(),
     StoreModule.forFeature(fromBlogs.blogsFeatureKey, fromBlogs.reducer),
+    StoreModule.forFeature(fromMemes.memesFeatureKey, fromMemes.reducer),
   ],
   exports: [
     AdminComponent,

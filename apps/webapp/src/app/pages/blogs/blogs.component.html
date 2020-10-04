@@ -1,7 +1,12 @@
 <portfolio-public-layout>
   <portfolio-header contentHeader></portfolio-header>
   <section contentBody>
-    BLogs index
+    <ng-container *ngFor="let blog of blogs$ | async">
+      <div>
+        <p>ID: {{ blog.id }}</p>
+        <p>content: {{ blog.content }}</p>
+      </div>
+    </ng-container>
   </section>
   <portfolio-footer contentFooter></portfolio-footer>
 </portfolio-public-layout>
