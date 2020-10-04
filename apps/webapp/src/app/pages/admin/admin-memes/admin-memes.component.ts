@@ -13,8 +13,8 @@ import { PhotoFormData } from '../../../modules/photo/model/photo.model';
 
 @Component({
   selector: 'portfolio-admin-memes',
-  templateUrl: './memes.component.html',
-  styleUrls: ['./memes.component.scss'],
+  templateUrl: './admin-memes.component.html',
+  styleUrls: ['./admin-memes.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminMemesComponent implements OnInit {

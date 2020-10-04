@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import * as fromBlogs from '../../../reducers/blog.reducer';
@@ -9,6 +9,7 @@ import { addBlog } from '../../../actions/blog.actions';
   selector: 'portfolio-admin-blogs',
   templateUrl: './admin-blogs.component.html',
   styleUrls: ['./admin-blogs.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminBlogsComponent implements OnInit {
   blogContent = this.fb.control('', [Validators.required]);
