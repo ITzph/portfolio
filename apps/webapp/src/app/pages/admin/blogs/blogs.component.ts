@@ -7,10 +7,10 @@ import { addBlog } from '../../../actions/blog.actions';
 
 @Component({
   selector: 'portfolio-admin-blogs',
-  templateUrl: './admin-blogs.component.html',
-  styleUrls: ['./admin-blogs.component.scss'],
+  templateUrl: './blogs.component.html',
+  styleUrls: ['./blogs.component.scss'],
 })
-export class AdminBlogsComponent implements OnInit {
+export class BlogsComponent implements OnInit {
   blogContent = this.fb.control('', [Validators.required]);
 
   constructor(

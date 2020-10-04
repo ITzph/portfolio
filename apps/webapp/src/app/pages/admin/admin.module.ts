@@ -17,10 +17,7 @@ import { HeaderModule } from '../../modules/header/header.module';
 import { AdminProfileComponent } from './profile/admin-profile/admin-profile.component';
 import { AdminResumeComponent } from './resume/admin-resume/admin-resume.component';
 import { NotFoundModule } from '../not-found/not-found.module';
-import { AdminBlogsComponent } from './blogs/admin-blogs.component';
-import { QuillModule } from 'ngx-quill';
 import { StoreModule } from '@ngrx/store';
-import * as fromBlogs from '../../reducers/blog.reducer';
 import * as fromMemes from '../../reducers/meme.reducer';
 
 @NgModule({
@@ -31,7 +28,6 @@ import * as fromMemes from '../../reducers/meme.reducer';
     UpdateMemeDialogComponent,
     AdminProfileComponent,
     AdminResumeComponent,
-    AdminBlogsComponent,
   ],
   imports: [
     CommonModule,
@@ -48,8 +44,7 @@ import * as fromMemes from '../../reducers/meme.reducer';
     HeaderModule,
     NotFoundModule,
     // TODO extract to submodule
-    QuillModule.forRoot(),
-    StoreModule.forFeature(fromBlogs.blogsFeatureKey, fromBlogs.reducer),
+
     StoreModule.forFeature(fromMemes.memesFeatureKey, fromMemes.reducer),
   ],
   exports: [
@@ -59,7 +54,6 @@ import * as fromMemes from '../../reducers/meme.reducer';
     UpdateMemeDialogComponent,
     AdminProfileComponent,
     AdminResumeComponent,
-    AdminBlogsComponent,
   ],
 })
 export class AdminModule {}
