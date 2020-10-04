@@ -17,7 +17,8 @@ const routes: Routes = [
       { path: 'memes', component: AdminMemesComponent, pathMatch: 'full' },
       {
         path: 'blogs',
-        loadChildren: () => import('./blogs/blogs.module').then((m) => m.AdminBlogsModule),
+        loadChildren: () =>
+          import('./admin-blogs/admin-blogs.module').then((m) => m.AdminBlogsModule),
       },
       { path: 'resume', component: AdminResumeComponent, pathMatch: 'full' },
       { path: '**', component: ContentNotFoundComponent, pathMatch: 'full' },
