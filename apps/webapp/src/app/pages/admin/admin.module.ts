@@ -6,13 +6,11 @@ import { AdminComponent } from './admin.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { HeaderModule } from '../../modules/header/header.module';
-import { AdminProfileComponent } from './profile/admin-profile/admin-profile.component';
-import { AdminResumeComponent } from './resume/admin-resume/admin-resume.component';
 import { NotFoundModule } from '../not-found/not-found.module';
 
 @NgModule({
-  declarations: [AdminComponent, AdminProfileComponent, AdminResumeComponent],
+  declarations: [AdminComponent],
   imports: [CommonModule, AdminRoutingModule, HeaderModule, NotFoundModule],
-  exports: [AdminComponent, AdminProfileComponent, AdminResumeComponent],
+  exports: [AdminComponent],
 })
 export class AdminModule {}

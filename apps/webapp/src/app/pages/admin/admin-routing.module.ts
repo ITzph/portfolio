@@ -3,8 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { ContentNotFoundComponent } from '../not-found/content-not-found/content-not-found.component';
 
 import { AdminComponent } from './admin.component';
-import { AdminProfileComponent } from './profile/admin-profile/admin-profile.component';
-import { AdminResumeComponent } from './resume/admin-resume/admin-resume.component';
 
 const routes: Routes = [
   {
@@ -16,7 +14,16 @@ const routes: Routes = [
         loadChildren: () =>
           import('./admin-memes/admin-memes.module').then((m) => m.AdminMemesModule),
       },
-      { path: 'profile', component: AdminProfileComponent, pathMatch: 'full' },
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('./admin-profile/admin-profile.module').then((m) => m.AdminProfileModule),
+      },
+      {
+        path: 'resume',
+        loadChildren: () =>
+          import('./admin-resume/admin-resume.module').then((m) => m.AdminResumeModule),
+      },
       {
         path: 'memes',
         loadChildren: () =>
@@ -27,7 +34,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('./admin-blogs/admin-blogs.module').then((m) => m.AdminBlogsModule),
       },
-      { path: 'resume', component: AdminResumeComponent, pathMatch: 'full' },
       { path: '**', component: ContentNotFoundComponent, pathMatch: 'full' },
     ],
   },
