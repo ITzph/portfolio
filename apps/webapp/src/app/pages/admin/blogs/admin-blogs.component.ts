@@ -22,20 +22,22 @@ export class AdminBlogsComponent implements OnInit {
     return this.blogsStore.pipe(select(getBlogs));
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  onSaveBlog() {
     this.blogsStore.dispatch(
       addBlog({
         blog: {
           id: new Date().getTime(),
-          content: 'initial State',
+          content: this.blogContent.value,
+          author: 'Code Gino',
+          coverPhoto: 'test',
+          createdAt: new Date(),
+          tags: ['test1', 'test2', 'test3'],
+          title: 'Some Title',
+          updatedAt: new Date(),
         },
       }),
-    );
-  }
-
-  onSaveBlog() {
-    this.blogsStore.dispatch(
-      addBlog({ blog: { id: new Date().getTime(), content: this.blogContent.value } }),
     );
   }
 }
