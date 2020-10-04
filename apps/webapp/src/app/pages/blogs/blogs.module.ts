@@ -8,15 +8,18 @@ import { LayoutModule } from '../../modules/layout/layout.module';
 import { StoreModule } from '@ngrx/store';
 
 import * as fromBlog from '../../reducers/blog.reducer';
+import { MatCardModule } from '@angular/material/card';
+import { SanitizeStringHtmlPipe } from '../../pipes/sanitize-string-html.pipe';
 
 @NgModule({
-  declarations: [BlogsComponent],
+  declarations: [BlogsComponent, SanitizeStringHtmlPipe],
   imports: [
     CommonModule,
     BlogsRoutingModule,
     HeaderModule,
     FooterModule,
     LayoutModule,
+    MatCardModule,
     StoreModule.forFeature(fromBlog.blogsFeatureKey, fromBlog.reducer),
   ],
   exports: [BlogsComponent],

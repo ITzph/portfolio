@@ -34,6 +34,8 @@ export class AdminBlogsComponent implements OnInit {
   }
 
   onSaveBlog() {
-    this.blogsStore.dispatch(addBlog({ blog: { id: 1, content: this.blogContent.value } }));
+    this.blogsStore.dispatch(
+      addBlog({ blog: { id: new Date().getTime(), content: this.blogContent.value } }),
+    );
   }
 }

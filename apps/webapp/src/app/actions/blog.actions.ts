@@ -19,8 +19,8 @@ export const updateBlogs = createAction(
   props<{ blogs: Update<Blog>[] }>(),
 );
 
-export const deleteBlog = createAction('[Blog/API] Delete Blog', props<{ id: string }>());
+export const deleteBlog = createAction('[Blog/API] Delete Blog', props<{ id: number }>());
 
-export const deleteBlogs = createAction('[Blog/API] Delete Blogs', props<{ ids: string[] }>());
+export const deleteBlogs = createAction('[Blog/API] Delete Blogs', props<{ ids: number[] }>());
 
 export const clearBlogs = createAction('[Blog/API] Clear Blogs');

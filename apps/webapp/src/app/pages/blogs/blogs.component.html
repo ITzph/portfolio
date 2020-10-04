@@ -2,10 +2,14 @@
   <portfolio-header contentHeader></portfolio-header>
   <section contentBody>
     <ng-container *ngFor="let blog of blogs$ | async">
-      <div>
-        <p>ID: {{ blog.id }}</p>
-        <p>content: {{ blog.content }}</p>
-      </div>
+      <mat-card>
+        <mat-card-title>
+          <p>ID: {{ blog.id }}</p>
+        </mat-card-title>
+        <mat-card-content>
+          <article [innerHTML]="blog.content"></article>
+        </mat-card-content>
+      </mat-card>
     </ng-container>
   </section>
   <portfolio-footer contentFooter></portfolio-footer>

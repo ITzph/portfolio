@@ -1,5 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import { Blog } from '@portfolio/api-interfaces';
+import { Observable } from 'rxjs';
 import * as fromBlog from '../../reducers/blog.reducer';
 import { getBlogs } from '../../selectors/blog.selectors';
 
@@ -10,11 +12,11 @@ import { getBlogs } from '../../selectors/blog.selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogsComponent implements OnInit {
+  blogs$: Observable<Blog[]>;
+
   constructor(private readonly blogStore: Store<fromBlog.State>) {}
 
-  ngOnInit(): void {}
-
-  get blogs$() {
-    return this.blogStore.pipe(select(getBlogs));
+  ngOnInit(): void {
+    this.blogs$ = this.blogStore.pipe(select(getBlogs));
   }
 }
