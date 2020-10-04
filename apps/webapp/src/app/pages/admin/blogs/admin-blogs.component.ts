@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
-import * as fromBlogs from '../../../reducers/blogs.reducer';
-import { getBlogs } from '../../../selectors/blogs.selectors';
-import { createBlog } from '../../../actions/blogs.actions';
+import * as fromBlogs from '../../../reducers/blog.reducer';
+import { getBlogs } from '../../../selectors/blog.selectors';
+import { addBlog } from '../../../actions/blog.actions';
 
 @Component({
   selector: 'portfolio-admin-blogs',
@@ -22,9 +22,18 @@ export class AdminBlogsComponent implements OnInit {
     return this.blogsStore.pipe(select(getBlogs));
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.blogsStore.dispatch(
+      addBlog({
+        blog: {
+          id: new Date().getTime(),
+          content: 'initial State',
+        },
+      }),
+    );
+  }
 
   onSaveBlog() {
-    this.blogsStore.dispatch(createBlog({ content: this.blogContent.value }));
+    this.blogsStore.dispatch(addBlog({ blog: { id: 1, content: this.blogContent.value } }));
   }
 }

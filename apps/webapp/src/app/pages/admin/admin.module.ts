@@ -20,7 +20,7 @@ import { NotFoundModule } from '../not-found/not-found.module';
 import { AdminBlogsComponent } from './blogs/admin-blogs.component';
 import { QuillModule } from 'ngx-quill';
 import { StoreModule } from '@ngrx/store';
-import * as fromBlogs from '../../reducers/blogs.reducer';
+import * as fromBlogs from '../../reducers/blog.reducer';
 
 @NgModule({
   declarations: [

@@ -1,7 +1,7 @@
-import { reducer, initialState } from './blogs.reducer';
+import { reducer, initialState } from '../reducers/blog.reducer';
 
-describe('Blogs Reducer', () => {
-  describe('an unknown action', () => {
+describe('Blog Reducer', () => {
+  describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as any;
 
