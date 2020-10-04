@@ -9,10 +9,11 @@ import { StoreModule } from '@ngrx/store';
 
 import * as fromBlog from '../../reducers/blog.reducer';
 import { MatCardModule } from '@angular/material/card';
-import { SanitizeStringHtmlPipe } from '../../pipes/sanitize-string-html.pipe';
+import { UtilitiesModule } from '../../modules/utilities/utilities.module';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
-  declarations: [BlogsComponent, SanitizeStringHtmlPipe],
+  declarations: [BlogsComponent],
   imports: [
     CommonModule,
     BlogsRoutingModule,
@@ -20,6 +21,8 @@ import { SanitizeStringHtmlPipe } from '../../pipes/sanitize-string-html.pipe';
     FooterModule,
     LayoutModule,
     MatCardModule,
+    UtilitiesModule,
+    MatChipsModule,
     StoreModule.forFeature(fromBlog.blogsFeatureKey, fromBlog.reducer),
   ],
   exports: [BlogsComponent],

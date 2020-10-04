@@ -12,16 +12,10 @@ import { CertificationComponent } from './certification/certification.component'
 import { LayoutModule } from '../../modules/layout/layout.module';
 import { HeaderModule } from '../../modules/header/header.module';
 import { FooterModule } from '../../modules/footer/footer.module';
-import { SanitizeStringHtmlPipe } from '../../pipes/sanitize-string-html.pipe';
+import { UtilitiesModule } from '../../modules/utilities/utilities.module';
 
 @NgModule({
-  declarations: [
-    ResumeComponent,
-    SkillComponent,
-    ExperienceComponent,
-    CertificationComponent,
-    SanitizeStringHtmlPipe,
-  ],
+  declarations: [ResumeComponent, SkillComponent, ExperienceComponent, CertificationComponent],
   imports: [
     CommonModule,
     ResumeRoutingModule,
@@ -30,6 +24,7 @@ import { SanitizeStringHtmlPipe } from '../../pipes/sanitize-string-html.pipe';
     LayoutModule,
     HeaderModule,
     FooterModule,
+    UtilitiesModule,
   ],
   exports: [ResumeComponent, SkillComponent, ExperienceComponent, CertificationComponent],
 })

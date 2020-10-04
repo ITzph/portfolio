@@ -1,16 +1,25 @@
 <portfolio-public-layout>
   <portfolio-header contentHeader></portfolio-header>
   <section contentBody>
-    <ng-container *ngFor="let blog of blogs$ | async">
-      <mat-card>
-        <mat-card-title>
-          <p>ID: {{ blog.id }}</p>
-        </mat-card-title>
-        <mat-card-content>
-          <article [innerHTML]="blog.content"></article>
-        </mat-card-content>
-      </mat-card>
-    </ng-container>
+    <article class="blogs-wrapper">
+      <ng-container *ngFor="let blog of blogs$ | async">
+        <mat-card class="blog">
+          <mat-card-title>
+            <h2>{{ blog.title }}</h2>
+            <h3>By: {{ blog.author }}</h3>
+            <h4>{{ blog.createdAt.toDateString() }}</h4>
+          </mat-card-title>
+          <mat-card-content>
+            <article [innerHTML]="blog.content"></article>
+          </mat-card-content>
+          <mat-chip-list class="tags">
+            <mat-chip *ngFor="let tag of blog.tags">
+              {{ tag }}
+            </mat-chip>
+          </mat-chip-list>
+        </mat-card>
+      </ng-container>
+    </article>
   </section>
   <portfolio-footer contentFooter></portfolio-footer>
 </portfolio-public-layout>

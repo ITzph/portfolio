@@ -18,8 +18,13 @@ export const adapter: EntityAdapter<Blog> = createEntityAdapter<Blog>();
 
 export const initialState: State = adapter.addMany(
   [
-    // { content: 'initial content', id: 1 },
     {
+      author: 'Code Gino',
+      coverPhoto: 'test',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      tags: ['tag1', 'tag2'],
+      title: 'Some Title',
       content:
         '<p>asdfadfafda</p><p><span style="color: rgb(230, 0, 0);">asdfasdfasdf</span></p><p><span style="color: rgb(230, 0, 0); background-color: rgb(0, 138, 0);">asdfasdf<span class="ql-cursor">﻿</span></span></p>',
       id: 2,
