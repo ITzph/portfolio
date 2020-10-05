@@ -10,7 +10,7 @@
             <h4>{{ blog.createdAt.toDateString() }}</h4>
           </mat-card-title>
           <mat-card-content>
-            <article [innerHTML]="blog.content"></article>
+            <quill-view-html [content]="blog.content" theme="snow"></quill-view-html>
           </mat-card-content>
           <mat-chip-list class="tags">
             <mat-chip *ngFor="let tag of blog.tags">

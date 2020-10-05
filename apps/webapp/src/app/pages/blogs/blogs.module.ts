@@ -11,6 +11,7 @@ import * as fromBlog from '../../reducers/blog.reducer';
 import { MatCardModule } from '@angular/material/card';
 import { UtilitiesModule } from '../../modules/utilities/utilities.module';
 import { MatChipsModule } from '@angular/material/chips';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [BlogsComponent],
@@ -23,6 +24,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatCardModule,
     UtilitiesModule,
     MatChipsModule,
+    QuillModule.forRoot(),
     StoreModule.forFeature(fromBlog.blogsFeatureKey, fromBlog.reducer),
   ],
   exports: [BlogsComponent],

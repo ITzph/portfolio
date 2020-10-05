@@ -26,6 +26,10 @@ export class AddMemeDialogComponent extends ImageDialogAbstract implements OnIni
     tags: [[]],
   });
 
+  get getForm() {
+    return this.memeForm;
+  }
+
   constructor(
     private readonly fb: FormBuilder,
     private readonly dialogRef: MatDialogRef<AddMemeDialogComponent, PhotoFormData>,

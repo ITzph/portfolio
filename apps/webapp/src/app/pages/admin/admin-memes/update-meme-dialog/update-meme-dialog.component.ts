@@ -24,6 +24,10 @@ export class UpdateMemeDialogComponent extends ImageDialogAbstract implements On
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
+  get getForm() {
+    return this.memeForm;
+  }
+
   constructor(
     private readonly fb: FormBuilder,
     private readonly dialogRef: MatDialogRef<UpdateMemeDialogComponent, Partial<PhotoFormData>>,

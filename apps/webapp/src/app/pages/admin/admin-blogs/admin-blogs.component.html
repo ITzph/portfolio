@@ -7,6 +7,5 @@
   Write a post
 </button>
 <portfolio-create-blog *ngIf="isCreateNewBlogVisible"></portfolio-create-blog>
-<h3>
-  {{ blogs$ | async | json }}
-</h3>
+
+{{ blogs$ | async | json }}

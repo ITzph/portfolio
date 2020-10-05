@@ -12,20 +12,40 @@
         >Title is required</mat-error
       >
     </mat-form-field>
-    <mat-form-field>
+    <!-- <mat-form-field>
       <mat-label style="font-size: 1.2em;">Tags</mat-label>
       <input matInput placeholder="Tags" formControlName="tags" style="font-size: 1.5em;" />
       <mat-error *ngIf="blogFormGroup.get('tags').hasError('required')">Tags is required</mat-error>
+    </mat-form-field> -->
+    <mat-form-field class="example-chip-list">
+      <mat-chip-list #chipList aria-label="Fruit selection" formControlName="tags">
+        <mat-chip
+          *ngFor="let tag of tags.value; let i = index"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="removeTag(tag, i)"
+        >
+          {{ tag }}
+          <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="Tags"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="addTag($event)"
+        />
+      </mat-chip-list>
     </mat-form-field>
     <quill-editor formControlName="content">
-      <div quill-editor-toolbar>
+      <!-- <div quill-editor-toolbar>
         <span class="ql-formats">
           <button class="ql-bold" [title]="'Bold'"></button>
           <button class="ql-italic" [title]="'Italic'"></button>
           <button class="ql-underline" [title]="'Underline'"></button>
           <button class="ql-strike" [title]="'Strikethrough'"></button>
         </span>
-      </div>
+      </div> -->
     </quill-editor>
     <mat-hint>*Content is required</mat-hint>
     <mat-card-actions class="actions">

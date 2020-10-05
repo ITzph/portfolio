@@ -14,6 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CreateBlogComponent } from './create-blog/create-blog.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [AdminBlogsComponent, CreateBlogComponent],
@@ -27,6 +29,8 @@ import { CreateBlogComponent } from './create-blog/create-blog.component';
     MatCardModule,
     QuillModule.forRoot(),
     MatButtonModule,
+    MatChipsModule,
+    MatIconModule,
     StoreModule.forFeature(fromBlogs.blogsFeatureKey, fromBlogs.reducer),
     MatDialogModule,
   ],
