@@ -12,7 +12,10 @@ import { addBlog } from '../../../actions/blog.actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminBlogsComponent implements OnInit {
-  blogContent = this.fb.control('', [Validators.required]);
+  blogFormGroup = this.fb.group({
+    content: ['', [Validators.required]],
+    title: ['', [Validators.required]],
+  });
 
   constructor(
     private readonly fb: FormBuilder,
@@ -30,7 +33,7 @@ export class AdminBlogsComponent implements OnInit {
       addBlog({
         blog: {
           id: new Date().getTime(),
-          content: this.blogContent.value,
+          content: this.blogFormGroup.get('content').value,
           author: 'Code Gino',
           coverPhoto: 'test',
           createdAt: new Date(),
@@ -40,5 +43,6 @@ export class AdminBlogsComponent implements OnInit {
         },
       }),
     );
+    this.blogFormGroup.reset();
   }
 }
