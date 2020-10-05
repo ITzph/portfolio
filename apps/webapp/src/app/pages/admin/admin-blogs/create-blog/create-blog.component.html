@@ -1,0 +1,38 @@
+<form [formGroup]="blogFormGroup" class="blog-form-wrapper">
+  <mat-card class="blog-form">
+    <mat-form-field class="double-font-size">
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        placeholder="Enter an awesome title here!"
+        formControlName="title"
+        class="font-size-doubled"
+      />
+      <mat-error *ngIf="blogFormGroup.get('title').hasError('required')"
+        >Title is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label style="font-size: 1.2em;">Tags</mat-label>
+      <input matInput placeholder="Tags" formControlName="tags" style="font-size: 1.5em;" />
+      <mat-error *ngIf="blogFormGroup.get('tags').hasError('required')">Tags is required</mat-error>
+    </mat-form-field>
+    <quill-editor formControlName="content">
+      <div quill-editor-toolbar>
+        <span class="ql-formats">
+          <button class="ql-bold" [title]="'Bold'"></button>
+          <button class="ql-italic" [title]="'Italic'"></button>
+          <button class="ql-underline" [title]="'Underline'"></button>
+          <button class="ql-strike" [title]="'Strikethrough'"></button>
+        </span>
+      </div>
+    </quill-editor>
+    <mat-hint>*Content is required</mat-hint>
+    <mat-card-actions class="actions">
+      <button mat-raised-button color="warn">Cancel</button>
+      <button color="primary" type="submit" class="submit" mat-raised-button (click)="onSaveBlog()">
+        Save Blog
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>
