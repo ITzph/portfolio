@@ -15,6 +15,7 @@ export class AdminBlogsComponent implements OnInit {
   blogFormGroup = this.fb.group({
     content: ['', [Validators.required]],
     title: ['', [Validators.required]],
+    tags: ['', [Validators.required]],
   });
 
   constructor(
@@ -29,20 +30,23 @@ export class AdminBlogsComponent implements OnInit {
   ngOnInit(): void {}
 
   onSaveBlog() {
-    this.blogsStore.dispatch(
-      addBlog({
-        blog: {
-          id: new Date().getTime(),
-          content: this.blogFormGroup.get('content').value,
-          author: 'Code Gino',
-          coverPhoto: 'test',
-          createdAt: new Date(),
-          tags: ['test1', 'test2', 'test3'],
-          title: 'Some Title',
-          updatedAt: new Date(),
-        },
-      }),
-    );
-    this.blogFormGroup.reset();
+    if (this.blogFormGroup.valid) {
+      const { content, title, tags } = this.blogFormGroup.value;
+      this.blogsStore.dispatch(
+        addBlog({
+          blog: {
+            content,
+            title,
+            id: new Date().getTime(),
+            author: 'Code Gino',
+            coverPhoto: 'test',
+            createdAt: new Date(),
+            tags: tags.split(','),
+            updatedAt: new Date(),
+          },
+        }),
+      );
+      this.blogFormGroup.reset();
+    }
   }
 }

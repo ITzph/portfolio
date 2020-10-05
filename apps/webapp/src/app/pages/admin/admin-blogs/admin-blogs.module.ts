@@ -10,6 +10,9 @@ import { AdminBlogsComponent } from './admin-blogs.component';
 import * as fromBlogs from '../../../reducers/blog.reducer';
 import { PhotoModule } from '../../../modules/photo/photo.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [AdminBlogsComponent],
@@ -19,7 +22,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     ReactiveFormsModule,
     PhotoModule,
+    MatInputModule,
+    MatCardModule,
     QuillModule.forRoot(),
+    MatButtonModule,
     StoreModule.forFeature(fromBlogs.blogsFeatureKey, fromBlogs.reducer),
     MatDialogModule,
   ],
