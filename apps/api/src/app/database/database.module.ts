@@ -6,6 +6,7 @@ import { UserSkill } from './entities/user-skill.entity';
 import { UserExperience } from './entities/user-experience.entity';
 import { UserCertification } from './entities/user-certification.entity';
 import { ImageMetadata } from './entities/image.entity';
+import { BlogMetadata } from './entities/blog.entity';
 
 @Module({
   imports: [
@@ -25,7 +26,7 @@ import { ImageMetadata } from './entities/image.entity';
             UserExperience,
             UserCertification,
             ImageMetadata,
-            ImageMetadata,
+            BlogMetadata,
           ],
           synchronize: true,
         };
