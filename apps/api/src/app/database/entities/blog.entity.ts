@@ -12,16 +12,16 @@ export class BlogMetadata implements Blog {
   @Column({ name: 'author' })
   author: string;
 
-  @Column({ name: 'content' })
+  @Column({ name: 'content', type: 'longtext' })
   content: string;
 
   @Column('simple-array', { name: 'tags' })
   tags: string[];
 
-  @Column({ name: 'created_at' })
+  @Column('datetime', { name: 'created_at' })
   createdAt: Date;
 
-  @Column({ name: 'updated_at' })
+  @Column('datetime', { name: 'updated_at' })
   updatedAt: Date;
 
   @Column({ name: 'cover_photo' })

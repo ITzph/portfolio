@@ -6,6 +6,8 @@ import { getBlogs } from '../../../../selectors/blog.selectors';
 import * as fromBlogs from '../../../../reducers/blog.reducer';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ImageDialogAbstract } from '../../admin-memes/image-dialog.abtract';
+import { BlogsService } from '../../../blogs/blogs.service';
+import { Blog } from '@portfolio/api-interfaces';
 
 @Component({
   selector: 'portfolio-create-blog',
@@ -32,6 +34,7 @@ export class CreateBlogComponent extends ImageDialogAbstract implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly blogsStore: Store<fromBlogs.State>,
+    private readonly blogService: BlogsService,
   ) {
     super();
   }
@@ -45,21 +48,18 @@ export class CreateBlogComponent extends ImageDialogAbstract implements OnInit {
   onSaveBlog() {
     if (this.blogFormGroup.valid) {
       const { content, title, tags } = this.blogFormGroup.value;
-      this.blogsStore.dispatch(
-        addBlog({
-          blog: {
-            content,
-            title,
-            tags,
-            id: new Date().getTime(),
-            author: 'Code Gino',
-            coverPhoto: 'test',
-            createdAt: new Date(),
-            updatedAt: new Date(),
-          },
-        }),
-      );
-      this.blogFormGroup.reset();
+
+      const newBlog = {
+        content,
+        title,
+        tags,
+        coverPhoto: 'test',
+      };
+
+      this.blogService.createBlog(newBlog).subscribe((blog) => {
+        this.blogsStore.dispatch(addBlog({ blog }));
+        this.blogFormGroup.reset();
+      });
     }
   }
 }

@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CreateBlogComponent } from './create-blog/create-blog.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { BlogsService } from '../../blogs/blogs.service';
 
 @NgModule({
   declarations: [AdminBlogsComponent, CreateBlogComponent],
@@ -34,6 +35,6 @@ import { MatIconModule } from '@angular/material/icon';
     StoreModule.forFeature(fromBlogs.blogsFeatureKey, fromBlogs.reducer),
     MatDialogModule,
   ],
-  exports: [CreateBlogComponent],
+  exports: [AdminBlogsComponent, CreateBlogComponent],
 })
 export class AdminBlogsModule {}

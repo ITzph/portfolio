@@ -12,4 +12,8 @@ export class BlogService {
   public saveBlog(blog: BlogMetadata) {
     return this.blogRepository.save(blog);
   }
+
+  public getBlogs() {
+    return this.blogRepository.find();
+  }
 }
