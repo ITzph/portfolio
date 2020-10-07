@@ -12,9 +12,11 @@ import { MatCardModule } from '@angular/material/card';
 import { UtilitiesModule } from '../../modules/utilities/utilities.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { QuillModule } from 'ngx-quill';
+import { FullBlogContentComponent } from './full-blog-content/full-blog-content.component';
+import { BlogListComponent } from './blog-list/blog-list.component';
 
 @NgModule({
-  declarations: [BlogsComponent],
+  declarations: [BlogsComponent, FullBlogContentComponent, BlogListComponent],
   imports: [
     CommonModule,
     BlogsRoutingModule,
@@ -27,6 +29,6 @@ import { QuillModule } from 'ngx-quill';
     QuillModule.forRoot(),
     StoreModule.forFeature(fromBlog.blogsFeatureKey, fromBlog.reducer),
   ],
-  exports: [BlogsComponent],
+  exports: [BlogsComponent, FullBlogContentComponent, BlogListComponent],
 })
 export class BlogsModule {}

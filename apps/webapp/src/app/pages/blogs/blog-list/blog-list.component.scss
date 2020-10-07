@@ -1,0 +1,28 @@
+@import '../../../../styles/variables';
+
+:host {
+  display: block;
+}
+
+.blog {
+  padding: 1rem;
+}
+
+.blogs-wrapper {
+  padding: $padding-very-small $padding-small;
+  > :not(:last-child) {
+    margin-bottom: $margin-medium;
+  }
+}
+
+.title {
+  cursor: pointer;
+  font-family: sans-serif;
+}
+
+// Check of a better way to center tags
+::ng-deep {
+  .mat-chip-list-wrapper {
+    justify-content: center;
+  }
+}

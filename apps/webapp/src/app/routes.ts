@@ -26,7 +26,6 @@ export const routes: Routes = [
   },
   {
     path: 'blogs',
-    pathMatch: 'full',
     loadChildren: () => import('./pages/blogs/blogs.module').then((m) => m.BlogsModule),
   },
   {
