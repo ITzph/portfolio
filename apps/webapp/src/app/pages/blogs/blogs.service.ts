@@ -16,4 +16,8 @@ export class BlogsService {
   createBlog(blog: Partial<Blog>) {
     return this.http.post<Blog>(environment.api + '/blogs', blog);
   }
+
+  fetchBlog(id: number) {
+    return this.http.get<Blog>(`${environment.api}/blogs/${id}`);
+  }
 }

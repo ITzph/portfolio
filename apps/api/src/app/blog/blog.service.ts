@@ -16,4 +16,8 @@ export class BlogService {
   public getBlogs() {
     return this.blogRepository.find();
   }
+
+  public getBlog(id: number) {
+    return this.blogRepository.findOne(id);
+  }
 }

@@ -40,6 +40,6 @@ export class BlogListComponent implements OnInit {
   }
 
   navigateToBlogContent(blog: Blog) {
-    this.router.navigateByUrl('/blogs/full');
+    this.router.navigateByUrl('/blogs/' + blog.id);
   }
 }

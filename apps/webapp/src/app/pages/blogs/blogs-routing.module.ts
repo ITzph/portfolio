@@ -15,7 +15,7 @@ const routes: Routes = [
         component: BlogListComponent,
       },
       {
-        path: '**',
+        path: ':id',
         component: FullBlogContentComponent,
       },
     ],

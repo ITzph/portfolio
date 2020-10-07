@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Post, Req, Res } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { Request } from 'express';
 import { BlogMetadata } from '../database/entities/blog.entity';
@@ -23,5 +23,10 @@ export class BlogController {
   @Get()
   getBlogs() {
     return this.blogService.getBlogs();
+  }
+
+  @Get(':id')
+  getBlog(@Param('id', ParseIntPipe) id: number) {
+    return this.blogService.getBlog(id);
   }
 }
