@@ -92,3 +92,19 @@ h3 {
     font-size: 2rem;
   }
 }
+
+h4 {
+  font-size: 1.2rem;
+  @media #{$xs-device} {
+    font-size: 1.2rem;
+  }
+  @media #{$sm-device} {
+    font-size: 1.4rem;
+  }
+  @media #{$lg-device} {
+    font-size: 1.6rem;
+  }
+  @media #{$xl-device} {
+    font-size: 1.8rem;
+  }
+}

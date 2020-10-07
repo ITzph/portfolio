@@ -1,0 +1,11 @@
+<button
+  mat-raised-button
+  color="primary"
+  (click)="isCreateNewBlogVisible = true"
+  *ngIf="!isCreateNewBlogVisible"
+>
+  Write a post
+</button>
+<portfolio-create-blog *ngIf="isCreateNewBlogVisible"></portfolio-create-blog>
+
+{{ blogs$ | async | json }}

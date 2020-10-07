@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
 import { IImageMetadata } from '@portfolio/api-interfaces';
 import { environment } from '../../../environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { finalize, take, catchError } from 'rxjs/operators';
+import { finalize, take, catchError, withLatestFrom } from 'rxjs/operators';
 import { Pagination } from '@portfolio/api-interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { select, Store } from '@ngrx/store';
+import * as fromMeme from '../../reducers/meme.reducer';
+import { getMemes } from '../../selectors/meme.selectors';
+import { addMeme, addMemes, deleteMeme, updateMeme } from '../../actions/meme.actions';
 
 @Injectable({ providedIn: 'root' })
 export class MemesService {
   private currentPage = 0;
   private readonly PAGE_SIZE_LIMIT = 20;
-  private memes = new BehaviorSubject<IImageMetadata[]>([]);
 
   constructor(
     private readonly http: HttpClient,
     private readonly spinner: NgxSpinnerService,
     private readonly snackBar: MatSnackBar,
+    private readonly memesStore: Store<fromMeme.State>,
   ) {
     this.spinner.show('memesSpinner');
 
@@ -30,17 +33,18 @@ export class MemesService {
         `${environment.api}/memes?page=${this.currentPage}&limit=${this.PAGE_SIZE_LIMIT}&orderBy=createdAt.ASC`,
       )
       .pipe(
+        withLatestFrom(this.memesStore.pipe(select(getMemes))),
         take(1),
         finalize(() => {
           this.spinner.hide('memesSpinner');
         }),
       )
-      .subscribe((res) => {
-        const currentMemes = this.memes.getValue();
+      .subscribe(([res, memes]) => {
+        const currentMemes = memes;
         const updatedMemes = [...currentMemes, ...res.items];
 
         if (res.meta.totalItems > currentMemes.length) {
-          this.memes.next(updatedMemes);
+          this.memesStore.dispatch(addMemes({ memes: res.items }));
         }
 
         if (res.meta.totalItems < updatedMemes.length) {
@@ -50,11 +54,11 @@ export class MemesService {
   }
 
   public getMemes$() {
-    return this.memes.asObservable();
+    return this.memesStore.pipe(select(getMemes));
   }
 
   public addMeme(meme: IImageMetadata) {
-    this.memes.next([...this.memes.getValue(), meme]);
+    this.memesStore.dispatch(addMeme({ meme }));
   }
 
   public updateMeme(id: number, meme: Partial<IImageMetadata>) {
@@ -71,16 +75,12 @@ export class MemesService {
       )
       .subscribe((res) => {
         // TODO handle result properly, check why result was id
-        this.memes.next(
-          this.memes.getValue().map((_meme) => {
-            if (id === _meme.id) {
-              return {
-                ..._meme,
-                ...res,
-              };
-            }
-
-            return _meme;
+        this.memesStore.dispatch(
+          updateMeme({
+            meme: {
+              id,
+              changes: res,
+            },
           }),
         );
 
@@ -100,10 +100,7 @@ export class MemesService {
         }),
       )
       .subscribe((res) => {
-        this.memes.next(this.memes.getValue().filter((_meme) => res.id !== _meme.id));
-        this.snackBar.open(`Deleted ${meme.title} successfully`, 'success', {
-          duration: 2000,
-        });
+        this.memesStore.dispatch(deleteMeme({ id: res.id }));
       });
   }
 

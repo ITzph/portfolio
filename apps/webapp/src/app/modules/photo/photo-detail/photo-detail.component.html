@@ -2,8 +2,8 @@
   <h2 style="margin-bottom: 0.25rem;">{{ meme.title }}</h2>
   <img width="100%" [src]="meme.url" [title]="meme.imageName" />
   <h4>{{ meme.description }}</h4>
-  <mat-chip-list class="example-chip">
-    <mat-chip class="example-box" *ngFor="let tag of meme.tags">
+  <mat-chip-list>
+    <mat-chip *ngFor="let tag of meme.tags">
       {{ tag }}
     </mat-chip>
   </mat-chip-list>

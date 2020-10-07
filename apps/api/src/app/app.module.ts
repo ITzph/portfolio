@@ -9,6 +9,7 @@ import { MemesModule } from './memes/memes.module';
 import { AuthModule } from './auth/auth.module';
 import { LoggerModule } from './logger/logger.module';
 import { EmailModule } from './email/email.module';
+import { BlogModule } from './blog/blog.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { EmailModule } from './email/email.module';
     AuthModule,
     LoggerModule,
     EmailModule,
+    BlogModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,0 +1,15 @@
+<ng-container *ngIf="blog$ | async; let blog">
+  <h1>{{ blog.title }}</h1>
+  <h3>By: {{ blog.author }}</h3>
+  <h4>{{ parseToDateTime(blog.createdAt) }}</h4>
+  <quill-view-html [content]="blog.content" theme="snow"></quill-view-html>
+</ng-container>
+
+<ng-container *ngIf="isBlogNotFound | async">
+  <mat-card style="text-align: center;">
+    <h2>
+      Blog post not found!
+    </h2>
+    <mat-icon class="not-found-icon">sentiment_very_dissatisfied</mat-icon>
+  </mat-card>
+</ng-container>
