@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Blog } from '@portfolio/api-interfaces';
-import { Observable } from 'rxjs';
-import { withLatestFrom } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { catchError, withLatestFrom } from 'rxjs/operators';
 import { BlogsService } from '../blogs.service';
 
 @Component({
@@ -12,15 +12,28 @@ import { BlogsService } from '../blogs.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FullBlogContentComponent implements OnInit {
-  blog$: Observable<Blog>;
-  constructor(private route: ActivatedRoute, private readonly blogService: BlogsService) {}
+  blog$ = new Subject<Blog>();
+  isBlogNotFound = new Subject<boolean>();
 
-  ngOnInit(): void {
+  constructor(private route: ActivatedRoute, private readonly blogService: BlogsService) {
     this.route.params.subscribe((param) => {
       const { id } = param;
-      this.blog$ = this.blogService.fetchBlog(id);
+      this.blogService.fetchBlog(id).subscribe(
+        (blog) => {
+          this.blog$.next(blog);
+          this.isBlogNotFound.next(false);
+        },
+        ({ status, error }) => {
+          this.blog$.next(null);
+          if (status === 404) {
+            this.isBlogNotFound.next(true);
+          }
+        },
+      );
     });
   }
+
+  ngOnInit(): void {}
 
   parseToDateTime(dateString: string) {
     const [date, time] = dateString.split('T');

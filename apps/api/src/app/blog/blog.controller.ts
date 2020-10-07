@@ -1,6 +1,6 @@
-import { Controller, Get, Param, ParseIntPipe, Post, Req, Res } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Param, ParseIntPipe, Post, Req, Res } from '@nestjs/common';
 import { BlogService } from './blog.service';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { BlogMetadata } from '../database/entities/blog.entity';
 
 @Controller('blogs')
@@ -26,7 +26,15 @@ export class BlogController {
   }
 
   @Get(':id')
-  getBlog(@Param('id', ParseIntPipe) id: number) {
-    return this.blogService.getBlog(id);
+  async getBlog(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+    const blog = await this.blogService.getBlog(id);
+
+    if (blog) {
+      return res.status(HttpStatus.OK).send(blog);
+    } else {
+      return res.status(HttpStatus.NOT_FOUND).send({
+        message: 'Blog post not found',
+      });
+    }
   }
 }

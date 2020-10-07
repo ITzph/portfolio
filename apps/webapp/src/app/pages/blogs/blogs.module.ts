@@ -14,6 +14,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { QuillModule } from 'ngx-quill';
 import { FullBlogContentComponent } from './full-blog-content/full-blog-content.component';
 import { BlogListComponent } from './blog-list/blog-list.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [BlogsComponent, FullBlogContentComponent, BlogListComponent],
@@ -28,6 +29,7 @@ import { BlogListComponent } from './blog-list/blog-list.component';
     MatChipsModule,
     QuillModule.forRoot(),
     StoreModule.forFeature(fromBlog.blogsFeatureKey, fromBlog.reducer),
+    MatIconModule,
   ],
   exports: [BlogsComponent, FullBlogContentComponent, BlogListComponent],
 })
