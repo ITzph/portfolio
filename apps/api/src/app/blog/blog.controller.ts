@@ -1,12 +1,24 @@
-import { Controller, Get, HttpStatus, Param, ParseIntPipe, Post, Req, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { Request, Response } from 'express';
 import { BlogMetadata } from '../database/entities/blog.entity';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('blogs')
 export class BlogController {
   constructor(private readonly blogService: BlogService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   createNewBlog(@Req() req: Request) {
     const blog = req.body as BlogMetadata;

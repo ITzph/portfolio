@@ -9,8 +9,13 @@ export class BlogService {
     @InjectRepository(BlogMetadata) private readonly blogRepository: Repository<BlogMetadata>,
   ) {}
 
-  public saveBlog(blog: BlogMetadata) {
-    return this.blogRepository.save(blog);
+  public async saveBlog(blog: BlogMetadata) {
+    const createdBlog = await this.blogRepository.save(blog);
+    if (createdBlog) {
+      const { content, ...others } = createdBlog;
+
+      return others;
+    }
   }
 
   public getBlogs() {
