@@ -6,6 +6,9 @@
 >
   Write a post
 </button>
-<portfolio-create-blog *ngIf="isCreateNewBlogVisible"></portfolio-create-blog>
+<portfolio-create-blog
+  *ngIf="isCreateNewBlogVisible"
+  (cancel)="isCreateNewBlogVisible = false"
+></portfolio-create-blog>
 
 {{ blogs$ | async | json }}

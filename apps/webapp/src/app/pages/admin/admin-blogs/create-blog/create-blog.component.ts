@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { addBlog } from '../../../../actions/blog.actions';
@@ -16,6 +16,7 @@ import { Blog } from '@portfolio/api-interfaces';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateBlogComponent extends ImageDialogAbstract implements OnInit {
+  @Output() cancel = new EventEmitter<void>();
   selectable = true;
   removable = true;
   addOnBlur = true;
@@ -44,6 +45,10 @@ export class CreateBlogComponent extends ImageDialogAbstract implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  onCancel() {
+    this.cancel.emit();
+  }
 
   onSaveBlog() {
     if (this.blogFormGroup.valid) {
