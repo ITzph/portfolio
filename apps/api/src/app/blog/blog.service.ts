@@ -27,4 +27,8 @@ export class BlogService {
   public getBlog(id: number) {
     return this.blogRepository.findOne(id);
   }
+
+  public deleteBlog(id: number) {
+    return this.blogRepository.delete(id);
+  }
 }

@@ -14,7 +14,7 @@
 <ng-container *ngFor="let blog of blogs$ | async">
   <portfolio-blog-tile [blog]="blog"></portfolio-blog-tile>
   <div class="flex-row">
-    <button mat-raised-button color="warn">Delete</button>
-    <button mat-raised-button color="primary">Update</button>
+    <button mat-raised-button color="warn" (click)="onBlogDelete(blog)">Delete</button>
+    <button mat-raised-button color="primary" (click)="onBlogUpdate(blog)">Update</button>
   </div>
 </ng-container>

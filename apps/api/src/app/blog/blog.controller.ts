@@ -1,5 +1,6 @@
 import {
   Controller,
+  Delete,
   Get,
   HttpStatus,
   Param,
@@ -30,6 +31,22 @@ export class BlogController {
       updatedAt: new Date(),
       coverPhoto: '',
     });
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  async deleteBlog(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+    const blogToDelete = await this.blogService.getBlog(id);
+
+    if (blogToDelete) {
+      const result = await this.blogService.deleteBlog(id);
+
+      if (result.affected) {
+        return res.send({ id });
+      }
+    } else {
+      res.status(HttpStatus.NOT_FOUND).send({ message: 'Blog not existing!' });
+    }
   }
 
   @Get()
