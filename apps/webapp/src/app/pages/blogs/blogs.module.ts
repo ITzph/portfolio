@@ -15,9 +15,10 @@ import { QuillModule } from 'ngx-quill';
 import { FullBlogContentComponent } from './full-blog-content/full-blog-content.component';
 import { BlogListComponent } from './blog-list/blog-list.component';
 import { MatIconModule } from '@angular/material/icon';
+import { BlogTileComponent } from './blog-tile/blog-tile.component';
 
 @NgModule({
-  declarations: [BlogsComponent, FullBlogContentComponent, BlogListComponent],
+  declarations: [BlogsComponent, FullBlogContentComponent, BlogListComponent, BlogTileComponent],
   imports: [
     CommonModule,
     BlogsRoutingModule,
@@ -31,6 +32,6 @@ import { MatIconModule } from '@angular/material/icon';
     StoreModule.forFeature(fromBlog.blogsFeatureKey, fromBlog.reducer),
     MatIconModule,
   ],
-  exports: [BlogsComponent, FullBlogContentComponent, BlogListComponent],
+  exports: [BlogsComponent, FullBlogContentComponent, BlogListComponent, BlogTileComponent],
 })
 export class BlogsModule {}

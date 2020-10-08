@@ -11,4 +11,10 @@
   (cancel)="isCreateNewBlogVisible = false"
 ></portfolio-create-blog>
 
-{{ blogs$ | async | json }}
+<ng-container *ngFor="let blog of blogs$ | async">
+  <portfolio-blog-tile [blog]="blog"></portfolio-blog-tile>
+  <div class="flex-row">
+    <button mat-raised-button color="warn">Delete</button>
+    <button mat-raised-button color="primary">Update</button>
+  </div>
+</ng-container>
