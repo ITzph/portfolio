@@ -14,7 +14,9 @@ export class BlogService {
   }
 
   public getBlogs() {
-    return this.blogRepository.find();
+    return this.blogRepository.find({
+      select: ['id', 'author', 'coverPhoto', 'createdAt', 'title', 'updatedAt', 'tags'],
+    });
   }
 
   public getBlog(id: number) {
