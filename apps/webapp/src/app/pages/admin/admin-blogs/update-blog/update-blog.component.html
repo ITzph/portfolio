@@ -1,0 +1,50 @@
+<form [formGroup]="blogFormGroup" class="blog-form-wrapper">
+  <mat-card class="blog-form">
+    <mat-form-field class="double-font-size">
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        placeholder="Enter an awesome title here!"
+        formControlName="title"
+        class="font-size-doubled"
+      />
+      <mat-error *ngIf="blogFormGroup.get('title').hasError('required')"
+        >Title is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field class="example-chip-list">
+      <mat-chip-list #chipList aria-label="Fruit selection" formControlName="tags">
+        <mat-chip
+          *ngFor="let tag of tags.value; let i = index"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="removeTag(tag, i)"
+        >
+          {{ tag }}
+          <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="Tags"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="addTag($event)"
+        />
+      </mat-chip-list>
+    </mat-form-field>
+    <quill-editor formControlName="content"> </quill-editor>
+    <mat-hint>*Content is required</mat-hint>
+    <mat-card-actions class="actions">
+      <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+      <button
+        color="primary"
+        type="submit"
+        class="submit"
+        mat-raised-button
+        (click)="onUpdateBlog()"
+      >
+        Save Blog
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

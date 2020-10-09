@@ -1,15 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { select, Store } from '@ngrx/store';
+import { FormBuilder } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { addBlog } from '../../../../actions/blog.actions';
-import { getBlogs } from '../../../../selectors/blog.selectors';
 import * as fromBlogs from '../../../../reducers/blog.reducer';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { ImageDialogAbstract } from '../../admin-memes/image-dialog.abtract';
 import { BlogsService } from '../../../blogs/blogs.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UpsertBlog } from '../upsert-blog.abstract';
 
 @Component({
   selector: 'portfolio-create-blog',
@@ -17,42 +15,20 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./create-blog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateBlogComponent extends ImageDialogAbstract implements OnInit {
+export class CreateBlogComponent extends UpsertBlog implements OnInit {
   @Output() cancel = new EventEmitter<void>();
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-
-  blogFormGroup = this.fb.group({
-    content: ['', [Validators.required]],
-    title: ['', [Validators.required]],
-    tags: [[], [Validators.required]],
-  });
-
-  get getForm() {
-    return this.blogFormGroup;
-  }
 
   constructor(
-    private readonly fb: FormBuilder,
-    private readonly blogsStore: Store<fromBlogs.State>,
-    private readonly blogService: BlogsService,
-    private readonly spinner: NgxSpinnerService,
-    private readonly snackbar: MatSnackBar,
+    readonly fb: FormBuilder,
+    readonly blogsStore: Store<fromBlogs.State>,
+    readonly blogService: BlogsService,
+    readonly spinner: NgxSpinnerService,
+    readonly snackbar: MatSnackBar,
   ) {
-    super();
-  }
-
-  get blogs$() {
-    return this.blogsStore.pipe(select(getBlogs));
+    super(fb, blogsStore, blogService, spinner, snackbar);
   }
 
   ngOnInit(): void {}
-
-  onCancel() {
-    this.cancel.emit();
-  }
 
   onSaveBlog() {
     if (this.blogFormGroup.valid) {

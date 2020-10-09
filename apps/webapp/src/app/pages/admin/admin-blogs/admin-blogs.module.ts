@@ -18,9 +18,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { BlogsModule } from '../../blogs/blogs.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { UpdateBlogComponent } from './update-blog/update-blog.component';
 
 @NgModule({
-  declarations: [AdminBlogsComponent, CreateBlogComponent],
+  declarations: [AdminBlogsComponent, CreateBlogComponent, UpdateBlogComponent],
   imports: [
     CommonModule,
     BlogsRoutingModule,
@@ -38,6 +39,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BlogsModule,
     NgxSpinnerModule,
   ],
-  exports: [AdminBlogsComponent, CreateBlogComponent],
+  exports: [AdminBlogsComponent, CreateBlogComponent, UpdateBlogComponent],
 })
 export class AdminBlogsModule {}
