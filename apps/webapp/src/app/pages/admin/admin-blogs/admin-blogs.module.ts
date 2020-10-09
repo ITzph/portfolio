@@ -16,8 +16,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { CreateBlogComponent } from './create-blog/create-blog.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-import { BlogsService } from '../../blogs/blogs.service';
 import { BlogsModule } from '../../blogs/blogs.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [AdminBlogsComponent, CreateBlogComponent],
@@ -36,6 +36,7 @@ import { BlogsModule } from '../../blogs/blogs.module';
     StoreModule.forFeature(fromBlogs.blogsFeatureKey, fromBlogs.reducer),
     MatDialogModule,
     BlogsModule,
+    NgxSpinnerModule,
   ],
   exports: [AdminBlogsComponent, CreateBlogComponent],
 })

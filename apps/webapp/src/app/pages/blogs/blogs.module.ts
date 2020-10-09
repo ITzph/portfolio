@@ -16,6 +16,7 @@ import { FullBlogContentComponent } from './full-blog-content/full-blog-content.
 import { BlogListComponent } from './blog-list/blog-list.component';
 import { MatIconModule } from '@angular/material/icon';
 import { BlogTileComponent } from './blog-tile/blog-tile.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [BlogsComponent, FullBlogContentComponent, BlogListComponent, BlogTileComponent],
@@ -31,6 +32,7 @@ import { BlogTileComponent } from './blog-tile/blog-tile.component';
     QuillModule.forRoot(),
     StoreModule.forFeature(fromBlog.blogsFeatureKey, fromBlog.reducer),
     MatIconModule,
+    NgxSpinnerModule,
   ],
   exports: [BlogsComponent, FullBlogContentComponent, BlogListComponent, BlogTileComponent],
 })
