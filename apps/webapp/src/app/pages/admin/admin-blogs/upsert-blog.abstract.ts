@@ -7,9 +7,9 @@ import { BlogsService } from '../../blogs/blogs.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 export abstract class UpsertBlog extends ImageDialogAbstract {
-  abstract cancel: EventEmitter<void>;
   selectable = true;
   removable = true;
   addOnBlur = true;
@@ -27,6 +27,7 @@ export abstract class UpsertBlog extends ImageDialogAbstract {
     protected readonly blogService: BlogsService,
     protected readonly spinner: NgxSpinnerService,
     protected readonly snackbar: MatSnackBar,
+    protected readonly router: Router,
   ) {
     super();
   }
@@ -35,7 +36,7 @@ export abstract class UpsertBlog extends ImageDialogAbstract {
     return this.blogFormGroup;
   }
 
-  onCancel() {
-    this.cancel.emit();
+  close() {
+    this.router.navigateByUrl('/admin/blogs');
   }
 }

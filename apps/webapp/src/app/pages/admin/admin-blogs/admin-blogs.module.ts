@@ -19,9 +19,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { BlogsModule } from '../../blogs/blogs.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { UpdateBlogComponent } from './update-blog/update-blog.component';
+import { ListBlogsComponent } from './list-blogs/list-blogs.component';
 
 @NgModule({
-  declarations: [AdminBlogsComponent, CreateBlogComponent, UpdateBlogComponent],
+  declarations: [AdminBlogsComponent, CreateBlogComponent, UpdateBlogComponent, ListBlogsComponent],
   imports: [
     CommonModule,
     BlogsRoutingModule,
@@ -39,6 +40,6 @@ import { UpdateBlogComponent } from './update-blog/update-blog.component';
     BlogsModule,
     NgxSpinnerModule,
   ],
-  exports: [AdminBlogsComponent, CreateBlogComponent, UpdateBlogComponent],
+  exports: [AdminBlogsComponent, CreateBlogComponent, UpdateBlogComponent, ListBlogsComponent],
 })
 export class AdminBlogsModule {}

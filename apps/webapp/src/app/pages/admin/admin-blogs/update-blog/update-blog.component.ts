@@ -1,4 +1,3 @@
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import {
   Component,
   OnInit,
@@ -7,14 +6,15 @@ import {
   EventEmitter,
   Input,
 } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BlogsService } from '../../../blogs/blogs.service';
-import { ImageDialogAbstract } from '../../admin-memes/image-dialog.abtract';
 import * as fromBlogs from '../../../../reducers/blog.reducer';
 import { Blog } from '@portfolio/api-interfaces';
+import { UpsertBlog } from '../upsert-blog.abstract';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'portfolio-update-blog',
@@ -22,38 +22,26 @@ import { Blog } from '@portfolio/api-interfaces';
   styleUrls: ['./update-blog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UpdateBlogComponent extends ImageDialogAbstract implements OnInit {
+export class UpdateBlogComponent extends UpsertBlog implements OnInit {
   @Input() blog: Blog;
-  @Output() cancel = new EventEmitter<void>();
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-
-  blogFormGroup = this.fb.group({
-    content: ['', [Validators.required]],
-    title: ['', [Validators.required]],
-    tags: [[], [Validators.required]],
-  });
 
   constructor(
-    private readonly fb: FormBuilder,
-    private readonly blogsStore: Store<fromBlogs.State>,
-    private readonly blogService: BlogsService,
-    private readonly spinner: NgxSpinnerService,
-    private readonly snackbar: MatSnackBar,
+    readonly fb: FormBuilder,
+    readonly blogsStore: Store<fromBlogs.State>,
+    readonly blogService: BlogsService,
+    readonly spinner: NgxSpinnerService,
+    readonly snackbar: MatSnackBar,
+    readonly router: Router,
   ) {
-    super();
+    super(fb, blogsStore, blogService, spinner, snackbar, router);
   }
 
-  ngOnInit(): void {}
-
-  get getForm() {
-    return this.blogFormGroup;
-  }
-
-  onCancel() {
-    this.cancel.emit();
+  ngOnInit(): void {
+    this.blogFormGroup.setValue({
+      content: this.blog.content,
+      title: this.blog.title,
+      tags: this.blog.tags,
+    });
   }
 
   onUpdateBlog() {}

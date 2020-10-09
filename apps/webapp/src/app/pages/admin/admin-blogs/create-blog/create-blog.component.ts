@@ -8,6 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UpsertBlog } from '../upsert-blog.abstract';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'portfolio-create-blog',
@@ -16,16 +17,15 @@ import { UpsertBlog } from '../upsert-blog.abstract';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateBlogComponent extends UpsertBlog implements OnInit {
-  @Output() cancel = new EventEmitter<void>();
-
   constructor(
     readonly fb: FormBuilder,
     readonly blogsStore: Store<fromBlogs.State>,
     readonly blogService: BlogsService,
     readonly spinner: NgxSpinnerService,
     readonly snackbar: MatSnackBar,
+    readonly router: Router,
   ) {
-    super(fb, blogsStore, blogService, spinner, snackbar);
+    super(fb, blogsStore, blogService, spinner, snackbar, router);
   }
 
   ngOnInit(): void {}
@@ -57,7 +57,7 @@ export class CreateBlogComponent extends UpsertBlog implements OnInit {
           this.snackbar.open(`Created new blog successfully`, 'success', {
             duration: 2000,
           });
-          this.cancel.emit();
+          this.close();
         });
     }
   }

@@ -1,23 +1,4 @@
-<button
-  mat-raised-button
-  color="primary"
-  (click)="isCreateNewBlogVisible = true"
-  *ngIf="!isCreateNewBlogVisible"
->
-  Write a post
-</button>
-<portfolio-create-blog
-  *ngIf="isCreateNewBlogVisible"
-  (cancel)="isCreateNewBlogVisible = false"
-></portfolio-create-blog>
-
-<ng-container *ngFor="let blog of blogs$ | async">
-  <portfolio-blog-tile [blog]="blog"></portfolio-blog-tile>
-  <div class="flex-row">
-    <button mat-raised-button color="warn" (click)="onBlogDelete(blog)">Delete</button>
-    <button mat-raised-button color="primary" (click)="onBlogUpdate(blog)">Update</button>
-  </div>
-</ng-container>
+<router-outlet></router-outlet>
 
 <ngx-spinner
   name="blogsSpinner"
