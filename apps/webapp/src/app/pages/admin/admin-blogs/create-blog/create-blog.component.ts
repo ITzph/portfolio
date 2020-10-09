@@ -77,6 +77,7 @@ export class CreateBlogComponent extends ImageDialogAbstract implements OnInit {
         .subscribe((blog) => {
           this.blogsStore.dispatch(addBlog({ blog }));
           this.blogFormGroup.reset();
+
           this.snackbar.open(`Created new blog successfully`, 'success', {
             duration: 2000,
           });
