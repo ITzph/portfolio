@@ -7,7 +7,9 @@ import * as fromBlogs from '../../../../reducers/blog.reducer';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ImageDialogAbstract } from '../../admin-memes/image-dialog.abtract';
 import { BlogsService } from '../../../blogs/blogs.service';
-import { Blog } from '@portfolio/api-interfaces';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { finalize } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'portfolio-create-blog',
@@ -36,6 +38,8 @@ export class CreateBlogComponent extends ImageDialogAbstract implements OnInit {
     private readonly fb: FormBuilder,
     private readonly blogsStore: Store<fromBlogs.State>,
     private readonly blogService: BlogsService,
+    private readonly spinner: NgxSpinnerService,
+    private readonly snackbar: MatSnackBar,
   ) {
     super();
   }
@@ -61,10 +65,23 @@ export class CreateBlogComponent extends ImageDialogAbstract implements OnInit {
         coverPhoto: 'test',
       };
 
-      this.blogService.createBlog(newBlog).subscribe((blog) => {
-        this.blogsStore.dispatch(addBlog({ blog }));
-        this.blogFormGroup.reset();
-      });
+      this.spinner.show('blogsSpinner');
+
+      this.blogService
+        .createBlog(newBlog)
+        .pipe(
+          finalize(() => {
+            this.spinner.hide('blogsSpinner');
+          }),
+        )
+        .subscribe((blog) => {
+          this.blogsStore.dispatch(addBlog({ blog }));
+          this.blogFormGroup.reset();
+          this.snackbar.open(`Created new blog successfully`, 'success', {
+            duration: 2000,
+          });
+          this.cancel.emit();
+        });
     }
   }
 }

@@ -38,7 +38,11 @@ export class BlogsService {
         filter(() => {
           return isEmpty;
         }),
+        finalize(() => {
+          this.spinner.hide('blogsSpinner');
+        }),
       )
+
       .subscribe((blogs) => {
         this.blogsStore.dispatch(loadBlogs({ blogs }));
         this.spinner.hide('blogsSpinner');
