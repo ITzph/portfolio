@@ -49,7 +49,7 @@ export class ListBlogsComponent implements OnInit {
   }
 
   onBlogUpdate(blog: Blog) {
-    this.router.navigateByUrl('admin/blogs/update');
+    this.router.navigateByUrl('admin/blogs/update/' + blog.id);
   }
 
   onCreateNewBlog() {

@@ -4,9 +4,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { select, Store } from '@ngrx/store';
 import { Blog } from '@portfolio/api-interfaces';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { filter, finalize } from 'rxjs/operators';
+import { catchError, filter, finalize } from 'rxjs/operators';
 import { environment } from '../../../../src/environments/environment';
-import { deleteBlog, loadBlogs } from '../../actions/blog.actions';
+import { deleteBlog, loadBlogs, updateBlog } from '../../actions/blog.actions';
 
 import * as fromBlog from '../../reducers/blog.reducer';
 import { getBlogs } from '../../selectors/blog.selectors';
@@ -55,6 +55,35 @@ export class BlogsService {
 
   fetchBlog(id: number) {
     return this.http.get<Blog>(`${environment.api}/blogs/${id}`);
+  }
+
+  updateBlog(id: number, blog: Partial<Blog>) {
+    this.spinner.show('memesSpinner');
+    this.http
+      .patch<Partial<Blog>>(`${environment.api}/blogs/${id}`, blog)
+      .pipe(
+        finalize(() => {
+          this.spinner.hide('memesSpinner');
+        }),
+        catchError((err) => {
+          throw { message: err };
+        }),
+      )
+      .subscribe((res) => {
+        // TODO handle result properly, check why result was id
+        this.blogsStore.dispatch(
+          updateBlog({
+            blog: {
+              id,
+              changes: res,
+            },
+          }),
+        );
+
+        this.snackBar.open(`Updated ${blog.title} successfully`, 'success', {
+          duration: 2000,
+        });
+      });
   }
 
   deleteBlog(blog: Blog) {

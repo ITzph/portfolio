@@ -24,7 +24,7 @@ const routes: Routes = [
         component: CreateBlogComponent,
       },
       {
-        path: 'update',
+        path: 'update/:id',
         component: UpdateBlogComponent,
       },
     ],

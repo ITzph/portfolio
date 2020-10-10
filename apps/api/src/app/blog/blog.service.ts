@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Blog } from '@portfolio/api-interfaces';
 import { Repository } from 'typeorm';
 import { BlogMetadata } from '../database/entities/blog.entity';
 
@@ -21,6 +22,13 @@ export class BlogService {
   public getBlogs() {
     return this.blogRepository.find({
       select: ['id', 'author', 'coverPhoto', 'createdAt', 'title', 'updatedAt', 'tags'],
+    });
+  }
+
+  public patchBlog(id: number, blog: Partial<Blog>) {
+    return this.blogRepository.save({
+      id,
+      ...blog,
     });
   }
 
