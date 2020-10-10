@@ -58,12 +58,12 @@ export class BlogsService {
   }
 
   updateBlog(id: number, blog: Partial<Blog>) {
-    this.spinner.show('memesSpinner');
+    this.spinner.show('blogsSpinner');
     this.http
       .patch<Partial<Blog>>(`${environment.api}/blogs/${id}`, blog)
       .pipe(
         finalize(() => {
-          this.spinner.hide('memesSpinner');
+          this.spinner.hide('blogsSpinner');
         }),
         catchError((err) => {
           throw { message: err };

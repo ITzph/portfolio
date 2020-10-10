@@ -60,7 +60,6 @@ export class UpdateBlogComponent extends UpsertBlog implements OnInit {
       blog.tags.length === updatedBlog.tags.length &&
       blog.tags.every((value, index) => value === updatedBlog.tags.tags[index]);
 
-    // TODO should only run if there is a difference in values
     if (
       updatedBlog.content !== blog.content ||
       updatedBlog.title !== blog.title ||
@@ -70,6 +69,10 @@ export class UpdateBlogComponent extends UpsertBlog implements OnInit {
         content: updatedBlog.content,
         title: updatedBlog.title,
         tags: updatedBlog.tags,
+      });
+    } else {
+      this.snackbar.open(`Updated blog successfully`, 'success', {
+        duration: 2000,
       });
     }
   }
