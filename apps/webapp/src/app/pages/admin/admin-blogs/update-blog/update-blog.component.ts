@@ -52,26 +52,32 @@ export class UpdateBlogComponent extends UpsertBlog implements OnInit {
 
   ngOnInit(): void {}
 
+  get isValueChanged() {
+    const { blog } = this;
+    if (blog) {
+      const { content, title, tags } = this.blogFormGroup.value;
+      const isTagsTheSame =
+        tags.length === blog.tags.length &&
+        tags.every((value, index) => value === blog.tags[index]);
+
+      const isValueChanged = content !== blog.content || title !== blog.title || !isTagsTheSame;
+
+      return isValueChanged;
+    }
+    return false;
+  }
+
   onUpdateBlog() {
     const updatedBlog = this.blogFormGroup.value;
-    const { blog } = this;
 
-    const isTagsTheSame =
-      blog.tags.length === updatedBlog.tags.length &&
-      blog.tags.every((value, index) => value === updatedBlog.tags.tags[index]);
-
-    if (
-      updatedBlog.content !== blog.content ||
-      updatedBlog.title !== blog.title ||
-      !isTagsTheSame
-    ) {
+    if (this.isValueChanged) {
       this.blogService.updateBlog(this.blog.id, {
         content: updatedBlog.content,
         title: updatedBlog.title,
         tags: updatedBlog.tags,
       });
     } else {
-      this.snackbar.open(`Updated blog successfully`, 'success', {
+      this.snackbar.open(`There are no changes`, 'warning', {
         duration: 2000,
       });
     }
