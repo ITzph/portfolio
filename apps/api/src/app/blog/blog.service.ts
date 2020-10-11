@@ -19,10 +19,30 @@ export class BlogService {
     }
   }
 
-  public getBlogs() {
-    return this.blogRepository.find({
-      select: ['id', 'author', 'coverPhoto', 'createdAt', 'title', 'updatedAt', 'tags'],
-    });
+  public getPublishedBlogs(published: boolean) {
+    const select: (keyof Blog)[] = [
+      'id',
+      'author',
+      'coverPhoto',
+      'createdAt',
+      'title',
+      'updatedAt',
+      'tags',
+      'published',
+    ];
+
+    if (published) {
+      return this.blogRepository.find({
+        select,
+        where: {
+          published: 1,
+        },
+      });
+    } else {
+      return this.blogRepository.find({
+        select,
+      });
+    }
   }
 
   public patchBlog(id: number, blog: Partial<Blog>) {

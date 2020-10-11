@@ -9,7 +9,7 @@ import { environment } from '../../../../src/environments/environment';
 import { deleteBlog, loadBlogs, updateBlog } from '../../actions/blog.actions';
 
 import * as fromBlog from '../../reducers/blog.reducer';
-import { getBlogs } from '../../selectors/blog.selectors';
+import { getAllBlogs, getPublishedBlogs } from '../../selectors/blog.selectors';
 @Injectable({
   providedIn: 'root',
 })
@@ -25,9 +25,14 @@ export class BlogsService {
     return this.http.get<Blog[]>(environment.api + '/blogs');
   }
 
-  initializeBlogs() {
+  fetchPublishedBlogs() {
+    return this.http.get<Blog[]>(environment.api + '/blogs/all');
+  }
+
+  initializeBlogs(published: boolean) {
     let isEmpty = false;
-    this.blogsStore.pipe(select(getBlogs)).subscribe((blogs) => (isEmpty = blogs.length === 0));
+
+    this.blogsStore.pipe(select(getAllBlogs)).subscribe((blogs) => (isEmpty = blogs.length === 0));
 
     if (isEmpty) {
       this.spinner.show('blogsSpinner');
@@ -42,7 +47,6 @@ export class BlogsService {
           this.spinner.hide('blogsSpinner');
         }),
       )
-
       .subscribe((blogs) => {
         this.blogsStore.dispatch(loadBlogs({ blogs }));
         this.spinner.hide('blogsSpinner');

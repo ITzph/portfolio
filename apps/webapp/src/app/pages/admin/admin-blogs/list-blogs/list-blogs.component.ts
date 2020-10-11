@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { getBlogs } from '../../../../selectors/blog.selectors';
+import { getAllBlogs, getPublishedBlogs } from '../../../../selectors/blog.selectors';
 import * as fromBlogs from '../../../../reducers/blog.reducer';
 import { Blog } from '@portfolio/api-interfaces';
 import { BlogsService } from '../../../blogs/blogs.service';
@@ -26,7 +26,7 @@ export class ListBlogsComponent implements OnInit {
   ngOnInit(): void {}
 
   get blogs$() {
-    return this.blogStore.pipe(select(getBlogs));
+    return this.blogStore.pipe(select(getAllBlogs));
   }
 
   onBlogDelete(blog: Blog) {

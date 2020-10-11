@@ -52,8 +52,13 @@ export class BlogController {
   }
 
   @Get()
-  getBlogs() {
-    return this.blogService.getBlogs();
+  getPublishedBlogs() {
+    return this.blogService.getPublishedBlogs(true);
+  }
+
+  @Get('all')
+  getAllBlogs() {
+    return this.blogService.getPublishedBlogs(false);
   }
 
   @UseGuards(JwtAuthGuard)

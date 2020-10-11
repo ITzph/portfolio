@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { Blog } from '@portfolio/api-interfaces';
 import { Observable } from 'rxjs';
 import * as fromBlog from '../../../reducers/blog.reducer';
-import { getBlogs } from '../../../selectors/blog.selectors';
+import { getPublishedBlogs } from '../../../selectors/blog.selectors';
 import { BlogsService } from '../blogs.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { BlogsService } from '../blogs.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogListComponent implements OnInit {
-  blogs$: Observable<Blog[]> = this.blogStore.pipe(select(getBlogs));
+  blogs$: Observable<Blog[]> = this.blogStore.pipe(select(getPublishedBlogs));
 
   constructor(
     private readonly blogStore: Store<fromBlog.State>,
@@ -21,6 +21,6 @@ export class BlogListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.blogService.initializeBlogs();
+    this.blogService.initializeBlogs(false);
   }
 }

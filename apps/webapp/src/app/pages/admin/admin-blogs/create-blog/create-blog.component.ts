@@ -9,6 +9,7 @@ import { finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UpsertBlog } from '../upsert-blog.abstract';
 import { Router } from '@angular/router';
+import { Blog } from '@portfolio/api-interfaces';
 
 @Component({
   selector: 'portfolio-create-blog',
@@ -30,14 +31,15 @@ export class CreateBlogComponent extends UpsertBlog implements OnInit {
 
   ngOnInit(): void {}
 
-  onSaveBlog() {
+  onSaveBlog(published: boolean) {
     if (this.blogFormGroup.valid) {
       const { content, title, tags } = this.blogFormGroup.value;
 
-      const newBlog = {
+      const newBlog: Partial<Blog> = {
         content,
         title,
         tags,
+        published,
         coverPhoto: 'test',
       };
 
