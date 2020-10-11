@@ -1,15 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Blog } from '@portfolio/api-interfaces';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { catchError, filter, finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { environment } from '../../../../src/environments/environment';
-import { deleteBlog, loadBlogs, updateBlog } from '../../actions/blog.actions';
+import { deleteBlog, updateBlog } from '../../actions/blog.actions';
 
 import * as fromBlog from '../../reducers/blog.reducer';
-import { getAllBlogs, getPublishedBlogs } from '../../selectors/blog.selectors';
 @Injectable({
   providedIn: 'root',
 })
@@ -21,36 +20,12 @@ export class BlogsService {
     private readonly blogsStore: Store<fromBlog.State>,
   ) {}
 
-  fetchlBlogs() {
-    return this.http.get<Blog[]>(environment.api + '/blogs');
-  }
-
-  fetchPublishedBlogs() {
+  fetchAllBlogs() {
     return this.http.get<Blog[]>(environment.api + '/blogs/all');
   }
 
-  initializeBlogs(published: boolean) {
-    let isEmpty = false;
-
-    this.blogsStore.pipe(select(getAllBlogs)).subscribe((blogs) => (isEmpty = blogs.length === 0));
-
-    if (isEmpty) {
-      this.spinner.show('blogsSpinner');
-    }
-
-    this.fetchlBlogs()
-      .pipe(
-        filter(() => {
-          return isEmpty;
-        }),
-        finalize(() => {
-          this.spinner.hide('blogsSpinner');
-        }),
-      )
-      .subscribe((blogs) => {
-        this.blogsStore.dispatch(loadBlogs({ blogs }));
-        this.spinner.hide('blogsSpinner');
-      });
+  fetchPublishedBlogs() {
+    return this.http.get<Blog[]>(environment.api + '/blogs');
   }
 
   createBlog(blog: Partial<Blog>) {

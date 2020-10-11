@@ -56,6 +56,7 @@ export class BlogController {
     return this.blogService.getPublishedBlogs(true);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('all')
   getAllBlogs() {
     return this.blogService.getPublishedBlogs(false);
@@ -68,7 +69,6 @@ export class BlogController {
     @Req() req: Request,
     @Res() res: Response,
   ) {
-    // this.logger.log('PATCH memes/:id');
     try {
       const body = req.body as Partial<Blog>;
 
