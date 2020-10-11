@@ -1,14 +1,6 @@
-import {
-  Component,
-  OnInit,
-  Renderer2,
-  ElementRef,
-  OnDestroy,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
-import { throttleTime, takeWhile, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ISocialHandler } from '@portfolio/api-interfaces';
 import { Store, select } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
@@ -29,11 +21,8 @@ export class HeaderComponent extends HeaderAbstract implements OnInit, OnDestroy
   isSideNavVisible = false;
 
   constructor(
-    private readonly el: ElementRef,
-    private readonly render: Renderer2,
     private readonly profileStore: Store<fromProfile.State>,
     authService: AuthService,
-    private readonly cdr: ChangeDetectorRef,
     snackBar: MatSnackBar,
     dialog: MatDialog,
   ) {
@@ -55,34 +44,36 @@ export class HeaderComponent extends HeaderAbstract implements OnInit, OnDestroy
         return user?.socialHandlers ?? [];
       }),
     );
-    this.render.listen('body', 'wheel', () => {
-      const rect = this.el.nativeElement.getBoundingClientRect().top;
-      this.scrollEvent.next(rect);
-    });
+    // This is for reference, if I want to return changing of header
 
-    this.render.listen(appRoot, 'scroll', () => {
-      const rect = this.el.nativeElement.getBoundingClientRect().top;
-      this.scrollEvent.next(rect);
-    });
+    // this.render.listen('body', 'wheel', () => {
+    //   const rect = this.el.nativeElement.getBoundingClientRect().top;
+    //   this.scrollEvent.next(rect);
+    // });
 
-    this.scrollEvent
-      .pipe(
-        throttleTime(50),
-        takeWhile(() => !this.isUnsubscribed),
-      )
-      .subscribe((rect) => {
-        if (rect < -20) {
-          if (!this.isPinned) {
-            this.isPinned = true;
-            this.cdr.detectChanges();
-          }
-        } else {
-          if (this.isPinned) {
-            this.isPinned = false;
-            this.cdr.detectChanges();
-          }
-        }
-      });
+    // this.render.listen(appRoot, 'scroll', () => {
+    //   const rect = this.el.nativeElement.getBoundingClientRect().top;
+    //   this.scrollEvent.next(rect);
+    // });
+
+    // this.scrollEvent
+    //   .pipe(
+    //     throttleTime(50),
+    //     takeWhile(() => !this.isUnsubscribed),
+    //   )
+    //   .subscribe((rect) => {
+    //     if (rect < -20) {
+    //       if (!this.isPinned) {
+    //         this.isPinned = true;
+    //         this.cdr.detectChanges();
+    //       }
+    //     } else {
+    //       if (this.isPinned) {
+    //         this.isPinned = false;
+    //         this.cdr.detectChanges();
+    //       }
+    //     }
+    //   });
   }
 
   showLinks(isVisible: boolean) {
