@@ -1,3 +1,20 @@
 :host {
   display: block;
+  position: relative;
+}
+
+$distance: 1rem;
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  z-index: 99;
+  bottom: $distance;
+  right: $distance;
+}
+
+.blog-card-wrapper {
+  position: relative;
+  padding: $distance;
 }

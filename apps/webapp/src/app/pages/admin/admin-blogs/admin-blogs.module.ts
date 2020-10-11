@@ -20,6 +20,7 @@ import { BlogsModule } from '../../blogs/blogs.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { UpdateBlogComponent } from './update-blog/update-blog.component';
 import { ListBlogsComponent } from './list-blogs/list-blogs.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [AdminBlogsComponent, CreateBlogComponent, UpdateBlogComponent, ListBlogsComponent],
@@ -34,11 +35,12 @@ import { ListBlogsComponent } from './list-blogs/list-blogs.component';
     QuillModule.forRoot(),
     MatButtonModule,
     MatChipsModule,
-    MatIconModule,
     StoreModule.forFeature(fromBlogs.blogsFeatureKey, fromBlogs.reducer),
     MatDialogModule,
     BlogsModule,
     NgxSpinnerModule,
+    MatTooltipModule,
+    MatIconModule,
   ],
   exports: [AdminBlogsComponent, CreateBlogComponent, UpdateBlogComponent, ListBlogsComponent],
 })
