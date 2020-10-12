@@ -28,7 +28,7 @@ export interface IUserExperience {
   role: string;
   startDate: Date;
   endDate: Date;
-  events: string[];
+  events: string;
 }
 
 export interface IUserCertification {

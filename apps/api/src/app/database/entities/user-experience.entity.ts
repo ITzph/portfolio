@@ -19,8 +19,8 @@ export class UserExperience implements IUserExperience {
   @Column('date', { name: 'end_date', nullable: true })
   endDate: Date;
 
-  @Column('simple-array', { name: 'events', default: '' })
-  events: string[];
+  @Column('mediumtext', { name: 'events', default: '' })
+  events: string;
 
   @Column('boolean', { name: 'is_active' })
   isActive: boolean;

@@ -19,3 +19,9 @@
 .event {
   list-style-position: inside;
 }
+
+::ng-deep {
+  .ql-editor {
+    padding: 0.5rem 1rem;
+  }
+}
