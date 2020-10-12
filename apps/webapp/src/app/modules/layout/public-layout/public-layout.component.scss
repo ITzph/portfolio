@@ -1,5 +1,3 @@
-@import '../../../../styles/variables';
-
 .app-root {
   height: 100vh;
   width: 100vw;
@@ -13,4 +11,9 @@
   overflow: hidden;
   position: relative;
   background-color: #eef0f1;
+}
+
+.main-content {
+  padding-bottom: 12rem; // If value is updated, footer height should match this value
+  box-sizing: border-box;
 }
