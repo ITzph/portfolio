@@ -68,13 +68,26 @@ export class UpdateBlogComponent extends UpsertBlog implements OnInit {
   }
 
   onUpdateBlog() {
+    this.patchBlog(this.isValueChanged, true);
+  }
+
+  onPublishBlog() {
+    this.patchBlog(this.isValueChanged || !this.blog.published, true);
+  }
+
+  onUnpublishBlog() {
+    this.patchBlog(this.isValueChanged || this.blog.published, false);
+  }
+
+  private patchBlog(condition: boolean, isPublished: boolean) {
     const updatedBlog = this.blogFormGroup.value;
 
-    if (this.isValueChanged) {
+    if (condition) {
       this.blogService.updateBlog(this.blog.id, {
         content: updatedBlog.content,
         title: updatedBlog.title,
         tags: updatedBlog.tags,
+        published: isPublished,
       });
     } else {
       this.snackbar.open(`There are no changes`, 'warning', {

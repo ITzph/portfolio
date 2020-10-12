@@ -20,3 +20,10 @@ $distance: 1rem;
   position: relative;
   padding: $distance;
 }
+
+.published {
+  position: absolute;
+  z-index: 1;
+  bottom: 1.5rem;
+  left: 2rem;
+}

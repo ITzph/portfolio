@@ -36,22 +36,10 @@
     <mat-hint>*Content is required</mat-hint>
     <mat-card-actions class="actions">
       <button mat-raised-button color="warn" (click)="close()">Cancel</button>
-      <button
-        color="primary"
-        type="submit"
-        class="submit"
-        mat-raised-button
-        (click)="onSaveBlog(false)"
-      >
+      <button color="primary" type="submit" mat-raised-button (click)="onSaveBlog(false)">
         Save as Draft
       </button>
-      <button
-        color="primary"
-        type="submit"
-        class="submit"
-        mat-raised-button
-        (click)="onSaveBlog(true)"
-      >
+      <button color="primary" type="submit" mat-raised-button (click)="onSaveBlog(true)">
         Publish Blog
       </button>
     </mat-card-actions>

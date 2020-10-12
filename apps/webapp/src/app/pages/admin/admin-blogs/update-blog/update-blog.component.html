@@ -34,7 +34,7 @@
     </mat-form-field>
     <quill-editor formControlName="content"> </quill-editor>
     <mat-hint>*Content is required</mat-hint>
-    <mat-card-actions class="actions">
+    <mat-card-actions class="actions" *ngIf="blog">
       <button mat-raised-button color="warn" (click)="close()">Cancel</button>
       <button
         color="primary"
@@ -42,9 +42,19 @@
         class="submit"
         mat-raised-button
         (click)="onUpdateBlog()"
+        *ngIf="blog.published"
       >
         Update Blog
       </button>
+      <button mat-raised-button color="primary" (click)="onPublishBlog()" *ngIf="!blog.published">
+        Publish
+      </button>
+      <button mat-raised-button color="primary" (click)="onUnpublishBlog()" *ngIf="blog.published">
+        Unpublish
+      </button>
     </mat-card-actions>
   </mat-card>
+  <h3 class="published-label" *ngIf="blog">
+    {{ blog.published ? 'Published' : 'Unpublished' }}
+  </h3>
 </form>

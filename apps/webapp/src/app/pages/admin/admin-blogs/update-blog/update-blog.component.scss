@@ -13,11 +13,8 @@
 }
 
 .blog-form-wrapper {
+  position: relative;
   width: 95%;
-}
-
-.submit {
-  margin-top: $margin-small;
 }
 
 .font-size-doubled {
@@ -27,4 +24,10 @@
 .actions {
   display: flex;
   justify-content: flex-end;
+}
+
+.published-label {
+  position: absolute;
+  bottom: 1rem;
+  left: 2rem;
 }

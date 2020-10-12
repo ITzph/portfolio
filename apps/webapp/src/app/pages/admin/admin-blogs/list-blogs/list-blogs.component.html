@@ -4,6 +4,7 @@
 
 <ng-container *ngFor="let blog of blogs$ | async">
   <article class="blog-card-wrapper">
+    <p class="published">{{ blog.published ? 'Published' : 'Unpublished' }}</p>
     <portfolio-blog-tile [blog]="blog"></portfolio-blog-tile>
     <div class="actions">
       <button
