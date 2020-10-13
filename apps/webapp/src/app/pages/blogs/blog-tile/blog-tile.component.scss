@@ -1,0 +1,18 @@
+:host {
+  display: block;
+}
+
+.blog {
+  padding: 1rem;
+}
+.title {
+  cursor: pointer;
+  font-family: sans-serif;
+}
+
+// Check of a better way to center tags
+::ng-deep {
+  .mat-chip-list-wrapper {
+    justify-content: center;
+  }
+}

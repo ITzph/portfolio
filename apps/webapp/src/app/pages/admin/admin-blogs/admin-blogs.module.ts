@@ -16,10 +16,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { CreateBlogComponent } from './create-blog/create-blog.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-import { BlogsService } from '../../blogs/blogs.service';
+import { BlogsModule } from '../../blogs/blogs.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { UpdateBlogComponent } from './update-blog/update-blog.component';
+import { ListBlogsComponent } from './list-blogs/list-blogs.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
-  declarations: [AdminBlogsComponent, CreateBlogComponent],
+  declarations: [AdminBlogsComponent, CreateBlogComponent, UpdateBlogComponent, ListBlogsComponent],
   imports: [
     CommonModule,
     BlogsRoutingModule,
@@ -31,10 +35,13 @@ import { BlogsService } from '../../blogs/blogs.service';
     QuillModule.forRoot(),
     MatButtonModule,
     MatChipsModule,
-    MatIconModule,
     StoreModule.forFeature(fromBlogs.blogsFeatureKey, fromBlogs.reducer),
     MatDialogModule,
+    BlogsModule,
+    NgxSpinnerModule,
+    MatTooltipModule,
+    MatIconModule,
   ],
-  exports: [AdminBlogsComponent, CreateBlogComponent],
+  exports: [AdminBlogsComponent, CreateBlogComponent, UpdateBlogComponent, ListBlogsComponent],
 })
 export class AdminBlogsModule {}

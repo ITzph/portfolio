@@ -7,4 +7,5 @@ export interface Blog {
   createdAt: Date;
   updatedAt: Date;
   coverPhoto: string;
+  published: boolean;
 }

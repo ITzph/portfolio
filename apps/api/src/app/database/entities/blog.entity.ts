@@ -26,4 +26,7 @@ export class BlogMetadata implements Blog {
 
   @Column({ name: 'cover_photo' })
   coverPhoto: string;
+
+  @Column('boolean', { name: 'published', default: false })
+  published: boolean;
 }

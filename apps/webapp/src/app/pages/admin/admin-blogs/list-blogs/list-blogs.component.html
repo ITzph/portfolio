@@ -1,0 +1,30 @@
+<button mat-raised-button color="primary" (click)="onCreateNewBlog()">
+  Write a post
+</button>
+
+<ng-container *ngFor="let blog of blogs$ | async">
+  <article class="blog-card-wrapper">
+    <p class="published">{{ blog.published ? 'Published' : 'Unpublished' }}</p>
+    <portfolio-blog-tile [blog]="blog"></portfolio-blog-tile>
+    <div class="actions">
+      <button
+        mat-icon-button
+        color="warn"
+        (click)="onBlogDelete(blog)"
+        matTooltip="Delete Blog"
+        matTooltipPosition="left"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="primary"
+        (click)="onBlogUpdate(blog)"
+        matTooltip="Update Blog"
+        matTooltipPosition="left"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+  </article>
+</ng-container>

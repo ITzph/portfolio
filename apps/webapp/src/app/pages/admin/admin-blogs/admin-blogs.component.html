@@ -1,11 +1,10 @@
-<button
-  mat-raised-button
-  color="primary"
-  (click)="isCreateNewBlogVisible = true"
-  *ngIf="!isCreateNewBlogVisible"
->
-  Write a post
-</button>
-<portfolio-create-blog *ngIf="isCreateNewBlogVisible"></portfolio-create-blog>
+<router-outlet></router-outlet>
 
-{{ blogs$ | async | json }}
+<ngx-spinner
+  name="blogsSpinner"
+  size="medium"
+  color="#fff"
+  type="ball-zig-zag-deflect"
+  [fullScreen]="true"
+  ><p style="color: white;">Weight lungs...</p></ngx-spinner
+>

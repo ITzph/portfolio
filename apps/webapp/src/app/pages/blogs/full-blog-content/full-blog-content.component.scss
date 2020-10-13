@@ -1,9 +1,30 @@
+@import '../../../../styles/variables';
+
 :host {
   display: block;
+  background-color: white;
 }
 
 .not-found-icon {
   font-size: 20rem;
   height: 20rem;
   width: 20rem;
+}
+
+.full-blog {
+  @media #{$xs-device} {
+    padding: $padding-very-small 1%;
+  }
+
+  @media #{$sm-device} {
+    padding: $padding-small 10%;
+  }
+
+  @media #{$md-device} {
+    padding: $padding-medium 20%;
+  }
+
+  @media #{$lg-device} {
+    padding: $padding-big 20%;
+  }
 }

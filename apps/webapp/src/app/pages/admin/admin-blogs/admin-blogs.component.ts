@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import * as fromBlogs from '../../../reducers/blog.reducer';
-import { getBlogs } from '../../../selectors/blog.selectors';
+import { Store } from '@ngrx/store';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { finalize } from 'rxjs/operators';
+import { BlogsService } from '../../blogs/blogs.service';
+import * as fromBlog from '../../../reducers/blog.reducer';
+import { loadBlogs } from '../../../actions/blog.actions';
 
 @Component({
   selector: 'portfolio-admin-blogs',
@@ -10,13 +13,24 @@ import { getBlogs } from '../../../selectors/blog.selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminBlogsComponent implements OnInit {
-  isCreateNewBlogVisible = false;
+  constructor(
+    private readonly blogService: BlogsService,
+    private readonly spinner: NgxSpinnerService,
+    private readonly blogStore: Store<fromBlog.State>,
+  ) {}
 
-  constructor(private readonly blogsStore: Store<fromBlogs.State>) {}
-
-  get blogs$() {
-    return this.blogsStore.pipe(select(getBlogs));
+  ngOnInit(): void {
+    this.spinner.show('blogsSpinner');
+    this.blogService
+      .fetchAllBlogs()
+      .pipe(
+        finalize(() => {
+          this.spinner.hide('blogsSpinner');
+        }),
+      )
+      .subscribe((blogs) => {
+        this.blogStore.dispatch(loadBlogs({ blogs }));
+        this.spinner.hide('blogsSpinner');
+      });
   }
-
-  ngOnInit(): void {}
 }

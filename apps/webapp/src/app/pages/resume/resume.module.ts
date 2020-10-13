@@ -13,6 +13,7 @@ import { LayoutModule } from '../../modules/layout/layout.module';
 import { HeaderModule } from '../../modules/header/header.module';
 import { FooterModule } from '../../modules/footer/footer.module';
 import { UtilitiesModule } from '../../modules/utilities/utilities.module';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [ResumeComponent, SkillComponent, ExperienceComponent, CertificationComponent],
@@ -25,6 +26,7 @@ import { UtilitiesModule } from '../../modules/utilities/utilities.module';
     HeaderModule,
     FooterModule,
     UtilitiesModule,
+    QuillModule.forRoot(),
   ],
   exports: [ResumeComponent, SkillComponent, ExperienceComponent, CertificationComponent],
 })

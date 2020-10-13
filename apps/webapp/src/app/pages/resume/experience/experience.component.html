@@ -6,10 +6,6 @@
     <div class="date">
       <p>{{ experience.startDate }} - {{ experience.endDate }}</p>
     </div>
-    <ul class="events">
-      <li *ngFor="let event of experience.events" class="event">
-        <span [innerHTML]="event | sanitizeStringHtml"></span>
-      </li>
-    </ul>
+    <quill-view-html [content]="experience.events" theme="snow"></quill-view-html>
   </div>
 </ng-container>

@@ -1,14 +1,13 @@
 <article class="blogs-wrapper">
   <ng-container *ngFor="let blog of blogs$ | async">
-    <mat-card class="blog">
-      <mat-card-title class="title" (click)="navigateToBlogContent(blog)">
-        <h1>{{ blog.title }}</h1>
-        <h3>By: {{ blog.author }}</h3>
-        <h4>{{ parseToDateTime(blog.createdAt) }}</h4>
-      </mat-card-title>
-      <mat-chip-list class="tags">
-        <mat-chip *ngFor="let tag of blog.tags"> <b>#</b>{{ tag }} </mat-chip>
-      </mat-chip-list>
-    </mat-card>
+    <portfolio-blog-tile [blog]="blog"></portfolio-blog-tile>
   </ng-container>
 </article>
+<ngx-spinner
+  name="blogsSpinner"
+  size="medium"
+  color="#fff"
+  type="ball-zig-zag-deflect"
+  [fullScreen]="true"
+  ><p style="color: white;">Weight lungs...</p></ngx-spinner
+>

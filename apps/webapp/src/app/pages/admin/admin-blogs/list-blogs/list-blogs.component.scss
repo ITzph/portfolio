@@ -1,0 +1,29 @@
+@import '../../../../../styles/variables';
+
+:host {
+  display: block;
+  position: relative;
+}
+
+$distance: 1rem;
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  z-index: 99;
+  bottom: $distance;
+  right: $distance;
+}
+
+.blog-card-wrapper {
+  position: relative;
+  padding: $distance;
+}
+
+.published {
+  position: absolute;
+  z-index: 1;
+  bottom: 1.5rem;
+  left: 2rem;
+}
