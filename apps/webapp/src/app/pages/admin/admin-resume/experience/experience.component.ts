@@ -8,6 +8,7 @@ import * as fromProfile from '../../../../reducers/profile.reducer';
 import { withLatestFrom } from 'rxjs/operators';
 import { updateProfile } from '../../../../actions/profile.actions';
 import { environment } from '../../../../../environments/environment';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'portfolio-admin-experience',
@@ -19,24 +20,32 @@ export class AdminExperienceComponent {
   constructor(
     private readonly profileStore: Store<fromProfile.State>,
     private readonly http: HttpClient,
+    private readonly fb: FormBuilder,
   ) {}
+
+  experienceFormGroup = this.fb.group({
+    title: ['', [Validators.required]],
+    role: ['', [Validators.required]],
+    events: ['', [Validators.required]],
+  });
 
   experiences$: Observable<IUserExperience[]> = this.profileStore.pipe(select(getExperiences));
 
-  eventsToModify: string;
   experienceToModify: IUserExperience;
 
   onSelectExperience(experience: IUserExperience) {
-    if (!this.eventsToModify) {
-      this.eventsToModify = experience.events;
-      this.experienceToModify = experience;
-    }
+    this.events.setValue(experience.events);
+    this.experienceToModify = experience;
+  }
+
+  get events() {
+    return this.experienceFormGroup.get('events');
   }
 
   onExperienceUpdate() {
     const { experienceToModify } = this;
     const updatedExperience: Partial<IUserExperience> = {
-      events: this.eventsToModify,
+      events: this.events.value,
       id: experienceToModify.id,
     };
 

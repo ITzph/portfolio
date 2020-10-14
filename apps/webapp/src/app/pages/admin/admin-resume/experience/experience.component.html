@@ -2,15 +2,33 @@
   <section
     (click)="onSelectExperience(experience)"
     style="cursor: pointer;"
-    *ngIf="!eventsToModify"
+    *ngIf="!experienceToModify"
   >
     <p>{{ experience.name }}</p>
     <p>{{ experience.endDate }}</p>
   </section>
 </ng-container>
 
-<ng-container *ngIf="!!eventsToModify">
-  <quill-editor [(ngModel)]="eventsToModify"> </quill-editor>
-  <button mat-raised-button (click)="eventsToModify = null">Cancel</button>
-  <button mat-raised-button (click)="onExperienceUpdate()">Update</button>
+<ng-container *ngIf="!!experienceToModify">
+  <form [formGroup]="experienceFormGroup">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="Title" formControlName="title" />
+      <!-- <mat-error *ngIf="experienceFormGroup.get('title').hasError('required')"
+        >Title is required</mat-error
+      > -->
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Role</mat-label>
+      <input matInput placeholder="Role" formControlName="role" />
+      <!-- <mat-error *ngIf="experienceFormGroup.get('role').hasError('required')"
+        >Role is required</mat-error
+      > -->
+    </mat-form-field>
+
+    <quill-editor formControlName="events"> </quill-editor>
+    <button mat-raised-button (click)="eventsToModify = null">Cancel</button>
+    <button mat-raised-button (click)="onExperienceUpdate()">Update</button>
+  </form>
 </ng-container>
