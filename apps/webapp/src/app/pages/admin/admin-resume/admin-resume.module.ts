@@ -6,9 +6,17 @@ import { AdminResumeComponent } from './admin-resume.component';
 import { QuillModule } from 'ngx-quill';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { AdminExperienceComponent } from './experience/experience.component';
+import { AdminCertificationComponent } from './certification/certification.component';
+import { AdminSkillComponent } from './skill/skill.component';
 
 @NgModule({
-  declarations: [AdminResumeComponent],
+  declarations: [
+    AdminResumeComponent,
+    AdminExperienceComponent,
+    AdminCertificationComponent,
+    AdminSkillComponent,
+  ],
   imports: [
     CommonModule,
     AdminResumeRoutingModule,
@@ -16,6 +24,11 @@ import { MatButtonModule } from '@angular/material/button';
     FormsModule,
     MatButtonModule,
   ],
-  exports: [AdminResumeComponent],
+  exports: [
+    AdminResumeComponent,
+    AdminExperienceComponent,
+    AdminCertificationComponent,
+    AdminSkillComponent,
+  ],
 })
 export class AdminResumeModule {}

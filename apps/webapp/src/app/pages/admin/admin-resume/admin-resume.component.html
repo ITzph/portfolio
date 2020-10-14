@@ -1,3 +1,27 @@
+<nav>
+  <a
+    [routerLink]="['experiences']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-skew-forward"
+    >Experiences</a
+  >
+  <a
+    [routerLink]="['skills']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-skew-forward"
+    >Skills</a
+  >
+  <a
+    [routerLink]="['certifications']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-skew-forward"
+    >Certification</a
+  >
+</nav>
+<router-outlet></router-outlet>
 <ng-container *ngFor="let experience of experiences$ | async">
   <section
     (click)="onSelectExperience(experience)"
