@@ -24,4 +24,16 @@ export const reducer = createReducer(
       };
     },
   ),
+  on(
+    ProfileActions.updateProfile,
+    (state: State, prop): State => {
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          ...prop.profile,
+        },
+      };
+    },
+  ),
 );

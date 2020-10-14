@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { IUserExperience, IUser } from '@portfolio/api-interfaces';
-import { Observable, of } from 'rxjs';
+import { IUserExperience } from '@portfolio/api-interfaces';
+import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import * as fromProfile from '../../../reducers/profile.reducer';
-import { getCurrentUser } from '../../../selectors/profile.selectors';
-import { filter, map } from 'rxjs/operators';
+import { getExperiences } from '../../../selectors/profile.selectors';
+import { map, withLatestFrom } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { updateProfile } from '../../../actions/profile.actions';
 
 @Component({
   selector: 'portfolio-admin-resume',
@@ -20,7 +21,7 @@ export class AdminResumeComponent implements OnInit {
     private readonly http: HttpClient,
   ) {}
 
-  experiences$: Observable<IUserExperience[]>;
+  experiences$: Observable<IUserExperience[]> = this.profileStore.pipe(select(getExperiences));
 
   eventsToModify: string;
   experienceToModify: IUserExperience;
@@ -44,16 +45,28 @@ export class AdminResumeComponent implements OnInit {
         `${environment.api}/experience/${experienceToModify.id}`,
         updatedExperience,
       )
-      .subscribe((experience) => {});
+      .pipe(withLatestFrom(this.profileStore.pipe(select(getExperiences))))
+      .subscribe(([experience, experiences]) => {
+        this.profileStore.dispatch(
+          updateProfile({
+            profile: {
+              experiences: experiences.map((exp) => {
+                const newExperience: IUserExperience = {
+                  id: experience.id,
+                  events: experience.events,
+                  endDate: experience?.endDate ?? exp.endDate,
+                  startDate: experience?.startDate ?? exp.startDate,
+                  name: experience?.name ?? exp.name,
+                  role: experience?.role ?? exp.role,
+                };
+
+                return exp.id === experience.id ? newExperience : exp;
+              }),
+            },
+          }),
+        );
+      });
   }
 
-  ngOnInit(): void {
-    this.experiences$ = this.profileStore.pipe(
-      select(getCurrentUser),
-      filter((user) => !!user),
-      map((user) => {
-        return user.experiences;
-      }),
-    );
-  }
+  ngOnInit(): void {}
 }
