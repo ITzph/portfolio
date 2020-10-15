@@ -1,4 +1,4 @@
-<ng-container *ngFor="let experience of experiences$ | async">
+<ng-container *ngFor="let experience of experiences$ | async; trackBy: experienceTracker">
   <section
     (click)="onSelectExperience(experience)"
     style="cursor: pointer;"
@@ -11,24 +11,33 @@
 
 <ng-container *ngIf="!!experienceToModify">
   <form [formGroup]="experienceFormGroup">
-    <mat-form-field>
-      <mat-label>Title</mat-label>
-      <input matInput placeholder="Title" formControlName="title" />
-      <!-- <mat-error *ngIf="experienceFormGroup.get('title').hasError('required')"
+    <mat-card class="form-wrapper">
+      <mat-card-title>
+        Update Experience
+      </mat-card-title>
+      <mat-card-content class="card-content">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Name" formControlName="name" />
+          <!-- <mat-error *ngIf="experienceFormGroup.get('title').hasError('required')"
         >Title is required</mat-error
       > -->
-    </mat-form-field>
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Role</mat-label>
-      <input matInput placeholder="Role" formControlName="role" />
-      <!-- <mat-error *ngIf="experienceFormGroup.get('role').hasError('required')"
+        <mat-form-field>
+          <mat-label>Role</mat-label>
+          <input matInput placeholder="Role" formControlName="role" />
+          <!-- <mat-error *ngIf="experienceFormGroup.get('role').hasError('required')"
         >Role is required</mat-error
       > -->
-    </mat-form-field>
+        </mat-form-field>
 
-    <quill-editor formControlName="events"> </quill-editor>
-    <button mat-raised-button (click)="eventsToModify = null">Cancel</button>
-    <button mat-raised-button (click)="onExperienceUpdate()">Update</button>
+        <quill-editor formControlName="events"> </quill-editor>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-raised-button color="warn" (click)="experienceToModify = null">Cancel</button>
+        <button mat-raised-button color="primary" (click)="onExperienceUpdate()">Update</button>
+      </mat-card-actions>
+    </mat-card>
   </form>
 </ng-container>

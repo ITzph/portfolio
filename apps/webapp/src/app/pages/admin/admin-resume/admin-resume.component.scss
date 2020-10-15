@@ -1,3 +1,16 @@
+@import '../../../../styles/variables';
+
 :host {
   display: block;
+}
+
+.link {
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.1rem;
+  padding: 0.65rem 0.5rem;
+  color: $color-dark;
+  &:not(:last-child) {
+    margin-right: 1rem;
+  }
 }

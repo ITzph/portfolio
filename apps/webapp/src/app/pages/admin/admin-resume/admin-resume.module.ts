@@ -10,6 +10,7 @@ import { AdminExperienceComponent } from './experience/experience.component';
 import { AdminCertificationComponent } from './certification/certification.component';
 import { AdminSkillComponent } from './skill/skill.component';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatCardModule,
   ],
   exports: [
     AdminResumeComponent,

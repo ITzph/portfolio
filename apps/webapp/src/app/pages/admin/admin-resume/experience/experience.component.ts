@@ -9,6 +9,8 @@ import { withLatestFrom } from 'rxjs/operators';
 import { updateProfile } from '../../../../actions/profile.actions';
 import { environment } from '../../../../../environments/environment';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { trackByIdOrIndex } from '../../../../utils/tracker-by-id.util';
 
 @Component({
   selector: 'portfolio-admin-experience',
@@ -21,10 +23,11 @@ export class AdminExperienceComponent {
     private readonly profileStore: Store<fromProfile.State>,
     private readonly http: HttpClient,
     private readonly fb: FormBuilder,
+    private readonly snackbar: MatSnackBar,
   ) {}
 
   experienceFormGroup = this.fb.group({
-    title: ['', [Validators.required]],
+    name: ['', [Validators.required]],
     role: ['', [Validators.required]],
     events: ['', [Validators.required]],
   });
@@ -34,8 +37,17 @@ export class AdminExperienceComponent {
   experienceToModify: IUserExperience;
 
   onSelectExperience(experience: IUserExperience) {
-    this.events.setValue(experience.events);
+    // this.events.setValue(experience.events);
+    this.experienceFormGroup.setValue({
+      role: experience.role,
+      events: experience.events,
+      name: experience.name,
+    });
     this.experienceToModify = experience;
+  }
+
+  experienceTracker(index: number, exp: IUserExperience) {
+    return trackByIdOrIndex(index, exp);
   }
 
   get events() {
@@ -44,8 +56,12 @@ export class AdminExperienceComponent {
 
   onExperienceUpdate() {
     const { experienceToModify } = this;
+    const { events, name, role } = this.experienceFormGroup.value;
+
     const updatedExperience: Partial<IUserExperience> = {
-      events: this.events.value,
+      events,
+      name,
+      role,
       id: experienceToModify.id,
     };
 
@@ -74,6 +90,13 @@ export class AdminExperienceComponent {
             },
           }),
         );
+
+        this.experienceToModify = null;
+        this.experienceFormGroup.reset();
+
+        this.snackbar.open(`Update experience successfully`, 'success', {
+          duration: 2000,
+        });
       });
   }
 }
