@@ -1,6 +1,16 @@
-import { Controller, Param, ParseIntPipe, Patch, Req, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { ExperienceService } from './experience.service';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { IUserExperience } from '@portfolio/api-interfaces';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 
@@ -13,5 +23,21 @@ export class ExperienceController {
   patchExperience(@Param('id', ParseIntPipe) id: number, @Req() req: Request) {
     const experience: Partial<IUserExperience> = req.body;
     return this.experienceService.patchExperience(id, experience);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post()
+  async addNewExperience(@Req() req: Request, @Res() res: Response) {
+    const experience = req.body as IUserExperience;
+
+    const result = await this.experienceService.addExperience(experience);
+
+    if (result) {
+      return res.status(HttpStatus.CREATED).send(result);
+    } else {
+      return res.status(HttpStatus.METHOD_NOT_ALLOWED).send({
+        message: 'Some error occurred',
+      });
+    }
   }
 }

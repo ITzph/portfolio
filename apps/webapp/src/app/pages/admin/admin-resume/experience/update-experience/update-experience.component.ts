@@ -12,9 +12,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { select, Store } from '@ngrx/store';
 import { IUserExperience } from '@portfolio/api-interfaces';
-import { updateProfile } from '../../../../../actions/profile.actions';
+import { updateExperience, updateProfile } from '../../../../../actions/profile.actions';
 import { getExperiences } from '../../../../../selectors/profile.selectors';
-import { withLatestFrom } from 'rxjs/operators';
+import { take, withLatestFrom } from 'rxjs/operators';
 import { environment } from '../../../../../../environments/environment';
 import * as fromProfile from '../../../../../reducers/profile.reducer';
 
@@ -73,24 +73,23 @@ export class UpdateExperienceComponent implements OnInit {
 
     this.http
       .patch<IUserExperience>(`${environment.api}/experience/${experience.id}`, updatedExperience)
-      .pipe(withLatestFrom(this.profileStore.pipe(select(getExperiences))))
+      .pipe(withLatestFrom(this.profileStore.pipe(select(getExperiences))), take(1))
       .subscribe(([updatedExp, experiences]) => {
         this.profileStore.dispatch(
-          updateProfile({
-            profile: {
-              experiences: experiences.map((exp) => {
-                const newExperience: IUserExperience = {
-                  id: updatedExp.id,
-                  events: updatedExp.events,
-                  endDate: updatedExp?.endDate ?? exp.endDate,
-                  startDate: updatedExp?.startDate ?? exp.startDate,
-                  name: updatedExp?.name ?? exp.name,
-                  role: updatedExp?.role ?? exp.role,
-                };
+          updateExperience({
+            experiences: experiences.map((exp) => {
+              const newExperience: IUserExperience = {
+                id: updatedExp.id,
+                events: updatedExp.events,
+                endDate: updatedExp?.endDate ?? exp.endDate,
+                startDate: updatedExp?.startDate ?? exp.startDate,
+                name: updatedExp?.name ?? exp.name,
+                role: updatedExp?.role ?? exp.role,
+                isActive: updatedExp?.isActive ?? exp.isActive,
+              };
 
-                return exp.id === updatedExp.id ? newExperience : exp;
-              }),
-            },
+              return exp.id === updatedExp.id ? newExperience : exp;
+            }),
           }),
         );
 

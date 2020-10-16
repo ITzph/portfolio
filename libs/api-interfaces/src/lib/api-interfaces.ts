@@ -29,6 +29,7 @@ export interface IUserExperience {
   startDate: Date | string;
   endDate: Date | string;
   events: string;
+  isActive: boolean;
 }
 
 export interface IUserCertification {

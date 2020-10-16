@@ -1,10 +1,15 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { select, Store } from '@ngrx/store';
 import { IUserExperience } from '@portfolio/api-interfaces';
 import { getExperiences } from '../../../../selectors/profile.selectors';
 import { Observable } from 'rxjs';
 import * as fromProfile from '../../../../reducers/profile.reducer';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { take, withLatestFrom } from 'rxjs/operators';
+import { updateExperience } from '../../../../actions/profile.actions';
+import { environment } from '../../../../../environments/environment';
+import { trackByIdOrIndex } from '../../../../utils/tracker-by-id.util';
 
 @Component({
   selector: 'portfolio-admin-experience',
@@ -16,6 +21,7 @@ export class AdminExperienceComponent {
   constructor(
     private readonly profileStore: Store<fromProfile.State>,
     private readonly snackbar: MatSnackBar,
+    private readonly http: HttpClient,
   ) {}
 
   experiences$: Observable<IUserExperience[]> = this.profileStore.pipe(select(getExperiences));
@@ -26,10 +32,37 @@ export class AdminExperienceComponent {
     this.experienceToModify = experience;
   }
 
+  onAddNewExperience() {
+    const emptyExperience: IUserExperience = {
+      id: null,
+      endDate: null,
+      events: 'Events in the experience',
+      name: 'Update name',
+      role: 'Update this Role',
+      startDate: null,
+      isActive: false,
+    };
+
+    this.http
+      .post<IUserExperience>(`${environment.api}/experience`, emptyExperience)
+      .pipe(withLatestFrom(this.profileStore.pipe(select(getExperiences), take(1))))
+      .subscribe(([addedExp, experiences]) => {
+        this.profileStore.dispatch(
+          updateExperience({
+            experiences: [...experiences, addedExp],
+          }),
+        );
+      });
+  }
+
   onUpdate() {
     this.experienceToModify = null;
     this.snackbar.open(`Update experience successfully`, 'success', {
       duration: 2000,
     });
+  }
+
+  experienceTracker(index: number, exp: IUserExperience) {
+    return trackByIdOrIndex(index, exp);
   }
 }

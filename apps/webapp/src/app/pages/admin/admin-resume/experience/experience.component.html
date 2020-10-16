@@ -11,6 +11,8 @@
   </mat-card>
 </ng-container>
 
+<button mat-raised-button color="primary" (click)="onAddNewExperience()">Add new experience</button>
+
 <ng-container *ngIf="!!experienceToModify">
   <portfolio-update-experience
     [experience]="experienceToModify"

@@ -25,6 +25,18 @@ export const reducer = createReducer(
     },
   ),
   on(
+    ProfileActions.updateExperience,
+    (state: State, prop): State => {
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          experiences: prop.experiences,
+        },
+      };
+    },
+  ),
+  on(
     ProfileActions.updateProfile,
     (state: State, prop): State => {
       return {

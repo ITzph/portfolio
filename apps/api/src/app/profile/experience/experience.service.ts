@@ -16,4 +16,8 @@ export class ExperienceService {
       ...experience,
     });
   }
+
+  addExperience(experience: IUserExperience) {
+    return this.userRepository.save(experience);
+  }
 }
