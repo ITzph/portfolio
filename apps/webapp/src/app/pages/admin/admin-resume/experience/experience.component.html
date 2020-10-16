@@ -1,12 +1,14 @@
 <ng-container *ngFor="let experience of experiences$ | async; trackBy: experienceTracker">
-  <section
+  <mat-card
     (click)="onSelectExperience(experience)"
-    style="cursor: pointer;"
+    style="cursor: pointer; margin-bottom: 1rem;"
     *ngIf="!experienceToModify"
   >
     <p>{{ experience.name }}</p>
+    <p>{{ experience.role }}</p>
+    <p>{{ experience.startDate }}</p>
     <p>{{ experience.endDate }}</p>
-  </section>
+  </mat-card>
 </ng-container>
 
 <ng-container *ngIf="!!experienceToModify">
@@ -16,6 +18,18 @@
         Update Experience
       </mat-card-title>
       <mat-card-content class="card-content">
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a start date</mat-label>
+          <input matInput [matDatepicker]="startPicker" formControlName="startDate" />
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose an end date</mat-label>
+          <input matInput [matDatepicker]="endPicker" formControlName="endDate" />
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
         <mat-form-field>
           <mat-label>Name</mat-label>
           <input matInput placeholder="Name" formControlName="name" />

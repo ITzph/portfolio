@@ -26,8 +26,8 @@ export interface IUserExperience {
   id: number;
   name: string;
   role: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: Date | string;
+  endDate: Date | string;
   events: string;
 }
 

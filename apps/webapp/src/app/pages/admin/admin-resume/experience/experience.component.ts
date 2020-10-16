@@ -11,6 +11,7 @@ import { environment } from '../../../../../environments/environment';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { trackByIdOrIndex } from '../../../../utils/tracker-by-id.util';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'portfolio-admin-experience',
@@ -30,6 +31,8 @@ export class AdminExperienceComponent {
     name: ['', [Validators.required]],
     role: ['', [Validators.required]],
     events: ['', [Validators.required]],
+    startDate: ['', [Validators.required]],
+    endDate: [''],
   });
 
   experiences$: Observable<IUserExperience[]> = this.profileStore.pipe(select(getExperiences));
@@ -42,6 +45,8 @@ export class AdminExperienceComponent {
       role: experience.role,
       events: experience.events,
       name: experience.name,
+      startDate: experience.startDate,
+      endDate: experience.endDate,
     });
     this.experienceToModify = experience;
   }
@@ -56,13 +61,15 @@ export class AdminExperienceComponent {
 
   onExperienceUpdate() {
     const { experienceToModify } = this;
-    const { events, name, role } = this.experienceFormGroup.value;
+    const { events, name, role, startDate, endDate } = this.experienceFormGroup.value;
 
     const updatedExperience: Partial<IUserExperience> = {
       events,
       name,
       role,
       id: experienceToModify.id,
+      startDate: formatDate(startDate, 'yyyy-MM-dd', 'sg'),
+      endDate: formatDate(endDate, 'yyyy-MM-dd', 'sg'),
     };
 
     this.http
