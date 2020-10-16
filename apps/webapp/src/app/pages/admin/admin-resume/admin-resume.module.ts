@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { UpdateExperienceComponent } from './experience/update-experience/update-experience.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     AdminExperienceComponent,
     AdminCertificationComponent,
     AdminSkillComponent,
+    UpdateExperienceComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +40,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     AdminExperienceComponent,
     AdminCertificationComponent,
     AdminSkillComponent,
+    UpdateExperienceComponent,
   ],
 })
 export class AdminResumeModule {}

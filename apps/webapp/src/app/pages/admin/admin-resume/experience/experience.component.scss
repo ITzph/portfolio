@@ -1,16 +1,3 @@
-@import '../../../../../styles/variables';
 :host {
   display: block;
-}
-
-.form-wrapper {
-  display: flex;
-  padding: $padding-small $padding-medium $padding-medium $padding-medium;
-  flex-direction: column;
-  margin: $padding-medium;
-}
-
-.card-content {
-  display: flex;
-  flex-direction: column;
 }
