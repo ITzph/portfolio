@@ -26,11 +26,20 @@ export class ExperienceController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post()
-  async addNewExperience(@Req() req: Request, @Res() res: Response) {
+  @Post(':id')
+  async addNewExperience(
+    @Param('id', ParseIntPipe) id: number,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
     const experience = req.body as IUserExperience;
 
-    const result = await this.experienceService.addExperience(experience);
+    const result = await this.experienceService.addExperience({
+      ...experience,
+      user: {
+        id,
+      },
+    } as any);
 
     if (result) {
       return res.status(HttpStatus.CREATED).send(result);

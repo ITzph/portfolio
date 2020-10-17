@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { select, Store } from '@ngrx/store';
 import { IUserExperience } from '@portfolio/api-interfaces';
-import { getExperiences } from '../../../../selectors/profile.selectors';
+import { getExperiences, getCurrentUser } from '../../../../selectors/profile.selectors';
 import { Observable } from 'rxjs';
 import * as fromProfile from '../../../../reducers/profile.reducer';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -43,16 +43,22 @@ export class AdminExperienceComponent {
       isActive: false,
     };
 
-    this.http
-      .post<IUserExperience>(`${environment.api}/experience`, emptyExperience)
-      .pipe(withLatestFrom(this.profileStore.pipe(select(getExperiences), take(1))))
-      .subscribe(([addedExp, experiences]) => {
-        this.profileStore.dispatch(
-          updateExperience({
-            experiences: [...experiences, addedExp],
-          }),
-        );
-      });
+    this.profileStore.pipe(select(getCurrentUser), take(1)).subscribe((user) => {
+      this.http
+        .post<IUserExperience>(`${environment.api}/experience/${user.id}`, emptyExperience)
+        .pipe(withLatestFrom(this.profileStore.pipe(select(getExperiences), take(1))))
+        .subscribe(([addedExp, experiences]) => {
+          this.profileStore.dispatch(
+            updateExperience({
+              experiences: [...experiences, addedExp],
+            }),
+          );
+
+          this.snackbar.open(`Created experience ${addedExp.name} successfully`, 'success', {
+            duration: 2000,
+          });
+        });
+    });
   }
 
   onUpdate() {
