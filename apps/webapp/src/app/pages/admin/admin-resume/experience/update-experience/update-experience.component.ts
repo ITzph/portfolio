@@ -34,6 +34,7 @@ export class UpdateExperienceComponent implements OnInit {
     private readonly profileStore: Store<fromProfile.State>,
     private readonly http: HttpClient,
     private readonly fb: FormBuilder,
+    private readonly snackbar: MatSnackBar,
   ) {}
 
   experienceFormGroup = this.fb.group({
@@ -74,27 +75,34 @@ export class UpdateExperienceComponent implements OnInit {
     this.http
       .patch<IUserExperience>(`${environment.api}/experience/${experience.id}`, updatedExperience)
       .pipe(withLatestFrom(this.profileStore.pipe(select(getExperiences))), take(1))
-      .subscribe(([updatedExp, experiences]) => {
-        this.profileStore.dispatch(
-          updateExperience({
-            experiences: experiences.map((exp) => {
-              const newExperience: IUserExperience = {
-                id: updatedExp.id,
-                events: updatedExp.events,
-                endDate: updatedExp?.endDate ?? exp.endDate,
-                startDate: updatedExp?.startDate ?? exp.startDate,
-                name: updatedExp?.name ?? exp.name,
-                role: updatedExp?.role ?? exp.role,
-                isActive: updatedExp?.isActive ?? exp.isActive,
-              };
+      .subscribe(
+        ([updatedExp, experiences]) => {
+          this.profileStore.dispatch(
+            updateExperience({
+              experiences: experiences.map((exp) => {
+                const newExperience: IUserExperience = {
+                  id: updatedExp.id,
+                  events: updatedExp.events,
+                  endDate: updatedExp?.endDate ?? exp.endDate,
+                  startDate: updatedExp?.startDate ?? exp.startDate,
+                  name: updatedExp?.name ?? exp.name,
+                  role: updatedExp?.role ?? exp.role,
+                  isActive: updatedExp?.isActive ?? exp.isActive,
+                };
 
-              return exp.id === updatedExp.id ? newExperience : exp;
+                return exp.id === updatedExp.id ? newExperience : exp;
+              }),
             }),
-          }),
-        );
+          );
 
-        this.experienceFormGroup.reset();
-        this.update.emit();
-      });
+          this.experienceFormGroup.reset();
+          this.update.emit();
+        },
+        () => {
+          this.snackbar.open(`Update experience fail`, 'error', {
+            duration: 2000,
+          });
+        },
+      );
   }
 }

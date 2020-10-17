@@ -1,5 +1,6 @@
 import {
   Controller,
+  Delete,
   HttpStatus,
   Param,
   ParseIntPipe,
@@ -23,6 +24,17 @@ export class ExperienceController {
   patchExperience(@Param('id', ParseIntPipe) id: number, @Req() req: Request) {
     const experience: Partial<IUserExperience> = req.body;
     return this.experienceService.patchExperience(id, experience);
+  }
+
+  @Delete(':id')
+  async deleteExperience(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+    const result = await this.experienceService.deleteExperience(id);
+
+    if (result.affected) {
+      return res.send({ id });
+    } else {
+      res.status(HttpStatus.NOT_FOUND).send({ message: 'Experience to delete not found!' });
+    }
   }
 
   @UseGuards(JwtAuthGuard)

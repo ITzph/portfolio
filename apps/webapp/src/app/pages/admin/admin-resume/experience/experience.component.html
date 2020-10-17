@@ -8,6 +8,13 @@
     <p>{{ experience.role }}</p>
     <p>{{ experience.startDate }}</p>
     <p>{{ experience.endDate }}</p>
+    <button
+      mat-icon-button
+      color="warn"
+      (click)="onDeleteExperience(experience); $event.stopPropagation()"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
   </mat-card>
 </ng-container>
 

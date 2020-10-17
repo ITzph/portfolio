@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { UpdateExperienceComponent } from './experience/update-experience/update-experience.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UpdateExperienceComponent } from './experience/update-experience/update
     MatCardModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatIconModule,
   ],
   exports: [
     AdminResumeComponent,
