@@ -17,6 +17,7 @@ import { getExperiences } from '../../../../../selectors/profile.selectors';
 import { take, withLatestFrom } from 'rxjs/operators';
 import { environment } from '../../../../../../environments/environment';
 import * as fromProfile from '../../../../../reducers/profile.reducer';
+import { ExperienceService } from '../experience.service';
 
 @Component({
   selector: 'portfolio-update-experience',
@@ -31,10 +32,8 @@ export class UpdateExperienceComponent implements OnInit {
   @Output() update = new EventEmitter<void>();
 
   constructor(
-    private readonly profileStore: Store<fromProfile.State>,
-    private readonly http: HttpClient,
     private readonly fb: FormBuilder,
-    private readonly snackbar: MatSnackBar,
+    private readonly experienceService: ExperienceService,
   ) {}
 
   experienceFormGroup = this.fb.group({
@@ -72,37 +71,11 @@ export class UpdateExperienceComponent implements OnInit {
       endDate: formatDate(endDate, 'yyyy-MM-dd', 'sg'),
     };
 
-    this.http
-      .patch<IUserExperience>(`${environment.api}/experience/${experience.id}`, updatedExperience)
-      .pipe(withLatestFrom(this.profileStore.pipe(select(getExperiences))), take(1))
-      .subscribe(
-        ([updatedExp, experiences]) => {
-          this.profileStore.dispatch(
-            updateExperience({
-              experiences: experiences.map((exp) => {
-                const newExperience: IUserExperience = {
-                  id: updatedExp.id,
-                  events: updatedExp.events,
-                  endDate: updatedExp?.endDate ?? exp.endDate,
-                  startDate: updatedExp?.startDate ?? exp.startDate,
-                  name: updatedExp?.name ?? exp.name,
-                  role: updatedExp?.role ?? exp.role,
-                  isActive: updatedExp?.isActive ?? exp.isActive,
-                };
+    const callback = () => {
+      this.experienceFormGroup.reset();
+      this.update.emit();
+    };
 
-                return exp.id === updatedExp.id ? newExperience : exp;
-              }),
-            }),
-          );
-
-          this.experienceFormGroup.reset();
-          this.update.emit();
-        },
-        () => {
-          this.snackbar.open(`Update experience fail`, 'error', {
-            duration: 2000,
-          });
-        },
-      );
+    this.experienceService.updateExperience(experience.id, updatedExperience, callback);
   }
 }

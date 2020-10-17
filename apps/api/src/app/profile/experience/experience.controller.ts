@@ -26,6 +26,7 @@ export class ExperienceController {
     return this.experienceService.patchExperience(id, experience);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async deleteExperience(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
     const result = await this.experienceService.deleteExperience(id);
