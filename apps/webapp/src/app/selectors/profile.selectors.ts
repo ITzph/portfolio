@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { IUserExperience } from '@portfolio/api-interfaces';
+import { IUserExperience, IUserSkill } from '@portfolio/api-interfaces';
 import * as fromProfile from '../reducers/profile.reducer';
 
 export const selectProfileState = createFeatureSelector<fromProfile.State>(
@@ -12,4 +12,8 @@ export const getCurrentUser = createSelector(selectProfileState, (state) => {
 
 export const getExperiences = createSelector(selectProfileState, (state): IUserExperience[] => {
   return getCurrentUser.projector(state)?.experiences || [];
+});
+
+export const getSkills = createSelector(selectProfileState, (state): IUserSkill[] => {
+  return getCurrentUser.projector(state)?.skills || [];
 });

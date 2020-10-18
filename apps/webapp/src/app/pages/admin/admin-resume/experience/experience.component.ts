@@ -6,9 +6,6 @@ import { getExperiences, getCurrentUser } from '../../../../selectors/profile.se
 import { Observable } from 'rxjs';
 import * as fromProfile from '../../../../reducers/profile.reducer';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { take, withLatestFrom } from 'rxjs/operators';
-import { updateExperience } from '../../../../actions/profile.actions';
-import { environment } from '../../../../../environments/environment';
 import { trackByIdOrIndex } from '../../../../utils/tracker-by-id.util';
 import { MatDialog } from '@angular/material/dialog';
 import { BinaryConfirmationComponent } from '../../../../modules/custom-dialog/binary-confirmation/binary-confirmation.component';
