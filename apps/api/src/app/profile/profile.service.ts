@@ -25,12 +25,21 @@ export class ProfileService {
     return this.userRepository.save(user);
   }
 
-  public getCurrentProfile(): Promise<IUser> {
+  public async getCurrentProfile(): Promise<IUser> {
     const username = process.env.MY_USERNAME;
-    return this.userRepository.findOne({
+    const user = await this.userRepository.findOne({
       where: {
         username,
       },
     });
+
+    user.experiences = user.experiences.sort((a, b) => {
+      if (new Date(a.startDate).getTime() === new Date(a.startDate).getTime()) {
+        return new Date(b.endDate).getTime() - new Date(a.endDate).getTime();
+      }
+      return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
+    });
+
+    return user;
   }
 }
