@@ -1,28 +1,11 @@
 @import 'variables';
 
-p {
+p,
+a,
+li {
   font-size: 1.2rem;
   @media #{$xs-device} {
     font-size: 1.2rem;
-  }
-  @media #{$sm-device} {
-    font-size: 1.4rem;
-  }
-  @media #{$md-device} {
-    font-size: 1.4rem;
-  }
-  @media #{$lg-device} {
-    font-size: 1.6rem;
-  }
-  @media #{$xl-device} {
-    font-size: 1.8rem;
-  }
-}
-
-a {
-  font-size: 1rem;
-  @media #{$xs-device} {
-    font-size: 1rem;
   }
   @media #{$sm-device} {
     font-size: 1.4rem;

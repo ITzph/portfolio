@@ -1,8 +1,8 @@
 <portfolio-public-layout>
   <portfolio-header contentHeader></portfolio-header>
-  <section contentBody>
+  <section contentBody class="content__wrapper">
     <ng-container *ngIf="profile$ | async; let profile">
-      <div class="skills-wrapper">
+      <div class="skills__wrapper">
         <h2>Work Skills</h2>
         <ng-container *ngFor="let category of categorizedSkill$ | async">
           <div class="skills-category">
@@ -15,7 +15,7 @@
           </div>
         </ng-container>
       </div>
-      <div class="experiences-wrapper">
+      <div class="experiences__wrapper">
         <h3>Work Experience</h3>
         <ng-container *ngFor="let exp of profile.experiences">
           <portfolio-experience [experience]="exp"></portfolio-experience>
