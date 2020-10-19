@@ -9,6 +9,7 @@ import { UserCertification } from '../database/entities/user-certification.entit
 import { LoggerModule } from '../logger/logger.module';
 import { ExperienceController } from './experience/experience.controller';
 import { ExperienceService } from './experience/experience.service';
+import { SkillModule } from './skill/skill.module';
 
 @Module({
   controllers: [ProfileController, ExperienceController],
@@ -16,6 +17,7 @@ import { ExperienceService } from './experience/experience.service';
   imports: [
     LoggerModule,
     TypeOrmModule.forFeature([User, UserSkill, UserExperience, UserCertification]),
+    SkillModule,
   ],
 })
 export class ProfileModule {}
