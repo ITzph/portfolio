@@ -9,15 +9,15 @@ import { UserCertification } from '../database/entities/user-certification.entit
 import { LoggerModule } from '../logger/logger.module';
 import { ExperienceController } from './experience/experience.controller';
 import { ExperienceService } from './experience/experience.service';
-import { SkillModule } from './skill/skill.module';
+import { SkillService } from './skill/skill.service';
+import { SkillController } from './skill/skill.controller';
 
 @Module({
-  controllers: [ProfileController, ExperienceController],
-  providers: [ProfileService, ExperienceService],
+  controllers: [ProfileController, ExperienceController, SkillController],
+  providers: [ProfileService, ExperienceService, SkillService],
   imports: [
     LoggerModule,
     TypeOrmModule.forFeature([User, UserSkill, UserExperience, UserCertification]),
-    SkillModule,
   ],
 })
 export class ProfileModule {}

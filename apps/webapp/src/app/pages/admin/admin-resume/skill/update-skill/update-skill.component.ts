@@ -1,5 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+  Input,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { IUserSkill } from '@portfolio/api-interfaces';
 
 @Component({
   selector: 'portfolio-update-skill',
@@ -9,23 +17,33 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class UpdateSkillComponent implements OnInit {
   @Output() closed = new EventEmitter<void>();
+  @Input() skill: IUserSkill;
+
+  @Output() update = new EventEmitter<void>();
 
   skillFormGroup = this.fb.group({
     name: ['', [Validators.required]],
     category: ['', [Validators.required]],
     current: [false],
-    link: [''],
   });
 
   constructor(private readonly fb: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.skillFormGroup.setValue({
+      name: this.skill.name,
+      category: this.skill.category,
+      current: this.skill.isCurrent,
+    });
+  }
 
   onCancel() {
     this.closed.emit();
   }
 
   onSkillUpdate() {
-    const { name, category, current, link } = this.skillFormGroup.value;
+    const { name, category, current } = this.skillFormGroup.value;
+
+    this.update.emit();
   }
 }

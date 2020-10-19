@@ -1,10 +1,21 @@
-<portfolio-update-skill></portfolio-update-skill>
-<ng-container *ngFor="let skill of skills$ | async">
-  <mat-card>
+<ng-container *ngFor="let skill of skills$ | async; trackBy: skillTracker">
+  <mat-card
+    style="cursor: pointer; margin-bottom: 1rem;"
+    *ngIf="!skillToModify"
+    (click)="onSelectSkill(skill)"
+  >
     <mat-card-content>
       <p>Name: {{ skill.name }}</p>
       <p>Category: {{ skill.category }}</p>
       <p>Is Current: {{ skill.isCurrent }}</p>
     </mat-card-content>
   </mat-card>
+</ng-container>
+
+<ng-container *ngIf="!!skillToModify">
+  <portfolio-update-skill
+    [skill]="skillToModify"
+    (closed)="skillToModify = null"
+    (update)="onUpdate()"
+  ></portfolio-update-skill>
 </ng-container>
