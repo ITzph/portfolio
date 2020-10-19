@@ -1,0 +1,26 @@
+<form [formGroup]="skillFormGroup">
+  <mat-card class="form-wrapper">
+    <mat-card-title>
+      Update Skill
+    </mat-card-title>
+    <mat-card-content class="card-content">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput type="text" placeholder="Name" formControlName="name" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Category</mat-label>
+        <input matInput type="text" placeholder="Category" formControlName="category" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Link</mat-label>
+        <input matInput type="text" placeholder="Link" formControlName="link" />
+      </mat-form-field>
+      <mat-checkbox formControlName="current">Is current skill?</mat-checkbox>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+      <button mat-raised-button color="primary" (click)="onSkillUpdate()">Update</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -15,6 +15,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { UpdateExperienceComponent } from './experience/update-experience/update-experience.component';
 import { MatIconModule } from '@angular/material/icon';
+import { UpdateSkillComponent } from './skill/update-skill/update-skill.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
     AdminCertificationComponent,
     AdminSkillComponent,
     UpdateExperienceComponent,
+    UpdateSkillComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +40,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
+    MatRadioModule,
+    MatCheckboxModule,
   ],
   exports: [
     AdminResumeComponent,
@@ -43,6 +49,7 @@ import { MatIconModule } from '@angular/material/icon';
     AdminCertificationComponent,
     AdminSkillComponent,
     UpdateExperienceComponent,
+    UpdateSkillComponent,
   ],
 })
 export class AdminResumeModule {}

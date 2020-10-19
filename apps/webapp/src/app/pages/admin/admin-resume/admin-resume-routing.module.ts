@@ -13,7 +13,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: AdminExperienceComponent,
+        component: AdminSkillComponent,
       },
       {
         path: 'experiences',

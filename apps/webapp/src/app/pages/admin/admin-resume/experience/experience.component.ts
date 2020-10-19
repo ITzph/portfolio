@@ -21,7 +21,6 @@ export class AdminExperienceComponent {
   constructor(
     private readonly profileStore: Store<fromProfile.State>,
     private readonly snackbar: MatSnackBar,
-    private readonly http: HttpClient,
     private readonly dialog: MatDialog,
     private readonly experienceService: ExperienceService,
   ) {}
