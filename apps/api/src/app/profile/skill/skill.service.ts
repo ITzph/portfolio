@@ -8,13 +8,17 @@ import { UserSkill } from '../../database/entities/user-skill.entity';
 export class SkillService {
   constructor(
     @InjectRepository(UserSkill)
-    private readonly experienceRepository: Repository<UserSkill>,
+    private readonly skillRepository: Repository<UserSkill>,
   ) {}
 
   patchSkill(id: number, skill: Partial<IUserSkill>) {
-    return this.experienceRepository.save({
+    return this.skillRepository.save({
       id,
       ...skill,
     });
+  }
+
+  addSkill(skill: IUserSkill) {
+    return this.skillRepository.save(skill);
   }
 }

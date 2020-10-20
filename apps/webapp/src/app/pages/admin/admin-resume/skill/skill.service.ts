@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { take, withLatestFrom } from 'rxjs/operators';
 import { IUserSkill } from '@portfolio/api-interfaces';
 import { updateSkills } from '../../../../actions/profile.actions';
-import { getSkills } from '../../../../selectors/profile.selectors';
+import { getCurrentUser, getSkills } from '../../../../selectors/profile.selectors';
 import { environment } from '../../../../../environments/environment';
 import * as fromProfile from '../../../../reducers/profile.reducer';
 
@@ -19,9 +19,35 @@ export class SkillService {
     private readonly http: HttpClient,
   ) {}
 
-  updateSkills(id: number, experience: Partial<IUserSkill>, cb?: Function) {
+  addSkill(skill: IUserSkill) {
+    this.profileStore.pipe(select(getCurrentUser), take(1)).subscribe((user) => {
+      this.http
+        .post<IUserSkill>(`${environment.api}/skill/${user.id}`, skill)
+        .pipe(withLatestFrom(this.profileStore.pipe(select(getSkills))), take(1))
+        .subscribe(
+          ([addedSkill, skills]) => {
+            this.profileStore.dispatch(
+              updateSkills({
+                skills: [addedSkill, ...skills],
+              }),
+            );
+
+            this.snackbar.open(`Created skill ${addedSkill.name} successfully`, 'success', {
+              duration: 2000,
+            });
+          },
+          () => {
+            this.snackbar.open(`Adding skill fail`, 'error', {
+              duration: 2000,
+            });
+          },
+        );
+    });
+  }
+
+  updateSkills(id: number, skill: Partial<IUserSkill>, cb?: Function) {
     this.http
-      .patch<IUserSkill>(`${environment.api}/skill/${id}`, experience)
+      .patch<IUserSkill>(`${environment.api}/skill/${id}`, skill)
       .pipe(withLatestFrom(this.profileStore.pipe(select(getSkills))), take(1))
       .subscribe(
         ([updatedSkill, experiences]) => {

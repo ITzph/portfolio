@@ -22,6 +22,7 @@ export class AdminSkillComponent implements OnInit {
   constructor(
     private readonly profileStore: Store<fromProfile.State>,
     private readonly snackbar: MatSnackBar,
+    private readonly skillService: SkillService,
   ) {}
 
   ngOnInit(): void {}
@@ -39,5 +40,17 @@ export class AdminSkillComponent implements OnInit {
     this.snackbar.open(`Updated skill successfully`, 'success', {
       duration: 2000,
     });
+  }
+
+  onAddNewSkill() {
+    const emptyExperience: IUserSkill = {
+      id: null,
+      category: '',
+      isCurrent: false,
+      name: '',
+    };
+
+    // this.experienceService.addExperience(emptyExperience);
+    this.skillService.addSkill(emptyExperience);
   }
 }
