@@ -45,11 +45,20 @@ export class UpdateSkillComponent implements OnInit {
   onSkillUpdate() {
     const { name, category, current } = this.skillFormGroup.value;
 
-    this.skillService.updateSkills(this.skill.id, {
-      name,
-      category,
-      isCurrent: current,
-      id: this.skill.id,
-    });
+    const callback = () => {
+      this.skillFormGroup.reset();
+      this.update.emit();
+    };
+
+    this.skillService.updateSkills(
+      this.skill.id,
+      {
+        name,
+        category,
+        isCurrent: current,
+        id: this.skill.id,
+      },
+      callback,
+    );
   }
 }

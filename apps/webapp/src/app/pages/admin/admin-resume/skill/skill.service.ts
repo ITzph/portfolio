@@ -21,7 +21,7 @@ export class SkillService {
 
   updateSkills(id: number, experience: Partial<IUserSkill>, cb?: Function) {
     this.http
-      .patch<IUserSkill>(`${environment.api}/experience/${id}`, experience)
+      .patch<IUserSkill>(`${environment.api}/skill/${id}`, experience)
       .pipe(withLatestFrom(this.profileStore.pipe(select(getSkills))), take(1))
       .subscribe(
         ([updatedSkill, experiences]) => {
