@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { IUserSkill } from '@portfolio/api-interfaces';
+import { SkillService } from '../skill.service';
 
 @Component({
   selector: 'portfolio-update-skill',
@@ -27,7 +28,7 @@ export class UpdateSkillComponent implements OnInit {
     current: [false],
   });
 
-  constructor(private readonly fb: FormBuilder) {}
+  constructor(private readonly fb: FormBuilder, private readonly skillService: SkillService) {}
 
   ngOnInit(): void {
     this.skillFormGroup.setValue({
@@ -44,6 +45,11 @@ export class UpdateSkillComponent implements OnInit {
   onSkillUpdate() {
     const { name, category, current } = this.skillFormGroup.value;
 
-    this.update.emit();
+    this.skillService.updateSkills(this.skill.id, {
+      name,
+      category,
+      isCurrent: current,
+      id: this.skill.id,
+    });
   }
 }

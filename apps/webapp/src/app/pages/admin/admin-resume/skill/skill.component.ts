@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { getSkills } from '../../../../selectors/profile.selectors';
 import * as fromProfile from '../../../../reducers/profile.reducer';
 import { trackByIdOrIndex } from '../../../../utils/tracker-by-id.util';
+import { SkillService } from './skill.service';
 
 @Component({
   selector: 'portfolio-admin-skill',
