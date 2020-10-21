@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { IUserSkill } from '@portfolio/api-interfaces';
+import { Observable, of } from 'rxjs';
 import { SkillService } from '../skill.service';
 
 @Component({
@@ -40,6 +41,11 @@ export class UpdateSkillComponent implements OnInit {
 
   onCancel() {
     this.closed.emit();
+  }
+
+  get filteredOptions$(): Observable<string[]> {
+    // return ['asdf', '123', 'zxcvvxczxv'];
+    return of(['123', '456']);
   }
 
   onSkillUpdate() {

@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { UpdateSkillComponent } from './skill/update-skill/update-skill.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @NgModule({
   declarations: [
     AdminResumeComponent,
@@ -42,6 +42,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatIconModule,
     MatRadioModule,
     MatCheckboxModule,
+    MatAutocompleteModule,
   ],
   exports: [
     AdminResumeComponent,
