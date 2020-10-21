@@ -45,6 +45,29 @@ export class SkillService {
     });
   }
 
+  deleteSkill(id: number) {
+    this.http
+      .delete<{ id: number }>(`${environment.api}/skill/${id}`)
+      .pipe(withLatestFrom(this.profileStore.pipe(select(getSkills), take(1))))
+      .subscribe(
+        ([res, skills]) => {
+          this.profileStore.dispatch(
+            updateSkills({
+              skills: skills.filter((exp) => exp.id !== res.id),
+            }),
+          );
+          this.snackbar.open(`Deleted skill successfully`, 'success', {
+            duration: 2000,
+          });
+        },
+        () => {
+          this.snackbar.open(`Delete skill fail`, 'error', {
+            duration: 2000,
+          });
+        },
+      );
+  }
+
   updateSkills(id: number, skill: Partial<IUserSkill>, cb?: Function) {
     this.http
       .patch<IUserSkill>(`${environment.api}/skill/${id}`, skill)

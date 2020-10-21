@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { IUserSkill } from '@portfolio/api-interfaces';
 import { Observable } from 'rxjs';
@@ -7,6 +8,7 @@ import { getSkills } from '../../../../selectors/profile.selectors';
 import * as fromProfile from '../../../../reducers/profile.reducer';
 import { trackByIdOrIndex } from '../../../../utils/tracker-by-id.util';
 import { SkillService } from './skill.service';
+import { BinaryConfirmationComponent } from '../../../../modules/custom-dialog/binary-confirmation/binary-confirmation.component';
 
 @Component({
   selector: 'portfolio-admin-skill',
@@ -23,6 +25,7 @@ export class AdminSkillComponent implements OnInit {
     private readonly profileStore: Store<fromProfile.State>,
     private readonly snackbar: MatSnackBar,
     private readonly skillService: SkillService,
+    private readonly dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {}
@@ -52,5 +55,24 @@ export class AdminSkillComponent implements OnInit {
 
     // this.experienceService.addExperience(emptyExperience);
     this.skillService.addSkill(emptyExperience);
+  }
+
+  onDeleteSkill(skill: IUserSkill) {
+    const dialogProp = {
+      title: 'Delete Experinece',
+      messages: [`Are you sure you want to delete ${skill.name}?`],
+      okayLabel: 'Okay',
+      noLabel: 'Cancel',
+    };
+
+    const dialogRef = this.dialog.open(BinaryConfirmationComponent, {
+      data: dialogProp,
+    });
+
+    dialogRef.afterClosed().subscribe((isTrue: boolean) => {
+      if (isTrue) {
+        this.skillService.deleteSkill(skill.id);
+      }
+    });
   }
 }

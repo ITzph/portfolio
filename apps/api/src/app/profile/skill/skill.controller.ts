@@ -1,5 +1,6 @@
 import {
   Controller,
+  Delete,
   HttpStatus,
   Param,
   ParseIntPipe,
@@ -23,6 +24,18 @@ export class SkillController {
   patchExperience(@Param('id', ParseIntPipe) id: number, @Req() req: Request) {
     const skill: Partial<IUserSkill> = req.body;
     return this.skillService.patchSkill(id, skill);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  async deleteSkill(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+    const result = await this.skillService.deleteSkill(id);
+
+    if (result.affected) {
+      return res.send({ id });
+    } else {
+      res.status(HttpStatus.NOT_FOUND).send({ message: 'Skill to delete not found!' });
+    }
   }
 
   @UseGuards(JwtAuthGuard)

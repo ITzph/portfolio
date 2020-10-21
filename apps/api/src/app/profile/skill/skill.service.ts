@@ -21,4 +21,8 @@ export class SkillService {
   addSkill(skill: IUserSkill) {
     return this.skillRepository.save(skill);
   }
+
+  deleteSkill(id: number) {
+    return this.skillRepository.delete(id);
+  }
 }
