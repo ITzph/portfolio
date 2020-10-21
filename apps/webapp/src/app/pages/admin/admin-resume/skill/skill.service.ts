@@ -8,16 +8,23 @@ import { updateSkills } from '../../../../actions/profile.actions';
 import { getCurrentUser, getSkills } from '../../../../selectors/profile.selectors';
 import { environment } from '../../../../../environments/environment';
 import * as fromProfile from '../../../../reducers/profile.reducer';
+import { ResumeAdminServiceAbstract } from '../resume-admin-abstract.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SkillService {
+export class SkillService extends ResumeAdminServiceAbstract {
+  elementType = 'skills';
+
+  getElements = this.profileStore.pipe(select(getSkills));
+
   constructor(
-    private readonly profileStore: Store<fromProfile.State>,
-    private readonly snackbar: MatSnackBar,
-    private readonly http: HttpClient,
-  ) {}
+    readonly profileStore: Store<fromProfile.State>,
+    readonly snackbar: MatSnackBar,
+    readonly http: HttpClient,
+  ) {
+    super(profileStore, snackbar, http);
+  }
 
   addSkill(skill: IUserSkill) {
     this.profileStore.pipe(select(getCurrentUser), take(1)).subscribe((user) => {
@@ -45,27 +52,10 @@ export class SkillService {
     });
   }
 
-  deleteSkill(id: number) {
-    this.http
-      .delete<{ id: number }>(`${environment.api}/skill/${id}`)
-      .pipe(withLatestFrom(this.profileStore.pipe(select(getSkills), take(1))))
-      .subscribe(
-        ([res, skills]) => {
-          this.profileStore.dispatch(
-            updateSkills({
-              skills: skills.filter((exp) => exp.id !== res.id),
-            }),
-          );
-          this.snackbar.open(`Deleted skill successfully`, 'success', {
-            duration: 2000,
-          });
-        },
-        () => {
-          this.snackbar.open(`Delete skill fail`, 'error', {
-            duration: 2000,
-          });
-        },
-      );
+  updateElements(elements: IUserSkill[]) {
+    return updateSkills({
+      skills: elements,
+    });
   }
 
   updateSkills(id: number, skill: Partial<IUserSkill>, cb?: Function) {

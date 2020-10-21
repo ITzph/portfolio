@@ -12,7 +12,11 @@
       <p>Is Current: {{ skill.isCurrent }}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-icon-button color="warn" (click)="onDeleteSkill(skill); $event.stopPropagation()">
+      <button
+        mat-icon-button
+        color="warn"
+        (click)="onDeleteElement(skill); $event.stopPropagation()"
+      >
         <mat-icon>delete</mat-icon>
       </button>
     </mat-card-actions>
