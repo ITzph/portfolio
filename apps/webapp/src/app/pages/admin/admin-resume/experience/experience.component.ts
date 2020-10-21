@@ -34,36 +34,33 @@ export class AdminExperienceComponent {
   }
 
   onAddNewExperience() {
-    const emptyExperience: IUserExperience = {
-      id: null,
-      endDate: null,
-      events: 'Events in the experience',
-      name: 'Update name',
-      role: 'Update this Role',
-      startDate: null,
-      isActive: false,
+    const cb = () => {
+      const emptyExperience: IUserExperience = {
+        id: null,
+        endDate: null,
+        events: 'Events in the experience',
+        name: 'Update name',
+        role: 'Update this Role',
+        startDate: null,
+        isActive: false,
+      };
+
+      this.experienceService.addExperience(emptyExperience);
     };
 
-    this.experienceService.addExperience(emptyExperience);
+    this.showConfirmationDialog(
+      'Add Experience',
+      [`Are you sure you want to add new experience?`],
+      cb,
+    );
   }
 
   onDeleteExperience(experience: IUserExperience) {
-    const dialogProp = {
-      title: 'Delete Experinece',
-      messages: [`Are you sure you want to delete ${experience.name}?`],
-      okayLabel: 'Okay',
-      noLabel: 'Cancel',
-    };
-
-    const dialogRef = this.dialog.open(BinaryConfirmationComponent, {
-      data: dialogProp,
-    });
-
-    dialogRef.afterClosed().subscribe((isTrue: boolean) => {
-      if (isTrue) {
-        this.experienceService.deleteExperience(experience.id);
-      }
-    });
+    this.showConfirmationDialog(
+      'Delete Experinece',
+      [`Are you sure you want to delete ${experience.name}?`],
+      () => this.experienceService.deleteExperience(experience.id),
+    );
   }
 
   onUpdate() {
@@ -75,5 +72,24 @@ export class AdminExperienceComponent {
 
   experienceTracker(index: number, exp: IUserExperience) {
     return trackByIdOrIndex(index, exp);
+  }
+
+  private showConfirmationDialog(title: string, messages: string[], cb: Function) {
+    const dialogProp = {
+      title,
+      messages,
+      okayLabel: 'Okay',
+      noLabel: 'Cancel',
+    };
+
+    const dialogRef = this.dialog.open(BinaryConfirmationComponent, {
+      data: dialogProp,
+    });
+
+    dialogRef.afterClosed().subscribe((isTrue: boolean) => {
+      if (isTrue) {
+        cb();
+      }
+    });
   }
 }

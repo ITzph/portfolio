@@ -46,21 +46,24 @@ export class AdminSkillComponent implements OnInit {
   }
 
   onAddNewSkill() {
-    const emptyExperience: IUserSkill = {
-      id: null,
-      category: '',
-      isCurrent: false,
-      name: '',
+    const cb = () => {
+      const emptyExperience: IUserSkill = {
+        id: null,
+        category: '',
+        isCurrent: false,
+        name: '',
+      };
+
+      this.skillService.addSkill(emptyExperience);
     };
 
-    // this.experienceService.addExperience(emptyExperience);
-    this.skillService.addSkill(emptyExperience);
+    this.showConfirmationDialog('Add Skill', [`Are you sure you want to add new skill?`], cb);
   }
 
-  onDeleteSkill(skill: IUserSkill) {
+  private showConfirmationDialog(title: string, messages: string[], cb: Function) {
     const dialogProp = {
-      title: 'Delete Experinece',
-      messages: [`Are you sure you want to delete ${skill.name}?`],
+      title,
+      messages,
       okayLabel: 'Okay',
       noLabel: 'Cancel',
     };
@@ -71,8 +74,16 @@ export class AdminSkillComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((isTrue: boolean) => {
       if (isTrue) {
-        this.skillService.deleteSkill(skill.id);
+        cb();
       }
     });
+  }
+
+  onDeleteSkill(skill: IUserSkill) {
+    this.showConfirmationDialog(
+      'Delete Skill',
+      [`Are you sure you want to delete ${skill.name}?`],
+      () => this.skillService.deleteSkill(skill.id),
+    );
   }
 }
