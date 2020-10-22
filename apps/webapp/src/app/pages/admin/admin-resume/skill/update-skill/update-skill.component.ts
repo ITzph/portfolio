@@ -56,15 +56,13 @@ export class UpdateSkillComponent implements OnInit {
       this.update.emit();
     };
 
-    this.skillService.updateSkills(
-      this.skill.id,
-      {
-        name,
-        category,
-        isCurrent: current,
-        id: this.skill.id,
-      },
-      callback,
-    );
+    const updatedSkill: Partial<IUserSkill> = {
+      name,
+      category,
+      isCurrent: current,
+      id: this.skill.id,
+    };
+
+    this.skillService.updateElement(this.skill.id, updatedSkill, callback);
   }
 }

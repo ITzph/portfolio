@@ -23,7 +23,9 @@ export abstract class ResumeAdminServiceAbstract implements IResumeAdminService 
 
   abstract getElements: Observable<Identifiable[]>;
 
-  abstract updateElements(elements: Identifiable[]): Action;
+  abstract updateElementsDispatcher(elements: Identifiable[]): Action;
+
+  abstract updateElementOfList(element: Identifiable, elements: Identifiable[]): Identifiable[];
 
   addElement(element: Identifiable) {
     this.profileStore.pipe(select(getCurrentUser), take(1)).subscribe((user) => {
@@ -32,7 +34,7 @@ export abstract class ResumeAdminServiceAbstract implements IResumeAdminService 
         .pipe(withLatestFrom(this.getElements), take(1))
         .subscribe(
           ([addedExp, experiences]) => {
-            this.profileStore.dispatch(this.updateElements([...experiences, addedExp]));
+            this.profileStore.dispatch(this.updateElementsDispatcher([...experiences, addedExp]));
 
             this.snackbar.open(`Created ${addedExp.name} successfully`, 'success', {
               duration: 2000,
@@ -54,7 +56,7 @@ export abstract class ResumeAdminServiceAbstract implements IResumeAdminService 
       .subscribe(
         ([res, skills]) => {
           this.profileStore.dispatch(
-            this.updateElements(skills.filter((obj) => obj.id !== res.id)),
+            this.updateElementsDispatcher(skills.filter((obj) => obj.id !== res.id)),
           );
           this.snackbar.open(`Deleted skill successfully`, 'success', {
             duration: 2000,
@@ -62,6 +64,28 @@ export abstract class ResumeAdminServiceAbstract implements IResumeAdminService 
         },
         () => {
           this.snackbar.open(`Delete skill fail`, 'error', {
+            duration: 2000,
+          });
+        },
+      );
+  }
+
+  updateElement(id: number, elementToUpdate: Partial<Identifiable>, cb?: Function) {
+    this.http
+      .patch<Identifiable>(`${environment.api}/${this.elementType}/${id}`, elementToUpdate)
+      .pipe(withLatestFrom(this.getElements), take(1))
+      .subscribe(
+        ([updatedElement, elements]) => {
+          this.profileStore.dispatch(
+            this.updateElementsDispatcher(this.updateElementOfList(updatedElement, elements)),
+          );
+
+          if (cb) {
+            cb();
+          }
+        },
+        () => {
+          this.snackbar.open(`Update fail`, 'error', {
             duration: 2000,
           });
         },

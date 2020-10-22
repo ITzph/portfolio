@@ -76,6 +76,6 @@ export class UpdateExperienceComponent implements OnInit {
       this.update.emit();
     };
 
-    this.experienceService.updateExperience(experience.id, updatedExperience, callback);
+    this.experienceService.updateElement(experience.id, updatedExperience, callback);
   }
 }
