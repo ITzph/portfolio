@@ -1,8 +1,8 @@
-<ng-container *ngFor="let experience of experiences$ | async; trackBy: experienceTracker">
+<ng-container *ngFor="let experience of experiences$ | async; trackBy: elementTracker">
   <mat-card
     (click)="onSelectExperience(experience)"
     style="cursor: pointer; margin-bottom: 1rem;"
-    *ngIf="!experienceToModify"
+    *ngIf="!elementToModify"
   >
     <p>{{ experience.name }}</p>
     <p>{{ experience.role }}</p>
@@ -20,9 +20,9 @@
 
 <button mat-raised-button color="primary" (click)="onAddNewExperience()">Add new experience</button>
 
-<ng-container *ngIf="!!experienceToModify">
+<ng-container *ngIf="!!elementToModify">
   <portfolio-update-experience
-    [experience]="experienceToModify"
+    [experience]="elementToModify"
     (closed)="experienceToModify = null"
     (update)="onUpdate()"
   ></portfolio-update-experience>

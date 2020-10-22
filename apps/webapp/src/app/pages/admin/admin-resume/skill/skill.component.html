@@ -1,9 +1,9 @@
 <button mat-raised-button color="primary" (click)="onAddNewSkill()">Add new skill</button>
 
-<ng-container *ngFor="let skill of skills$ | async; trackBy: skillTracker">
+<ng-container *ngFor="let skill of skills$ | async; trackBy: elementTracker">
   <mat-card
     style="cursor: pointer; margin-bottom: 1rem;"
-    *ngIf="!skillToModify"
+    *ngIf="!elementToModify"
     (click)="onSelectSkill(skill)"
   >
     <mat-card-content>
@@ -23,9 +23,9 @@
   </mat-card>
 </ng-container>
 
-<ng-container *ngIf="!!skillToModify">
+<ng-container *ngIf="!!elementToModify">
   <portfolio-update-skill
-    [skill]="skillToModify"
+    [skill]="elementToModify"
     (closed)="skillToModify = null"
     (update)="onUpdate()"
   ></portfolio-update-skill>

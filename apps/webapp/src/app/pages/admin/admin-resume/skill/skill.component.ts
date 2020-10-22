@@ -16,38 +16,26 @@ import { ResumeAdminComponentAbstract } from '../resume-admin-abstract.component
   styleUrls: ['./skill.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminSkillComponent extends ResumeAdminComponentAbstract<IUserSkill>
-  implements OnInit {
+export class AdminSkillComponent extends ResumeAdminComponentAbstract implements OnInit {
   skills$: Observable<IUserSkill[]> = this.profileStore.pipe(select(getSkills));
 
-  skillToModify: IUserSkill;
+  elementToModify: IUserSkill;
 
   elementType = 'skill';
 
   constructor(
     private readonly profileStore: Store<fromProfile.State>,
-    private readonly snackbar: MatSnackBar,
-    private readonly skillService: SkillService,
+    readonly snackbar: MatSnackBar,
+    readonly skillService: SkillService,
     readonly dialog: MatDialog,
   ) {
-    super(dialog, skillService);
+    super(dialog, skillService, snackbar);
   }
 
   ngOnInit(): void {}
 
   onSelectSkill(skill: IUserSkill) {
-    this.skillToModify = skill;
-  }
-
-  skillTracker(index: number, skill: IUserSkill) {
-    return trackByIdOrIndex(index, skill);
-  }
-
-  onUpdate() {
-    this.skillToModify = null;
-    this.snackbar.open(`Updated skill successfully`, 'success', {
-      duration: 2000,
-    });
+    this.elementToModify = skill;
   }
 
   onAddNewSkill() {
@@ -64,12 +52,4 @@ export class AdminSkillComponent extends ResumeAdminComponentAbstract<IUserSkill
 
     this.showConfirmationDialog('Add Skill', [`Are you sure you want to add new skill?`], cb);
   }
-
-  // onDeleteSkill(skill: IUserSkill) {
-  //   this.showConfirmationDialog(
-  //     'Delete Skill',
-  //     [`Are you sure you want to delete ${skill.name}?`],
-  //     () => this.skillService.deleteSkill(skill.id),
-  //   );
-  // }
 }
