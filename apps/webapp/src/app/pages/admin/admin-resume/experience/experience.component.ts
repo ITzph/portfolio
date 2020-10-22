@@ -59,7 +59,7 @@ export class AdminExperienceComponent {
     this.showConfirmationDialog(
       'Delete Experinece',
       [`Are you sure you want to delete ${experience.name}?`],
-      () => this.experienceService.deleteExperience(experience.id),
+      () => this.experienceService.deleteElement(experience.id),
     );
   }
 

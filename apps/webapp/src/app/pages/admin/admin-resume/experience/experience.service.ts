@@ -2,23 +2,38 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { select, Store } from '@ngrx/store';
-import { IUserExperience } from '@portfolio/api-interfaces';
+import { Action, select, Store } from '@ngrx/store';
+import { IUserExperience, PORTFOLIO_ENDPOINTS } from '@portfolio/api-interfaces';
 import { getCurrentUser, getExperiences } from '../../../../selectors/profile.selectors';
 import * as fromProfile from '../../../../reducers/profile.reducer';
 import { environment } from '../../../../../environments/environment';
 import { take, withLatestFrom } from 'rxjs/operators';
 import { updateExperience } from '../../../../actions/profile.actions';
+import { Identifiable, ResumeAdminServiceAbstract } from '../resume-admin-abstract.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ExperienceService {
+export class ExperienceService extends ResumeAdminServiceAbstract {
+  elementType = PORTFOLIO_ENDPOINTS.experiences;
+
+  getElements = this.profileStore.pipe(select(getExperiences));
+
+  updateElements(elements: IUserExperience[]): Action {
+    // throw new Error('Method not implemented.');
+    return updateExperience({
+      experiences: elements,
+    });
+  }
+
   constructor(
-    private readonly profileStore: Store<fromProfile.State>,
-    private readonly snackbar: MatSnackBar,
-    private readonly http: HttpClient,
-  ) {}
+    readonly profileStore: Store<fromProfile.State>,
+    readonly snackbar: MatSnackBar,
+    readonly http: HttpClient,
+  ) {
+    super(profileStore, snackbar, http);
+  }
 
   updateExperience(id: number, experience: Partial<IUserExperience>, cb: Function) {
     this.http
@@ -54,33 +69,36 @@ export class ExperienceService {
       );
   }
 
-  deleteExperience(id: number) {
-    this.http
-      .delete<{ id: number }>(`${environment.api}/experience/${id}`)
-      .pipe(withLatestFrom(this.profileStore.pipe(select(getExperiences), take(1))))
-      .subscribe(
-        ([res, experiences]) => {
-          this.profileStore.dispatch(
-            updateExperience({
-              experiences: experiences.filter((exp) => exp.id !== res.id),
-            }),
-          );
-          this.snackbar.open(`Deleted experience successfully`, 'success', {
-            duration: 2000,
-          });
-        },
-        () => {
-          this.snackbar.open(`Deleted experience fail`, 'error', {
-            duration: 2000,
-          });
-        },
-      );
-  }
+  // deleteExperience(id: number) {
+  //   this.http
+  //     .delete<{ id: number }>(`${environment.api}/experience/${id}`)
+  //     .pipe(withLatestFrom(this.profileStore.pipe(select(getExperiences), take(1))))
+  //     .subscribe(
+  //       ([res, experiences]) => {
+  //         this.profileStore.dispatch(
+  //           updateExperience({
+  //             experiences: experiences.filter((exp) => exp.id !== res.id),
+  //           }),
+  //         );
+  //         this.snackbar.open(`Deleted experience successfully`, 'success', {
+  //           duration: 2000,
+  //         });
+  //       },
+  //       () => {
+  //         this.snackbar.open(`Deleted experience fail`, 'error', {
+  //           duration: 2000,
+  //         });
+  //       },
+  //     );
+  // }
 
   addExperience(experience: IUserExperience) {
     this.profileStore.pipe(select(getCurrentUser), take(1)).subscribe((user) => {
       this.http
-        .post<IUserExperience>(`${environment.api}/experience/${user.id}`, experience)
+        .post<IUserExperience>(
+          `${environment.api}/${PORTFOLIO_ENDPOINTS.experiences}/${user.id}`,
+          experience,
+        )
         .pipe(withLatestFrom(this.profileStore.pipe(select(getExperiences), take(1))))
         .subscribe(
           ([addedExp, experiences]) => {

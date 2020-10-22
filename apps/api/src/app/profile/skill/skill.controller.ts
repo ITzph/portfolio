@@ -10,12 +10,12 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { IUserSkill } from '@portfolio/api-interfaces';
+import { IUserSkill, PORTFOLIO_ENDPOINTS } from '@portfolio/api-interfaces';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 import { SkillService } from './skill.service';
 import { Request, Response } from 'express';
 
-@Controller('skill')
+@Controller(PORTFOLIO_ENDPOINTS.skills)
 export class SkillController {
   constructor(private readonly skillService: SkillService) {}
 

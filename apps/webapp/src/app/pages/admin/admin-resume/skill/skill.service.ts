@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { select, Store } from '@ngrx/store';
 import { take, withLatestFrom } from 'rxjs/operators';
-import { IUserSkill } from '@portfolio/api-interfaces';
+import { IUserSkill, PORTFOLIO_ENDPOINTS } from '@portfolio/api-interfaces';
 import { updateSkills } from '../../../../actions/profile.actions';
 import { getCurrentUser, getSkills } from '../../../../selectors/profile.selectors';
 import { environment } from '../../../../../environments/environment';
@@ -14,7 +14,7 @@ import { ResumeAdminServiceAbstract } from '../resume-admin-abstract.service';
   providedIn: 'root',
 })
 export class SkillService extends ResumeAdminServiceAbstract {
-  elementType = 'skills';
+  elementType = PORTFOLIO_ENDPOINTS.skills;
 
   getElements = this.profileStore.pipe(select(getSkills));
 
@@ -29,7 +29,7 @@ export class SkillService extends ResumeAdminServiceAbstract {
   addSkill(skill: IUserSkill) {
     this.profileStore.pipe(select(getCurrentUser), take(1)).subscribe((user) => {
       this.http
-        .post<IUserSkill>(`${environment.api}/skill/${user.id}`, skill)
+        .post<IUserSkill>(`${environment.api}/${PORTFOLIO_ENDPOINTS.skills}/${user.id}`, skill)
         .pipe(withLatestFrom(this.profileStore.pipe(select(getSkills))), take(1))
         .subscribe(
           ([addedSkill, skills]) => {

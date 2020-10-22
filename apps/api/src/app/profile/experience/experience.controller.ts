@@ -12,10 +12,10 @@ import {
 } from '@nestjs/common';
 import { ExperienceService } from './experience.service';
 import { Request, Response } from 'express';
-import { IUserExperience } from '@portfolio/api-interfaces';
+import { IUserExperience, PORTFOLIO_ENDPOINTS } from '@portfolio/api-interfaces';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 
-@Controller('experience')
+@Controller(PORTFOLIO_ENDPOINTS.experiences)
 export class ExperienceController {
   constructor(private readonly experienceService: ExperienceService) {}
 
