@@ -59,7 +59,7 @@ export class AdminSkillComponent extends ResumeAdminComponentAbstract<IUserSkill
         name: '',
       };
 
-      this.skillService.addSkill(emptyExperience);
+      this.skillService.addElement(emptyExperience);
     };
 
     this.showConfirmationDialog('Add Skill', [`Are you sure you want to add new skill?`], cb);

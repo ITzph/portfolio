@@ -45,7 +45,7 @@ export class AdminExperienceComponent {
         isActive: false,
       };
 
-      this.experienceService.addExperience(emptyExperience);
+      this.experienceService.addElement(emptyExperience);
     };
 
     this.showConfirmationDialog(
