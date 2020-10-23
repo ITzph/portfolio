@@ -33,10 +33,12 @@ export abstract class ResumeAdminServiceAbstract implements IResumeAdminService 
         .post<Identifiable>(`${environment.api}/${this.elementType}/${user.id}`, element)
         .pipe(withLatestFrom(this.getElements), take(1))
         .subscribe(
-          ([addedExp, experiences]) => {
-            this.profileStore.dispatch(this.updateElementsDispatcher([...experiences, addedExp]));
+          ([addedElement, experiences]) => {
+            this.profileStore.dispatch(
+              this.updateElementsDispatcher([addedElement, ...experiences]),
+            );
 
-            this.snackbar.open(`Created ${addedExp.name} successfully`, 'success', {
+            this.snackbar.open(`Created ${addedElement.name} successfully`, 'success', {
               duration: 2000,
             });
           },
