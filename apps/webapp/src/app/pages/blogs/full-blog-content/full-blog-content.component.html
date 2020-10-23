@@ -1,10 +1,10 @@
 <ng-container *ngIf="blog$ | async; let blog">
-  <section class="full-blog">
+  <article class="full-blog">
     <h1>{{ blog.title }}</h1>
     <h3>By: {{ blog.author }}</h3>
     <h4>{{ parseToDateTime(blog.createdAt) }}</h4>
     <quill-view-html [content]="blog.content" theme="snow"></quill-view-html>
-  </section>
+  </article>
 </ng-container>
 
 <ng-container *ngIf="isBlogNotFound | async">

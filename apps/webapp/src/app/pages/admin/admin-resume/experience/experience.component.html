@@ -1,0 +1,29 @@
+<ng-container *ngFor="let experience of experiences$ | async; trackBy: elementTracker">
+  <mat-card
+    (click)="onSelectExperience(experience)"
+    style="cursor: pointer; margin-bottom: 1rem;"
+    *ngIf="!elementToModify"
+  >
+    <p>{{ experience.name }}</p>
+    <p>{{ experience.role }}</p>
+    <p>{{ experience.startDate }}</p>
+    <p>{{ experience.endDate }}</p>
+    <button
+      mat-icon-button
+      color="warn"
+      (click)="onDeleteExperience(experience); $event.stopPropagation()"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card>
+</ng-container>
+
+<button mat-raised-button color="primary" (click)="onAddNewExperience()">Add new experience</button>
+
+<ng-container *ngIf="!!elementToModify">
+  <portfolio-update-experience
+    [experience]="elementToModify"
+    (closed)="experienceToModify = null"
+    (update)="onUpdate()"
+  ></portfolio-update-experience>
+</ng-container>

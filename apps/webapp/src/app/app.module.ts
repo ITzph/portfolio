@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -14,7 +14,13 @@ import { HeaderModule } from './modules/header/header.module';
 import { FooterModule } from './modules/footer/footer.module';
 import { HttpHeaderInterceptor } from './interceptors/http-header.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import localeSG from '@angular/common/locales/sg';
+import { registerLocaleData } from '@angular/common';
+
 import * as fromProfile from './reducers/profile.reducer';
+
+registerLocaleData(localeSG);
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -47,6 +53,10 @@ import * as fromProfile from './reducers/profile.reducer';
       provide: HTTP_INTERCEPTORS,
       useClass: HttpHeaderInterceptor,
       multi: true,
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'sg',
     },
   ],
   bootstrap: [AppComponent],

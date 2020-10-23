@@ -1,0 +1,32 @@
+<button mat-raised-button color="primary" (click)="onAddNewSkill()">Add new skill</button>
+
+<ng-container *ngFor="let skill of skills$ | async; trackBy: elementTracker">
+  <mat-card
+    style="cursor: pointer; margin-bottom: 1rem;"
+    *ngIf="!elementToModify"
+    (click)="onSelectSkill(skill)"
+  >
+    <mat-card-content>
+      <p>Name: {{ skill.name }}</p>
+      <p>Category: {{ skill.category }}</p>
+      <p>Is Current: {{ skill.isCurrent }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-icon-button
+        color="warn"
+        (click)="onDeleteElement(skill); $event.stopPropagation()"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>
+
+<ng-container *ngIf="!!elementToModify">
+  <portfolio-update-skill
+    [skill]="elementToModify"
+    (closed)="skillToModify = null"
+    (update)="onUpdate()"
+  ></portfolio-update-skill>
+</ng-container>

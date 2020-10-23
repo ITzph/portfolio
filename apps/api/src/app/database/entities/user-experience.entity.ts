@@ -22,7 +22,7 @@ export class UserExperience implements IUserExperience {
   @Column('mediumtext', { name: 'events', default: '' })
   events: string;
 
-  @Column('boolean', { name: 'is_active' })
+  @Column('boolean', { name: 'is_active', default: false })
   isActive: boolean;
 
   @ManyToOne(() => User, (user) => user.experiences)

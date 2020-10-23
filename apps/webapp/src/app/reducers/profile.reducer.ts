@@ -24,4 +24,40 @@ export const reducer = createReducer(
       };
     },
   ),
+  on(
+    ProfileActions.updateSkills,
+    (state: State, prop): State => {
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          skills: prop.skills,
+        },
+      };
+    },
+  ),
+  on(
+    ProfileActions.updateExperience,
+    (state: State, prop): State => {
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          experiences: prop.experiences,
+        },
+      };
+    },
+  ),
+  on(
+    ProfileActions.updateProfile,
+    (state: State, prop): State => {
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          ...prop.profile,
+        },
+      };
+    },
+  ),
 );

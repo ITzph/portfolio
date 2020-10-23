@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Blog } from '@portfolio/api-interfaces';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'portfolio-blog-tile',
@@ -15,12 +16,7 @@ export class BlogTileComponent implements OnInit {
   ngOnInit(): void {}
 
   parseToDateTime(dateString: string) {
-    const [date, time] = dateString.split('T');
-
-    const formattedDate = new Date(date).toDateString();
-    const formattedTime = time.substring(0, 5);
-
-    return `${formattedDate} ${formattedTime}`;
+    return formatDate(dateString, 'yyyy MMM dd hh:mm', 'en');
   }
 
   navigateToBlogContent(blog: Blog) {

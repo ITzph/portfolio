@@ -1,16 +1,24 @@
-<ng-container *ngFor="let experience of experiences$ | async">
-  <section
-    (click)="onSelectExperience(experience)"
-    style="cursor: pointer;"
-    *ngIf="!eventsToModify"
+<nav>
+  <a
+    [routerLink]="['experiences']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-skew-forward"
+    >Experiences</a
   >
-    <p>{{ experience.name }}</p>
-    <p>{{ experience.endDate }}</p>
-  </section>
-</ng-container>
-
-<ng-container *ngIf="!!eventsToModify">
-  <quill-editor [(ngModel)]="eventsToModify"> </quill-editor>
-  <button mat-raised-button (click)="eventsToModify = null">Cancel</button>
-  <button mat-raised-button (click)="onExperienceUpdate()">Update</button>
-</ng-container>
+  <a
+    [routerLink]="['skills']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-skew-forward"
+    >Skills</a
+  >
+  <a
+    [routerLink]="['certifications']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-skew-forward"
+    >Certification</a
+  >
+</nav>
+<router-outlet></router-outlet>

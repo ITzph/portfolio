@@ -1,6 +1,6 @@
 @import '../../../styles/variables';
 
-.skills-wrapper {
+.skills__wrapper {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -8,6 +8,27 @@
 
   :not(:first-child) {
     margin-left: $margin-very-very-small;
+  }
+}
+
+.experiences {
+  &__wrapper {
+    :not(:first-child) {
+      background-color: blue;
+      margin-top: $margin-small;
+    }
+    width: 100%;
+    @media #{$xs-device} {
+      width: 95%;
+    }
+
+    @media #{$sm-device} {
+      width: 70%;
+    }
+
+    @media #{$md-device} {
+      width: 50%;
+    }
   }
 }
 
@@ -65,4 +86,16 @@
 .skills-category {
   display: flex;
   flex-direction: column;
+}
+
+.content__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+::ng-deep {
+  .ql-editor ol {
+    padding: 0;
+  }
 }

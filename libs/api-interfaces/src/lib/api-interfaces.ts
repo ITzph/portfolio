@@ -15,23 +15,29 @@ export interface IUser {
   socialHandlers: ISocialHandler[];
 }
 
-export interface IUserSkill {
+export interface Identifiable {
+  id: string | number;
+  name: string;
+}
+
+export interface IUserSkill extends Identifiable {
   id: number;
   name: string;
   category: string;
   isCurrent: boolean;
 }
 
-export interface IUserExperience {
+export interface IUserExperience extends Identifiable {
   id: number;
   name: string;
   role: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: Date | string;
+  endDate: Date | string;
   events: string;
+  isActive: boolean;
 }
 
-export interface IUserCertification {
+export interface IUserCertification extends Identifiable {
   id: number;
   name: string;
   description: string;

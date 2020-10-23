@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Blog } from '@portfolio/api-interfaces';
@@ -36,11 +37,6 @@ export class FullBlogContentComponent implements OnInit {
   ngOnInit(): void {}
 
   parseToDateTime(dateString: string) {
-    const [date, time] = dateString.split('T');
-
-    const formattedDate = new Date(date).toDateString();
-    const formattedTime = time.substring(0, 5);
-
-    return `${formattedDate} ${formattedTime}`;
+    return formatDate(dateString, 'yyyy MMM dd hh:mm', 'en');
   }
 }
