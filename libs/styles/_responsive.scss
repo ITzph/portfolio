@@ -1,5 +1,24 @@
 @import 'variables';
 
+span {
+  font-size: 0.9em;
+  @media #{$xs-device} {
+    font-size: 0.9em;
+  }
+  @media #{$sm-device} {
+    font-size: 1.1em;
+  }
+  @media #{$md-device} {
+    font-size: 1.15em;
+  }
+  @media #{$lg-device} {
+    font-size: 1.3em;
+  }
+  @media #{$xl-device} {
+    font-size: 1.5em;
+  }
+}
+
 p,
 a,
 li {
