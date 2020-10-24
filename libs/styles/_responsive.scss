@@ -9,13 +9,13 @@ span {
     font-size: 1.1em;
   }
   @media #{$md-device} {
-    font-size: 1.15em;
+    font-size: 1.1em;
   }
   @media #{$lg-device} {
-    font-size: 1.3em;
+    font-size: 1.15em;
   }
   @media #{$xl-device} {
-    font-size: 1.5em;
+    font-size: 1.125em;
   }
 }
 
