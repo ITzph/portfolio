@@ -34,7 +34,7 @@ export class AdminCertificationComponent extends ResumeAdminComponentAbstract im
     const cb = () => {
       const emptyCertification: IUserCertification = {
         id: null,
-        dateAcquired: null,
+        dateAcquired: new Date(),
         description: 'To Update',
         name: 'To Update',
         provider: 'To Update',

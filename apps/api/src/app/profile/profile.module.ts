@@ -11,10 +11,12 @@ import { ExperienceController } from './experience/experience.controller';
 import { ExperienceService } from './experience/experience.service';
 import { SkillService } from './skill/skill.service';
 import { SkillController } from './skill/skill.controller';
+import { CertificationController } from './certification/certification.controller';
+import { CertificationService } from './certification/certification.service';
 
 @Module({
-  controllers: [ProfileController, ExperienceController, SkillController],
-  providers: [ProfileService, ExperienceService, SkillService],
+  controllers: [ProfileController, ExperienceController, SkillController, CertificationController],
+  providers: [ProfileService, ExperienceService, SkillService, CertificationService],
   imports: [
     LoggerModule,
     TypeOrmModule.forFeature([User, UserSkill, UserExperience, UserCertification]),

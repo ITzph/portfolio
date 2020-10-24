@@ -1,9 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { select, Store } from '@ngrx/store';
 import { IUserExperience } from '@portfolio/api-interfaces';
-import { getExperiences } from '../../../../selectors/profile.selectors';
 import { Observable } from 'rxjs';
-import * as fromProfile from '../../../../reducers/profile.reducer';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ExperienceService } from './experience.service';
