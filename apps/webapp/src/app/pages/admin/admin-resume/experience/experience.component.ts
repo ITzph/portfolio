@@ -20,7 +20,6 @@ export class AdminExperienceComponent extends ResumeAdminComponentAbstract {
   elementType = 'experience';
 
   constructor(
-    private readonly profileStore: Store<fromProfile.State>,
     readonly snackbar: MatSnackBar,
     readonly dialog: MatDialog,
     readonly experienceService: ExperienceService,
@@ -28,7 +27,7 @@ export class AdminExperienceComponent extends ResumeAdminComponentAbstract {
     super(dialog, experienceService, snackbar);
   }
 
-  experiences$: Observable<IUserExperience[]> = this.profileStore.pipe(select(getExperiences));
+  experiences$: Observable<IUserExperience[]> = this.experienceService.getElements;
 
   onAddNewExperience() {
     const cb = () => {

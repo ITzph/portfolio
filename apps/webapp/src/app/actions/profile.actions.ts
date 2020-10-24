@@ -1,11 +1,12 @@
 import { createAction, props } from '@ngrx/store';
-import { IUser, IUserExperience, IUserSkill } from '@portfolio/api-interfaces';
+import { IUser, IUserCertification, IUserExperience, IUserSkill } from '@portfolio/api-interfaces';
 
 export enum ProfileAction {
   SetProfile = '[Profile] Set',
   UpdateProfile = '[Profile] Update',
   UpdateExperience = '[Profile] Update Experience',
   UpdateSkills = '[Profile] Update Skills',
+  UpdateCertifications = '[Profile] Update Certifications',
 }
 
 export const setProfile = createAction(ProfileAction.SetProfile, props<{ profile: IUser }>());
@@ -15,6 +16,7 @@ export const updateProfile = createAction(
   props<{ profile: Partial<IUser> }>(),
 );
 
+// TODO make this plural
 export const updateExperience = createAction(
   ProfileAction.UpdateExperience,
   props<{ experiences: IUserExperience[] }>(),
@@ -23,4 +25,9 @@ export const updateExperience = createAction(
 export const updateSkills = createAction(
   ProfileAction.UpdateSkills,
   props<{ skills: IUserSkill[] }>(),
+);
+
+export const updateCertifications = createAction(
+  ProfileAction.UpdateSkills,
+  props<{ certifications: IUserCertification[] }>(),
 );

@@ -3,11 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ExperienceService } from '../experience/experience.service';
 import { ResumeAdminComponentAbstract } from '../resume-admin-abstract.component';
 import * as fromProfile from '../../../../reducers/profile.reducer';
 import { Identifiable, IUserCertification } from '@portfolio/api-interfaces';
 import { getCertifications } from '../../../../selectors/profile.selectors';
+import { CertificationService } from './certification.service';
 
 @Component({
   selector: 'portfolio-admin-certification',
@@ -23,16 +23,14 @@ export class AdminCertificationComponent extends ResumeAdminComponentAbstract im
     private readonly profileStore: Store<fromProfile.State>,
     readonly snackbar: MatSnackBar,
     readonly dialog: MatDialog,
-    readonly experienceService: ExperienceService,
+    readonly certificationService: CertificationService,
   ) {
-    super(dialog, experienceService, snackbar);
+    super(dialog, certificationService, snackbar);
   }
 
-  certifications$: Observable<IUserCertification[]> = this.profileStore.pipe(
-    select(getCertifications),
-  );
+  certifications$: Observable<IUserCertification[]> = this.certificationService.getElements;
 
-  onAddNewExperience() {
+  onAddNewCertification() {
     const cb = () => {
       const emptyCertification: IUserCertification = {
         id: null,
@@ -43,12 +41,12 @@ export class AdminCertificationComponent extends ResumeAdminComponentAbstract im
         url: '',
       };
 
-      this.experienceService.addElement(emptyCertification);
+      this.certificationService.addElement(emptyCertification);
     };
 
     this.showConfirmationDialog(
-      'Add Experience',
-      [`Are you sure you want to add new experience?`],
+      'Add Certification',
+      [`Are you sure you want to add new certification?`],
       cb,
     );
   }

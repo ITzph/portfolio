@@ -49,6 +49,18 @@ export const reducer = createReducer(
     },
   ),
   on(
+    ProfileActions.updateCertifications,
+    (state: State, prop): State => {
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          certifications: prop.certifications,
+        },
+      };
+    },
+  ),
+  on(
     ProfileActions.updateProfile,
     (state: State, prop): State => {
       return {

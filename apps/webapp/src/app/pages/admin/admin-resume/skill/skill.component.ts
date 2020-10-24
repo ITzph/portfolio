@@ -17,14 +17,13 @@ import { ResumeAdminComponentAbstract } from '../resume-admin-abstract.component
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminSkillComponent extends ResumeAdminComponentAbstract implements OnInit {
-  skills$: Observable<IUserSkill[]> = this.profileStore.pipe(select(getSkills));
+  skills$: Observable<IUserSkill[]> = this.skillService.getElements;
 
   elementToModify: IUserSkill;
 
   elementType = 'skill';
 
   constructor(
-    private readonly profileStore: Store<fromProfile.State>,
     readonly snackbar: MatSnackBar,
     readonly skillService: SkillService,
     readonly dialog: MatDialog,
