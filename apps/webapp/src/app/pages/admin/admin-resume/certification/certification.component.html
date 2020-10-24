@@ -1,1 +1,9 @@
-<p>certification works!</p>
+<ng-container *ngFor="let certification of certifications$ | async; trackBy: elementTracker">
+  <p>
+    {{ certification | json }}
+  </p>
+</ng-container>
+
+<button mat-raised-button color="primary" (click)="onAddNewCertification()">
+  Add new certification
+</button>

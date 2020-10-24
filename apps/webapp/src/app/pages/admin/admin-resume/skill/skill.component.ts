@@ -34,10 +34,6 @@ export class AdminSkillComponent extends ResumeAdminComponentAbstract implements
 
   ngOnInit(): void {}
 
-  onSelectSkill(skill: IUserSkill) {
-    this.elementToModify = skill;
-  }
-
   onAddNewSkill() {
     const cb = () => {
       const emptyExperience: IUserSkill = {
