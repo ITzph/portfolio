@@ -9,6 +9,7 @@ import {
 import { FormBuilder, Validators } from '@angular/forms';
 import { IUserSkill } from '@portfolio/api-interfaces';
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { SkillService } from '../skill.service';
 
 @Component({
@@ -44,8 +45,19 @@ export class UpdateSkillComponent implements OnInit {
   }
 
   get filteredOptions$(): Observable<string[]> {
-    // return ['asdf', '123', 'zxcvvxczxv'];
-    return of(['123', '456']);
+    return this.skillService.getElements.pipe(
+      map((skills) => {
+        return skills
+          .reduce((acc, curr): string[] => {
+            return !!curr.category && !acc.includes(curr.category) ? [...acc, curr.category] : acc;
+          }, [])
+          .filter((skill: string) => {
+            const value = this.skillFormGroup.get('category').value as string;
+
+            return !!value ? skill.toLowerCase().includes(value.toLowerCase()) : true;
+          });
+      }),
+    );
   }
 
   onSkillUpdate() {

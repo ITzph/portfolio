@@ -2,11 +2,33 @@
 
 :host {
   display: block;
+  margin: $margin-big 0;
 }
 
 .blogs-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   padding: $padding-very-small $padding-small;
+
   > :not(:last-child) {
     margin-bottom: $margin-medium;
+  }
+
+  > portfolio-blog-tile {
+    width: 99%;
+    min-width: 25rem;
+    @media #{$xs-device} {
+      width: 50rem;
+    }
+
+    @media #{$md-device} {
+      width: 60rem;
+    }
+
+    @media #{$lg-device} {
+      width: 70rem;
+    }
   }
 }

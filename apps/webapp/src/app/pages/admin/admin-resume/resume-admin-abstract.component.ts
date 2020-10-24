@@ -19,7 +19,7 @@ export abstract class ResumeAdminComponentAbstract {
     return trackByIdOrIndex(index, skill);
   }
 
-  onSelectExperience(element: Identifiable) {
+  onSelectElement(element: Identifiable) {
     this.elementToModify = element;
   }
 

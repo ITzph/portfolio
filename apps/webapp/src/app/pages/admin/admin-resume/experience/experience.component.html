@@ -1,6 +1,6 @@
 <ng-container *ngFor="let experience of experiences$ | async; trackBy: elementTracker">
   <mat-card
-    (click)="onSelectExperience(experience)"
+    (click)="onSelectElement(experience)"
     style="cursor: pointer; margin-bottom: 1rem;"
     *ngIf="!elementToModify"
   >

@@ -1,10 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { select, Store } from '@ngrx/store';
-import { Identifiable, IUserExperience } from '@portfolio/api-interfaces';
-import { getExperiences, getCurrentUser } from '../../../../selectors/profile.selectors';
+import { IUserExperience } from '@portfolio/api-interfaces';
 import { Observable } from 'rxjs';
-import * as fromProfile from '../../../../reducers/profile.reducer';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ExperienceService } from './experience.service';
@@ -21,7 +17,6 @@ export class AdminExperienceComponent extends ResumeAdminComponentAbstract {
   elementType = 'experience';
 
   constructor(
-    private readonly profileStore: Store<fromProfile.State>,
     readonly snackbar: MatSnackBar,
     readonly dialog: MatDialog,
     readonly experienceService: ExperienceService,
@@ -29,7 +24,7 @@ export class AdminExperienceComponent extends ResumeAdminComponentAbstract {
     super(dialog, experienceService, snackbar);
   }
 
-  experiences$: Observable<IUserExperience[]> = this.profileStore.pipe(select(getExperiences));
+  experiences$: Observable<IUserExperience[]> = this.experienceService.getElements;
 
   onAddNewExperience() {
     const cb = () => {
