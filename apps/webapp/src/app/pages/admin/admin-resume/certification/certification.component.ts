@@ -51,5 +51,13 @@ export class AdminCertificationComponent extends ResumeAdminComponentAbstract im
     );
   }
 
+  onDeleteCertification(certification: IUserCertification) {
+    this.showConfirmationDialog(
+      'Delete Certification',
+      [`Are you sure you want to delete ${certification.name}?`],
+      () => this.certificationService.deleteElement(certification.id),
+    );
+  }
+
   ngOnInit(): void {}
 }
