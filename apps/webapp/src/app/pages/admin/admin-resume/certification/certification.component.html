@@ -2,7 +2,11 @@
   Add new certification
 </button>
 <ng-container *ngFor="let certification of certifications$ | async; trackBy: elementTracker">
-  <mat-card>
+  <mat-card
+    (click)="onSelectElement(certification)"
+    style="cursor: pointer; margin-bottom: 1rem;"
+    *ngIf="!elementToModify"
+  >
     <p>{{ certification.name }}</p>
     <p>{{ certification.description }}</p>
     <p>{{ certification.provider }}</p>
@@ -16,4 +20,13 @@
       <mat-icon>delete</mat-icon>
     </button>
   </mat-card>
+</ng-container>
+
+<ng-container *ngIf="!!elementToModify">
+  <portfolio-update-certification
+    [certification]="elementToModify"
+    (closed)="elementToModify = null"
+    (update)="onUpdate()"
+  >
+  </portfolio-update-certification>
 </ng-container>

@@ -42,7 +42,7 @@ export interface IUserCertification extends Identifiable {
   name: string;
   description: string;
   provider: string;
-  dateAcquired: Date;
+  dateAcquired: Date | string;
   url: string;
 }
 export interface ISocialHandler {

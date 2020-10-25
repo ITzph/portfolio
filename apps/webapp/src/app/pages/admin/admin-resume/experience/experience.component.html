@@ -23,7 +23,7 @@
 <ng-container *ngIf="!!elementToModify">
   <portfolio-update-experience
     [experience]="elementToModify"
-    (closed)="experienceToModify = null"
+    (closed)="elementToModify = null"
     (update)="onUpdate()"
   ></portfolio-update-experience>
 </ng-container>
