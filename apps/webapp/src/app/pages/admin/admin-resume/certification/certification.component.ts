@@ -1,13 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ResumeAdminComponentAbstract } from '../resume-admin-abstract.component';
 import * as fromProfile from '../../../../reducers/profile.reducer';
 import { Identifiable, IUserCertification } from '@portfolio/api-interfaces';
-import { getCertifications } from '../../../../selectors/profile.selectors';
 import { CertificationService } from './certification.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'portfolio-admin-certification',
@@ -34,7 +34,7 @@ export class AdminCertificationComponent extends ResumeAdminComponentAbstract im
     const cb = () => {
       const emptyCertification: IUserCertification = {
         id: null,
-        dateAcquired: new Date(),
+        dateAcquired: formatDate(new Date(), 'yyyy-MM-dd', 'sg'),
         description: 'To Update',
         name: 'To Update',
         provider: 'To Update',
