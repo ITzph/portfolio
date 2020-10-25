@@ -1,3 +1,3 @@
-describe('Meme Selectors', () => {
+describe('Photo Selectors', () => {
   it('should select the feature state', () => {});
 });

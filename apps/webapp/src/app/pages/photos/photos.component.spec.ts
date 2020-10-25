@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NotFoundModule } from '../not-found/not-found.module';
-import { MemesComponent } from './memes.component';
-import { MemesModule } from './memes.module';
+import { PhotosComponent } from './photos.component';
+import { PhotosModule } from './photos.module';
 import * as fromProfile from '../../reducers/profile.reducer';
 import { StoreModule } from '@ngrx/store';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('MemesComponent', () => {
-  let component: MemesComponent;
-  let fixture: ComponentFixture<MemesComponent>;
+describe('PhotosComponent', () => {
+  let component: PhotosComponent;
+  let fixture: ComponentFixture<PhotosComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        MemesModule,
+        PhotosModule,
         NotFoundModule,
         StoreModule.forRoot({}),
         StoreModule.forFeature(fromProfile.profileFeatureKey, fromProfile.reducer),
@@ -25,7 +25,7 @@ describe('MemesComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MemesComponent);
+    fixture = TestBed.createComponent(PhotosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

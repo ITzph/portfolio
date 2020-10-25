@@ -3,7 +3,7 @@ import { PhotoModule } from '../photo.module';
 
 import { PhotoDetailComponent } from './photo-detail.component';
 
-describe('MemeDetailComponent', () => {
+describe('PhotoDetailComponent', () => {
   let component: PhotoDetailComponent;
   let fixture: ComponentFixture<PhotoDetailComponent>;
 

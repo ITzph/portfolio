@@ -12,7 +12,7 @@ describe('webapp page', () => {
   });
 
   it('should navigate to profile page when link is clicked', () => {
-    cy.visit('/memes');
+    cy.visit('/photos');
     getLinkByName('profile').click();
     cy.location('pathname').should('eq', '/profile');
   });
@@ -23,9 +23,9 @@ describe('webapp page', () => {
     cy.get('h1.message').should('contain', 'Page not found!');
   });
 
-  it('should navigate to memes page when link is clicked', () => {
-    getLinkByName('memes').click();
-    cy.location('pathname').should('eq', '/memes');
+  it('should navigate to photos page when link is clicked', () => {
+    getLinkByName('photos').click();
+    cy.location('pathname').should('eq', '/photos');
   });
 
   it('should navigate to resume page when link is clicked', () => {

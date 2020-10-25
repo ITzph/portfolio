@@ -1,21 +1,21 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { IImageMetadata } from '@portfolio/api-interfaces';
 import { map } from 'rxjs/operators';
-import { MemesService } from './memes.service';
+import { PhotosService } from './photos.service';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'portfolio-memes',
-  templateUrl: './memes.component.html',
-  styleUrls: ['./memes.component.scss'],
+  selector: 'portfolio-photos',
+  templateUrl: './photos.component.html',
+  styleUrls: ['./photos.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MemesComponent implements OnInit {
+export class PhotosComponent implements OnInit {
   ngOnInit(): void {}
 
   constructor(
-    private readonly memesService: MemesService,
+    private readonly photosService: PhotosService,
     private readonly authService: AuthService,
   ) {}
 
@@ -23,14 +23,14 @@ export class MemesComponent implements OnInit {
     return this.authService.isLoggedIn$();
   }
 
-  public get memes$() {
-    return this.memesService.getMemes$().pipe(
-      map((memes) => {
-        return memes.map(
-          (meme): IImageMetadata => {
+  public get photos$() {
+    return this.photosService.getPhotos$().pipe(
+      map((photos) => {
+        return photos.map(
+          (photo): IImageMetadata => {
             return {
-              ...meme,
-              url: `${environment.api}/memes/image/${meme.imageName}`,
+              ...photo,
+              url: `${environment.api}/photos/image/${photo.imageName}`,
             };
           },
         );

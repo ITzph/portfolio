@@ -1,11 +1,11 @@
-<h2 mat-dialog-title>Update Meme</h2>
+<h2 mat-dialog-title>Update Photo</h2>
 <mat-dialog-content>
-  <form [formGroup]="memeForm" class="meme-form">
+  <form [formGroup]="photoForm" class="photo-form">
     <mat-form-field>
       <mat-label>Title</mat-label>
       <input matInput placeholder="Title" formControlName="title" />
-      <mat-error *ngIf="memeForm.get('title').hasError('required')">Title is required</mat-error>
-      <mat-error *ngIf="memeForm.get('title').hasError('minlength')"
+      <mat-error *ngIf="photoForm.get('title').hasError('required')">Title is required</mat-error>
+      <mat-error *ngIf="photoForm.get('title').hasError('minlength')"
         >Minimum length of 4 characters</mat-error
       >
     </mat-form-field>
@@ -42,7 +42,7 @@
     color="primary"
     mat-raised-button
     (click)="onUploadHandler()"
-    [disabled]="!memeForm.valid || !isValueChanged"
+    [disabled]="!photoForm.valid || !isValueChanged"
   >
     Update Image
   </button>

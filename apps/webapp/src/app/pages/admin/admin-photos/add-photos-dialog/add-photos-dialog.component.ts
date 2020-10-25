@@ -6,19 +6,19 @@ import { PhotoFormData } from '../../../../modules/photo/model/photo.model';
 import { ImageDialogAbstract } from '../image-dialog.abtract';
 
 @Component({
-  selector: 'portfolio-add-meme-dialog',
-  templateUrl: './add-meme-dialog.component.html',
-  styleUrls: ['./add-meme-dialog.component.scss'],
+  selector: 'portfolio-add-photo-dialog',
+  templateUrl: './add-photo-dialog.component.html',
+  styleUrls: ['./add-photo-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddMemeDialogComponent extends ImageDialogAbstract implements OnInit {
+export class AddPhotoDialogComponent extends ImageDialogAbstract implements OnInit {
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  memeForm = this.fb.group({
+  photoForm = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(4)]],
     description: [''],
     file: ['', [Validators.required]],
@@ -27,12 +27,12 @@ export class AddMemeDialogComponent extends ImageDialogAbstract implements OnIni
   });
 
   get getForm() {
-    return this.memeForm;
+    return this.photoForm;
   }
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly dialogRef: MatDialogRef<AddMemeDialogComponent, PhotoFormData>,
+    private readonly dialogRef: MatDialogRef<AddPhotoDialogComponent, PhotoFormData>,
   ) {
     super();
   }
@@ -43,15 +43,15 @@ export class AddMemeDialogComponent extends ImageDialogAbstract implements OnIni
     const fileSource = (event.target as HTMLInputElement).files[0];
 
     if (fileSource) {
-      this.memeForm.patchValue({
+      this.photoForm.patchValue({
         fileSource,
       });
     }
   }
 
   onUploadHandler() {
-    if (this.memeForm.valid) {
-      const { description, title, fileSource, tags } = this.memeForm.value;
+    if (this.photoForm.valid) {
+      const { description, title, fileSource, tags } = this.photoForm.value;
       this.dialogRef.close({
         description,
         title,

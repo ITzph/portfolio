@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Repository } from 'typeorm';
-import { MemesService } from './memes.service';
+import { PhotosService } from './photos.service';
 
-describe('MemesService', () => {
-  let service: MemesService;
+describe('PhotosService', () => {
+  let service: PhotosService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        MemesService,
+        PhotosService,
         {
           provide: 'ImageMetadataRepository',
           useClass: Repository,
@@ -16,7 +16,7 @@ describe('MemesService', () => {
       ],
     }).compile();
 
-    service = module.get<MemesService>(MemesService);
+    service = module.get<PhotosService>(PhotosService);
   });
 
   it('should be defined', () => {

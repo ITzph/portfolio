@@ -7,12 +7,12 @@ import { finalize, take, catchError, withLatestFrom } from 'rxjs/operators';
 import { Pagination } from '@portfolio/api-interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { select, Store } from '@ngrx/store';
-import * as fromMeme from '../../reducers/meme.reducer';
-import { getMemes } from '../../selectors/meme.selectors';
-import { addMeme, addMemes, deleteMeme, updateMeme } from '../../actions/meme.actions';
+import * as fromPhoto from '../../reducers/photo.reducer';
+import { getPhotos } from '../../selectors/photo.selectors';
+import { addPhoto, addPhotos, deletePhoto, updatePhoto } from '../../actions/photo.actions';
 
 @Injectable({ providedIn: 'root' })
-export class MemesService {
+export class PhotosService {
   private currentPage = 0;
   private readonly PAGE_SIZE_LIMIT = 20;
 
@@ -20,54 +20,54 @@ export class MemesService {
     private readonly http: HttpClient,
     private readonly spinner: NgxSpinnerService,
     private readonly snackBar: MatSnackBar,
-    private readonly memesStore: Store<fromMeme.State>,
+    private readonly photosStore: Store<fromPhoto.State>,
   ) {
-    this.spinner.show('memesSpinner');
+    this.spinner.show('photosSpinner');
 
-    this.fetchPaginatedMemes();
+    this.fetchPaginatedPhotos();
   }
 
-  public fetchPaginatedMemes() {
+  public fetchPaginatedPhotos() {
     this.http
       .get<Pagination<IImageMetadata>>(
-        `${environment.api}/memes?page=${this.currentPage}&limit=${this.PAGE_SIZE_LIMIT}&orderBy=createdAt.ASC`,
+        `${environment.api}/photos?page=${this.currentPage}&limit=${this.PAGE_SIZE_LIMIT}&orderBy=createdAt.ASC`,
       )
       .pipe(
-        withLatestFrom(this.memesStore.pipe(select(getMemes))),
+        withLatestFrom(this.photosStore.pipe(select(getPhotos))),
         take(1),
         finalize(() => {
-          this.spinner.hide('memesSpinner');
+          this.spinner.hide('photosSpinner');
         }),
       )
-      .subscribe(([res, memes]) => {
-        const currentMemes = memes;
-        const updatedMemes = [...currentMemes, ...res.items];
+      .subscribe(([res, photos]) => {
+        const currentPhotos = photos;
+        const updatedPhotos = [...currentPhotos, ...res.items];
 
-        if (res.meta.totalItems > currentMemes.length) {
-          this.memesStore.dispatch(addMemes({ memes: res.items }));
+        if (res.meta.totalItems > currentPhotos.length) {
+          this.photosStore.dispatch(addPhotos({ photos: res.items }));
         }
 
-        if (res.meta.totalItems < updatedMemes.length) {
+        if (res.meta.totalItems < updatedPhotos.length) {
           this.currentPage += 1;
         }
       });
   }
 
-  public getMemes$() {
-    return this.memesStore.pipe(select(getMemes));
+  public getPhotos$() {
+    return this.photosStore.pipe(select(getPhotos));
   }
 
-  public addMeme(meme: IImageMetadata) {
-    this.memesStore.dispatch(addMeme({ meme }));
+  public addPhoto(photo: IImageMetadata) {
+    this.photosStore.dispatch(addPhoto({ photo }));
   }
 
-  public updateMeme(id: number, meme: Partial<IImageMetadata>) {
-    this.spinner.show('memesSpinner');
+  public updatePhoto(id: number, photo: Partial<IImageMetadata>) {
+    this.spinner.show('photosSpinner');
     this.http
-      .patch<Partial<IImageMetadata>>(`${environment.api}/memes/${id}`, meme)
+      .patch<Partial<IImageMetadata>>(`${environment.api}/photos/${id}`, photo)
       .pipe(
         finalize(() => {
-          this.spinner.hide('memesSpinner');
+          this.spinner.hide('photosSpinner');
         }),
         catchError((err) => {
           throw { message: err };
@@ -75,36 +75,36 @@ export class MemesService {
       )
       .subscribe((res) => {
         // TODO handle result properly, check why result was id
-        this.memesStore.dispatch(
-          updateMeme({
-            meme: {
+        this.photosStore.dispatch(
+          updatePhoto({
+            photo: {
               id,
               changes: res,
             },
           }),
         );
 
-        this.snackBar.open(`Updated ${meme.title} successfully`, 'success', {
+        this.snackBar.open(`Updated ${photo.title} successfully`, 'success', {
           duration: 2000,
         });
       });
   }
 
-  public deleteMeme(meme: IImageMetadata) {
-    this.spinner.show('memesSpinner');
+  public deletePhoto(photo: IImageMetadata) {
+    this.spinner.show('photosSpinner');
     this.http
-      .delete<{ id: number }>(`${environment.api}/memes/${meme.id}`)
+      .delete<{ id: number }>(`${environment.api}/photos/${photo.id}`)
       .pipe(
         finalize(() => {
-          this.spinner.hide('memesSpinner');
+          this.spinner.hide('photosSpinner');
         }),
       )
       .subscribe((res) => {
-        this.memesStore.dispatch(deleteMeme({ id: res.id }));
+        this.photosStore.dispatch(deletePhoto({ id: res.id }));
       });
   }
 
   imageUpload(imageForm: FormData) {
-    return this.http.post<IImageMetadata>(`${environment.api}/memes`, imageForm);
+    return this.http.post<IImageMetadata>(`${environment.api}/photos`, imageForm);
   }
 }

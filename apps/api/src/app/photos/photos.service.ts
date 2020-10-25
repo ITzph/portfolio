@@ -5,16 +5,16 @@ import { Repository } from 'typeorm';
 import { IImageMetadata, Pagination, IPaginationOptions } from '@portfolio/api-interfaces';
 
 @Injectable()
-export class MemesService {
+export class PhotosService {
   constructor(
     @InjectRepository(ImageMetadata) private readonly imageRepository: Repository<ImageMetadata>,
   ) {}
 
-  public async fetchAllMemes(
+  public async fetchAllPhotos(
     options: IPaginationOptions,
     order: { key: keyof IImageMetadata; order: 'ASC' | 'DESC' },
   ): Promise<Pagination<IImageMetadata>> {
-    const [memes, totalItems] = await this.imageRepository.findAndCount({
+    const [photos, totalItems] = await this.imageRepository.findAndCount({
       take: options.limit,
       skip: options.page,
       order: !!order
@@ -26,13 +26,13 @@ export class MemesService {
 
     return {
       // Remove URL when sending response
-      items: memes.map((meme) => {
-        delete meme.url;
-        return meme;
+      items: photos.map((photo) => {
+        delete photo.url;
+        return photo;
       }),
       meta: {
         currentPage: options.page,
-        itemCount: memes.length,
+        itemCount: photos.length,
         totalItems,
         itemsPerPage: options.limit,
         totalPages: totalItems / options.limit,

@@ -5,7 +5,7 @@ import * as MulterS3 from 'multer-s3';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
-export class MemesS3Service implements MulterOptionsFactory {
+export class PhotosS3Service implements MulterOptionsFactory {
   private s3: any;
   private readonly FILE_LIMIT_SIZE = 123451232132;
 

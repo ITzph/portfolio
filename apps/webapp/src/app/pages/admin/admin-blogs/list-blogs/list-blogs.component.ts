@@ -31,7 +31,7 @@ export class ListBlogsComponent implements OnInit {
 
   onBlogDelete(blog: Blog) {
     const dialogProp = {
-      title: 'Delete Meme',
+      title: 'Delete Photo',
       messages: [`Are you sure you want to delete ${blog.title}?`],
       okayLabel: 'Okay',
       noLabel: 'Cancel',

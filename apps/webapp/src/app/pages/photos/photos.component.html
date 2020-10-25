@@ -1,14 +1,14 @@
 <portfolio-public-layout>
   <portfolio-header contentHeader></portfolio-header>
   <section contentBody>
-    <ng-container *ngIf="memes$ | async; let memes">
+    <ng-container *ngIf="photos$ | async; let photos">
       <portfolio-photos-list
-        [memes]="memes"
-        *ngIf="memes.length > 0; else emptyList"
+        [photos]="photos"
+        *ngIf="photos.length > 0; else emptyList"
       ></portfolio-photos-list>
     </ng-container>
     <ngx-spinner
-      name="memesSpinner"
+      name="photosSpinner"
       size="medium"
       color="#fff"
       type="ball-zig-zag-deflect"
@@ -20,5 +20,5 @@
 </portfolio-public-layout>
 
 <ng-template #emptyList>
-  <portfolio-empty-list text="Empty memes. Please add one master!"></portfolio-empty-list>
+  <portfolio-empty-list text="Empty photos. Please add one master!"></portfolio-empty-list>
 </ng-template>

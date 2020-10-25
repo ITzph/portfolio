@@ -1,11 +1,11 @@
-<button mat-raised-button (click)="onAddNewMeme()" title="Add new Meme">
-  Add new Meme
+<button mat-raised-button (click)="onAddNewPhoto()" title="Add new Photo">
+  Add new Photo
   <mat-icon>add</mat-icon>
 </button>
-<div class="memes-list" *ngFor="let meme of memes$ | async; trackBy: memeTracker">
-  <portfolio-photo-detail [meme]="meme"></portfolio-photo-detail>
-  <button color="warn" mat-icon-button (click)="onDeleteMeme(meme)">
+<div class="photos-list" *ngFor="let photo of photos$ | async; trackBy: photoTracker">
+  <portfolio-photo-detail [photo]="photo"></portfolio-photo-detail>
+  <button color="warn" mat-icon-button (click)="onDeletePhoto(photo)">
     <mat-icon>delete_forever</mat-icon>
   </button>
-  <button mat-icon-button (click)="onUpdateMeme(meme)"><mat-icon>edit</mat-icon></button>
+  <button mat-icon-button (click)="onUpdatePhoto(photo)"><mat-icon>edit</mat-icon></button>
 </div>

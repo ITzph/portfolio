@@ -6,13 +6,13 @@ import { PhotoFormData } from '../../../../modules/photo/model/photo.model';
 import { ImageDialogAbstract } from '../image-dialog.abtract';
 
 @Component({
-  selector: 'portfolio-update-meme-dialog',
-  templateUrl: './update-meme-dialog.component.html',
-  styleUrls: ['./update-meme-dialog.component.scss'],
+  selector: 'portfolio-update-photo-dialog',
+  templateUrl: './update-photo-dialog.component.html',
+  styleUrls: ['./update-photo-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UpdateMemeDialogComponent extends ImageDialogAbstract implements OnInit {
-  memeForm = this.fb.group({
+export class UpdatePhotoDialogComponent extends ImageDialogAbstract implements OnInit {
+  photoForm = this.fb.group({
     title: [this.data.title, [Validators.required, Validators.minLength(4)]],
     description: [this.data.description],
     tags: [this.data.tags],
@@ -25,12 +25,12 @@ export class UpdateMemeDialogComponent extends ImageDialogAbstract implements On
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   get getForm() {
-    return this.memeForm;
+    return this.photoForm;
   }
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly dialogRef: MatDialogRef<UpdateMemeDialogComponent, Partial<PhotoFormData>>,
+    private readonly dialogRef: MatDialogRef<UpdatePhotoDialogComponent, Partial<PhotoFormData>>,
     @Inject(MAT_DIALOG_DATA) private data: PhotoFormData,
   ) {
     super();
@@ -39,7 +39,7 @@ export class UpdateMemeDialogComponent extends ImageDialogAbstract implements On
   ngOnInit(): void {}
 
   get isValueChanged() {
-    const { description, title, tags } = this.memeForm.value;
+    const { description, title, tags } = this.photoForm.value;
     const isTagsTheSame =
       tags.length === this.data.tags.length &&
       tags.every((value, index) => value === this.data.tags[index]);
@@ -51,8 +51,8 @@ export class UpdateMemeDialogComponent extends ImageDialogAbstract implements On
   }
 
   onUploadHandler() {
-    if (this.memeForm.valid) {
-      const { description, title, tags } = this.memeForm.value;
+    if (this.photoForm.valid) {
+      const { description, title, tags } = this.photoForm.value;
 
       if (this.isValueChanged) {
         this.dialogRef.close({

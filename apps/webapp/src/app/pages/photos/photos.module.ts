@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MemesRoutingModule } from './memes-routing.module';
-import { MemesComponent } from './memes.component';
+import { PhotosRoutingModule } from './photos-routing.module';
+import { PhotosComponent } from './photos.component';
 import { StoreModule } from '@ngrx/store';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -16,20 +16,20 @@ import { FooterModule } from '../../modules/footer/footer.module';
 import { PhotoModule } from '../../modules/photo/photo.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import * as fromProfile from '../../reducers/profile.reducer';
-import * as fromMeme from '../../reducers/meme.reducer';
+import * as fromPhoto from '../../reducers/photo.reducer';
 
 @NgModule({
-  declarations: [MemesComponent],
+  declarations: [PhotosComponent],
   imports: [
     CommonModule,
-    MemesRoutingModule,
+    PhotosRoutingModule,
     MatCardModule,
     MatIconModule,
     MatInputModule,
     MatDialogModule,
     CustomDialogModule,
     StoreModule.forFeature(fromProfile.profileFeatureKey, fromProfile.reducer),
-    StoreModule.forFeature(fromMeme.memesFeatureKey, fromMeme.reducer),
+    StoreModule.forFeature(fromPhoto.photosFeatureKey, fromPhoto.reducer),
     NgxSpinnerModule,
     LayoutModule,
     HeaderModule,
@@ -37,6 +37,6 @@ import * as fromMeme from '../../reducers/meme.reducer';
     PhotoModule,
     MatSnackBarModule,
   ],
-  exports: [MemesComponent],
+  exports: [PhotosComponent],
 })
-export class MemesModule {}
+export class PhotosModule {}

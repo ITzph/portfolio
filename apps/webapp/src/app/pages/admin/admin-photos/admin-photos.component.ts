@@ -1,39 +1,39 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { map, finalize } from 'rxjs/operators';
 import { IImageMetadata } from '@portfolio/api-interfaces';
-import { MemesService } from '../../memes/memes.service';
+import { PhotosService } from '../../photos/photos.service';
 import { environment } from '../../../../environments/environment';
 import { BinaryConfirmationComponent } from '../../../modules/custom-dialog/binary-confirmation/binary-confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
-import { AddMemeDialogComponent } from './add-meme-dialog/add-meme-dialog.component';
+import { AddPhotoDialogComponent } from './add-photo-dialog/add-photo-dialog.component';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { UpdateMemeDialogComponent } from './update-meme-dialog/update-meme-dialog.component';
+import { UpdatePhotoDialogComponent } from './update-photo-dialog/update-photo-dialog.component';
 import { trackByIdOrIndex } from '../../../utils/tracker-by-id.util';
 import { PhotoFormData } from '../../../modules/photo/model/photo.model';
 
 @Component({
-  selector: 'portfolio-admin-memes',
-  templateUrl: './admin-memes.component.html',
-  styleUrls: ['./admin-memes.component.scss'],
+  selector: 'portfolio-admin-photos',
+  templateUrl: './admin-photos.component.html',
+  styleUrls: ['./admin-photos.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminMemesComponent implements OnInit {
+export class AdminPhotosComponent implements OnInit {
   constructor(
-    private readonly memesService: MemesService,
+    private readonly photosService: PhotosService,
     private readonly dialog: MatDialog,
     private readonly spinner: NgxSpinnerService,
   ) {}
 
   ngOnInit(): void {}
 
-  public get memes$() {
-    return this.memesService.getMemes$().pipe(
-      map((memes) => {
-        return memes.map(
-          (meme): IImageMetadata => {
+  public get photos$() {
+    return this.photosService.getPhotos$().pipe(
+      map((photos) => {
+        return photos.map(
+          (photo): IImageMetadata => {
             return {
-              ...meme,
-              url: `${environment.api}/memes/image/${meme.imageName}`,
+              ...photo,
+              url: `${environment.api}/photos/image/${photo.imageName}`,
             };
           },
         );
@@ -41,8 +41,8 @@ export class AdminMemesComponent implements OnInit {
     );
   }
 
-  public onAddNewMeme() {
-    const dialogRef = this.dialog.open(AddMemeDialogComponent);
+  public onAddNewPhoto() {
+    const dialogRef = this.dialog.open(AddPhotoDialogComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -51,26 +51,26 @@ export class AdminMemesComponent implements OnInit {
     });
   }
 
-  public onUpdateMeme(meme: IImageMetadata) {
-    const dialogRef = this.dialog.open(UpdateMemeDialogComponent, {
-      data: meme,
+  public onUpdatePhoto(photo: IImageMetadata) {
+    const dialogRef = this.dialog.open(UpdatePhotoDialogComponent, {
+      data: photo,
     });
 
     dialogRef.afterClosed().subscribe((image: Partial<IImageMetadata>) => {
       if (image) {
-        this.memesService.updateMeme(meme.id, image);
+        this.photosService.updatePhoto(photo.id, image);
       }
     });
   }
 
-  public memeTracker(index: number, meme: IImageMetadata) {
-    return trackByIdOrIndex(index, meme);
+  public photoTracker(index: number, photo: IImageMetadata) {
+    return trackByIdOrIndex(index, photo);
   }
 
-  public onDeleteMeme(meme: IImageMetadata) {
+  public onDeletePhoto(photo: IImageMetadata) {
     const dialogProp = {
-      title: 'Delete Meme',
-      messages: [`Are you sure you want to delete ${meme.title}?`],
+      title: 'Delete Photo',
+      messages: [`Are you sure you want to delete ${photo.title}?`],
       okayLabel: 'Okay',
       noLabel: 'Cancel',
     };
@@ -81,7 +81,7 @@ export class AdminMemesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((isTrue: boolean) => {
       if (isTrue) {
-        this.memesService.deleteMeme(meme);
+        this.photosService.deletePhoto(photo);
       }
     });
   }
@@ -92,16 +92,16 @@ export class AdminMemesComponent implements OnInit {
     imageForm.append('caption', formData.description);
     imageForm.append('title', formData.title);
     imageForm.append('tags', JSON.stringify(formData.tags));
-    this.spinner.show('memesSpinner');
-    this.memesService
+    this.spinner.show('photosSpinner');
+    this.photosService
       .imageUpload(imageForm)
       .pipe(
         finalize(() => {
-          this.spinner.hide('memesSpinner');
+          this.spinner.hide('photosSpinner');
         }),
       )
       .subscribe((res) => {
-        this.memesService.addMeme(res);
+        this.photosService.addPhoto(res);
       });
   }
 }

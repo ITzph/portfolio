@@ -1,6 +1,6 @@
-import { reducer, initialState } from '../reducers/meme.reducer';
+import { reducer, initialState } from '../reducers/photo.reducer';
 
-describe('Meme Reducer', () => {
+describe('Photo Reducer', () => {
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as any;

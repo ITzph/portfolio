@@ -1,9 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { IImageMetadata } from '@portfolio/api-interfaces';
-import * as fromMeme from '../reducers/meme.reducer';
+import * as fromPhoto from '../reducers/photo.reducer';
 
-export const selectBlogsState = createFeatureSelector<fromMeme.State>(fromMeme.memesFeatureKey);
+export const selectBlogsState = createFeatureSelector<fromPhoto.State>(fromPhoto.photosFeatureKey);
 
-export const getMemes = createSelector(selectBlogsState, (state): IImageMetadata[] => {
-  return fromMeme.selectAll(state);
+export const getPhotos = createSelector(selectBlogsState, (state): IImageMetadata[] => {
+  return fromPhoto.selectAll(state);
 });

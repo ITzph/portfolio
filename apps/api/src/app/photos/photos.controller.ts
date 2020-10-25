@@ -14,21 +14,21 @@ import {
   UseGuards,
   Patch,
 } from '@nestjs/common';
-import { MemesService } from './memes.service';
+import { PhotosService } from './photos.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response, Request } from 'express';
 
-import { MemesS3Service } from './memes-s3.service';
+import { PhotosS3Service } from './photos-s3.service';
 import { ImageCategory } from '../../database/entities/image.entity';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 import { PortfolioLoggerService } from '../../logger/logger.service';
 import { IImageMetadata } from '@portfolio/api-interfaces';
 
-@Controller('memes')
-export class MemesController {
+@Controller('photos')
+export class PhotosController {
   constructor(
-    private readonly memesService: MemesService,
-    private readonly s3Service: MemesS3Service,
+    private readonly photosService: PhotosService,
+    private readonly s3Service: PhotosS3Service,
     private readonly logger: PortfolioLoggerService,
   ) {}
 
@@ -53,7 +53,7 @@ export class MemesController {
       };
     }
 
-    const paginatednata = await this.memesService.fetchAllMemes(
+    const paginatednata = await this.photosService.fetchAllPhotos(
       {
         limit,
         page,
@@ -71,11 +71,11 @@ export class MemesController {
     @Req() req: Request,
     @Res() res: Response,
   ) {
-    this.logger.log('PATCH memes/:id');
+    this.logger.log('PATCH photos/:id');
     try {
       const body = req.body as Partial<{ title: string; description: string }>;
 
-      const result = await this.memesService.patchImage(id, body);
+      const result = await this.photosService.patchImage(id, body);
 
       res.status(HttpStatus.ACCEPTED).send(result);
     } catch (error) {
@@ -86,8 +86,8 @@ export class MemesController {
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async deleteImage(@Param('id', ParseIntPipe) id, @Res() res: Response) {
-    this.logger.log('DELETE memes/:id');
-    const imageToDelete = await this.memesService.getImageById(id);
+    this.logger.log('DELETE photos/:id');
+    const imageToDelete = await this.photosService.getImageById(id);
 
     if (imageToDelete) {
       await this.s3Service
@@ -98,7 +98,7 @@ export class MemesController {
         })
         .promise();
 
-      const result = await this.memesService.deleteImage(id);
+      const result = await this.photosService.deleteImage(id);
 
       if (result.affected) {
         return res.send({ id });
@@ -112,11 +112,11 @@ export class MemesController {
   @Post()
   @UseInterceptors(FileInterceptor('image'))
   async uploadImage(@UploadedFile() file, @Req() req: Request, @Res() res: Response) {
-    this.logger.log('POST memes');
+    this.logger.log('POST photos');
     const body = req.body as { caption: string; title: string; tags: string };
 
     try {
-      const image = await this.memesService.saveImageMetadata({
+      const image = await this.photosService.saveImageMetadata({
         id: null,
         description: body?.caption,
         category: ImageCategory.MEME,
@@ -135,7 +135,7 @@ export class MemesController {
 
   @Get('image/:key')
   async getImageByKey(@Param('key') key: string, @Res() res: Response) {
-    this.logger.log('GET memes/:key');
+    this.logger.log('GET photos/:key');
     try {
       const s3GetRes = await this.s3Service
         .s3Instance()

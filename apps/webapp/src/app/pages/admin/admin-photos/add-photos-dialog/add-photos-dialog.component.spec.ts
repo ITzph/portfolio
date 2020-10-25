@@ -3,11 +3,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminModule } from '../../admin.module';
 
-import { AddMemeDialogComponent } from './add-meme-dialog.component';
+import { AddPhotoDialogComponent } from './add-photo-dialog.component';
 
-describe('AddMemeDialogComponent', () => {
-  let component: AddMemeDialogComponent;
-  let fixture: ComponentFixture<AddMemeDialogComponent>;
+describe('AddPhotoDialogComponent', () => {
+  let component: AddPhotoDialogComponent;
+  let fixture: ComponentFixture<AddPhotoDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -20,7 +20,7 @@ describe('AddMemeDialogComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddMemeDialogComponent);
+    fixture = TestBed.createComponent(AddPhotoDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

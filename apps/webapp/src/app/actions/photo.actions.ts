@@ -3,34 +3,40 @@ import { Update } from '@ngrx/entity';
 
 import { IImageMetadata } from '@portfolio/api-interfaces';
 
-export const loadMemes = createAction(
-  '[Meme/API] Load Memes',
-  props<{ memes: IImageMetadata[] }>(),
+export const loadPhotos = createAction(
+  '[Photo/API] Load Photos',
+  props<{ photos: IImageMetadata[] }>(),
 );
 
-export const addMeme = createAction('[Meme/API] Add Meme', props<{ meme: IImageMetadata }>());
+export const addPhoto = createAction('[Photo/API] Add Photo', props<{ photo: IImageMetadata }>());
 
-export const upsertMeme = createAction('[Meme/API] Upsert Meme', props<{ meme: IImageMetadata }>());
-
-export const addMemes = createAction('[Meme/API] Add Memes', props<{ memes: IImageMetadata[] }>());
-
-export const upsertMemes = createAction(
-  '[Meme/API] Upsert Memes',
-  props<{ memes: IImageMetadata[] }>(),
+export const upsertPhoto = createAction(
+  '[Photo/API] Upsert Photo',
+  props<{ photo: IImageMetadata }>(),
 );
 
-export const updateMeme = createAction(
-  '[Meme/API] Update Meme',
-  props<{ meme: Update<IImageMetadata> }>(),
+export const addPhotos = createAction(
+  '[Photo/API] Add Photos',
+  props<{ photos: IImageMetadata[] }>(),
 );
 
-export const updateMemes = createAction(
-  '[Meme/API] Update Memes',
-  props<{ memes: Update<IImageMetadata>[] }>(),
+export const upsertPhotos = createAction(
+  '[Photo/API] Upsert Photos',
+  props<{ photos: IImageMetadata[] }>(),
 );
 
-export const deleteMeme = createAction('[Meme/API] Delete Meme', props<{ id: number }>());
+export const updatePhoto = createAction(
+  '[Photo/API] Update Photo',
+  props<{ photo: Update<IImageMetadata> }>(),
+);
 
-export const deleteMemes = createAction('[Meme/API] Delete Memes', props<{ ids: number[] }>());
+export const updatePhotos = createAction(
+  '[Photo/API] Update Photos',
+  props<{ photos: Update<IImageMetadata>[] }>(),
+);
 
-export const clearMemes = createAction('[Meme/API] Clear Memes');
+export const deletePhoto = createAction('[Photo/API] Delete Photo', props<{ id: number }>());
+
+export const deletePhotos = createAction('[Photo/API] Delete Photos', props<{ ids: number[] }>());
+
+export const clearPhotos = createAction('[Photo/API] Clear Photos');

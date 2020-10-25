@@ -21,23 +21,23 @@
   </div>
 </div>
 
-<ng-container *ngIf="filteredMemes.length > 0; else emptyList">
-  <div class="memes-wrapper">
+<ng-container *ngIf="filteredPhotos.length > 0; else emptyList">
+  <div class="photos-wrapper">
     <ng-container
       *ngFor="
-        let meme of filteredMemes
+        let photo of filteredPhotos
           | paginate: { itemsPerPage: PAGE_SIZE_LIMIT, currentPage: currentPage };
-        trackBy: memeTracker
+        trackBy: photoTracker
       "
     >
-      <div class="memes">
-        <portfolio-photo-detail [meme]="meme"></portfolio-photo-detail>
+      <div class="photos">
+        <portfolio-photo-detail [photo]="photo"></portfolio-photo-detail>
       </div>
     </ng-container>
 
     <pagination-controls
       (pageChange)="onPageChange($event)"
-      *ngIf="filteredMemes.length > PAGE_SIZE_LIMIT"
+      *ngIf="filteredPhotos.length > PAGE_SIZE_LIMIT"
     ></pagination-controls>
   </div>
 </ng-container>
