@@ -9,7 +9,7 @@ import { IImageMetadata } from '@portfolio/api-interfaces';
 })
 export class PhotoDetailComponent implements OnInit {
   @Input()
-  meme: IImageMetadata;
+  photo: IImageMetadata;
 
   ngOnInit(): void {}
 }

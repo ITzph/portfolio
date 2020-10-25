@@ -12,7 +12,7 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () =>
-          import('./admin-memes/admin-memes.module').then((m) => m.AdminMemesModule),
+          import('./admin-photos/admin-photos.module').then((m) => m.AdminPhotosModule),
       },
       {
         path: 'profile',
@@ -25,9 +25,9 @@ const routes: Routes = [
           import('./admin-resume/admin-resume.module').then((m) => m.AdminResumeModule),
       },
       {
-        path: 'memes',
+        path: 'photos',
         loadChildren: () =>
-          import('./admin-memes/admin-memes.module').then((m) => m.AdminMemesModule),
+          import('./admin-photos/admin-photos.module').then((m) => m.AdminPhotosModule),
       },
       {
         path: 'blogs',

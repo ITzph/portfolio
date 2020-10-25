@@ -5,7 +5,7 @@ import { PhotoModule } from '../photo.module';
 
 import { PhotosListComponent } from './photos-list.component';
 
-describe('MemesListComponent', () => {
+describe('PhotosListComponent', () => {
   let component: PhotosListComponent;
   let fixture: ComponentFixture<PhotosListComponent>;
 

@@ -1,9 +1,9 @@
-<section class="meme" *ngIf="meme; else invalidImage">
-  <h2 style="margin-bottom: 0.25rem;">{{ meme.title }}</h2>
-  <img width="100%" [src]="meme.url" [title]="meme.imageName" />
-  <h4>{{ meme.description }}</h4>
+<section class="photo" *ngIf="photo; else invalidImage">
+  <h2 style="margin-bottom: 0.25rem;">{{ photo.title }}</h2>
+  <img width="100%" [src]="photo.url" [title]="photo.imageName" />
+  <h4>{{ photo.description }}</h4>
   <mat-chip-list>
-    <mat-chip *ngFor="let tag of meme.tags">
+    <mat-chip *ngFor="let tag of photo.tags">
       {{ tag }}
     </mat-chip>
   </mat-chip-list>

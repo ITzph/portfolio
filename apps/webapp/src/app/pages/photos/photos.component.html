@@ -1,0 +1,24 @@
+<portfolio-public-layout>
+  <portfolio-header contentHeader></portfolio-header>
+  <section contentBody>
+    <ng-container *ngIf="photos$ | async; let photos">
+      <portfolio-photos-list
+        [photos]="photos"
+        *ngIf="photos.length > 0; else emptyList"
+      ></portfolio-photos-list>
+    </ng-container>
+    <ngx-spinner
+      name="photosSpinner"
+      size="medium"
+      color="#fff"
+      type="ball-zig-zag-deflect"
+      [fullScreen]="true"
+      ><p style="color: white;">Weight lungs...</p></ngx-spinner
+    >
+  </section>
+  <portfolio-footer contentFooter></portfolio-footer>
+</portfolio-public-layout>
+
+<ng-template #emptyList>
+  <portfolio-empty-list text="Empty photos. Please add one master!"></portfolio-empty-list>
+</ng-template>

@@ -2,7 +2,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as fromBlogs from '../../../reducers/blog.reducer';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { ImageDialogAbstract } from '../admin-memes/image-dialog.abtract';
+import { ImageDialogAbstract } from '../admin-photos/image-dialog.abtract';
 import { BlogsService } from '../../blogs/blogs.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';

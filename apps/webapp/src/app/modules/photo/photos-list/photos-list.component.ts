@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { IImageMetadata } from '@portfolio/api-interfaces';
-import { MemesService } from '../../../pages/memes/memes.service';
+import { PhotosService } from '../../../pages/photos/photos.service';
 import { trackByIdOrIndex } from '../../../utils/tracker-by-id.util';
 import { OrderByEventProp, ORDER, ORDER_BY } from '../../grouping/grouping.model';
 
@@ -12,7 +12,7 @@ import { OrderByEventProp, ORDER, ORDER_BY } from '../../grouping/grouping.model
 })
 export class PhotosListComponent implements OnInit {
   @Input()
-  memes: IImageMetadata[] = [];
+  photos: IImageMetadata[] = [];
 
   filterValue = '';
   filterKey: keyof IImageMetadata = 'tags';
@@ -25,21 +25,21 @@ export class PhotosListComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  get filteredMemes() {
-    const memes = !!this.filterValue
-      ? this.memes.filter((meme) => {
+  get filteredPhotos() {
+    const photos = !!this.filterValue
+      ? this.photos.filter((photo) => {
           if (this.filterKey === 'tags') {
-            return !!meme.tags.find((tag) => tag.includes(this.filterValue));
+            return !!photo.tags.find((tag) => tag.includes(this.filterValue));
           } else {
             if (['title', 'description'].includes(this.filterKey)) {
-              return (meme[this.filterKey] as string).includes(this.filterValue);
+              return (photo[this.filterKey] as string).includes(this.filterValue);
             }
           }
         })
-      : this.memes;
+      : this.photos;
 
     const { order, orderBy } = this;
-    return memes.sort((a, b) => {
+    return photos.sort((a, b) => {
       if (order === ORDER.ASC) {
         if (orderBy === ORDER_BY.DESCRIPTION || orderBy === ORDER_BY.TITLE) {
           return a[orderBy].localeCompare(b[orderBy]);
@@ -79,14 +79,14 @@ export class PhotosListComponent implements OnInit {
     }
   }
 
-  constructor(private readonly memesService: MemesService) {}
+  constructor(private readonly photosService: PhotosService) {}
 
-  public memeTracker(index: number, meme: IImageMetadata) {
-    return trackByIdOrIndex(index, meme);
+  public photoTracker(index: number, photo: IImageMetadata) {
+    return trackByIdOrIndex(index, photo);
   }
 
   public onPageChange(page: number) {
     this.currentPage = page;
-    this.memesService.fetchPaginatedMemes();
+    this.photosService.fetchPaginatedPhotos();
   }
 }

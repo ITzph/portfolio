@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { ProfileModule } from './profile/profile.module';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
-import { MemesModule } from './memes/memes.module';
+import { PhotosModule } from './photos/photos.module';
 import { AuthModule } from './auth/auth.module';
 import { LoggerModule } from './logger/logger.module';
 import { EmailModule } from './email/email.module';
@@ -16,7 +16,7 @@ import { BlogModule } from './blog/blog.module';
     ProfileModule,
     DatabaseModule,
     ConfigModule.forRoot({}),
-    MemesModule,
+    PhotosModule,
     AuthModule,
     LoggerModule,
     EmailModule,

@@ -15,9 +15,9 @@ export const routes: Routes = [
     loadChildren: () => import('./pages/profile/profile.module').then((m) => m.ProfileModule),
   },
   {
-    path: 'memes',
+    path: 'photos',
     pathMatch: 'full',
-    loadChildren: () => import('./pages/memes/memes.module').then((m) => m.MemesModule),
+    loadChildren: () => import('./pages/photos/photos.module').then((m) => m.PhotosModule),
   },
   {
     path: 'resume',

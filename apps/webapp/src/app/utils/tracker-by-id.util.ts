@@ -1,6 +1,6 @@
-export const trackByIdOrIndex = (index: number, meme: { id: number | string }) => {
-  if (meme) {
-    return meme.id;
+export const trackByIdOrIndex = (index: number, photo: { id: number | string }) => {
+  if (photo) {
+    return photo.id;
   }
 
   return index;

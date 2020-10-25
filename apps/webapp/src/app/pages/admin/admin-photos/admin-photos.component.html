@@ -1,0 +1,11 @@
+<button mat-raised-button (click)="onAddNewPhoto()" title="Add new Photo">
+  Add new Photo
+  <mat-icon>add</mat-icon>
+</button>
+<div class="photos-list" *ngFor="let photo of photos$ | async; trackBy: photoTracker">
+  <portfolio-photo-detail [photo]="photo"></portfolio-photo-detail>
+  <button color="warn" mat-icon-button (click)="onDeletePhoto(photo)">
+    <mat-icon>delete_forever</mat-icon>
+  </button>
+  <button mat-icon-button (click)="onUpdatePhoto(photo)"><mat-icon>edit</mat-icon></button>
+</div>
