@@ -1,0 +1,38 @@
+<form [formGroup]="certificationFormGroup">
+  <mat-card class="form-wrapper">
+    <mat-card-title>
+      Update Experience
+    </mat-card-title>
+    <mat-card-content class="card-content">
+      <mat-form-field appearance="fill">
+        <mat-label>Choose date acquisition</mat-label>
+        <input matInput [matDatepicker]="dateAcquired" formControlName="dateAcquired" />
+        <mat-datepicker-toggle matSuffix [for]="dateAcquired"></mat-datepicker-toggle>
+        <mat-datepicker #dateAcquired></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name" formControlName="name" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input matInput placeholder="Description" formControlName="description" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Provider</mat-label>
+        <input matInput placeholder="Provider" formControlName="provider" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>URL</mat-label>
+        <input matInput placeholder="URL" formControlName="url" />
+        <mat-error *ngIf="certificationFormGroup.get('url').hasError('pattern')"
+          >Must be a valid URL</mat-error
+        >
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+      <button mat-raised-button color="primary" (click)="onCertificationUpdate()">Update</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

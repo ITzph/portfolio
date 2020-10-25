@@ -50,7 +50,7 @@ export class AdminExperienceComponent extends ResumeAdminComponentAbstract {
 
   onDeleteExperience(experience: IUserExperience) {
     this.showConfirmationDialog(
-      'Delete Experinece',
+      'Delete Experience',
       [`Are you sure you want to delete ${experience.name}?`],
       () => this.experienceService.deleteElement(experience.id),
     );
