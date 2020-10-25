@@ -19,6 +19,7 @@ import { UpdateSkillComponent } from './skill/update-skill/update-skill.componen
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { UpdateCertificationComponent } from './certification/update-certification/update-certification.component';
 @NgModule({
   declarations: [
     AdminResumeComponent,
@@ -27,6 +28,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     AdminSkillComponent,
     UpdateExperienceComponent,
     UpdateSkillComponent,
+    UpdateCertificationComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +53,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     AdminSkillComponent,
     UpdateExperienceComponent,
     UpdateSkillComponent,
+    UpdateCertificationComponent,
   ],
 })
 export class AdminResumeModule {}
