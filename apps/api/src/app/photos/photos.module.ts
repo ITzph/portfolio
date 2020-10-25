@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { PhotosController } from './photos/photos.controller';
-import { PhotosService } from './photos/photos.service';
+import { PhotosController } from './photos.controller';
+import { PhotosService } from './photos.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ImageMetadata } from '../database/entities/image.entity';
 import { MulterModule } from '@nestjs/platform-express';
-import { PhotosS3Service } from './photos/photos-s3.service';
+import { PhotosS3Service } from './photos-s3.service';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from '../logger/logger.module';
 

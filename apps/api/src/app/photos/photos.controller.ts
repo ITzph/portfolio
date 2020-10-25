@@ -19,9 +19,9 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Response, Request } from 'express';
 
 import { PhotosS3Service } from './photos-s3.service';
-import { ImageCategory } from '../../database/entities/image.entity';
-import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
-import { PortfolioLoggerService } from '../../logger/logger.service';
+import { ImageCategory } from '../database/entities/image.entity';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { PortfolioLoggerService } from '../logger/logger.service';
 import { IImageMetadata } from '@portfolio/api-interfaces';
 
 @Controller('photos')

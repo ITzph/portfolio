@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ImageMetadata } from '../../database/entities/image.entity';
+import { ImageMetadata } from '../database/entities/image.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { IImageMetadata, Pagination, IPaginationOptions } from '@portfolio/api-interfaces';
