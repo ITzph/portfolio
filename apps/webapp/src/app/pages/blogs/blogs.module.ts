@@ -17,9 +17,16 @@ import { BlogListComponent } from './blog-list/blog-list.component';
 import { MatIconModule } from '@angular/material/icon';
 import { BlogTileComponent } from './blog-tile/blog-tile.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TagFilterComponent } from './tag-filter/tag-filter.component';
 
 @NgModule({
-  declarations: [BlogsComponent, FullBlogContentComponent, BlogListComponent, BlogTileComponent],
+  declarations: [
+    BlogsComponent,
+    FullBlogContentComponent,
+    BlogListComponent,
+    BlogTileComponent,
+    TagFilterComponent,
+  ],
   imports: [
     CommonModule,
     BlogsRoutingModule,
@@ -34,6 +41,12 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatIconModule,
     NgxSpinnerModule,
   ],
-  exports: [BlogsComponent, FullBlogContentComponent, BlogListComponent, BlogTileComponent],
+  exports: [
+    BlogsComponent,
+    FullBlogContentComponent,
+    BlogListComponent,
+    BlogTileComponent,
+    TagFilterComponent,
+  ],
 })
 export class BlogsModule {}
