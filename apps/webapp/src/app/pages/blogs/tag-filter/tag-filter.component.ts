@@ -14,7 +14,13 @@ export interface TagCounter {
 export class TagFilterComponent implements OnInit {
   @Input() tags: TagCounter[] = [];
 
+  selectedTags: string[] = ['sf'];
+
   constructor() {}
+
+  isSelected(tag: TagCounter) {
+    return !!this.selectedTags.find((t) => t === tag.name);
+  }
 
   ngOnInit(): void {}
 }
