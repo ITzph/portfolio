@@ -3,8 +3,10 @@
   <mat-card-content class="tags">
     <mat-chip-list aria-label="Tags" *ngFor="let tag of tags" class="tag">
       <mat-chip [class.tag--selected]="isSelected(tag)"
-        ><span class="tag__name">{{ tag.name }}</span
-        >&nbsp;<span class="tag__count">{{ tag.count }}</span></mat-chip
+        ><button (click)="onTagClick(tag)" class="tag__button">
+          <span class="tag__name">{{ tag.name }}</span
+          >&nbsp;<span class="tag__count">{{ tag.count }}</span>
+        </button></mat-chip
       >
     </mat-chip-list>
   </mat-card-content>

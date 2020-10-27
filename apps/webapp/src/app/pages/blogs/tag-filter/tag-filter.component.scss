@@ -25,6 +25,13 @@
     font-weight: bold;
   }
 
+  &__button {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    outline: none;
+  }
+
   &--selected {
     background-color: red;
     color: white;
