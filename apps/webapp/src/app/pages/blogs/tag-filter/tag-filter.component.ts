@@ -30,5 +30,9 @@ export class TagFilterComponent implements OnInit {
     }
   }
 
+  tagTracker(index: number, tag: TagCounter) {
+    return tag ? tag.name : index;
+  }
+
   ngOnInit(): void {}
 }
