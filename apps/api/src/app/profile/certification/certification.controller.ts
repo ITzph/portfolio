@@ -23,7 +23,7 @@ export class CertificationController {
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
   patchExperience(@Param('id', ParseIntPipe) id: number, @Req() req: Request) {
-    const certification: Partial<IUserCertification> = req.body;
+    const certification = req.body;
     return this.certificationService.patchCertification(id, certification);
   }
 

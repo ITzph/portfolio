@@ -5,6 +5,12 @@
   margin: $margin-big 0;
 }
 
+.blogs-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .blogs-wrapper {
   display: flex;
   flex-direction: column;

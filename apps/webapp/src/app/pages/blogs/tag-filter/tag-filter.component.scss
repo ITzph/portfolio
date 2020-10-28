@@ -1,0 +1,39 @@
+@import '../../../../styles/variables';
+
+.tags-container {
+  box-shadow: 0 0 0 1px $color-light;
+}
+
+.tags {
+  display: flex;
+  flex-direction: row;
+  width: 30rem;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  padding: 1rem;
+}
+
+.tag {
+  margin-right: $margin-small;
+  margin-bottom: $margin-small;
+
+  &__name {
+    font-style: normal;
+  }
+
+  &__count {
+    font-weight: bold;
+  }
+
+  &__button {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    outline: none;
+  }
+
+  &--selected {
+    background-color: red;
+    color: white;
+  }
+}
