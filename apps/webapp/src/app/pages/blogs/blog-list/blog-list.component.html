@@ -1,10 +1,13 @@
 <section class="blogs-container">
   <article class="blogs-wrapper">
-    <ng-container *ngFor="let blog of blogs$ | async">
+    <ng-container *ngFor="let blog of filteredBlogs$ | async; trackBy: blogTracker">
       <portfolio-blog-tile [blog]="blog"></portfolio-blog-tile>
     </ng-container>
   </article>
-  <portfolio-tag-filter [tags]="tagList$ | async"></portfolio-tag-filter>
+  <portfolio-tag-filter
+    [tags]="tagList$ | async"
+    (selectedChange)="onSelectedTagChange($event)"
+  ></portfolio-tag-filter>
 </section>
 <ngx-spinner
   name="blogsSpinner"

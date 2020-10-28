@@ -1,4 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 export interface TagCounter {
   count: number;
@@ -13,6 +20,7 @@ export interface TagCounter {
 })
 export class TagFilterComponent implements OnInit {
   @Input() tags: TagCounter[] = [];
+  @Output() selectedChange = new EventEmitter<Set<string>>();
 
   selectedTags: Set<string> = new Set();
 
@@ -28,6 +36,7 @@ export class TagFilterComponent implements OnInit {
     } else {
       this.selectedTags.add(tag.name);
     }
+    this.selectedChange.emit(this.selectedTags);
   }
 
   tagTracker(index: number, tag: TagCounter) {
