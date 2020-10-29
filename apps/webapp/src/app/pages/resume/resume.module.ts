@@ -15,6 +15,7 @@ import { FooterModule } from '../../modules/footer/footer.module';
 import { UtilitiesModule } from '../../modules/utilities/utilities.module';
 import { QuillModule } from 'ngx-quill';
 import { MatChipsModule } from '@angular/material/chips';
+import { SocialModule } from '../../modules/social/social.module';
 
 @NgModule({
   declarations: [ResumeComponent, SkillComponent, ExperienceComponent, CertificationComponent],
@@ -28,6 +29,7 @@ import { MatChipsModule } from '@angular/material/chips';
     FooterModule,
     UtilitiesModule,
     QuillModule.forRoot(),
+    SocialModule,
     MatChipsModule,
   ],
   exports: [ResumeComponent, SkillComponent, ExperienceComponent, CertificationComponent],

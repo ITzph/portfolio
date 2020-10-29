@@ -18,6 +18,14 @@
             </div>
           </div>
           <div class="second-side">
+            <div class="social__handlers">
+              <h1>SOCIAL</h1>
+              <ng-container *ngFor="let social of socialHandlers$ | async">
+                <portfolio-static-social-handler
+                  [social]="social"
+                ></portfolio-static-social-handler>
+              </ng-container>
+            </div>
             <div class="skills__wrapper">
               <h2>Work Skills</h2>
               <ng-container *ngFor="let category of categorizedSkill$ | async">

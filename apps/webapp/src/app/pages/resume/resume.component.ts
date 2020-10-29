@@ -21,7 +21,14 @@ interface CategorizedSkill {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResumeComponent implements OnInit {
-  profile$: Observable<IUser>;
+  socialHandlers$ = this.profileStore.pipe(
+    select(getCurrentUser),
+    map((user) => {
+      return user?.socialHandlers ?? [];
+    }),
+  );
+
+  profile$ = this.profileStore.pipe(select(getCurrentUser));
 
   constructor(
     private readonly profileStore: Store<fromProfile.State>,
@@ -58,8 +65,6 @@ export class ResumeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profile$ = this.profileStore.pipe(select(getCurrentUser));
-
     this.apiService
       .getProfile()
       .pipe(
