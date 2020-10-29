@@ -1,5 +1,5 @@
-<div *ngIf="skill" class="skill">
-  <p>
-    {{ skill.name }}
-  </p>
+<div *ngIf="skill">
+  <mat-chip-list aria-label="Tags" class="tag">
+    <mat-chip>{{ skill.name }}</mat-chip>
+  </mat-chip-list>
 </div>

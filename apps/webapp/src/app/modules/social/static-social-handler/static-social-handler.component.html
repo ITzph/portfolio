@@ -1,0 +1,15 @@
+<div class="social" (click)="goToUrl(social.url)" *ngIf="social; else invalidSocialInfo">
+  <svg-icon
+    [src]="'assets/images/' + social.icon + '.svg'"
+    class="social__icon"
+    [applyClass]="true"
+    svgClass="social__icon animate__animated animate__wobble"
+    [svgStyle]="{ 'width.rem': 3.5, fill: fillColor }"
+  ></svg-icon>
+  <p class="name" [style.color]="fillColor">{{ social.name }}</p>
+  <a class="url" [href]="social.url">{{ social.url }}</a>
+</div>
+
+<ng-template #invalidSocialInfo>
+  <p>Invalid Info</p>
+</ng-template>
