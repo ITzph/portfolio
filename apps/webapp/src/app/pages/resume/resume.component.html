@@ -2,32 +2,42 @@
   <portfolio-header contentHeader></portfolio-header>
   <section contentBody class="resume__container">
     <div class="content__wrapper">
+      <header class="resume__header">
+        <h1 class="name">Carlo Gino</h1>
+        <h2 class="title">The quick brown fox jumps over the lazy dog!</h2>
+      </header>
+      <hr class="resume__separator" />
       <ng-container *ngIf="profile$ | async; let profile">
-        <div class="skills__wrapper">
-          <h2>Work Skills</h2>
-          <ng-container *ngFor="let category of categorizedSkill$ | async">
-            <div class="skills-category">
-              <h3>{{ category.category }}</h3>
-              <aside class="flex-row skills-group">
-                <ng-container *ngFor="let skill of category.skills">
-                  <portfolio-skill [skill]="skill"></portfolio-skill>
-                </ng-container>
-              </aside>
+        <div class="resume__body">
+          <div class="first-side">
+            <div class="experiences__wrapper">
+              <h3>Work Experience</h3>
+              <ng-container *ngFor="let exp of profile.experiences">
+                <portfolio-experience [experience]="exp"></portfolio-experience>
+              </ng-container>
             </div>
-          </ng-container>
-        </div>
-        <div class="experiences__wrapper">
-          <h3>Work Experience</h3>
-          <ng-container *ngFor="let exp of profile.experiences">
-            <portfolio-experience [experience]="exp"></portfolio-experience>
-          </ng-container>
-        </div>
-
-        <div class="certifications__wrapper">
-          <h3 class="certifications__title">Certifications</h3>
-          <ng-container *ngFor="let cert of profile.certifications">
-            <portfolio-certification [certification]="cert"></portfolio-certification>
-          </ng-container>
+          </div>
+          <div class="second-side">
+            <div class="skills__wrapper">
+              <h2>Work Skills</h2>
+              <ng-container *ngFor="let category of categorizedSkill$ | async">
+                <div class="skills-category">
+                  <h3>{{ category.category }}</h3>
+                  <aside class="flex-row skills-group">
+                    <ng-container *ngFor="let skill of category.skills">
+                      <portfolio-skill [skill]="skill"></portfolio-skill>
+                    </ng-container>
+                  </aside>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <div class="certifications__wrapper">
+            <h3 class="certifications__title">Certifications</h3>
+            <ng-container *ngFor="let cert of profile.certifications">
+              <portfolio-certification [certification]="cert"></portfolio-certification>
+            </ng-container>
+          </div>
         </div>
       </ng-container>
     </div>
