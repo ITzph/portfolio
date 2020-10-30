@@ -1,7 +1,10 @@
 <ng-container *ngIf="experience">
   <div class="experience">
     <div class="title">
-      <p>{{ experience.name }} - {{ experience.role }}</p>
+      <p>
+        <mat-icon>{{ categoryIcon }}</mat-icon
+        >{{ experience.name }} - {{ experience.role }}
+      </p>
     </div>
     <div class="date">
       <p>{{ experience.startDate }} - {{ experience.endDate }}</p>

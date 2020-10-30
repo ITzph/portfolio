@@ -11,13 +11,17 @@
         <div class="resume__body">
           <div class="first-side">
             <div class="experiences__wrapper">
-              <h2 class="social__label">Work Experience</h2>
+              <h2 class="section__label">
+                <mat-icon class="section__icon">work</mat-icon>Work Experience
+              </h2>
               <ng-container *ngFor="let exp of workExperiences$ | async">
                 <portfolio-experience [experience]="exp"></portfolio-experience>
               </ng-container>
             </div>
             <div class="experiences__wrapper">
-              <h2 class="social__label">Education</h2>
+              <h2 class="section__label">
+                <mat-icon class="section__icon">school</mat-icon>Education
+              </h2>
               <ng-container *ngFor="let exp of education$ | async">
                 <portfolio-experience [experience]="exp"></portfolio-experience>
               </ng-container>
@@ -25,7 +29,9 @@
           </div>
           <div class="second-side">
             <div class="social__wrapper">
-              <h2 class="social__label">Social</h2>
+              <h2 class="section__label">
+                <mat-icon class="section__icon">people</mat-icon>Social
+              </h2>
               <ng-container *ngFor="let social of socialHandlers$ | async">
                 <portfolio-static-social-handler
                   [social]="social"
@@ -33,10 +39,12 @@
               </ng-container>
             </div>
             <div class="skills__wrapper">
-              <h2 class="section__label">Work Skills</h2>
+              <h2 class="section__label">
+                <mat-icon class="section__icon">settings</mat-icon> Skills
+              </h2>
               <ng-container *ngFor="let category of categorizedSkill$ | async">
-                <div class="skills-category">
-                  <h3>{{ category.category }}</h3>
+                <div class="skills__category">
+                  <h3 class="skills__category__label">{{ category.category }}</h3>
                   <aside class="flex-row skills-group">
                     <ng-container *ngFor="let skill of category.skills">
                       <portfolio-skill [skill]="skill"></portfolio-skill>

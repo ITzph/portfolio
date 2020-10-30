@@ -16,6 +16,7 @@ import { UtilitiesModule } from '../../modules/utilities/utilities.module';
 import { QuillModule } from 'ngx-quill';
 import { MatChipsModule } from '@angular/material/chips';
 import { SocialModule } from '../../modules/social/social.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [ResumeComponent, SkillComponent, ExperienceComponent, CertificationComponent],
@@ -31,6 +32,7 @@ import { SocialModule } from '../../modules/social/social.module';
     QuillModule.forRoot(),
     SocialModule,
     MatChipsModule,
+    MatIconModule,
   ],
   exports: [ResumeComponent, SkillComponent, ExperienceComponent, CertificationComponent],
 })
