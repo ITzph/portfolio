@@ -69,6 +69,17 @@
   }
 }
 
+.social {
+  &__wrapper {
+    padding-left: $padding-big;
+    margin-bottom: $margin-big;
+  }
+}
+
+.section__label {
+  margin-bottom: $margin-medium;
+}
+
 .skills-group {
   justify-content: center;
 }

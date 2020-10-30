@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as fromProfile from '../../reducers/profile.reducer';
 import { Observable } from 'rxjs';
-import { IUser, IUserSkill } from '@portfolio/api-interfaces';
+import { ExperienceCategory, IUser, IUserSkill } from '@portfolio/api-interfaces';
 import { getCurrentUser } from '../../selectors/profile.selectors';
 import { ApiService } from '../../services/api.service';
 import { finalize, map, distinctUntilChanged, take, filter, tap } from 'rxjs/operators';
@@ -29,6 +29,18 @@ export class ResumeComponent implements OnInit {
   );
 
   profile$ = this.profileStore.pipe(select(getCurrentUser));
+
+  workExperiences$ = this.profile$.pipe(
+    map((profile) => {
+      return profile.experiences.filter((exp) => exp.category === ExperienceCategory.WORK);
+    }),
+  );
+
+  education$ = this.profile$.pipe(
+    map((profile) => {
+      return profile.experiences.filter((exp) => exp.category === ExperienceCategory.EDUCATION);
+    }),
+  );
 
   constructor(
     private readonly profileStore: Store<fromProfile.State>,

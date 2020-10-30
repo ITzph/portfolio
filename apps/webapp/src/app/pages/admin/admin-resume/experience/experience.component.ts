@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { IUserExperience } from '@portfolio/api-interfaces';
+import { ExperienceCategory, IUserExperience } from '@portfolio/api-interfaces';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
@@ -34,6 +34,7 @@ export class AdminExperienceComponent extends ResumeAdminComponentAbstract {
         events: 'Events in the experience',
         name: 'Update name',
         role: 'Update this Role',
+        category: ExperienceCategory.WORK, // TODO Make this dynamic
         startDate: null,
         isActive: false,
       };

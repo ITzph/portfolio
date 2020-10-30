@@ -11,15 +11,21 @@
         <div class="resume__body">
           <div class="first-side">
             <div class="experiences__wrapper">
-              <h3>Work Experience</h3>
-              <ng-container *ngFor="let exp of profile.experiences">
+              <h2 class="social__label">Work Experience</h2>
+              <ng-container *ngFor="let exp of workExperiences$ | async">
+                <portfolio-experience [experience]="exp"></portfolio-experience>
+              </ng-container>
+            </div>
+            <div class="experiences__wrapper">
+              <h2 class="social__label">Education</h2>
+              <ng-container *ngFor="let exp of education$ | async">
                 <portfolio-experience [experience]="exp"></portfolio-experience>
               </ng-container>
             </div>
           </div>
           <div class="second-side">
-            <div class="social__handlers">
-              <h1>SOCIAL</h1>
+            <div class="social__wrapper">
+              <h2 class="social__label">Social</h2>
               <ng-container *ngFor="let social of socialHandlers$ | async">
                 <portfolio-static-social-handler
                   [social]="social"
@@ -27,7 +33,7 @@
               </ng-container>
             </div>
             <div class="skills__wrapper">
-              <h2>Work Skills</h2>
+              <h2 class="section__label">Work Skills</h2>
               <ng-container *ngFor="let category of categorizedSkill$ | async">
                 <div class="skills-category">
                   <h3>{{ category.category }}</h3>
