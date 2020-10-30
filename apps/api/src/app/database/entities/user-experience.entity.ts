@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { User } from './user.entity';
-import { IUserExperience } from '@portfolio/api-interfaces';
+import { ExperienceCategory, IUserExperience } from '@portfolio/api-interfaces';
 
 @Entity({ name: 'user_experience' })
 export class UserExperience implements IUserExperience {
@@ -12,6 +12,9 @@ export class UserExperience implements IUserExperience {
 
   @Column({ name: 'role', nullable: true })
   role: string;
+
+  @Column({ name: 'category', type: 'text', default: ExperienceCategory.OTHERS })
+  category: ExperienceCategory;
 
   @Column('date', { name: 'start_date', nullable: true })
   startDate: Date;

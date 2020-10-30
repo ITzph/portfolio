@@ -2,7 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Action, select, Store } from '@ngrx/store';
-import { IUserExperience, PORTFOLIO_ENDPOINTS } from '@portfolio/api-interfaces';
+import {
+  ExperienceCategory,
+  IUserExperience,
+  PORTFOLIO_ENDPOINTS,
+} from '@portfolio/api-interfaces';
 import { getExperiences } from '../../../../selectors/profile.selectors';
 import * as fromProfile from '../../../../reducers/profile.reducer';
 import { updateExperience } from '../../../../actions/profile.actions';
@@ -39,6 +43,7 @@ export class ExperienceService extends ResumeAdminServiceAbstract {
         startDate: experience?.startDate ?? exp.startDate,
         name: experience?.name ?? exp.name,
         role: experience?.role ?? exp.role,
+        category: ExperienceCategory.WORK,
         isActive: experience?.isActive ?? exp.isActive,
       };
 

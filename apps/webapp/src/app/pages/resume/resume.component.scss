@@ -1,21 +1,10 @@
 @import '../../../styles/variables';
 
-.skills__wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  margin-bottom: $margin-medium;
-
-  :not(:first-child) {
-    margin-left: $margin-very-very-small;
-  }
-}
-
 .experiences {
   &__wrapper {
     :not(:first-child) {
       background-color: blue;
-      margin-top: $margin-small;
+      margin-top: $margin-medium;
     }
     width: 100%;
   }
@@ -69,13 +58,59 @@
   }
 }
 
+.social {
+  &__wrapper {
+    margin-bottom: $margin-big;
+
+    :not(:first-child) {
+      padding-left: $padding-big;
+      margin: $margin-small;
+    }
+  }
+}
+
+.section {
+  &__label {
+    margin-bottom: $margin-medium;
+  }
+
+  &__icon {
+    margin-right: $margin-small;
+  }
+}
+
 .skills-group {
   justify-content: center;
 }
 
-.skills-category {
-  display: flex;
-  flex-direction: column;
+.skills {
+  &-group {
+    justify-content: center;
+
+    > :not(:first-child) {
+      margin-left: $margin-very-small;
+    }
+  }
+
+  &__category {
+    display: flex;
+    flex-direction: column;
+
+    &__label {
+      margin-bottom: $margin-very-very-small;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-bottom: $margin-medium;
+
+    > :not(:first-child) {
+      margin-top: $margin-small;
+    }
+  }
 }
 
 .resume__container {

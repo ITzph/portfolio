@@ -27,6 +27,12 @@ export interface IUserSkill extends Identifiable {
   isCurrent: boolean;
 }
 
+export enum ExperienceCategory {
+  EDUCATION = 'Education',
+  WORK = 'Work',
+  OTHERS = 'Others',
+}
+
 export interface IUserExperience extends Identifiable {
   id: number;
   name: string;
@@ -35,6 +41,7 @@ export interface IUserExperience extends Identifiable {
   endDate: Date | string;
   events: string;
   isActive: boolean;
+  category: ExperienceCategory;
 }
 
 export interface IUserCertification extends Identifiable {
