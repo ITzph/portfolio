@@ -7,6 +7,12 @@
 
 .title {
   font-weight: bold;
+
+  > p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .date {
