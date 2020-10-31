@@ -6,7 +6,7 @@ import { TIME_ZONE } from '@portfolio/api-interfaces';
   name: 'dateFormatter',
 })
 export class DateFormatterPipe implements PipeTransform {
-  transform(value: string, ...args: unknown[]): unknown {
-    return formatDate(new Date(value), 'yyyy-MMM-dd', TIME_ZONE.DEFAULT);
+  transform(value: string, format = 'dd MMM yyyy'): unknown {
+    return formatDate(new Date(value), format, TIME_ZONE.DEFAULT);
   }
 }
