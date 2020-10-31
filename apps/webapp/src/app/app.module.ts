@@ -14,10 +14,11 @@ import { HeaderModule } from './modules/header/header.module';
 import { FooterModule } from './modules/footer/footer.module';
 import { HttpHeaderInterceptor } from './interceptors/http-header.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import localeSG from '@angular/common/locales/sg';
+import localeSG from '@angular/common/locales/en';
 import { registerLocaleData } from '@angular/common';
 
 import * as fromProfile from './reducers/profile.reducer';
+import { TIME_ZONE } from '@portfolio/api-interfaces';
 
 registerLocaleData(localeSG);
 
@@ -56,7 +57,7 @@ registerLocaleData(localeSG);
     },
     {
       provide: LOCALE_ID,
-      useValue: 'sg',
+      useValue: TIME_ZONE.DEFAULT,
     },
   ],
   bootstrap: [AppComponent],

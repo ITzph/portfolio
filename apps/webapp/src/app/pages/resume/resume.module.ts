@@ -33,6 +33,7 @@ import { MatIconModule } from '@angular/material/icon';
     SocialModule,
     MatChipsModule,
     MatIconModule,
+    UtilitiesModule,
   ],
   exports: [ResumeComponent, SkillComponent, ExperienceComponent, CertificationComponent],
 })

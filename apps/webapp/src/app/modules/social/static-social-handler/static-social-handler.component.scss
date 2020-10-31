@@ -6,7 +6,12 @@
 
 .social {
   display: grid;
-  grid-template-columns: 4rem 1fr;
+  grid-template-columns: 3rem 1fr;
+
+  > .name,
+  .url {
+    font-size: 0.9em;
+  }
 
   .social__icon {
     grid-row: span 2;

@@ -7,7 +7,10 @@
       </p>
     </div>
     <div class="date">
-      <p>{{ experience.startDate }} - {{ experience.endDate }}</p>
+      <p style="font-size: 0.9em; margin-top: 0.3rem;">
+        {{ experience.startDate | dateFormatter }} -
+        {{ experience.endDate | dateFormatter }}
+      </p>
     </div>
     <quill-view-html [content]="experience.events" theme="snow"></quill-view-html>
   </div>
