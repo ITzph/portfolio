@@ -8,7 +8,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { IUserCertification } from '@portfolio/api-interfaces';
+import { IUserCertification, TIME_ZONE } from '@portfolio/api-interfaces';
 import { CertificationService } from '../certification.service';
 
 @Component({
@@ -67,7 +67,7 @@ export class UpdateCertificationComponent implements OnInit {
       const updatedExperience: Partial<IUserCertification> = {
         name,
         id: certification.id,
-        dateAcquired: formatDate(dateAcquired, 'yyyy-MM-dd', 'sg'),
+        dateAcquired: formatDate(dateAcquired, 'yyyy-MM-dd', TIME_ZONE.DEFAULT),
         description,
         provider,
         url,

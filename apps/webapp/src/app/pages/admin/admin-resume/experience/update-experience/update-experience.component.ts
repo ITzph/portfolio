@@ -11,7 +11,7 @@ import {
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { select, Store } from '@ngrx/store';
-import { IUserExperience } from '@portfolio/api-interfaces';
+import { IUserExperience, TIME_ZONE } from '@portfolio/api-interfaces';
 import { updateExperience, updateProfile } from '../../../../../actions/profile.actions';
 import { getExperiences } from '../../../../../selectors/profile.selectors';
 import { take, withLatestFrom } from 'rxjs/operators';
@@ -67,8 +67,8 @@ export class UpdateExperienceComponent implements OnInit {
       name,
       role,
       id: experience.id,
-      startDate: formatDate(startDate, 'yyyy-MM-dd', 'sg'),
-      endDate: formatDate(endDate, 'yyyy-MM-dd', 'sg'),
+      startDate: formatDate(startDate, 'yyyy-MM-dd', TIME_ZONE.DEFAULT),
+      endDate: formatDate(endDate, 'yyyy-MM-dd', TIME_ZONE.DEFAULT),
     };
 
     const callback = () => {

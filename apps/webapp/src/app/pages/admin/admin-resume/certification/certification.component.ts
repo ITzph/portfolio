@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ResumeAdminComponentAbstract } from '../resume-admin-abstract.component';
 import * as fromProfile from '../../../../reducers/profile.reducer';
-import { Identifiable, IUserCertification } from '@portfolio/api-interfaces';
+import { Identifiable, IUserCertification, TIME_ZONE } from '@portfolio/api-interfaces';
 import { CertificationService } from './certification.service';
 import { formatDate } from '@angular/common';
 
@@ -34,7 +34,7 @@ export class AdminCertificationComponent extends ResumeAdminComponentAbstract im
     const cb = () => {
       const emptyCertification: IUserCertification = {
         id: null,
-        dateAcquired: formatDate(new Date(), 'yyyy-MM-dd', 'sg'),
+        dateAcquired: formatDate(new Date(), 'yyyy-MM-dd', TIME_ZONE.DEFAULT),
         description: 'To Update',
         name: 'To Update',
         provider: 'To Update',
