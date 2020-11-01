@@ -1,4 +1,11 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectionStrategy,
+  Inject,
+  PLATFORM_ID,
+} from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ISocialHandler } from '@portfolio/api-interfaces';
@@ -9,6 +16,7 @@ import * as fromProfile from '../../../reducers/profile.reducer';
 import { getCurrentUser } from '../../../selectors/profile.selectors';
 import { AuthService } from '../../../services/auth.service';
 import { HeaderAbstract } from '../header.abstract';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'portfolio-header',
@@ -25,6 +33,7 @@ export class HeaderComponent extends HeaderAbstract implements OnInit, OnDestroy
     authService: AuthService,
     snackBar: MatSnackBar,
     dialog: MatDialog,
+    @Inject(PLATFORM_ID) private platformID: Object,
   ) {
     super(authService, dialog, snackBar);
   }
@@ -36,44 +45,46 @@ export class HeaderComponent extends HeaderAbstract implements OnInit, OnDestroy
   scrollEvent: Subject<number> = new Subject();
 
   ngOnInit() {
-    const appRoot = document.getElementById('app-root');
+    if (isPlatformBrowser(this.platformID)) {
+      const appRoot = document.getElementById('app-root');
 
-    this.socialHandlers$ = this.profileStore.pipe(
-      select(getCurrentUser),
-      map((user) => {
-        return user?.socialHandlers ?? [];
-      }),
-    );
-    // This is for reference, if I want to return changing of header
+      this.socialHandlers$ = this.profileStore.pipe(
+        select(getCurrentUser),
+        map((user) => {
+          return user?.socialHandlers ?? [];
+        }),
+      );
+      // This is for reference, if I want to return changing of header
 
-    // this.render.listen('body', 'wheel', () => {
-    //   const rect = this.el.nativeElement.getBoundingClientRect().top;
-    //   this.scrollEvent.next(rect);
-    // });
+      // this.render.listen('body', 'wheel', () => {
+      //   const rect = this.el.nativeElement.getBoundingClientRect().top;
+      //   this.scrollEvent.next(rect);
+      // });
 
-    // this.render.listen(appRoot, 'scroll', () => {
-    //   const rect = this.el.nativeElement.getBoundingClientRect().top;
-    //   this.scrollEvent.next(rect);
-    // });
+      // this.render.listen(appRoot, 'scroll', () => {
+      //   const rect = this.el.nativeElement.getBoundingClientRect().top;
+      //   this.scrollEvent.next(rect);
+      // });
 
-    // this.scrollEvent
-    //   .pipe(
-    //     throttleTime(50),
-    //     takeWhile(() => !this.isUnsubscribed),
-    //   )
-    //   .subscribe((rect) => {
-    //     if (rect < -20) {
-    //       if (!this.isPinned) {
-    //         this.isPinned = true;
-    //         this.cdr.detectChanges();
-    //       }
-    //     } else {
-    //       if (this.isPinned) {
-    //         this.isPinned = false;
-    //         this.cdr.detectChanges();
-    //       }
-    //     }
-    //   });
+      // this.scrollEvent
+      //   .pipe(
+      //     throttleTime(50),
+      //     takeWhile(() => !this.isUnsubscribed),
+      //   )
+      //   .subscribe((rect) => {
+      //     if (rect < -20) {
+      //       if (!this.isPinned) {
+      //         this.isPinned = true;
+      //         this.cdr.detectChanges();
+      //       }
+      //     } else {
+      //       if (this.isPinned) {
+      //         this.isPinned = false;
+      //         this.cdr.detectChanges();
+      //       }
+      //     }
+      //   });
+    }
   }
 
   showLinks(isVisible: boolean) {
