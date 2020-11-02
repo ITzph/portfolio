@@ -16,9 +16,9 @@
       "prefix": "portfolio",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "outputPath": "dist/webapp/browser",
+            "outputPath": "dist/apps/webapp/browser",
             "index": "apps/webapp/src/index.html",
             "main": "apps/webapp/src/main.ts",
             "polyfills": "apps/webapp/src/polyfills.ts",
@@ -31,7 +31,10 @@
               "node_modules/animate.css/animate.min.css",
               "node_modules/hover.css/css/hover-min.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "./webpack-webapp.config.js"
+            }
           },
           "configurations": {
             "production": {
@@ -117,7 +120,7 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/webapp/server",
+            "outputPath": "dist/apps/webapp/server",
             "main": "apps/webapp/server.ts",
             "tsConfig": "apps/webapp/tsconfig.server.json"
           },
@@ -153,7 +156,7 @@
           "options": {
             "browserTarget": "webapp:build:production",
             "serverTarget": "webapp:server:production",
-            "routes": ["/"]
+            "routesFile": "./routes.txt"
           },
           "configurations": {
             "production": {}
