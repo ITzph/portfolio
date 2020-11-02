@@ -18,10 +18,9 @@ phases:
   build:
     commands:
       - echo building...
-      - ng build webapp --prod
-      - aws s3 rm s3://$ARTIFACTS_BUCKET --recursive
+      - npm run build:ssr
 artifacts:
   files:
     - '**/*'
   discard-paths: no
-  base-directory: dist/webapp/browser
+  base-directory: dist/apps/webapp
