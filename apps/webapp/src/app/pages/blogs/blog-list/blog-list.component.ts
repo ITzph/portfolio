@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Blog } from '@portfolio/api-interfaces';
 import { NgxSpinnerService } from 'ngx-spinner';

@@ -76,7 +76,6 @@ p {
 h1 {
   font-size: 3rem;
   margin-bottom: var(--margin-small);
-  text-transform: uppercase;
 }
 
 h2 {
@@ -86,6 +85,18 @@ h2 {
 
 h3 {
   font-size: 1.8rem;
+}
+
+h4 {
+  font-size: 1.6rem;
+}
+
+h5 {
+  font-size: 1.4rem;
+}
+
+h6 {
+  font-size: 1.2rem;
 }
 
 body {

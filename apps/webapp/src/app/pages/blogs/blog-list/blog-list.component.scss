@@ -2,13 +2,43 @@
 
 :host {
   display: block;
-  margin: $margin-big 0;
+  @media #{$sm-device} {
+    margin: $margin-small 0;
+  }
+
+  @media #{$md-device} {
+    margin: $margin-medium 0;
+  }
+
+  @media #{$lg-device} {
+    margin: $margin-big 0;
+  }
 }
 
 .blogs-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+
+  @media #{$md-device} {
+    flex-direction: row;
+  }
+
+  portfolio-tag-filter {
+    width: 30rem;
+    align-self: center;
+    margin-top: 2rem;
+
+    @media #{$md-device} {
+      width: 30rem;
+      align-self: unset;
+      margin-top: 0;
+    }
+
+    @media #{$lg-device} {
+      width: 33rem;
+    }
+  }
 }
 
 .blogs-wrapper {
@@ -19,21 +49,28 @@
   padding: $padding-very-small $padding-small;
 
   > :not(:last-child) {
-    margin-bottom: $margin-medium;
+    margin-bottom: $margin-small;
+    @media #{$md-device} {
+      margin-bottom: $margin-small;
+    }
   }
 
   > portfolio-blog-tile {
     width: 99%;
     min-width: 25rem;
     @media #{$xs-device} {
-      width: 50rem;
+      width: 30rem;
     }
 
     @media #{$md-device} {
-      width: 60rem;
+      width: 40rem;
     }
 
     @media #{$lg-device} {
+      width: 55rem;
+    }
+
+    @media #{$xl-device} {
       width: 70rem;
     }
   }
