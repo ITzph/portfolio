@@ -56,6 +56,7 @@ export interface ISocialHandler {
   url: string;
   name: string;
   icon: string;
+  color: string;
   description: string;
 }
 

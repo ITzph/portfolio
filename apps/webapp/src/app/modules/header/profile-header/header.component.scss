@@ -63,6 +63,11 @@
 
   &__socials {
     display: flex;
+    background: white;
+    padding: 0.25rem 1rem;
+    border-radius: 6px;
+    box-shadow: $shadow-1;
+
     :not(:last-child) {
       margin-right: $margin-small;
     }

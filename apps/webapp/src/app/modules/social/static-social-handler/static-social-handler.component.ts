@@ -12,7 +12,7 @@ export class StaticSocialHandlerComponent implements OnInit {
   social: ISocialHandler;
 
   @Input()
-  fillColor = '#000000';
+  fillColor = null;
 
   constructor() {}
 

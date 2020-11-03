@@ -4,7 +4,7 @@
     class="social__icon"
     [applyClass]="true"
     svgClass="social__icon animate__animated animate__wobble"
-    [svgStyle]="{ 'width.rem': 2.5, fill: fillColor }"
+    [svgStyle]="{ 'width.rem': 2.5, fill: fillColor || social.color }"
   ></svg-icon>
   <p class="name" [style.color]="fillColor">{{ social.name }}</p>
   <a class="url" [href]="social.url">{{ social.url }}</a>
