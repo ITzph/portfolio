@@ -32,7 +32,7 @@
         />
       </mat-chip-list>
     </mat-form-field>
-    <quill-editor formControlName="content"> </quill-editor>
+    <quill-editor formControlName="content" [modules]="{ syntax: true }"> </quill-editor>
     <mat-hint>*Content is required</mat-hint>
     <mat-card-actions class="actions">
       <button mat-raised-button color="warn" (click)="close()">Cancel</button>
