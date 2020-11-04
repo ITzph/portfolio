@@ -8,7 +8,6 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { environment } from '../environments/environment';
-import { HmrModule, stateSetter } from '../hmr.module';
 import { CustomSerializer } from './merged-route-serializer';
 import { HeaderModule } from './modules/header/header.module';
 import { FooterModule } from './modules/footer/footer.module';
@@ -32,7 +31,6 @@ registerLocaleData(localeSG);
     StoreModule.forRoot(
       {},
       {
-        metaReducers: !environment.production ? [stateSetter] : [],
         runtimeChecks: {
           strictActionImmutability: true,
           strictStateImmutability: true,
@@ -62,4 +60,4 @@ registerLocaleData(localeSG);
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule extends HmrModule {}
+export class AppModule {}
