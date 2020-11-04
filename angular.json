@@ -64,14 +64,6 @@
                   "maximumError": "10kb"
                 }
               ]
-            },
-            "hmr": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/webapp/src/environments/environment.ts",
-                  "with": "apps/webapp/src/environments/environment.hmr.ts"
-                }
-              ]
             }
           }
         },
@@ -84,10 +76,6 @@
           "configurations": {
             "production": {
               "browserTarget": "webapp:build:production"
-            },
-            "hmr": {
-              "hmr": true,
-              "browserTarget": "webapp:build:hmr"
             }
           }
         },
