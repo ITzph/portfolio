@@ -1,14 +1,16 @@
-<section class="blogs-container">
-  <article class="blogs-wrapper">
-    <ng-container *ngFor="let blog of filteredBlogs$ | async; trackBy: blogTracker">
-      <portfolio-blog-tile [blog]="blog"></portfolio-blog-tile>
-    </ng-container>
-  </article>
-  <portfolio-tag-filter
-    [tags]="tagList$ | async"
-    (selectedChange)="onSelectedTagChange($event)"
-  ></portfolio-tag-filter>
-</section>
+<ng-container *ngIf="filteredBlogs$ | async; let filteredBlogs">
+  <section class="blogs-container" *ngIf="filteredBlogs.length > 0; else emptyList">
+    <article class="blogs-wrapper">
+      <ng-container *ngFor="let blog of filteredBlogs; trackBy: blogTracker">
+        <portfolio-blog-tile [blog]="blog"></portfolio-blog-tile>
+      </ng-container>
+    </article>
+    <portfolio-tag-filter
+      [tags]="tagList$ | async"
+      (selectedChange)="onSelectedTagChange($event)"
+    ></portfolio-tag-filter>
+  </section>
+</ng-container>
 <ngx-spinner
   name="blogsSpinner"
   size="medium"
@@ -17,3 +19,11 @@
   [fullScreen]="true"
   ><p style="color: white;">Weight lungs...</p></ngx-spinner
 >
+
+<ng-template #emptyList>
+  <mat-card>
+    <h3>
+      Fetching list
+    </h3>
+  </mat-card>
+</ng-template>

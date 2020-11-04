@@ -25,18 +25,18 @@
   }
 
   portfolio-tag-filter {
-    width: 30rem;
+    width: 33rem;
     align-self: center;
     margin-top: 2rem;
 
     @media #{$md-device} {
-      width: 30rem;
+      width: 35rem;
       align-self: unset;
       margin-top: 0;
     }
 
     @media #{$lg-device} {
-      width: 33rem;
+      width: 37rem;
     }
   }
 }
