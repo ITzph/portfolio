@@ -70,6 +70,16 @@ export interface IImageMetadata {
   tags: string[];
 }
 
+export interface IFileMetadata {
+  id: number;
+  fileName: string;
+  url?: string;
+  title: string;
+  description: string;
+  createdAt: Date;
+  tags: string[];
+}
+
 export class Pagination<PaginationObject> {
   constructor(
     /**
