@@ -1,11 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { IImageMetadata } from '@portfolio/api-interfaces';
+import { IImageMetadata, ImageCategory } from '@portfolio/api-interfaces';
 import { User } from './user.entity';
-
-export enum ImageCategory {
-  MEME = 'MEME',
-  QUOTE = 'QUOTE',
-}
 
 @Entity({ name: 'image_metadata' })
 export class ImageMetadata implements IImageMetadata {
@@ -18,7 +13,7 @@ export class ImageMetadata implements IImageMetadata {
   @Column({ default: '' })
   description: string;
 
-  @Column({ length: 20 })
+  @Column('varchar', { length: 20 })
   category: ImageCategory;
 
   @Column({ default: '', length: 50 })
@@ -33,7 +28,7 @@ export class ImageMetadata implements IImageMetadata {
   @Column('datetime', { name: 'created_at' })
   createdAt: Date;
 
-  @ManyToOne(() => User, (user) => user.experiences)
+  @ManyToOne(() => User, (user) => user.images)
   @JoinColumn({ name: 'user_id' })
   user: User;
 }
