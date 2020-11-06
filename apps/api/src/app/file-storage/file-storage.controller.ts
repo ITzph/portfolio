@@ -9,10 +9,13 @@ import {
   Post,
   Req,
   Res,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { FileStorageService } from './file-storage.service';
 import { Request, Response } from 'express';
-import { FileMetadata } from '../database/entities/file.entity';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { FileCategory } from '@portfolio/api-interfaces';
 
 @Controller('files')
 export class FileStorageController {
@@ -24,7 +27,7 @@ export class FileStorageController {
   }
 
   @Get(':id')
-  getOneFilete(@Param('id', ParseIntPipe) id: number) {
+  getOneFile(@Param('id', ParseIntPipe) id: number) {
     return this.fileStorageService.getOneFile(id);
   }
 
@@ -39,11 +42,25 @@ export class FileStorageController {
     }
   }
 
-  @Post('')
-  addNewFile(@Req() req: Request) {
-    const file: FileMetadata = req.body;
+  @Post()
+  @UseInterceptors(FileInterceptor('file'))
+  async addNewFile(@UploadedFile() file, @Req() req: Request, @Res() res: Response) {
+    const body = req.body as { fileName: string; description: string; category: FileCategory };
 
-    return this.fileStorageService.addNewFile(file);
+    try {
+      const resultingFile = await this.fileStorageService.addNewFile({
+        id: null,
+        description: body?.description,
+        category: body?.category,
+        url: file.location,
+        fileName: body?.fileName,
+        tags: [],
+        createdAt: new Date(),
+      });
+      res.send(resultingFile);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   @Patch(':id')

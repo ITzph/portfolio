@@ -15,9 +15,6 @@ export class FileMetadata implements IFileMetadata {
   @Column('varchar', { length: 30 })
   category: FileCategory;
 
-  @Column({ default: '', length: 50 })
-  title: string;
-
   @Column()
   url: string;
 

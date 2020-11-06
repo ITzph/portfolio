@@ -74,7 +74,6 @@ export interface IFileMetadata {
   id: number;
   fileName: string;
   url?: string;
-  title: string;
   description: string;
   createdAt: Date;
   tags: string[];
