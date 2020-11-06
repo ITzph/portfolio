@@ -76,6 +76,7 @@ export interface IFileMetadata {
   url?: string;
   description: string;
   createdAt: Date;
+  key: string;
   tags: string[];
 }
 

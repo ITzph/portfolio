@@ -16,19 +16,32 @@ import { FileStorageService } from './file-storage.service';
 import { Request, Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FileCategory } from '@portfolio/api-interfaces';
+import { FilesS3Service } from './files-s3.service';
 
 @Controller('files')
 export class FileStorageController {
-  constructor(private readonly fileStorageService: FileStorageService) {}
+  constructor(
+    private readonly fileStorageService: FileStorageService,
+    private readonly s3Service: FilesS3Service,
+  ) {}
 
   @Get('')
   getALlFiles() {
     return this.fileStorageService.getAllFiles();
   }
 
-  @Get(':id')
-  getOneFile(@Param('id', ParseIntPipe) id: number) {
-    return this.fileStorageService.getOneFile(id);
+  @Get(':key')
+  async getImageByKey(@Param('key') key: string, @Res() res: Response) {
+    try {
+      const s3GetRes = await this.s3Service
+        .s3Instance()
+        .getObject({ Bucket: process.env.AWS_FILE_BUCKET_NAME, Key: key })
+        .promise();
+
+      res.status(HttpStatus.OK).set('Content-Type', 'image/*').send(s3GetRes.Body);
+    } catch (error) {
+      res.status(HttpStatus.NOT_FOUND).send('Image not found');
+    }
   }
 
   @Delete(':id')
@@ -54,6 +67,7 @@ export class FileStorageController {
         category: body?.category,
         url: file.location,
         fileName: body?.fileName,
+        key: file.key,
         tags: [],
         createdAt: new Date(),
       });

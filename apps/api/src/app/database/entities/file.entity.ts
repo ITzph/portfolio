@@ -9,6 +9,9 @@ export class FileMetadata implements IFileMetadata {
   @Column({ name: 'file_name', length: 50 })
   fileName: string;
 
+  @Column({ unique: true })
+  key: string;
+
   @Column({ default: '' })
   description: string;
 
