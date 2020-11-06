@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { LoggerModule } from './logger/logger.module';
 import { EmailModule } from './email/email.module';
 import { BlogModule } from './blog/blog.module';
+import { FileStorageModule } from './file-storage/file-storage.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { BlogModule } from './blog/blog.module';
     LoggerModule,
     EmailModule,
     BlogModule,
+    FileStorageModule,
   ],
   controllers: [AppController],
   providers: [AppService],

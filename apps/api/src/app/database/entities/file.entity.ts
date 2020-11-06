@@ -9,14 +9,14 @@ export class FileMetadata implements IFileMetadata {
   @Column({ name: 'file_name', length: 50 })
   fileName: string;
 
+  @Column({ unique: true })
+  key: string;
+
   @Column({ default: '' })
   description: string;
 
   @Column('varchar', { length: 30 })
   category: FileCategory;
-
-  @Column({ default: '', length: 50 })
-  title: string;
 
   @Column()
   url: string;
