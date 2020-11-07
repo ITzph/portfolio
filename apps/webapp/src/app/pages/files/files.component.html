@@ -1,1 +1,15 @@
-<p>files works!</p>
+<portfolio-public-layout>
+  <portfolio-header contentHeader></portfolio-header>
+  <section contentBody>
+    <ng-container *ngIf="files$ | async; else emptyFiles">
+      <p>{{ files$ | async | json }}</p>
+    </ng-container>
+  </section>
+  <portfolio-footer contentFooter></portfolio-footer>
+</portfolio-public-layout>
+
+<ng-template #emptyFiles>
+  <mat-card>
+    <h3>EmptyList</h3>
+  </mat-card>
+</ng-template>

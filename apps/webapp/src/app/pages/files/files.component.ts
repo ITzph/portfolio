@@ -1,4 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { IFileMetadata } from '@portfolio/api-interfaces';
+import { Observable } from 'rxjs';
+import { FilesService } from './files.service';
 
 @Component({
   selector: 'portfolio-files',
@@ -7,7 +10,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilesViewerComponent implements OnInit {
-  constructor() {}
+  files$: Observable<IFileMetadata[]> = this.filesService.getAllFiles();
+
+  constructor(private readonly filesService: FilesService) {}
 
   ngOnInit(): void {}
 }
