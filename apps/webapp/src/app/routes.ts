@@ -29,6 +29,10 @@ export const routes: Routes = [
     loadChildren: () => import('./pages/blogs/blogs.module').then((m) => m.BlogsModule),
   },
   {
+    path: 'files',
+    loadChildren: () => import('./pages/files/files.module').then((m) => m.FilesModule),
+  },
+  {
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin.module').then((m) => m.AdminModule),
     canLoad: [CanLoadAuthenticatedGuard],
