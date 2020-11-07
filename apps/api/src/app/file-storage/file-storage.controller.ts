@@ -35,7 +35,7 @@ export class FileStorageController {
     try {
       const s3GetRes = await this.s3Service
         .s3Instance()
-        .getObject({ Bucket: process.env.AWS_FILE_BUCKET_NAME, Key: key })
+        .getObject({ Bucket: process.env.AWS_FILES_BUCKET_NAME, Key: key })
         .promise();
 
       res.status(HttpStatus.OK).set('Content-Type', 'image/*').send(s3GetRes.Body);
