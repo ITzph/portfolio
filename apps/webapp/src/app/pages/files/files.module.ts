@@ -7,9 +7,11 @@ import { LayoutModule } from '../../modules/layout/layout.module';
 import { HeaderModule } from '../../modules/header/header.module';
 import { FooterModule } from '../../modules/footer/footer.module';
 import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { FileListComponent } from './file-list/file-list.component';
 
 @NgModule({
-  declarations: [FilesViewerComponent],
+  declarations: [FilesViewerComponent, FileListComponent],
   imports: [
     CommonModule,
     FilesRoutingModule,
@@ -17,7 +19,8 @@ import { MatCardModule } from '@angular/material/card';
     HeaderModule,
     FooterModule,
     MatCardModule,
+    MatTableModule,
   ],
-  exports: [FilesViewerComponent],
+  exports: [FilesViewerComponent, FileListComponent],
 })
 export class FilesModule {}

@@ -2,7 +2,7 @@
   <portfolio-header contentHeader></portfolio-header>
   <section contentBody>
     <ng-container *ngIf="files$ | async; else emptyFiles">
-      <p>{{ files$ | async | json }}</p>
+      <portfolio-file-list [fileList]="files$ | async"></portfolio-file-list>
     </ng-container>
   </section>
   <portfolio-footer contentFooter></portfolio-footer>
