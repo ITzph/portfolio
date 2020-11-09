@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { FileListComponent } from './file-list/file-list.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [FilesViewerComponent, FileListComponent],
@@ -22,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatTableModule,
     MatIconModule,
+    MatButtonModule,
   ],
   exports: [FilesViewerComponent, FileListComponent],
 })
