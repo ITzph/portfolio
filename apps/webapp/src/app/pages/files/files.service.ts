@@ -18,4 +18,10 @@ export class FilesService {
       responseType: 'arraybuffer' as 'json',
     });
   }
+
+  getResume() {
+    return this.http.get(`${environment.api}/files/resume`, {
+      responseType: 'arraybuffer' as 'json',
+    });
+  }
 }

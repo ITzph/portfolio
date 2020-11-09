@@ -2,6 +2,7 @@ import { MulterOptionsFactory, MulterModuleOptions } from '@nestjs/platform-expr
 import * as AWS from 'aws-sdk';
 import * as MulterS3 from 'multer-s3';
 import { ConfigService } from '@nestjs/config';
+import { v4 as uuid } from 'uuid';
 
 export abstract class S3BucketAbstract implements MulterOptionsFactory {
   private s3: any;
@@ -36,8 +37,9 @@ export abstract class S3BucketAbstract implements MulterOptionsFactory {
       bucket,
       acl,
       key: function (req, file, cb) {
-        /*I'm using Date.now() to make sure my file has a unique name*/
-        const s3Key = `${Date.now()}_${file.originalname}`;
+        const key = req?.body?.key;
+
+        const s3Key = key ? key : uuid();
         req.file = s3Key;
         cb(null, s3Key);
       },
