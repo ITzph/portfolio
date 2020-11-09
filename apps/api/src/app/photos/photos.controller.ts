@@ -92,7 +92,7 @@ export class PhotosController {
       await this.s3Service
         .s3Instance()
         .deleteObject({
-          Bucket: process.env.AWS_MEMES_BUCKET_NAME,
+          Bucket: process.env.AWS_PHOTOS_BUCKET_NAME,
           Key: imageToDelete.imageName,
         })
         .promise();
@@ -138,7 +138,7 @@ export class PhotosController {
     try {
       const s3GetRes = await this.s3Service
         .s3Instance()
-        .getObject({ Bucket: process.env.AWS_MEMES_BUCKET_NAME, Key: key })
+        .getObject({ Bucket: process.env.AWS_PHOTOS_BUCKET_NAME, Key: key })
         .promise();
 
       res.status(HttpStatus.OK).set('Content-Type', 'image/*').send(s3GetRes.Body);

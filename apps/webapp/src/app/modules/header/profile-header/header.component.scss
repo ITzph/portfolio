@@ -23,7 +23,7 @@
     display: none;
   }
   @media #{$sm-device} {
-    display: block;
+    display: none;
   }
   @media #{$md-device} {
     display: block;
@@ -35,9 +35,6 @@
 
 .links-button {
   display: block;
-  @media #{$sm-device} {
-    display: none;
-  }
 
   @media #{$md-device} {
     display: none;

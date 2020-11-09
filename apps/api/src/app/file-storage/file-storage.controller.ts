@@ -31,14 +31,28 @@ export class FileStorageController {
   }
 
   @Get(':key')
-  async getImageByKey(@Param('key') key: string, @Res() res: Response) {
+  async getFileByKey(@Param('key') key: string, @Res() res: Response) {
     try {
       const s3GetRes = await this.s3Service
         .s3Instance()
-        .getObject({ Bucket: process.env.AWS_FILE_BUCKET_NAME, Key: key })
+        .getObject({ Bucket: process.env.AWS_FILES_BUCKET_NAME, Key: key })
         .promise();
 
-      res.status(HttpStatus.OK).set('Content-Type', 'image/*').send(s3GetRes.Body);
+      res.status(HttpStatus.OK).set('Content-Type', 'application/octet-stream').send(s3GetRes.Body);
+    } catch (error) {
+      res.status(HttpStatus.NOT_FOUND).send('Image not found');
+    }
+  }
+
+  @Get('resume/download')
+  async getResume(@Res() res: Response) {
+    try {
+      const s3GetRes = await this.s3Service
+        .s3Instance()
+        .getObject({ Bucket: process.env.AWS_FILES_BUCKET_NAME, Key: process.env.RESUME_S3_KEY })
+        .promise();
+
+      res.status(HttpStatus.OK).set('Content-Type', 'application/pdf').send(s3GetRes.Body);
     } catch (error) {
       res.status(HttpStatus.NOT_FOUND).send('Image not found');
     }
