@@ -38,7 +38,7 @@ export class FileStorageController {
         .getObject({ Bucket: process.env.AWS_FILES_BUCKET_NAME, Key: key })
         .promise();
 
-      res.status(HttpStatus.OK).set('Content-Type', 'image/*').send(s3GetRes.Body);
+      res.status(HttpStatus.OK).set('Content-Type', 'application/octet-stream').send(s3GetRes.Body);
     } catch (error) {
       res.status(HttpStatus.NOT_FOUND).send('Image not found');
     }

@@ -10,6 +10,12 @@ export class FilesService {
   constructor(private readonly http: HttpClient) {}
 
   getAllFiles() {
-    return this.http.get<IFileMetadata[]>(environment.api + '/files');
+    return this.http.get<IFileMetadata[]>(`${environment.api}/files`);
+  }
+
+  getOneFile(key: string) {
+    return this.http.get(`${environment.api}/files/${key}`, {
+      responseType: 'arraybuffer' as 'json',
+    });
   }
 }

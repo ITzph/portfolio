@@ -9,6 +9,7 @@ import { FooterModule } from '../../modules/footer/footer.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { FileListComponent } from './file-list/file-list.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [FilesViewerComponent, FileListComponent],
@@ -20,6 +21,7 @@ import { FileListComponent } from './file-list/file-list.component';
     FooterModule,
     MatCardModule,
     MatTableModule,
+    MatIconModule,
   ],
   exports: [FilesViewerComponent, FileListComponent],
 })
