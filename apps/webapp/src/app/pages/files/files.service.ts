@@ -20,7 +20,7 @@ export class FilesService {
   }
 
   getResume() {
-    return this.http.get(`${environment.api}/files/resume`, {
+    return this.http.get(`${environment.api}/files/resume/download`, {
       responseType: 'arraybuffer' as 'json',
     });
   }
