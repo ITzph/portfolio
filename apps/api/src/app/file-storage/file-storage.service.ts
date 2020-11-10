@@ -10,7 +10,9 @@ export class FileStorageService {
   ) {}
 
   public getAllFiles() {
-    return this.fileRepository.find();
+    return this.fileRepository.find({
+      select: ['fileName', 'category', 'description', 'id', 'key', 'tags'],
+    });
   }
 
   public getOneFile(id: number) {

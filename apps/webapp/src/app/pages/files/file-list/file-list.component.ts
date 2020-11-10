@@ -16,6 +16,7 @@ export class FileListComponent implements OnInit {
     png: 'image',
     pdf: 'picture_as_pdf',
     txt: 'view_headline',
+    docx: 'article',
   };
 
   get filesToDisplay(): (IFileMetadata & { fileType: string })[] {
