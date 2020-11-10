@@ -17,6 +17,9 @@ import { QuillModule } from 'ngx-quill';
 import { MatChipsModule } from '@angular/material/chips';
 import { SocialModule } from '../../modules/social/social.module';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [ResumeComponent, SkillComponent, ExperienceComponent, CertificationComponent],
@@ -34,6 +37,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatChipsModule,
     MatIconModule,
     UtilitiesModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatTooltipModule,
   ],
   exports: [ResumeComponent, SkillComponent, ExperienceComponent, CertificationComponent],
 })

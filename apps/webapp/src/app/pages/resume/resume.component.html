@@ -1,6 +1,21 @@
 <portfolio-public-layout>
   <portfolio-header contentHeader></portfolio-header>
   <section contentBody class="resume__container">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      class="resume__download"
+      matTooltip="Download resume"
+      matTooltipPosition="left"
+    >
+      <mat-icon class="resume__download__icon animate__animated animate__pulse animate__infinite"
+        >cloud_download</mat-icon
+      >
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="downloadResume('pdf')">PDF</button>
+      <button mat-menu-item (click)="downloadResume('word')">Word</button>
+    </mat-menu>
     <div class="content__wrapper">
       <header class="resume__header">
         <h1 class="name">Carlo Gino</h1>
