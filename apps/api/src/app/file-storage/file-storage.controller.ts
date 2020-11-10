@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   Req,
   Res,
   UploadedFile,
@@ -45,11 +46,12 @@ export class FileStorageController {
   }
 
   @Get('resume/download')
-  async getResume(@Res() res: Response) {
+  async getResume(@Query('fileType') fileType, @Res() res: Response) {
+    const resumeS3Key = `${process.env.RESUME_S3_KEY}_${fileType}`;
     try {
       const s3GetRes = await this.s3Service
         .s3Instance()
-        .getObject({ Bucket: process.env.AWS_FILES_BUCKET_NAME, Key: process.env.RESUME_S3_KEY })
+        .getObject({ Bucket: process.env.AWS_FILES_BUCKET_NAME, Key: resumeS3Key })
         .promise();
 
       res.status(HttpStatus.OK).set('Content-Type', 'application/pdf').send(s3GetRes.Body);

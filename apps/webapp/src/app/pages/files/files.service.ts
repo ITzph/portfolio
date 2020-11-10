@@ -19,8 +19,8 @@ export class FilesService {
     });
   }
 
-  getResume() {
-    return this.http.get(`${environment.api}/files/resume/download`, {
+  getResume(fileType: 'pdf' | 'word') {
+    return this.http.get(`${environment.api}/files/resume/download?fileType=${fileType}`, {
       responseType: 'arraybuffer' as 'json',
     });
   }

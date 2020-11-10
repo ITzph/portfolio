@@ -8,6 +8,7 @@ import { ApiService } from '../../services/api.service';
 import { finalize, map, distinctUntilChanged, take, filter, tap } from 'rxjs/operators';
 import { setProfile } from '../../actions/profile.actions';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { FilesService } from '../files/files.service';
 
 interface CategorizedSkill {
   category: string;
@@ -46,7 +47,26 @@ export class ResumeComponent implements OnInit {
     private readonly profileStore: Store<fromProfile.State>,
     private readonly apiService: ApiService,
     private readonly spinner: NgxSpinnerService,
+    private readonly filesService: FilesService,
   ) {}
+
+  downloadResume(fileType: 'pdf' | 'word') {
+    this.filesService.getResume(fileType).subscribe((response: any) => {
+      const filename = `MyResume.${fileType === 'word' ? '.docx' : 'pdf'}`;
+
+      const dataType = response.type;
+      if (filename) {
+        const binaryData = [];
+        binaryData.push(response);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, { type: dataType }));
+        downloadLink.setAttribute('download', filename);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      }
+    });
+  }
 
   get categorizedSkill$() {
     return this.profile$.pipe(
