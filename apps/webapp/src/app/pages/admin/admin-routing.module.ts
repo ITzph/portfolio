@@ -30,6 +30,11 @@ const routes: Routes = [
           import('./admin-photos/admin-photos.module').then((m) => m.AdminPhotosModule),
       },
       {
+        path: 'files',
+        loadChildren: () =>
+          import('./admin-files/admin-files.module').then((m) => m.AdminFilesModule),
+      },
+      {
         path: 'blogs',
         loadChildren: () =>
           import('./admin-blogs/admin-blogs.module').then((m) => m.AdminBlogsModule),
