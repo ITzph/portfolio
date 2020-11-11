@@ -33,6 +33,13 @@
     >Profile</a
   >
   <a
+    [routerLink]="['files']"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link hvr-skew-forward"
+    >Files</a
+  >
+  <a
     [routerLink]="['blogs']"
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
