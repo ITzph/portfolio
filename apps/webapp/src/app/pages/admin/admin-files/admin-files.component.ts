@@ -40,6 +40,11 @@ export class AdminFilesComponent implements OnInit {
       });
   }
 
+  onCancelEditing() {
+    this.initializeFileToDisplay();
+    this.isEditing = false;
+  }
+
   onFileUpdateStarted(file: EditableFile) {
     const currentFiles = this.filesToDisplay.getValue();
     this.filesToDisplay.next(
@@ -86,20 +91,23 @@ export class AdminFilesComponent implements OnInit {
   }
 
   onConfirmUpdate(file: EditableFile) {
-    const currentFiles = this.filesToDisplay.getValue();
-    this.filesToDisplay.next(
-      currentFiles.map((_file) => {
-        if (_file.id === file.id) {
-          this.isEditing = false;
-          return {
-            ...file,
-            editable: false,
-          };
-        }
+    this.filesService.updateFile(file.id, file).subscribe((updatedFile) => {
+      const currentFiles = this.filesToDisplay.getValue();
+      this.filesToDisplay.next(
+        currentFiles.map((_file) => {
+          if (_file.id === updatedFile.id) {
+            this.isEditing = false;
+            return {
+              ...file,
+              ...updatedFile,
+              editable: false,
+            };
+          }
 
-        return { ..._file, editable: false };
-      }),
-    );
+          return { ..._file, editable: false };
+        }),
+      );
+    });
   }
 
   constructor(private readonly filesService: FilesService) {}
