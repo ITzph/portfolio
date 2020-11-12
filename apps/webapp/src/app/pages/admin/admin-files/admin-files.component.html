@@ -1,22 +1,51 @@
-<table mat-table [dataSource]="files$ | async" class="mat-elevation-z8 file-list-table">
+<table
+  mat-table
+  [dataSource]="filesToDisplay | async"
+  class="mat-elevation-z8 file-list-table"
+  [trackBy]="fileTracker"
+>
   <ng-container matColumnDef="fileName">
     <th mat-header-cell *matHeaderCellDef>Filename</th>
-    <td mat-cell *matCellDef="let element">{{ element.fileName }}</td>
+    <td mat-cell *matCellDef="let element">
+      <ng-container
+        *ngTemplateOutlet="tableCellElement; context: { element: element, prop: 'fileName' }"
+      ></ng-container>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="description">
     <th mat-header-cell *matHeaderCellDef>Description</th>
-    <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+    <td mat-cell *matCellDef="let element">
+      <ng-container
+        *ngTemplateOutlet="tableCellElement; context: { element: element, prop: 'description' }"
+      ></ng-container>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <th mat-header-cell *matHeaderCellDef style="width: 14rem;">Actions</th>
     <td mat-cell *matCellDef="let element">
-      <button>Update</button>
-      <button>Delete</button>
+      <button (click)="onFileUpdateStarted(element)" *ngIf="!isEditing">Update</button>
+      <button (click)="onFileDeleteStarted(element)" *ngIf="!isEditing">Delete</button>
+      <button (click)="onCancelEditing()" *ngIf="isEditing && element.editable">
+        Cancel
+      </button>
+      <button (click)="onConfirmUpdate(element)" *ngIf="isEditing && element.editable">
+        Confirm
+      </button>
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+
+<ng-template #tableCellElement let-element="element" let-prop="prop">
+  <span *ngIf="!element.editable">{{ element[prop] }}</span>
+  <input
+    type="text"
+    [value]="element[prop]"
+    *ngIf="element.editable"
+    (input)="onPropertyChange(element, $event, prop)"
+  />
+</ng-template>
