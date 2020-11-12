@@ -99,6 +99,7 @@ function generatePackageJson() {
     'rxjs',
     'mysql',
     'passport',
+    'uuid',
   ];
   const dependencies = implicitDeps.reduce((acc, dep) => {
     acc[dep] = packageJson.dependencies[dep];
