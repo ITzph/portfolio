@@ -1,19 +1,41 @@
-<table mat-table [dataSource]="files$ | async" class="mat-elevation-z8 file-list-table">
+<table
+  mat-table
+  [dataSource]="filesToDisplay | async"
+  class="mat-elevation-z8 file-list-table"
+  [trackBy]="fileTracker"
+>
   <ng-container matColumnDef="fileName">
     <th mat-header-cell *matHeaderCellDef>Filename</th>
-    <td mat-cell *matCellDef="let element">{{ element.fileName }}</td>
+    <td mat-cell *matCellDef="let element">
+      <input
+        type="text"
+        [value]="element.fileName"
+        [disabled]="!element.editable"
+        (input)="onPropertyChange(element, $event, 'fileName')"
+      />
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="description">
     <th mat-header-cell *matHeaderCellDef>Description</th>
-    <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+    <td mat-cell *matCellDef="let element">
+      <input
+        type="text"
+        [value]="element.description"
+        [disabled]="!element.editable"
+        (input)="onPropertyChange(element, $event, 'description')"
+      />
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let element">
-      <button>Update</button>
-      <button>Delete</button>
+      <button (click)="onFileUpdateStarted(element)" *ngIf="!isEditing">Update</button>
+      <button (click)="onFileDeleteStarted(element)" *ngIf="!isEditing">Delete</button>
+      <button (click)="onConfirmUpdate(element)" *ngIf="isEditing && element.editable">
+        Confirm Update
+      </button>
     </td>
   </ng-container>
 
