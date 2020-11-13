@@ -1,9 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { IFileMetadata } from '@portfolio/api-interfaces';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { finalize, map, take } from 'rxjs/operators';
 import { trackByIdOrIndex } from '../../../utils/tracker-by-id.util';
 import { FilesService } from '../../files/files.service';
+import { FileFormData } from './file.model';
+import { UploadFileComponent } from './upload-file/upload-file.component';
 
 type EditableFile = IFileMetadata & { editable: boolean };
 
@@ -21,6 +25,45 @@ export class AdminFilesComponent implements OnInit {
   files$: Observable<IFileMetadata[]> = this.filesService.getAllFiles();
 
   filesToDisplay: BehaviorSubject<EditableFile[]> = new BehaviorSubject([]);
+
+  constructor(
+    private readonly filesService: FilesService,
+    private readonly dialog: MatDialog,
+    private readonly spinner: NgxSpinnerService,
+  ) {}
+
+  onUploadNewFile() {
+    const dialogRef = this.dialog.open(UploadFileComponent);
+
+    dialogRef.afterClosed().subscribe((formData: FileFormData) => {
+      if (formData) {
+        const imageForm = new FormData();
+        imageForm.append('fileName', formData.fileName);
+        imageForm.append('description', formData.description);
+        imageForm.append('category', formData.category);
+        imageForm.append('key', formData.key);
+        imageForm.append('file', formData.fileSource);
+        this.spinner.show('photosSpinner');
+        this.filesService
+          .fileUpload(imageForm)
+          .pipe(
+            finalize(() => {
+              this.spinner.hide('photosSpinner');
+            }),
+          )
+          .subscribe((res) => {
+            const currentFiles = this.filesToDisplay.getValue();
+            this.filesToDisplay.next([
+              {
+                ...res,
+                editable: false,
+              },
+              ...currentFiles,
+            ]);
+          });
+      }
+    });
+  }
 
   initializeFileToDisplay() {
     this.files$
@@ -67,8 +110,10 @@ export class AdminFilesComponent implements OnInit {
   }
 
   onFileDeleteStarted(file: EditableFile) {
-    const currentFiles = this.filesToDisplay.getValue();
-    this.filesToDisplay.next(currentFiles.filter((_file) => _file.id !== file.id));
+    this.filesService.deleteFile(file.id).subscribe(({ id }) => {
+      const currentFiles = this.filesToDisplay.getValue();
+      this.filesToDisplay.next(currentFiles.filter((_file) => _file.id !== id));
+    });
   }
 
   onPropertyChange(file: EditableFile, event: Event, prop: keyof EditableFile) {
@@ -109,8 +154,6 @@ export class AdminFilesComponent implements OnInit {
       );
     });
   }
-
-  constructor(private readonly filesService: FilesService) {}
 
   ngOnInit(): void {
     this.initializeFileToDisplay();
