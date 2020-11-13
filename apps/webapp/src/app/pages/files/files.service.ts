@@ -23,6 +23,14 @@ export class FilesService {
     return this.http.patch<IFileMetadata>(`${environment.api}/files/${id}`, file);
   }
 
+  deleteFile(id: number) {
+    return this.http.delete<{ id: number }>(`${environment.api}/files/${id}`);
+  }
+
+  fileUpload(fileFormData: FormData) {
+    return this.http.post<IFileMetadata>(`${environment.api}/files`, fileFormData);
+  }
+
   getResume(fileType: 'pdf' | 'word') {
     return this.http.get(`${environment.api}/files/resume/download?fileType=${fileType}`, {
       responseType: 'arraybuffer' as 'json',

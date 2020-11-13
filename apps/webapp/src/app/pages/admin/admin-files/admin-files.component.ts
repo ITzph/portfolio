@@ -22,6 +22,8 @@ export class AdminFilesComponent implements OnInit {
 
   filesToDisplay: BehaviorSubject<EditableFile[]> = new BehaviorSubject([]);
 
+  constructor(private readonly filesService: FilesService) {}
+
   initializeFileToDisplay() {
     this.files$
       .pipe(
@@ -67,8 +69,10 @@ export class AdminFilesComponent implements OnInit {
   }
 
   onFileDeleteStarted(file: EditableFile) {
-    const currentFiles = this.filesToDisplay.getValue();
-    this.filesToDisplay.next(currentFiles.filter((_file) => _file.id !== file.id));
+    this.filesService.deleteFile(file.id).subscribe(({ id }) => {
+      const currentFiles = this.filesToDisplay.getValue();
+      this.filesToDisplay.next(currentFiles.filter((_file) => _file.id !== id));
+    });
   }
 
   onPropertyChange(file: EditableFile, event: Event, prop: keyof EditableFile) {
@@ -109,8 +113,6 @@ export class AdminFilesComponent implements OnInit {
       );
     });
   }
-
-  constructor(private readonly filesService: FilesService) {}
 
   ngOnInit(): void {
     this.initializeFileToDisplay();
