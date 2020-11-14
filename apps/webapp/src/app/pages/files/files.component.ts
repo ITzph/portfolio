@@ -10,7 +10,7 @@ import { FilesService } from './files.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilesViewerComponent implements OnInit {
-  files$: Observable<IFileMetadata[]> = this.filesService.getAllFiles();
+  files$: Observable<IFileMetadata[]> = this.filesService.getAllPublicFiles();
 
   constructor(private readonly filesService: FilesService) {}
 

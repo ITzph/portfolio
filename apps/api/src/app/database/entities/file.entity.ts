@@ -15,6 +15,9 @@ export class FileMetadata implements IFileMetadata {
   @Column({ default: '' })
   description: string;
 
+  @Column({ default: true })
+  isPrivate: boolean;
+
   @Column('varchar', { length: 30 })
   category: FileCategory;
 

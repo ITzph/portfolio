@@ -11,6 +11,7 @@ import {
   Req,
   Res,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileStorageService } from './file-storage.service';
@@ -18,6 +19,7 @@ import { Request, Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FileCategory } from '@portfolio/api-interfaces';
 import { FilesS3Service } from './files-s3.service';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('files')
 export class FileStorageController {
@@ -26,9 +28,15 @@ export class FileStorageController {
     private readonly s3Service: FilesS3Service,
   ) {}
 
-  @Get('')
+  @UseGuards(JwtAuthGuard)
+  @Get('all')
   getALlFiles() {
     return this.fileStorageService.getAllFiles();
+  }
+
+  @Get('')
+  getALlPublicFiles() {
+    return this.fileStorageService.getAllPublicFiles();
   }
 
   @Get(':key')
@@ -60,6 +68,7 @@ export class FileStorageController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async deleteById(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
     const result = await this.fileStorageService.deleteById(id);
@@ -71,6 +80,7 @@ export class FileStorageController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   async addNewFile(@UploadedFile() file, @Req() req: Request, @Res() res: Response) {
@@ -93,6 +103,7 @@ export class FileStorageController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   patchExperience(@Param('id', ParseIntPipe) id: number, @Req() req: Request) {
     const fileToUpdate = req.body;
