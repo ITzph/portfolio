@@ -95,6 +95,7 @@ export class FileStorageController {
         fileName: body?.fileName,
         key: file.key,
         tags: [],
+        isPrivate: true,
         createdAt: new Date(),
       });
       res.send(resultingFile);
