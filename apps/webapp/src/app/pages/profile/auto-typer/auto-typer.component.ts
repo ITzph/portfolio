@@ -5,9 +5,11 @@ import {
   Input,
   Output,
   EventEmitter,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
 } from '@angular/core';
-import { of, Observable, concat, from, BehaviorSubject } from 'rxjs';
-import { delay, concatMap, tap, takeWhile, take, map } from 'rxjs/operators';
+import Typewriter from 'typewriter-effect/dist/core';
 
 @Component({
   selector: 'portfolio-auto-typer',
@@ -15,95 +17,55 @@ import { delay, concatMap, tap, takeWhile, take, map } from 'rxjs/operators';
   styleUrls: ['./auto-typer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AutoTyperComponent implements OnInit {
+export class AutoTyperComponent implements OnInit, AfterViewInit {
   @Input() messages: string[] = [];
   @Output() completed = new EventEmitter<boolean>();
 
-  private readonly TYPING_SPEED_DELAY = 30;
-  private readonly ERASE_SPEED_DELAY = 10;
-  private readonly READING_DELAY_MULTIPLIER = 20;
+  private readonly TYPING_SPEED_DELAY = 1;
+  private readonly ERASE_SPEED_DELAY = 1;
+  private readonly READING_DELAY_MULTIPLIER = 2;
 
   isTyping = true;
 
-  message$ = new BehaviorSubject<string>('');
+  private typewriter = null;
 
-  ngOnInit(): void {
-    this.autoType().subscribe(this.message$);
+  @ViewChild('message') messageContainer: ElementRef<HTMLSpanElement>;
+
+  ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    this.initializeAutotyping();
+  }
+
+  private initializeAutotyping() {
+    this.typewriter = new Typewriter(this.messageContainer.nativeElement, {
+      delay: this.TYPING_SPEED_DELAY,
+    });
+
+    this.messages.forEach((message, index) => {
+      this.typewriter.typeString(message).pauseFor(message.length * this.READING_DELAY_MULTIPLIER);
+
+      if (this.messages.length - 1 > index) {
+        this.typewriter.deleteAll(this.ERASE_SPEED_DELAY);
+      }
+    });
+
+    this.typewriter.start();
   }
 
   public skipAutoType() {
-    this.message$.next(this.messages[this.messages.length - 1]);
+    this.typewriter.stop();
+    this.messageContainer.nativeElement.innerText = this.messages[this.messages.length - 1];
     this.setIsTyping(false);
   }
 
   public retriggerAutoType() {
     this.setIsTyping(true);
-    this.message$ = new BehaviorSubject<string>('');
-    this.autoType().subscribe(this.message$);
+    this.initializeAutotyping();
   }
 
   private setIsTyping(isTyping: boolean) {
-    this.message$.complete();
     this.isTyping = isTyping;
     this.completed.emit(!isTyping);
-  }
-
-  private autoType() {
-    const array: Observable<string>[] = [];
-
-    this.messages.forEach((element, index) => {
-      array.push(this.addIndividualCharacters$(element));
-
-      if (index < this.messages.length - 1) {
-        array.push(this.pauseBeforeDeleting$());
-        array.push(this.deleteCurrentMessage$());
-      } else {
-        array.push(this.emitCompleteTyping$());
-      }
-    });
-
-    return concat(...array).pipe(takeWhile(() => this.isTyping));
-  }
-
-  private addIndividualCharacters$(element: string) {
-    return of(element).pipe(
-      concatMap((message) => {
-        return from(message);
-      }),
-      concatMap((newCharacter) => {
-        const newMessage = this.message$.getValue() + newCharacter;
-        return of(newMessage).pipe(delay(this.TYPING_SPEED_DELAY));
-      }),
-    );
-  }
-
-  private deleteCurrentMessage$() {
-    return this.message$.asObservable().pipe(
-      takeWhile((message) => message.length > 0),
-      delay(this.ERASE_SPEED_DELAY),
-      map((message) => {
-        return message.slice(0, -1);
-      }),
-    );
-  }
-
-  private pauseBeforeDeleting$() {
-    return this.message$.asObservable().pipe(
-      take(1),
-      concatMap((message) => {
-        return of(message).pipe(
-          delay(this.READING_DELAY_MULTIPLIER * this.message$.getValue().length),
-        );
-      }),
-    );
-  }
-
-  private emitCompleteTyping$() {
-    return this.message$.asObservable().pipe(
-      take(1),
-      tap(() => {
-        this.setIsTyping(false);
-      }),
-    );
   }
 }
