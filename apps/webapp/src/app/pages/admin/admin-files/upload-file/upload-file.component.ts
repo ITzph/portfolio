@@ -39,13 +39,15 @@ export class UploadFileComponent implements OnInit {
     }
   }
 
-  private onFileUpload(formData: FileFormData) {}
-
   ngOnInit(): void {}
 
   onImagePicked(event: Event): void {
-    const fileSource = (event.target as HTMLInputElement).files[0];
+    const target = event.target as HTMLInputElement;
+    const fileSource = target.files[0];
     if (fileSource) {
+      this.fileUploadForm.patchValue({
+        fileName: target.files[0].name,
+      });
       this.fileUploadForm.patchValue({
         fileSource,
       });

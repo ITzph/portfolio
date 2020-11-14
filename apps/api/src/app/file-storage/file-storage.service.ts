@@ -15,8 +15,21 @@ export class FileStorageService {
     });
   }
 
+  public getAllPublicFiles() {
+    return this.fileRepository.find({
+      select: ['fileName', 'category', 'description', 'id', 'key', 'tags'],
+      where: {
+        isPrivate: false,
+      },
+    });
+  }
+
   public getOneFile(id: number) {
-    return this.fileRepository.findOne(id);
+    return this.fileRepository.findOne(id, {
+      where: {
+        isPrivate: false,
+      },
+    });
   }
 
   public addNewFile(file: FileMetadata) {
