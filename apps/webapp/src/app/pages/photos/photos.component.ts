@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { IImageMetadata } from '@portfolio/api-interfaces';
+import { IImageMetadata, API_ENDPOINTS } from '@portfolio/api-interfaces';
 import { map } from 'rxjs/operators';
 import { PhotosService } from './photos.service';
 import { environment } from '../../../environments/environment';
@@ -20,7 +20,7 @@ export class PhotosComponent implements OnInit {
   ) {}
 
   get isLoggedIn$() {
-    return this.authService.isLoggedIn$();
+    return this.authService.hasAuthToken();
   }
 
   public get photos$() {
@@ -30,7 +30,7 @@ export class PhotosComponent implements OnInit {
           (photo): IImageMetadata => {
             return {
               ...photo,
-              url: `${environment.api}/photos/image/${photo.imageName}`,
+              url: `${environment.api}/${API_ENDPOINTS.photos}/image/${photo.imageName}`,
             };
           },
         );

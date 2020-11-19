@@ -27,6 +27,7 @@ export class CanLoadAuthenticatedGuard implements CanLoad {
       .subscribe((token) => (authToken = token));
 
     if (authToken) {
+      this.authService.checkIfAuthenticated().subscribe(() => {}, this.authService.logout);
       return true;
     }
     this.router.navigateByUrl('/auth');

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { select, Action, Store } from '@ngrx/store';
-import { Identifiable, IUserCertification, PORTFOLIO_ENDPOINTS } from '@portfolio/api-interfaces';
+import { Identifiable, IUserCertification, API_ENDPOINTS } from '@portfolio/api-interfaces';
 import { ResumeAdminServiceAbstract } from '../resume-admin-abstract.service';
 import { getCertifications } from '../../../../selectors/profile.selectors';
 import { updateCertifications } from '../../../../actions/profile.actions';
@@ -12,7 +12,7 @@ import * as fromProfile from '../../../../reducers/profile.reducer';
   providedIn: 'root',
 })
 export class CertificationService extends ResumeAdminServiceAbstract {
-  elementType = PORTFOLIO_ENDPOINTS.certifications;
+  elementType = API_ENDPOINTS.certifications;
 
   getElements = this.profileStore.pipe(select(getCertifications));
 

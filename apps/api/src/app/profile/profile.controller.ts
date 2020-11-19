@@ -4,15 +4,16 @@ import { User } from '../database/entities/user.entity';
 import { Request, Response } from 'express';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { PortfolioLoggerService } from '../logger/logger.service';
+import { API_ENDPOINTS } from '@portfolio/api-interfaces';
 
-@Controller('profiles')
+@Controller(API_ENDPOINTS.profiles)
 export class ProfileController {
   constructor(
     private readonly profileService: ProfileService,
     private readonly logger: PortfolioLoggerService,
   ) {}
 
-  @Get('/me')
+  @Get(API_ENDPOINTS.me)
   async getCurrentUser() {
     this.logger.log('GET profiles/me');
     return await this.profileService.getCurrentProfile();

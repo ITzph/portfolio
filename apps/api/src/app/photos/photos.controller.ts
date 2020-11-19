@@ -21,9 +21,14 @@ import { Response, Request } from 'express';
 import { PhotosS3Service } from './photos-s3.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { PortfolioLoggerService } from '../logger/logger.service';
-import { IImageMetadata, ImageCategory } from '@portfolio/api-interfaces';
+import {
+  IImageMetadata,
+  ImageCategory,
+  PHOTOS_ENDPOINTS,
+  API_ENDPOINTS,
+} from '@portfolio/api-interfaces';
 
-@Controller('photos')
+@Controller(API_ENDPOINTS.photos)
 export class PhotosController {
   constructor(
     private readonly photosService: PhotosService,
@@ -132,7 +137,7 @@ export class PhotosController {
     }
   }
 
-  @Get('image/:key')
+  @Get(`${PHOTOS_ENDPOINTS.image}/:key`)
   async getImageByKey(@Param('key') key: string, @Res() res: Response) {
     this.logger.log('GET photos/:key');
     try {

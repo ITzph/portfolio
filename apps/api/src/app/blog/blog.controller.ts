@@ -15,9 +15,9 @@ import { BlogService } from './blog.service';
 import { Request, Response } from 'express';
 import { BlogMetadata } from '../database/entities/blog.entity';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { Blog } from '@portfolio/api-interfaces';
+import { Blog, API_ENDPOINTS } from '@portfolio/api-interfaces';
 
-@Controller('blogs')
+@Controller(API_ENDPOINTS.blogs)
 export class BlogController {
   constructor(private readonly blogService: BlogService) {}
 
@@ -57,7 +57,7 @@ export class BlogController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('all')
+  @Get(API_ENDPOINTS.all)
   getAllBlogs() {
     return this.blogService.getPublishedBlogs(false);
   }
