@@ -4,8 +4,9 @@ import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import { PortfolioLoggerService } from '../logger/logger.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
+import { AUTH_ENDPOINTS, PORTFOLIO_ENDPOINTS } from '@portfolio/api-interfaces';
 
-@Controller('auth')
+@Controller(PORTFOLIO_ENDPOINTS.auth)
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
@@ -13,14 +14,14 @@ export class AuthController {
   ) {}
 
   @UseGuards(LocalAuthGuard)
-  @Post('/login')
+  @Post(AUTH_ENDPOINTS.login)
   async login(@Req() req: Request) {
     this.logger.log('POST auth/login');
     return this.authService.login(req.user);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('check')
+  @Get(AUTH_ENDPOINTS.check)
   async checkIfLoggedIn(@Headers() headers) {
     this.logger.log('GET auth/check');
     try {

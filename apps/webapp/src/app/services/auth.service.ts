@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
+import { AUTH_ENDPOINTS, PORTFOLIO_ENDPOINTS } from '@portfolio/api-interfaces';
 
 enum LOCAL_STORAGE_KEY {
   AUTH_TOKEN = 'auth_token',
@@ -26,7 +27,9 @@ export class AuthService {
   }
 
   public checkIfAuthenticated() {
-    return this.http.get<boolean>(environment.api + '/auth/check');
+    return this.http.get<boolean>(
+      `${environment.api}/${PORTFOLIO_ENDPOINTS.auth}/${AUTH_ENDPOINTS.check}`,
+    );
   }
 
   private setToken(token: string) {
@@ -38,10 +41,13 @@ export class AuthService {
   }
 
   public login(username: string, password: string) {
-    return this.http.post<{ access_token: string }>(environment.api + '/auth/login', {
-      username,
-      password,
-    });
+    return this.http.post<{ access_token: string }>(
+      `${environment.api}/${PORTFOLIO_ENDPOINTS.auth}/${AUTH_ENDPOINTS.login}`,
+      {
+        username,
+        password,
+      },
+    );
   }
 
   public handleLoginSuccessful(username: string, accessToken: string) {
