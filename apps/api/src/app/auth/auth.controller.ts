@@ -4,9 +4,9 @@ import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import { PortfolioLoggerService } from '../logger/logger.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
-import { AUTH_ENDPOINTS, PORTFOLIO_ENDPOINTS } from '@portfolio/api-interfaces';
+import { AUTH_ENDPOINTS, API_ENDPOINTS } from '@portfolio/api-interfaces';
 
-@Controller(PORTFOLIO_ENDPOINTS.auth)
+@Controller(API_ENDPOINTS.auth)
 export class AuthController {
   constructor(
     private readonly authService: AuthService,

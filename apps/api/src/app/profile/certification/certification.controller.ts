@@ -10,13 +10,13 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { IUserCertification, PORTFOLIO_ENDPOINTS } from '@portfolio/api-interfaces';
+import { IUserCertification, API_ENDPOINTS } from '@portfolio/api-interfaces';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 
 import { Request, Response } from 'express';
 import { CertificationService } from './certification.service';
 
-@Controller(PORTFOLIO_ENDPOINTS.certifications)
+@Controller(API_ENDPOINTS.certifications)
 export class CertificationController {
   constructor(private readonly certificationService: CertificationService) {}
 

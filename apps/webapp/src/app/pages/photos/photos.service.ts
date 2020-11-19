@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IImageMetadata } from '@portfolio/api-interfaces';
+import { IImageMetadata, API_ENDPOINTS } from '@portfolio/api-interfaces';
 import { environment } from '../../../environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { finalize, take, catchError, withLatestFrom } from 'rxjs/operators';
@@ -30,7 +30,7 @@ export class PhotosService {
   public fetchPaginatedPhotos() {
     this.http
       .get<Pagination<IImageMetadata>>(
-        `${environment.api}/photos?page=${this.currentPage}&limit=${this.PAGE_SIZE_LIMIT}&orderBy=createdAt.ASC`,
+        `${environment.api}/${API_ENDPOINTS.photos}?page=${this.currentPage}&limit=${this.PAGE_SIZE_LIMIT}&orderBy=createdAt.ASC`,
       )
       .pipe(
         withLatestFrom(this.photosStore.pipe(select(getPhotos))),
@@ -64,7 +64,7 @@ export class PhotosService {
   public updatePhoto(id: number, photo: Partial<IImageMetadata>) {
     this.spinner.show('photosSpinner');
     this.http
-      .patch<Partial<IImageMetadata>>(`${environment.api}/photos/${id}`, photo)
+      .patch<Partial<IImageMetadata>>(`${environment.api}/${API_ENDPOINTS.photos}/${id}`, photo)
       .pipe(
         finalize(() => {
           this.spinner.hide('photosSpinner');
@@ -93,7 +93,7 @@ export class PhotosService {
   public deletePhoto(photo: IImageMetadata) {
     this.spinner.show('photosSpinner');
     this.http
-      .delete<{ id: number }>(`${environment.api}/photos/${photo.id}`)
+      .delete<{ id: number }>(`${environment.api}/${API_ENDPOINTS.photos}/${photo.id}`)
       .pipe(
         finalize(() => {
           this.spinner.hide('photosSpinner');

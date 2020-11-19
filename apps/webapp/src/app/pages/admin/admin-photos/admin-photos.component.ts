@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { map, finalize } from 'rxjs/operators';
-import { IImageMetadata } from '@portfolio/api-interfaces';
+import { IImageMetadata, API_ENDPOINTS } from '@portfolio/api-interfaces';
 import { PhotosService } from '../../photos/photos.service';
 import { environment } from '../../../../environments/environment';
 import { BinaryConfirmationComponent } from '../../../modules/custom-dialog/binary-confirmation/binary-confirmation.component';
@@ -33,7 +33,7 @@ export class AdminPhotosComponent implements OnInit {
           (photo): IImageMetadata => {
             return {
               ...photo,
-              url: `${environment.api}/photos/image/${photo.imageName}`,
+              url: `${environment.api}/${API_ENDPOINTS.photos}/image/${photo.imageName}`,
             };
           },
         );

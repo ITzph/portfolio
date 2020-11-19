@@ -17,11 +17,11 @@ import {
 import { FileStorageService } from './file-storage.service';
 import { Request, Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { FileCategory } from '@portfolio/api-interfaces';
+import { FileCategory, API_ENDPOINTS } from '@portfolio/api-interfaces';
 import { FilesS3Service } from './files-s3.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
-@Controller('files')
+@Controller(API_ENDPOINTS.files)
 export class FileStorageController {
   constructor(
     private readonly fileStorageService: FileStorageService,
@@ -29,7 +29,7 @@ export class FileStorageController {
   ) {}
 
   @UseGuards(JwtAuthGuard)
-  @Get('all')
+  @Get(API_ENDPOINTS.all)
   getALlFiles() {
     return this.fileStorageService.getAllFiles();
   }
@@ -53,7 +53,7 @@ export class FileStorageController {
     }
   }
 
-  @Get('resume/download')
+  @Get(`${API_ENDPOINTS.resume}/${API_ENDPOINTS.download}`)
   async getResume(@Query('fileType') fileType, @Res() res: Response) {
     const resumeS3Key = `${process.env.RESUME_S3_KEY}_${fileType}`;
     try {
