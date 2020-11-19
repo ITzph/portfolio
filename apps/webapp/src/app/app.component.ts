@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   get isLoggedIn$() {
-    return this.authService.isLoggedIn$();
+    return this.authService.hasAuthToken();
   }
 
   ngOnInit(): void {

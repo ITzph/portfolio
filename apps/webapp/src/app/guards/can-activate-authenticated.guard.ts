@@ -28,6 +28,7 @@ export class CanActivateAuthenticatedGuard implements CanActivate {
       .subscribe((token) => (authToken = token));
 
     if (authToken) {
+      this.authService.checkIfAuthenticated().subscribe(() => {}, this.authService.logout);
       return true;
     }
     this.router.navigateByUrl('/auth');

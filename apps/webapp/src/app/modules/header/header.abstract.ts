@@ -12,11 +12,11 @@ export abstract class HeaderAbstract {
   ) {}
 
   get isLoggedIn$() {
-    return this.authService.isLoggedIn$();
+    return this.authService.hasAuthToken();
   }
 
   get isLoggedOut$() {
-    return this.authService.isLoggedIn$().pipe(map((isLoggedIn) => !isLoggedIn));
+    return this.authService.hasAuthToken().pipe(map((isLoggedIn) => !isLoggedIn));
   }
 
   onLogout() {

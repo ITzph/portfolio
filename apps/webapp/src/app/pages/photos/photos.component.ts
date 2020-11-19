@@ -20,7 +20,7 @@ export class PhotosComponent implements OnInit {
   ) {}
 
   get isLoggedIn$() {
-    return this.authService.isLoggedIn$();
+    return this.authService.hasAuthToken();
   }
 
   public get photos$() {

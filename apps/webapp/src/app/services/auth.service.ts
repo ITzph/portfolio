@@ -25,11 +25,15 @@ export class AuthService {
     return this.authToken.asObservable();
   }
 
+  public checkIfAuthenticated() {
+    return this.http.get<boolean>(environment.api + '/auth/check');
+  }
+
   private setToken(token: string) {
     this.authToken.next(token);
   }
 
-  public isLoggedIn$(): Observable<boolean> {
+  public hasAuthToken(): Observable<boolean> {
     return this.getToken().pipe(map((token) => !!token));
   }
 
