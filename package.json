@@ -75,6 +75,7 @@
     "localstorage-polyfill": "^1.0.1",
     "multer-s3": "^2.9.0",
     "mysql": "^2.18.1",
+    "ng-lazyload-image": "^9.1.0",
     "ngx-pagination": "^5.0.0",
     "ngx-quill": "^12.0.1",
     "ngx-spinner": "^10.0.1",

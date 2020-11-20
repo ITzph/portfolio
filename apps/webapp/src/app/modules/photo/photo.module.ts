@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { GroupingModule } from '../grouping/grouping.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 @NgModule({
   declarations: [PhotosListComponent, PhotoDetailComponent, EmptyListComponent],
   imports: [
@@ -20,6 +20,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     GroupingModule,
     MatButtonModule,
     MatTooltipModule,
+    LazyLoadImageModule,
   ],
   exports: [PhotosListComponent, PhotoDetailComponent, EmptyListComponent],
 })
