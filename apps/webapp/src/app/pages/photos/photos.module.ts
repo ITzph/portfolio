@@ -15,6 +15,7 @@ import { HeaderModule } from '../../modules/header/header.module';
 import { FooterModule } from '../../modules/footer/footer.module';
 import { PhotoModule } from '../../modules/photo/photo.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 import * as fromProfile from '../../reducers/profile.reducer';
 import * as fromPhoto from '../../reducers/photo.reducer';
 
