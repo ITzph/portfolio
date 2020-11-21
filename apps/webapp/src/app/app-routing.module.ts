@@ -6,8 +6,9 @@ import { routes } from './routes';
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      initialNavigation: 'enabled',
-    }),
+    initialNavigation: 'enabled',
+    relativeLinkResolution: 'legacy'
+}),
     NotFoundModule,
   ],
   exports: [RouterModule],
