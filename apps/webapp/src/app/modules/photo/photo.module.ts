@@ -10,6 +10,7 @@ import { GroupingModule } from '../grouping/grouping.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { ButtonModule } from 'primeng/button';
 @NgModule({
   declarations: [PhotosListComponent, PhotoDetailComponent, EmptyListComponent],
   imports: [
@@ -21,6 +22,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     MatButtonModule,
     MatTooltipModule,
     LazyLoadImageModule,
+    ButtonModule,
   ],
   exports: [PhotosListComponent, PhotoDetailComponent, EmptyListComponent],
 })

@@ -4,20 +4,22 @@
     [filterKey]="filterKey"
     (filterValueChange)="onFilterChange($event)"
   ></portfolio-filter-by-tag>
-  <div class="flex-row">
+  <div class="p-d-flex p-ai-center">
     <portfolio-sort-by-property
       [order]="order"
       [orderBy]="orderBy"
       (orderChange)="onOrderChange($event)"
     ></portfolio-sort-by-property>
     <button
-      mat-icon-button
+      pButton
+      class="p-button-icon p-button-rounded p-ml-2"
+      type="button"
+      icon="pi pi-refresh"
       (click)="onResetFilter()"
+      title="Reset Filters"
       matTooltip="Reset filter"
       matTooltipPosition="left"
-    >
-      <mat-icon>refresh</mat-icon>
-    </button>
+    ></button>
   </div>
 </div>
 

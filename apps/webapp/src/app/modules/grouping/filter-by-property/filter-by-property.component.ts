@@ -8,7 +8,6 @@ import {
   OnChanges,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatOptionSelectionChange } from '@angular/material/core';
 
 @Component({
   selector: 'portfolio-filter-by-tag',
