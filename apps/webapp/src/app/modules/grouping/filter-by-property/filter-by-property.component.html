@@ -1,30 +1,31 @@
 <div class="search-wrapper">
-  <mat-form-field style="width: 70%; margin-right: 0.5rem;">
+  <div style="margin-right: 0.5rem; grid-column: span 8;">
     <input
       type="text"
       placeholder="Enter the filter value"
-      matInput
+      style="width: 100%;"
+      pInputText
       [formControl]="filterValueFC"
       (input)="onFilterValueChange($event)"
       (keyup.enter)="onUpdateFilter()"
     />
-    <mat-icon class="search-icon" (click)="onUpdateFilter()">search</mat-icon>
-  </mat-form-field>
-  <mat-form-field style="width: 30%;">
-    <mat-select
+  </div>
+  <div style="grid-column: span 3;">
+    <p-dropdown
+      [options]="[
+        { value: 'title', label: 'Title' },
+        { value: 'tags', label: 'Tags' }
+      ]"
+      (onChange)="onOptionChange($event, 'key')"
+      optionLabel="label"
+      optionValue="value"
       [formControl]="filterKeyFC"
-      (selectionChange)="onOptionChange($event, 'key')"
-      placeholder="Filter by"
-    >
-      <mat-option value="title">
-        Title
-      </mat-option>
-      <mat-option value="description">
-        Description
-      </mat-option>
-      <mat-option value="tags">
-        Tags
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+    ></p-dropdown>
+  </div>
+  <i
+    class="pi pi-search"
+    (click)="onUpdateFilter()"
+    style="cursor: pointer; text-align: right; font-size: 1.5em;"
+    title="Search"
+  ></i>
 </div>
