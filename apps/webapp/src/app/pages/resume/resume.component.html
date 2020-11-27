@@ -59,7 +59,7 @@
               </h2>
               <ng-container *ngFor="let category of categorizedSkill$ | async">
                 <div class="skills__category">
-                  <h3 class="skills__category__label">{{ category.category }}</h3>
+                  <h3 class="skills__category__label p-mb-3">{{ category.category }}</h3>
                   <aside class="flex-row skills-group">
                     <ng-container *ngFor="let skill of category.skills">
                       <portfolio-skill [skill]="skill"></portfolio-skill>
