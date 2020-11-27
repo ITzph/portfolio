@@ -180,25 +180,36 @@
   flex-direction: column;
   align-items: center;
   max-width: 120rem;
-  width: 97rem;
   background-color: white;
   box-sizing: border-box;
+  width: 100%;
 
   @media #{$xs-device} {
     padding: $padding-medium $padding-very-small;
   }
 
   @media #{$sm-device} {
+    width: 50rem;
     margin: $margin-small $margin-very-small;
     padding: $padding-medium $padding-small;
     box-shadow: $shadow-1;
+    border: 1rem solid rgba(0, 0, 0, 0.3);
   }
 
   @media #{$md-device} {
+    width: 70rem;
     margin-top: $margin-big;
     margin-bottom: $margin-big;
-    border: 20px solid rgba(0, 0, 0, 0.3);
+    border: 2rem solid rgba(0, 0, 0, 0.3);
     padding: $padding-medium;
+  }
+
+  @media #{$lg-device} {
+    width: 90rem;
+  }
+
+  @media #{$xl-device} {
+    width: 97rem;
   }
 }
 
