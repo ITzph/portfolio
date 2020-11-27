@@ -1,24 +1,26 @@
-<div class="filter-wrapper">
-  <portfolio-filter-by-tag
-    [filterValue]="filterValue"
-    [filterKey]="filterKey"
-    (filterValueChange)="onFilterChange($event)"
-  ></portfolio-filter-by-tag>
-  <div class="p-d-flex p-ai-center">
-    <portfolio-sort-by-property
-      [order]="order"
-      [orderBy]="orderBy"
-      (orderChange)="onOrderChange($event)"
-    ></portfolio-sort-by-property>
-    <button
-      pButton
-      class="p-button-icon p-button-rounded p-ml-2"
-      type="button"
-      icon="pi pi-refresh"
-      (click)="onResetFilter()"
-      pTooltip="Reset filter"
-      tooltipPosition="left"
-    ></button>
+<div class="filter-wrapper p-d-flex p-jc-center">
+  <div class="p-d-flex p-flex-column p-ai-start p-flex-md-row">
+    <portfolio-filter-by-tag
+      [filterValue]="filterValue"
+      [filterKey]="filterKey"
+      (filterValueChange)="onFilterChange($event)"
+    ></portfolio-filter-by-tag>
+    <div class="p-d-flex p-ai-center">
+      <portfolio-sort-by-property
+        [order]="order"
+        [orderBy]="orderBy"
+        (orderChange)="onOrderChange($event)"
+      ></portfolio-sort-by-property>
+      <button
+        pButton
+        class="p-button-icon p-button-rounded p-ml-2"
+        type="button"
+        icon="pi pi-refresh"
+        (click)="onResetFilter()"
+        pTooltip="Reset filter"
+        tooltipPosition="left"
+      ></button>
+    </div>
   </div>
 </div>
 

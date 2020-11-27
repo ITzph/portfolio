@@ -18,6 +18,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { BlogTileComponent } from './blog-tile/blog-tile.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TagFilterComponent } from './tag-filter/tag-filter.component';
+import { CardModule } from 'primeng/card';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { TagFilterComponent } from './tag-filter/tag-filter.component';
     StoreModule.forFeature(fromBlog.blogsFeatureKey, fromBlog.reducer),
     MatIconModule,
     NgxSpinnerModule,
+    CardModule,
+    TooltipModule,
   ],
   exports: [
     BlogsComponent,

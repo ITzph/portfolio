@@ -1,10 +1,20 @@
-<mat-card class="blog">
-  <mat-card-title class="title" (click)="navigateToBlogContent(blog)">
-    <h2>{{ blog.title }}</h2>
-    <h4>By: {{ blog.author }}</h4>
-    <h6>{{ parseToDateTime($any(blog.createdAt)) }}</h6>
-  </mat-card-title>
-  <mat-chip-list class="tags">
-    <mat-chip *ngFor="let tag of blog.tags"> <b>#</b>{{ tag }} </mat-chip>
-  </mat-chip-list>
-</mat-card>
+<p-card>
+  <p-header>
+    <div
+      class="p-pt-4"
+      style="cursor: pointer;"
+      (click)="navigateToBlogContent(blog)"
+      pTooltip="View full content"
+      tooltipPosition="left"
+    >
+      <h2>{{ blog.title }}</h2>
+      <h4>By: {{ blog.author }}</h4>
+      <h6>{{ parseToDateTime($any(blog.createdAt)) }}</h6>
+    </div>
+  </p-header>
+  <div class="p-d-flex p-jc-center">
+    <span *ngFor="let tag of blog.tags" class="p-shadow-3 p-p-1" style="border-radius: 5px;">
+      <b>#</b>{{ tag }}
+    </span>
+  </div>
+</p-card>

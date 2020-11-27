@@ -5,13 +5,9 @@
 }
 
 .filter-wrapper {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0 $padding-small;
-  flex-direction: column;
-  align-items: flex-start;
   margin-bottom: $margin-small;
   position: relative;
+  padding: 0 $padding-small;
 
   :not(:last-child) {
     margin-bottom: $margin-very-small;
@@ -19,12 +15,11 @@
   }
 
   @media #{$lg-device} {
-    flex-direction: row;
-    align-items: center;
     :not(:last-child) {
       margin-bottom: 0;
       margin-right: $margin-very-small;
     }
+    padding-left: $padding-small;
   }
 }
 
