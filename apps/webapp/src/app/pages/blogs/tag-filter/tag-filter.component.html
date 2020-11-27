@@ -3,7 +3,11 @@
     <h3>Tag Lists</h3>
   </p-header>
   <div class="p-d-flex tags">
-    <span *ngFor="let tag of tags; trackBy: tagTracker" class="p-shadow-3 p-p-1 tag">
+    <span
+      *ngFor="let tag of tags; trackBy: tagTracker"
+      class="p-shadow-3 p-p-1 tag"
+      [class.tag--selected]="isSelected(tag)"
+    >
       <button (click)="onTagClick(tag)" class="tag__button">
         <span class="tag__name">{{ tag.name }}</span
         >&nbsp;<span class="tag__count">{{ tag.count }}</span>
