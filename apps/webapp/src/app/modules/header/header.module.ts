@@ -9,6 +9,7 @@ import { routes } from '../../routes';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AdminHeaderComponent } from './admin-header/admin-header.component';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
   declarations: [HeaderComponent, AdminHeaderComponent],
@@ -20,7 +21,8 @@ import { AdminHeaderComponent } from './admin-header/admin-header.component';
     MatSnackBarModule,
     MatDialogModule,
     RouterModule.forChild(routes),
+    AngularSvgIconModule,
   ],
-  exports: [HeaderComponent, AdminHeaderComponent],
+  exports: [HeaderComponent, AdminHeaderComponent, AngularSvgIconModule],
 })
 export class HeaderModule {}

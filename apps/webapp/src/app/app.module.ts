@@ -18,6 +18,7 @@ import { registerLocaleData } from '@angular/common';
 
 import * as fromProfile from './reducers/profile.reducer';
 import { TIME_ZONE } from '@portfolio/api-interfaces';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 registerLocaleData(localeSG);
 
@@ -42,6 +43,7 @@ registerLocaleData(localeSG);
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     HeaderModule,
     FooterModule,
+    AngularSvgIconModule.forRoot(),
   ],
   providers: [
     {
