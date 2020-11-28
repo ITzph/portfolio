@@ -18,9 +18,9 @@ export class ExperienceComponent implements OnInit {
   get categoryIcon() {
     return (
       {
-        [ExperienceCategory.WORK]: 'location_city',
-        [ExperienceCategory.EDUCATION]: 'verified_user',
-      }[this.experience.category] ?? ExperienceCategory.OTHERS
+        [ExperienceCategory.WORK]: 'briefcase',
+        [ExperienceCategory.EDUCATION]: 'graduation-cap',
+      }[this.experience.category] ?? 'radiation-alt'
     );
   }
 }

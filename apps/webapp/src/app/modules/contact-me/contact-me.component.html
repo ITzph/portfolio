@@ -1,54 +1,91 @@
-<mat-card class="form-wrapper">
-  <mat-card-header style="justify-content: center;">
-    <h2 style="display: flex;">Contact Me&nbsp;<mat-icon>question_answer</mat-icon></h2>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="social-handlers">
-      <h3>Follow me on these platforms</h3>
-      <ng-container *ngFor="let social of socialHandlers$ | async">
-        <portfolio-social-handler [social]="social"></portfolio-social-handler>
-      </ng-container>
+<p-card class="form-wrapper">
+  <p-header>
+    <h2 class="p-pl-5 p-pt-3" style="display: flex; align-items: center; justify-content: center;">
+      Contact Me&nbsp;<mat-icon>question_answer</mat-icon>
+    </h2>
+  </p-header>
+  <div class="social-handlers">
+    <h3>Follow me on these platforms</h3>
+    <ng-container *ngFor="let social of socialHandlers$ | async">
+      <portfolio-social-handler [social]="social"></portfolio-social-handler>
+    </ng-container>
+  </div>
+  <p class="or-separator">OR</p>
+  <h3>Send me a message via email</h3>
+  <form [formGroup]="contactDetailsForm" class="flex-column p-mt-2">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 1rem;">
+      <div class="p-field p-float-label p-input-icon-right">
+        <i class="pi pi-user"></i>
+        <input
+          class="p-inputtext-lg"
+          id="float-input"
+          type="text"
+          pInputText
+          style="width: 100%;"
+          formControlName="firstName"
+        />
+        <label for="float-input">First Name</label>
+      </div>
+      <div class="p-field p-float-label p-input-icon-right">
+        <i class="pi pi-user"></i>
+        <input
+          class="p-inputtext-lg"
+          id="float-input"
+          type="text"
+          style="width: 100%;"
+          pInputText
+          formControlName="lastName"
+        />
+        <label for="float-input">Last Name</label>
+      </div>
+      <div
+        class="p-field p-float-label p-input-group p-input-icon-right"
+        style="grid-column: span 2;"
+      >
+        <i class="pi pi-inbox"></i>
+        <input
+          id="float-input"
+          class="p-inputtext-lg"
+          type="text"
+          pInputText
+          formControlName="email"
+          style="width: 100%;"
+        />
+        <label for="float-input">email</label>
+      </div>
+      <div
+        class="p-field p-float-label p-input-group p-input-icon-right"
+        style="grid-column: span 2;"
+      >
+        <i class="pi pi-pencil"></i>
+        <textarea
+          id="float-input"
+          type="text"
+          pInputTextarea
+          formControlName="message"
+          style="min-width: 100%; max-width: 100%;"
+        ></textarea>
+        <label for="float-input">Message</label>
+      </div>
     </div>
-    <p class="or-separator">OR</p>
-    <h3>Send me a message via email</h3>
-    <form [formGroup]="contactDetailsForm" class="flex-column">
-      <div class="flex-row">
-        <mat-form-field style="width: 50%; margin-right: 0.5rem;">
-          <input type="text" placeholder="First name" matInput formControlName="firstName" />
-          <mat-icon matSuffix>perm_identity</mat-icon>
-        </mat-form-field>
-        <mat-form-field style="width: 50%; margin-right: 0.5rem;">
-          <input type="text" placeholder="Last name" matInput formControlName="lastName" />
-          <mat-icon matSuffix>account_circle</mat-icon>
-        </mat-form-field>
-      </div>
-      <mat-form-field style="width: 100%;">
-        <input type="email" placeholder="Email address" matInput formControlName="email" />
-        <mat-icon matSuffix>email</mat-icon>
-      </mat-form-field>
-      <mat-form-field style="width: 100%;">
-        <textarea placeholder="Enter your message" matInput formControlName="message"></textarea>
-        <mat-icon matSuffix>comment</mat-icon>
-      </mat-form-field>
-      <div>
-        <button
-          mat-raised-button
-          type="reset"
-          style="margin-right: 1rem;"
-          *ngIf="contactDetailsForm.dirty"
-        >
-          Reset
-        </button>
-        <button
-          [disabled]="!contactDetailsForm.valid"
-          type="submit"
-          color="primary"
-          mat-raised-button
-          (click)="onSubmitHandler()"
-        >
-          Submit
-        </button>
-      </div>
-    </form>
-  </mat-card-content>
-</mat-card>
+
+    <div>
+      <button
+        type="reset"
+        style="margin-right: 1rem;"
+        *ngIf="contactDetailsForm.dirty"
+        pButton
+        class="p-button-lg"
+        label="Reset"
+      ></button>
+      <button
+        [disabled]="!contactDetailsForm.valid"
+        type="submit"
+        pButton
+        (click)="onSubmitHandler()"
+        label="Submit"
+        class="p-button-lg"
+      ></button>
+    </div>
+  </form>
+</p-card>

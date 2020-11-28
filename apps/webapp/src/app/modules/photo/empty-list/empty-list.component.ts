@@ -8,7 +8,6 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class EmptyListComponent implements OnInit {
   @Input() text = 'Empty list';
-  @Input() icon = 'sentiment_dissatisfied';
   constructor() {}
 
   ngOnInit(): void {}

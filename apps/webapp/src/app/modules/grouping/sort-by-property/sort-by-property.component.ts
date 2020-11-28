@@ -40,8 +40,8 @@ export class SortByPropertyComponent implements OnChanges {
     }
   }
 
-  onOptionChange(event: MatOptionSelectionChange, property: 'order' | 'orderBy') {
-    const { value } = event.source;
+  onOptionChange(event, property: 'order' | 'orderBy') {
+    const { value } = event;
 
     if (property === 'order') {
       this.orderFC.setValue(value);

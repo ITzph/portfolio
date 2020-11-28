@@ -1,13 +1,17 @@
-<mat-card class="tags-container">
-  <mat-card-header><h3>Tag Lists</h3></mat-card-header>
-  <mat-card-content class="tags">
-    <mat-chip-list aria-label="Tags" *ngFor="let tag of tags; trackBy: tagTracker" class="tag">
-      <mat-chip [class.tag--selected]="isSelected(tag)"
-        ><button (click)="onTagClick(tag)" class="tag__button">
-          <span class="tag__name">{{ tag.name }}</span
-          >&nbsp;<span class="tag__count">{{ tag.count }}</span>
-        </button></mat-chip
-      >
-    </mat-chip-list>
-  </mat-card-content>
-</mat-card>
+<p-card class="tags-container">
+  <p-header>
+    <h3>Tag Lists</h3>
+  </p-header>
+  <div class="p-d-flex tags">
+    <span
+      *ngFor="let tag of tags; trackBy: tagTracker"
+      class="p-shadow-3 p-p-1 tag"
+      [class.tag--selected]="isSelected(tag)"
+    >
+      <button (click)="onTagClick(tag)" class="tag__button">
+        <span class="tag__name">{{ tag.name }}</span
+        >&nbsp;<span class="tag__count">{{ tag.count }}</span>
+      </button>
+    </span>
+  </div>
+</p-card>

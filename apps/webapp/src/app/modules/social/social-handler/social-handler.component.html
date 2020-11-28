@@ -1,11 +1,10 @@
 <div class="social" (click)="goToUrl(social.url)" *ngIf="social; else invalidSocialInfo">
-  <svg-icon
-    [src]="'assets/images/' + social.icon + '.svg'"
-    class="social__icon"
-    [applyClass]="true"
-    svgClass="social__icon animate__animated animate__wobble"
-    [svgStyle]="{ 'width.rem': 2.5, fill: fillColor || social.color }"
-  ></svg-icon>
+  <i
+    class="social__icon animate__animated animate__wobble fab fa-facebook"
+    [ngClass]="'fa-' + social.icon"
+    style="font-size: 2.5rem;"
+    [style.color]="fillColor || social.color"
+  ></i>
   <p class="name hvr-bounce-to-right" [style.color]="fillColor">{{ social.name }}</p>
 </div>
 

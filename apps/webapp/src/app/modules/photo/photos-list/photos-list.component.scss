@@ -5,26 +5,21 @@
 }
 
 .filter-wrapper {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0 $padding-small;
-  flex-direction: column;
-  align-items: center;
   margin-bottom: $margin-small;
   position: relative;
+  padding: 0 $padding-small;
 
   :not(:last-child) {
     margin-bottom: $margin-very-small;
     margin-right: 0;
   }
 
-  @media #{$sm-device} {
-    flex-direction: row;
-    align-items: flex-end;
+  @media #{$lg-device} {
     :not(:last-child) {
       margin-bottom: 0;
       margin-right: $margin-very-small;
     }
+    padding-left: $padding-small;
   }
 }
 

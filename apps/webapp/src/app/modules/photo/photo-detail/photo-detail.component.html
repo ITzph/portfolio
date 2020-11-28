@@ -3,17 +3,17 @@
   <img
     width="100%"
     loading="lazy"
-    style="min-height: 30rem;"
+    style="min-width: 30rem; min-height: 30rem;"
     [defaultImage]="'assets/images/placeholder-image.gif'"
     [lazyLoad]="photo.url"
     [title]="photo.imageName"
   />
-  <h4>{{ photo.description }}</h4>
-  <mat-chip-list>
-    <mat-chip *ngFor="let tag of photo.tags">
+  <h4 class="p-mb-2">{{ photo.description }}</h4>
+  <ng-container *ngFor="let tag of photo.tags">
+    <span class="p-px-2 p-py-1 p-shadow-2">
       {{ tag }}
-    </mat-chip>
-  </mat-chip-list>
+    </span>
+  </ng-container>
 </section>
 
 <ng-template #invalidImage>

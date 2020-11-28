@@ -8,7 +8,6 @@ import {
   OnChanges,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatOptionSelectionChange } from '@angular/material/core';
 
 @Component({
   selector: 'portfolio-filter-by-tag',
@@ -42,8 +41,8 @@ export class FilterByTagComponent implements OnChanges {
     this.filterValueFC.setValue(value);
   }
 
-  onOptionChange(event: MatOptionSelectionChange, property: 'key' | 'value') {
-    const { value } = event.source;
+  onOptionChange(event, property: 'key' | 'value') {
+    const { value } = event;
 
     if (property === 'value') {
       this.filterValueFC.setValue(value);

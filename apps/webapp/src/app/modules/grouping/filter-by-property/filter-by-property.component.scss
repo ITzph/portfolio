@@ -19,6 +19,9 @@
   @include common-wrapper();
 
   width: 30rem;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
 
   @media #{$sm-device} {
     width: 32rem;
