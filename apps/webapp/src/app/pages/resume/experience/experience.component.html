@@ -2,8 +2,8 @@
   <div class="experience">
     <div class="title">
       <p>
-        <mat-icon>{{ categoryIcon }}</mat-icon
-        >{{ experience.name }} - {{ experience.role }}
+        <i class="section__icon fa" [ngClass]="'fa-' + categoryIcon"> </i>
+        &nbsp;{{ experience.name }} - {{ experience.role }}
       </p>
     </div>
     <div class="date">

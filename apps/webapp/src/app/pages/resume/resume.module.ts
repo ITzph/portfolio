@@ -16,7 +16,6 @@ import { UtilitiesModule } from '../../modules/utilities/utilities.module';
 import { QuillModule } from 'ngx-quill';
 import { MatChipsModule } from '@angular/material/chips';
 import { SocialModule } from '../../modules/social/social.module';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -35,7 +34,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     QuillModule.forRoot(),
     SocialModule,
     MatChipsModule,
-    MatIconModule,
     UtilitiesModule,
     MatButtonModule,
     MatMenuModule,
