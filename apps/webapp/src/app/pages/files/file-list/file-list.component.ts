@@ -12,11 +12,11 @@ export class FileListComponent implements OnInit {
   @Input() fileList: IFileMetadata[] = [];
 
   readonly fileTypeIcon = {
-    jpg: 'pi-image',
-    png: 'pi-image',
-    pdf: 'pi-file-pdf',
-    txt: 'pi-align-justify',
-    docx: 'pi-file',
+    jpg: 'fa-image',
+    png: 'fa-image',
+    pdf: 'fa-file-pdf',
+    txt: 'fa-file-alt',
+    docx: 'fa-file-word',
   };
 
   get filesToDisplay(): (IFileMetadata & { fileType: string })[] {
