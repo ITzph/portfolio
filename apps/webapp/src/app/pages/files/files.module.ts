@@ -6,11 +6,10 @@ import { FilesViewerComponent } from './files.component';
 import { LayoutModule } from '../../modules/layout/layout.module';
 import { HeaderModule } from '../../modules/header/header.module';
 import { FooterModule } from '../../modules/footer/footer.module';
-import { MatCardModule } from '@angular/material/card';
 import { FileListComponent } from './file-list/file-list.component';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [FilesViewerComponent, FileListComponent],
@@ -20,9 +19,8 @@ import { TableModule } from 'primeng/table';
     LayoutModule,
     HeaderModule,
     FooterModule,
-    MatCardModule,
-    MatIconModule,
-    MatButtonModule,
+    CardModule,
+    ButtonModule,
     TableModule,
   ],
   exports: [FilesViewerComponent, FileListComponent],

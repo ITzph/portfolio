@@ -10,16 +10,17 @@
   <ng-template pTemplate="body" let-element>
     <tr>
       <td>
-        <mat-icon [title]="element.fileType">
-          {{ fileTypeIcon[element.fileType] || 'error' }}
-        </mat-icon>
+        <i
+          class="pi"
+          [ngClass]="fileTypeIcon[element.fileType]"
+          style="font-size: 2rem;"
+          [title]="element.fileType"
+        ></i>
       </td>
       <td>{{ element.fileName }}</td>
       <td>{{ element.description }}</td>
       <td>
-        <button mat-raised-button color="primary" (click)="downloadFile(element)">
-          Download
-        </button>
+        <button pButton type="button" (click)="downloadFile(element)" label="Download"></button>
       </td>
     </tr>
   </ng-template>
