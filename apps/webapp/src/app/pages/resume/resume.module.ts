@@ -14,11 +14,9 @@ import { HeaderModule } from '../../modules/header/header.module';
 import { FooterModule } from '../../modules/footer/footer.module';
 import { UtilitiesModule } from '../../modules/utilities/utilities.module';
 import { QuillModule } from 'ngx-quill';
-import { MatChipsModule } from '@angular/material/chips';
 import { SocialModule } from '../../modules/social/social.module';
-import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { ButtonModule } from 'primeng/button';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [ResumeComponent, SkillComponent, ExperienceComponent, CertificationComponent],
@@ -33,11 +31,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     UtilitiesModule,
     QuillModule.forRoot(),
     SocialModule,
-    MatChipsModule,
     UtilitiesModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatTooltipModule,
+    ButtonModule,
+    MenuModule,
   ],
   exports: [ResumeComponent, SkillComponent, ExperienceComponent, CertificationComponent],
 })

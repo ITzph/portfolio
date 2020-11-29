@@ -9,6 +9,7 @@ import { finalize, map, distinctUntilChanged, take, filter, tap } from 'rxjs/ope
 import { setProfile } from '../../actions/profile.actions';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FilesService } from '../files/files.service';
+import { MenuItem } from 'primeng/api';
 
 interface CategorizedSkill {
   category: string;
@@ -28,6 +29,8 @@ export class ResumeComponent implements OnInit {
       return user?.socialHandlers ?? [];
     }),
   );
+
+  menuItems: MenuItem[];
 
   profile$ = this.profileStore.pipe(select(getCurrentUser));
 
@@ -50,7 +53,7 @@ export class ResumeComponent implements OnInit {
     private readonly filesService: FilesService,
   ) {}
 
-  downloadResume(fileType: 'pdf' | 'word') {
+  private downloadResume(fileType: 'pdf' | 'word') {
     this.filesService.getResume(fileType).subscribe((response: any) => {
       const filename = `MyResume.${fileType === 'word' ? '.docx' : 'pdf'}`;
 
@@ -112,6 +115,23 @@ export class ResumeComponent implements OnInit {
           console.error(error);
         },
       );
+
+    this.menuItems = [
+      {
+        label: 'PDF',
+        icon: 'fa fa-file-pdf',
+        command: () => {
+          this.downloadResume('pdf');
+        },
+      },
+      {
+        label: 'Word',
+        icon: 'fa fa-file-word',
+        command: () => {
+          this.downloadResume('word');
+        },
+      },
+    ];
   }
 
   updateProfile(profile: IUser) {
