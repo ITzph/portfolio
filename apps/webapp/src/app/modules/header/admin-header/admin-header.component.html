@@ -71,7 +71,12 @@
 </ng-template>
 
 <ng-template #forLogout>
-  <button mat-icon-button (click)="onLogout()" style="color: red;" title="Logout">
-    <mat-icon>power_settings_new</mat-icon>
-  </button>
+  <button
+    pButton
+    class="p-button-text p-button-rounded"
+    (click)="onLogout()"
+    style="color: red; font-size: 2em;"
+    title="Logout"
+    icon="fa fa-sign-out-alt"
+  ></button>
 </ng-template>
