@@ -1,14 +1,12 @@
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
-import { BinaryConfirmationComponent } from '../custom-dialog/binary-confirmation/binary-confirmation.component';
 
 export abstract class HeaderAbstract {
   constructor(
     private readonly authService: AuthService,
-    private readonly dialog: MatDialog,
-    private readonly snackBar: MatSnackBar,
+    private readonly confirmationService: ConfirmationService,
+    private readonly messageService: MessageService,
   ) {}
 
   get isLoggedIn$() {
@@ -20,24 +18,16 @@ export abstract class HeaderAbstract {
   }
 
   onLogout() {
-    const dialogProp = {
-      title: 'Logout',
-      messages: [`Are you sure you want to logout`],
-      okayLabel: 'Yes',
-      noLabel: 'No',
-    };
-
-    const dialogRef = this.dialog.open(BinaryConfirmationComponent, {
-      data: dialogProp,
-    });
-
-    dialogRef.afterClosed().subscribe((isTrue: boolean) => {
-      if (isTrue) {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to logout?',
+      accept: () => {
         this.authService.logout();
-        this.snackBar.open('Logout successfully', 'success', {
-          duration: 2000,
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Logout successfully',
+          detail: 'Via MessageService',
         });
-      }
+      },
     });
   }
 }

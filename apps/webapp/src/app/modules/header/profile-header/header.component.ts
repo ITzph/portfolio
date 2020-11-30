@@ -10,13 +10,11 @@ import { Subject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ISocialHandler } from '@portfolio/api-interfaces';
 import { Store, select } from '@ngrx/store';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import * as fromProfile from '../../../reducers/profile.reducer';
 import { getCurrentUser } from '../../../selectors/profile.selectors';
 import { AuthService } from '../../../services/auth.service';
 import { HeaderAbstract } from '../header.abstract';
-import { isPlatformBrowser } from '@angular/common';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'portfolio-header',
@@ -30,12 +28,12 @@ export class HeaderComponent extends HeaderAbstract implements OnInit, OnDestroy
 
   constructor(
     private readonly profileStore: Store<fromProfile.State>,
+    confirmationService: ConfirmationService,
     authService: AuthService,
-    snackBar: MatSnackBar,
-    dialog: MatDialog,
+    messageService: MessageService,
     @Inject(PLATFORM_ID) private platformID: Object,
   ) {
-    super(authService, dialog, snackBar);
+    super(authService, confirmationService, messageService);
   }
 
   isPinned = false;
@@ -45,46 +43,12 @@ export class HeaderComponent extends HeaderAbstract implements OnInit, OnDestroy
   scrollEvent: Subject<number> = new Subject();
 
   ngOnInit() {
-    if (isPlatformBrowser(this.platformID)) {
-      const appRoot = document.getElementById('app-root');
-
-      this.socialHandlers$ = this.profileStore.pipe(
-        select(getCurrentUser),
-        map((user) => {
-          return user?.socialHandlers ?? [];
-        }),
-      );
-      // This is for reference, if I want to return changing of header
-
-      // this.render.listen('body', 'wheel', () => {
-      //   const rect = this.el.nativeElement.getBoundingClientRect().top;
-      //   this.scrollEvent.next(rect);
-      // });
-
-      // this.render.listen(appRoot, 'scroll', () => {
-      //   const rect = this.el.nativeElement.getBoundingClientRect().top;
-      //   this.scrollEvent.next(rect);
-      // });
-
-      // this.scrollEvent
-      //   .pipe(
-      //     throttleTime(50),
-      //     takeWhile(() => !this.isUnsubscribed),
-      //   )
-      //   .subscribe((rect) => {
-      //     if (rect < -20) {
-      //       if (!this.isPinned) {
-      //         this.isPinned = true;
-      //         this.cdr.detectChanges();
-      //       }
-      //     } else {
-      //       if (this.isPinned) {
-      //         this.isPinned = false;
-      //         this.cdr.detectChanges();
-      //       }
-      //     }
-      //   });
-    }
+    this.socialHandlers$ = this.profileStore.pipe(
+      select(getCurrentUser),
+      map((user) => {
+        return user?.socialHandlers ?? [];
+      }),
+    );
   }
 
   showLinks(isVisible: boolean) {
