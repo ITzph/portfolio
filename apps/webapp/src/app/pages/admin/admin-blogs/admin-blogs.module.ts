@@ -11,7 +11,6 @@ import * as fromBlogs from '../../../reducers/blog.reducer';
 import { PhotoModule } from '../../../modules/photo/photo.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CreateBlogComponent } from './create-blog/create-blog.component';
 import { MatChipsModule } from '@angular/material/chips';
@@ -21,6 +20,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { UpdateBlogComponent } from './update-blog/update-blog.component';
 import { ListBlogsComponent } from './list-blogs/list-blogs.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [AdminBlogsComponent, CreateBlogComponent, UpdateBlogComponent, ListBlogsComponent],
@@ -31,7 +34,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ReactiveFormsModule,
     PhotoModule,
     MatInputModule,
-    MatCardModule,
     QuillModule.forRoot(),
     MatButtonModule,
     MatChipsModule,
@@ -41,7 +43,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     NgxSpinnerModule,
     MatTooltipModule,
     MatIconModule,
+    ConfirmDialogModule,
+    ToastModule,
+    CardModule,
   ],
+
+  providers: [ConfirmationService, MessageService],
   exports: [AdminBlogsComponent, CreateBlogComponent, UpdateBlogComponent, ListBlogsComponent],
 })
 export class AdminBlogsModule {}

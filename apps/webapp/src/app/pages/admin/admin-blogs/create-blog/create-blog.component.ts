@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UpsertBlog } from '../upsert-blog.abstract';
 import { Router } from '@angular/router';
 import { Blog } from '@portfolio/api-interfaces';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'portfolio-create-blog',
@@ -23,10 +24,10 @@ export class CreateBlogComponent extends UpsertBlog implements OnInit {
     readonly blogsStore: Store<fromBlogs.State>,
     readonly blogService: BlogsService,
     readonly spinner: NgxSpinnerService,
-    readonly snackbar: MatSnackBar,
+    readonly messageService: MessageService,
     readonly router: Router,
   ) {
-    super(fb, blogsStore, blogService, spinner, snackbar, router);
+    super(fb, blogsStore, blogService, spinner, router);
   }
 
   ngOnInit(): void {}
@@ -56,8 +57,11 @@ export class CreateBlogComponent extends UpsertBlog implements OnInit {
           this.blogsStore.dispatch(addBlog({ blog }));
           this.blogFormGroup.reset();
 
-          this.snackbar.open(`Created new blog successfully`, 'success', {
-            duration: 2000,
+          this.messageService.add({
+            key: 'blog-admin',
+            severity: 'success',
+            summary: 'Created new blog successfully',
+            detail: 'Via MessageService',
           });
           this.close();
         });

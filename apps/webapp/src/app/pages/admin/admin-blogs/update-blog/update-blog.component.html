@@ -1,5 +1,5 @@
 <form [formGroup]="blogFormGroup" class="blog-form-wrapper">
-  <mat-card class="blog-form">
+  <p-card class="blog-form">
     <mat-form-field class="double-font-size">
       <mat-label>Title</mat-label>
       <input
@@ -34,7 +34,7 @@
     </mat-form-field>
     <quill-editor formControlName="content"> </quill-editor>
     <mat-hint>*Content is required</mat-hint>
-    <mat-card-actions class="actions" *ngIf="blog">
+    <p-footer class="actions" *ngIf="blog">
       <button mat-raised-button color="warn" (click)="close()">Cancel</button>
       <button
         color="primary"
@@ -52,8 +52,8 @@
       <button mat-raised-button color="primary" (click)="onUnpublishBlog()" *ngIf="blog.published">
         Unpublish
       </button>
-    </mat-card-actions>
-  </mat-card>
+    </p-footer>
+  </p-card>
   <h3 class="published-label" *ngIf="blog">
     {{ blog.published ? 'Published' : 'Unpublished' }}
   </h3>

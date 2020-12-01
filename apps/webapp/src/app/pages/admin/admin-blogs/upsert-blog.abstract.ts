@@ -5,8 +5,6 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ImageDialogAbstract } from '../admin-photos/image-dialog.abtract';
 import { BlogsService } from '../../blogs/blogs.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 export abstract class UpsertBlog extends ImageDialogAbstract {
@@ -26,7 +24,6 @@ export abstract class UpsertBlog extends ImageDialogAbstract {
     protected readonly blogsStore: Store<fromBlogs.State>,
     protected readonly blogService: BlogsService,
     protected readonly spinner: NgxSpinnerService,
-    protected readonly snackbar: MatSnackBar,
     protected readonly router: Router,
   ) {
     super();
