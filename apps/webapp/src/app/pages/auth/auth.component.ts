@@ -3,7 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { finalize } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'portfolio-auth',
@@ -22,7 +22,7 @@ export class AuthComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly fb: FormBuilder,
     private readonly spinner: NgxSpinnerService,
-    private readonly snackBar: MatSnackBar,
+    private readonly messageService: MessageService,
   ) {}
 
   ngOnInit(): void {}
@@ -38,20 +38,31 @@ export class AuthComponent implements OnInit {
           (res) => {
             this.isInvalidCredentials = false;
             this.authService.handleLoginSuccessful(username, res.access_token);
-            this.snackBar.open('Login successfuly', 'success', {
-              duration: 2000,
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Login successfully',
+              detail: 'Yay!',
             });
           },
           (error) => {
             if (error.status === 504) {
-              this.snackBar.open('Could not connect to server', 'error', {
-                duration: 2000,
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Could not connect to server',
+                detail: 'Error 5xx',
               });
             } else if (error.status === 401) {
               this.isInvalidCredentials = true;
+              this.messageService.add({
+                severity: 'error',
+                summary: 'An error has occurred',
+                detail: 'Errrrror!',
+              });
             } else {
-              this.snackBar.open('Unknown error', 'error', {
-                duration: 2000,
+              this.messageService.add({
+                severity: 'error',
+                summary: 'An error has occurred',
+                detail: 'Errrrror!',
               });
             }
           },

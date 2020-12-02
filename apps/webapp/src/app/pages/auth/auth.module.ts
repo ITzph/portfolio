@@ -4,12 +4,12 @@ import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [AuthComponent],
@@ -19,11 +19,11 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     AngularSvgIconModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatCardModule,
+    ButtonModule,
+    InputTextModule,
+    CardModule,
     NgxSpinnerModule,
+    ToastModule,
   ],
   exports: [AuthComponent],
 })
