@@ -73,10 +73,15 @@
 <ng-template #forLogout>
   <button
     pButton
+    type="button"
+    name="logout"
+    title="Logout"
+    style="color: red; font-size: 2em;"
     class="p-button-text p-button-rounded"
     (click)="onLogout()"
-    style="color: red; font-size: 2em;"
-    title="Logout"
     icon="fa fa-sign-out-alt"
   ></button>
 </ng-template>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-toast></p-toast>

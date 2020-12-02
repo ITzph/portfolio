@@ -24,6 +24,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CardModule } from 'primeng/card';
+import { ChipsModule } from 'primeng/chips';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [AdminBlogsComponent, CreateBlogComponent, UpdateBlogComponent, ListBlogsComponent],
@@ -46,6 +48,8 @@ import { CardModule } from 'primeng/card';
     ConfirmDialogModule,
     ToastModule,
     CardModule,
+    ChipsModule,
+    ButtonModule,
   ],
 
   providers: [ConfirmationService, MessageService],

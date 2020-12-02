@@ -8,23 +8,23 @@
     <portfolio-blog-tile [blog]="blog"></portfolio-blog-tile>
     <div class="actions">
       <button
-        mat-icon-button
+        pButton
+        icon="fa fa-trash-alt"
+        class="p-button-rounded"
         color="warn"
         (click)="onBlogDelete(blog)"
         matTooltip="Delete Blog"
         matTooltipPosition="left"
-      >
-        <mat-icon>delete</mat-icon>
-      </button>
+      ></button>
       <button
-        mat-icon-button
+        pButton
+        icon="fa fa-pen"
+        class="p-button-rounded"
         color="primary"
         (click)="onBlogUpdate(blog)"
         matTooltip="Update Blog"
         matTooltipPosition="left"
-      >
-        <mat-icon>edit</mat-icon>
-      </button>
+      ></button>
     </div>
   </article>
 </ng-container>
