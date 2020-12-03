@@ -1,15 +1,14 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { IFileMetadata } from '@portfolio/api-interfaces';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
-import { BinaryConfirmationComponent } from '../../../modules/custom-dialog/binary-confirmation/binary-confirmation.component';
 import { trackByIdOrIndex } from '../../../utils/tracker-by-id.util';
 import { FilesService } from '../../files/files.service';
 import { FileFormData } from './file.model';
 import { UploadFileComponent } from './upload-file/upload-file.component';
 import { DialogService } from 'primeng/dynamicdialog';
+import { ConfirmationService } from 'primeng/api';
 
 type EditableFile = IFileMetadata & { editable: boolean };
 
@@ -32,6 +31,7 @@ export class AdminFilesComponent implements OnInit {
     private readonly filesService: FilesService,
     private readonly dialogService: DialogService,
     private readonly spinner: NgxSpinnerService,
+    private readonly confirmationService: ConfirmationService,
   ) {}
 
   onUploadNewFile() {
@@ -145,25 +145,15 @@ export class AdminFilesComponent implements OnInit {
   }
 
   onFileDeleteStarted(file: EditableFile) {
-    const dialogProp = {
-      title: 'Delete file',
-      messages: [`Are you sure you want to delete ${file.fileName}?`],
-      okayLabel: 'Okay',
-      noLabel: 'Cancel',
-    };
-
-    // const dialogRef = this.dialog.open(BinaryConfirmationComponent, {
-    //   data: dialogProp,
-    // });
-
-    // dialogRef.afterClosed().subscribe((isTrue: boolean) => {
-    //   if (isTrue) {
-    //     this.filesService.deleteFile(file.id).subscribe(({ id }) => {
-    //       const currentFiles = this.filesToDisplay.getValue();
-    //       this.filesToDisplay.next(currentFiles.filter((_file) => _file.id !== id));
-    //     });
-    //   }
-    // });
+    this.confirmationService.confirm({
+      message: `Are you sure you want to delete ${file.fileName}?`,
+      accept: () => {
+        this.filesService.deleteFile(file.id).subscribe(({ id }) => {
+          const currentFiles = this.filesToDisplay.getValue();
+          this.filesToDisplay.next(currentFiles.filter((_file) => _file.id !== id));
+        });
+      },
+    });
   }
 
   onPropertyChange(file: EditableFile, event: Event, prop: keyof EditableFile) {
@@ -186,37 +176,27 @@ export class AdminFilesComponent implements OnInit {
   }
 
   onConfirmUpdate(file: EditableFile) {
-    const dialogProp = {
-      title: 'Update file',
-      messages: [`Are you sure you want to update ${file.fileName}?`],
-      okayLabel: 'Okay',
-      noLabel: 'Cancel',
-    };
-
-    // const dialogRef = this.dialog.open(BinaryConfirmationComponent, {
-    //   data: dialogProp,
-    // });
-
-    // dialogRef.afterClosed().subscribe((isTrue: boolean) => {
-    //   if (isTrue) {
-    //     this.filesService.updateFile(file.id, file).subscribe((updatedFile) => {
-    //       const currentFiles = this.filesToDisplay.getValue();
-    //       this.filesToDisplay.next(
-    //         currentFiles.map((_file) => {
-    //           if (_file.id === updatedFile.id) {
-    //             this.isEditing = false;
-    //             return {
-    //               ...file,
-    //               ...updatedFile,
-    //               editable: false,
-    //             };
-    //           }
-    //           return { ..._file, editable: false };
-    //         }),
-    //       );
-    //     });
-    //   }
-    // });
+    this.confirmationService.confirm({
+      message: `Are you sure you want to update ${file.fileName}?`,
+      accept: () => {
+        this.filesService.updateFile(file.id, file).subscribe((updatedFile) => {
+          const currentFiles = this.filesToDisplay.getValue();
+          this.filesToDisplay.next(
+            currentFiles.map((_file) => {
+              if (_file.id === updatedFile.id) {
+                this.isEditing = false;
+                return {
+                  ...file,
+                  ...updatedFile,
+                  editable: false,
+                };
+              }
+              return { ..._file, editable: false };
+            }),
+          );
+        });
+      },
+    });
   }
 
   ngOnInit(): void {
