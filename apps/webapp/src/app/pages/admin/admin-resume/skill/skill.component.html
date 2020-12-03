@@ -1,26 +1,20 @@
-<button mat-raised-button color="primary" (click)="onAddNewSkill()">Add new skill</button>
+<button pButton color="primary" (click)="onAddNewSkill()" label="Add new skill"></button>
 
 <ng-container *ngFor="let skill of skills$ | async; trackBy: elementTracker">
-  <mat-card
-    style="cursor: pointer; margin-bottom: 1rem;"
-    *ngIf="!elementToModify"
-    (click)="onSelectElement(skill)"
-  >
-    <mat-card-content>
-      <p>Name: {{ skill.name }}</p>
-      <p>Category: {{ skill.category }}</p>
-      <p>Is Current: {{ skill.isCurrent }}</p>
-    </mat-card-content>
-    <mat-card-actions>
+  <p-card *ngIf="!elementToModify" (click)="onSelectElement(skill)" class="p-mb-3">
+    <p>Name: {{ skill.name }}</p>
+    <p>Category: {{ skill.category }}</p>
+    <p>Is Current: {{ skill.isCurrent }}</p>
+    <p-footer>
       <button
-        mat-icon-button
+        pButton
         color="warn"
+        class="p-button-rounded"
+        icon="fa fa-trash-alt"
         (click)="onDeleteElement(skill); $event.stopPropagation()"
-      >
-        <mat-icon>delete</mat-icon>
-      </button>
-    </mat-card-actions>
-  </mat-card>
+      ></button>
+    </p-footer>
+  </p-card>
 </ng-container>
 
 <ng-container *ngIf="!!elementToModify">

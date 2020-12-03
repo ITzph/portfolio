@@ -1,25 +1,24 @@
-<button mat-raised-button color="primary" (click)="onAddNewCertification()">
-  Add new certification
-</button>
+<button
+  pButton
+  color="primary"
+  (click)="onAddNewCertification()"
+  label="Add new certification"
+></button>
 <ng-container *ngFor="let certification of certifications$ | async; trackBy: elementTracker">
-  <mat-card
-    (click)="onSelectElement(certification)"
-    style="cursor: pointer; margin-bottom: 1rem;"
-    *ngIf="!elementToModify"
-  >
+  <p-card (click)="onSelectElement(certification)" *ngIf="!elementToModify">
     <p>{{ certification.name }}</p>
     <p>{{ certification.description }}</p>
     <p>{{ certification.provider }}</p>
     <p>{{ certification.url }}</p>
     <p>{{ certification.dateAcquired }}</p>
     <button
-      mat-icon-button
+      pButton
       color="warn"
+      class="p-button-rounded"
+      icon="fa fa-trash-alt"
       (click)="onDeleteCertification(certification); $event.stopPropagation()"
-    >
-      <mat-icon>delete</mat-icon>
-    </button>
-  </mat-card>
+    ></button>
+  </p-card>
 </ng-container>
 
 <ng-container *ngIf="!!elementToModify">

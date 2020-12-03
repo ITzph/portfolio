@@ -20,6 +20,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { UpdateCertificationComponent } from './certification/update-certification/update-certification.component';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 @NgModule({
   declarations: [
     AdminResumeComponent,
@@ -45,6 +47,8 @@ import { UpdateCertificationComponent } from './certification/update-certificati
     MatRadioModule,
     MatCheckboxModule,
     MatAutocompleteModule,
+    CardModule,
+    ButtonModule,
   ],
   exports: [
     AdminResumeComponent,
