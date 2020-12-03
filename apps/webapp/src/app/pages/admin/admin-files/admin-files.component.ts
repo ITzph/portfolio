@@ -9,6 +9,7 @@ import { trackByIdOrIndex } from '../../../utils/tracker-by-id.util';
 import { FilesService } from '../../files/files.service';
 import { FileFormData } from './file.model';
 import { UploadFileComponent } from './upload-file/upload-file.component';
+import { DialogService } from 'primeng/dynamicdialog';
 
 type EditableFile = IFileMetadata & { editable: boolean };
 
@@ -29,14 +30,17 @@ export class AdminFilesComponent implements OnInit {
 
   constructor(
     private readonly filesService: FilesService,
-    private readonly dialog: MatDialog,
+    private readonly dialogService: DialogService,
     private readonly spinner: NgxSpinnerService,
   ) {}
 
   onUploadNewFile() {
-    const dialogRef = this.dialog.open(UploadFileComponent);
+    const ref = this.dialogService.open(UploadFileComponent, {
+      header: 'Upload a new file',
+      width: '70%',
+    });
 
-    dialogRef.afterClosed().subscribe((formData: FileFormData) => {
+    ref.onClose.subscribe((formData: FileFormData) => {
       if (formData) {
         const imageForm = new FormData();
         imageForm.append('fileName', formData.fileName);
@@ -64,6 +68,36 @@ export class AdminFilesComponent implements OnInit {
           });
       }
     });
+    // const dialogRef = this.dialog.open(UploadFileComponent);
+
+    // dialogRef.afterClosed().subscribe((formData: FileFormData) => {
+    //   if (formData) {
+    //     const imageForm = new FormData();
+    //     imageForm.append('fileName', formData.fileName);
+    //     imageForm.append('description', formData.description);
+    //     imageForm.append('category', formData.category);
+    //     imageForm.append('key', formData.key);
+    //     imageForm.append('file', formData.fileSource);
+    //     this.spinner.show('photosSpinner');
+    //     this.filesService
+    //       .fileUpload(imageForm)
+    //       .pipe(
+    //         finalize(() => {
+    //           this.spinner.hide('photosSpinner');
+    //         }),
+    //       )
+    //       .subscribe((res) => {
+    //         const currentFiles = this.filesToDisplay.getValue();
+    //         this.filesToDisplay.next([
+    //           {
+    //             ...res,
+    //             editable: false,
+    //           },
+    //           ...currentFiles,
+    //         ]);
+    //       });
+    //   }
+    // });
   }
 
   initializeFileToDisplay() {
@@ -118,18 +152,18 @@ export class AdminFilesComponent implements OnInit {
       noLabel: 'Cancel',
     };
 
-    const dialogRef = this.dialog.open(BinaryConfirmationComponent, {
-      data: dialogProp,
-    });
+    // const dialogRef = this.dialog.open(BinaryConfirmationComponent, {
+    //   data: dialogProp,
+    // });
 
-    dialogRef.afterClosed().subscribe((isTrue: boolean) => {
-      if (isTrue) {
-        this.filesService.deleteFile(file.id).subscribe(({ id }) => {
-          const currentFiles = this.filesToDisplay.getValue();
-          this.filesToDisplay.next(currentFiles.filter((_file) => _file.id !== id));
-        });
-      }
-    });
+    // dialogRef.afterClosed().subscribe((isTrue: boolean) => {
+    //   if (isTrue) {
+    //     this.filesService.deleteFile(file.id).subscribe(({ id }) => {
+    //       const currentFiles = this.filesToDisplay.getValue();
+    //       this.filesToDisplay.next(currentFiles.filter((_file) => _file.id !== id));
+    //     });
+    //   }
+    // });
   }
 
   onPropertyChange(file: EditableFile, event: Event, prop: keyof EditableFile) {
@@ -159,30 +193,30 @@ export class AdminFilesComponent implements OnInit {
       noLabel: 'Cancel',
     };
 
-    const dialogRef = this.dialog.open(BinaryConfirmationComponent, {
-      data: dialogProp,
-    });
+    // const dialogRef = this.dialog.open(BinaryConfirmationComponent, {
+    //   data: dialogProp,
+    // });
 
-    dialogRef.afterClosed().subscribe((isTrue: boolean) => {
-      if (isTrue) {
-        this.filesService.updateFile(file.id, file).subscribe((updatedFile) => {
-          const currentFiles = this.filesToDisplay.getValue();
-          this.filesToDisplay.next(
-            currentFiles.map((_file) => {
-              if (_file.id === updatedFile.id) {
-                this.isEditing = false;
-                return {
-                  ...file,
-                  ...updatedFile,
-                  editable: false,
-                };
-              }
-              return { ..._file, editable: false };
-            }),
-          );
-        });
-      }
-    });
+    // dialogRef.afterClosed().subscribe((isTrue: boolean) => {
+    //   if (isTrue) {
+    //     this.filesService.updateFile(file.id, file).subscribe((updatedFile) => {
+    //       const currentFiles = this.filesToDisplay.getValue();
+    //       this.filesToDisplay.next(
+    //         currentFiles.map((_file) => {
+    //           if (_file.id === updatedFile.id) {
+    //             this.isEditing = false;
+    //             return {
+    //               ...file,
+    //               ...updatedFile,
+    //               editable: false,
+    //             };
+    //           }
+    //           return { ..._file, editable: false };
+    //         }),
+    //       );
+    //     });
+    //   }
+    // });
   }
 
   ngOnInit(): void {

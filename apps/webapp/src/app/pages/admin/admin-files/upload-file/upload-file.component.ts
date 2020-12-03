@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FileFormData } from '../file.model';
 
 @Component({
@@ -23,8 +24,15 @@ export class UploadFileComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly dialogRef: MatDialogRef<UploadFileComponent, FileFormData>,
+    public dialogRef: DynamicDialogRef,
+    public config: DynamicDialogConfig,
   ) {}
+
+  // constructor(
+  //   private carService: CarService,
+  //   public ref: DynamicDialogRef,
+  //   public config: DynamicDialogConfig,
+  // ) {}
 
   onFormSubmit() {
     if (this.fileUploadForm.valid) {

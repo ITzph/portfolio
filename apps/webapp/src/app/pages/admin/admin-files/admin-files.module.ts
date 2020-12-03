@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { DialogService } from 'primeng/dynamicdialog';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [AdminFilesComponent, UploadFileComponent],
@@ -29,7 +31,9 @@ import { ButtonModule } from 'primeng/button';
     NgxSpinnerModule,
     TableModule,
     ButtonModule,
+    InputTextModule,
   ],
+  providers: [DialogService],
   exports: [UploadFileComponent],
 })
 export class AdminFilesModule {}

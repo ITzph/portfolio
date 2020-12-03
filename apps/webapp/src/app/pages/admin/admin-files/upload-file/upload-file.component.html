@@ -1,39 +1,53 @@
-<h2 mat-dialgo-title>Upload File</h2>
-<mat-dialog-content>
-  <form [formGroup]="fileUploadForm" (submit)="onFormSubmit()" class="upload-form">
-    <mat-form-field>
-      <mat-label>File name</mat-label>
-      <input matInput placeholder="File name" formControlName="fileName" />
-      <mat-error *ngIf="fileUploadForm.get('fileName').hasError('required')"
-        >File name is required</mat-error
-      >
-      <mat-error *ngIf="fileUploadForm.get('fileName').hasError('minlength')"
-        >Minimum length of 4 characters</mat-error
-      >
-    </mat-form-field>
+<form [formGroup]="fileUploadForm" (submit)="onFormSubmit()" class="upload-form p-pb-5">
+  <div class="p-field p-float-label">
+    <input type="text" pInputText style="width: 100%;" formControlName="fileName" />
+    <label for="float-input">File name</label>
+  </div>
+  <div class="p-field p-float-label">
+    <input type="text" pInputText style="width: 100%;" formControlName="description" />
+    <label for="float-input">Description</label>
+  </div>
+  <div class="p-field p-float-label">
+    <input type="text" pInputText style="width: 100%;" formControlName="category" />
+    <label for="float-input">Category</label>
+  </div>
+  <div class="p-field p-float-label">
+    <input type="text" pInputText style="width: 100%;" formControlName="key" />
+    <label for="float-input">Key</label>
+  </div>
 
-    <mat-form-field>
-      <mat-label>Description</mat-label>
-      <input matInput placeholder="Description" formControlName="description" />
-    </mat-form-field>
+  <!-- <mat-form-field>
+    <mat-label>File name</mat-label>
+    <input matInput placeholder="File name" formControlName="fileName" />
+    <mat-error *ngIf="fileUploadForm.get('fileName').hasError('required')"
+      >File name is required</mat-error
+    >
+    <mat-error *ngIf="fileUploadForm.get('fileName').hasError('minlength')"
+      >Minimum length of 4 characters</mat-error
+    >
+  </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Category</mat-label>
-      <input matInput placeholder="Category" formControlName="category" />
-    </mat-form-field>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <input matInput placeholder="Description" formControlName="description" />
+  </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Key</mat-label>
-      <input matInput placeholder="Key" formControlName="key" />
-    </mat-form-field>
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <input matInput placeholder="Category" formControlName="category" />
+  </mat-form-field>
 
-    <input
-      (change)="onImagePicked($event)"
-      placeholder="Upload File"
-      formControlName="file"
-      type="file"
-      style="margin: 1rem 0;"
-    />
-    <button mat-raised-button color="primary" type="submit">Upload</button>
-  </form>
-</mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Key</mat-label>
+    <input matInput placeholder="Key" formControlName="key" />
+  </mat-form-field> -->
+
+  <input
+    (change)="onImagePicked($event)"
+    placeholder="Upload File"
+    formControlName="file"
+    type="file"
+    style="margin: 1rem 0;"
+  />
+  <button mat-raised-button color="primary" type="submit">Upload</button>
+</form>
