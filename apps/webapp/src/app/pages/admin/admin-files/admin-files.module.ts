@@ -11,6 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [AdminFilesComponent, UploadFileComponent],
@@ -25,6 +27,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatDialogModule,
     MatButtonModule,
     NgxSpinnerModule,
+    TableModule,
+    ButtonModule,
   ],
   exports: [UploadFileComponent],
 })
