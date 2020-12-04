@@ -1,33 +1,29 @@
 <form [formGroup]="skillFormGroup">
-  <mat-card class="form-wrapper">
-    <mat-card-title>
+  <p-card class="form-wrapper">
+    <p-header>
       Update Skill
-    </mat-card-title>
-    <mat-card-content class="card-content">
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput type="text" placeholder="Name" formControlName="name" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Category</mat-label>
-        <input
-          matInput
-          type="text"
-          placeholder="Category"
-          formControlName="category"
-          [matAutocomplete]="auto"
-        />
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">
-            {{ option }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <mat-checkbox formControlName="current">Is current skill?</mat-checkbox>
-    </mat-card-content>
-    <mat-card-actions align="end">
+    </p-header>
+    <div class="card-content">
+      <div class="p-field p-float-label">
+        <input type="text" pInputText style="width: 100%;" formControlName="name" />
+        <label for="float-input">Name</label>
+      </div>
+      <p-autoComplete
+        formControlName="category"
+        [suggestions]="filteredOptions$ | async"
+        (completeMethod)="search($event)"
+      ></p-autoComplete>
+      <p-toggleButton
+        formControlName="current"
+        [onIcon]="'pi pi-check'"
+        offIcon="pi pi-times"
+        [onLabel]="'Current skill'"
+        offLabel="Not current skill"
+      ></p-toggleButton>
+    </div>
+    <p-footer align="end">
       <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
       <button mat-raised-button color="primary" (click)="onSkillUpdate()">Update</button>
-    </mat-card-actions>
-  </mat-card>
+    </p-footer>
+  </p-card>
 </form>

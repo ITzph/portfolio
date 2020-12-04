@@ -22,6 +22,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { UpdateCertificationComponent } from './certification/update-certification/update-certification.component';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { InputTextModule } from 'primeng/inputtext';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+
 @NgModule({
   declarations: [
     AdminResumeComponent,
@@ -49,6 +53,9 @@ import { ButtonModule } from 'primeng/button';
     MatAutocompleteModule,
     CardModule,
     ButtonModule,
+    AutoCompleteModule,
+    InputTextModule,
+    ToggleButtonModule,
   ],
   exports: [
     AdminResumeComponent,
