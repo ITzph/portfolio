@@ -25,6 +25,7 @@ import { ButtonModule } from 'primeng/button';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     AutoCompleteModule,
     InputTextModule,
     ToggleButtonModule,
+    CalendarModule,
   ],
   exports: [
     AdminResumeComponent,
