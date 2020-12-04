@@ -6,9 +6,9 @@ import {
   UrlTree,
   Router,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { take } from 'rxjs/operators';
+import { catchError, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +28,15 @@ export class CanActivateAuthenticatedGuard implements CanActivate {
       .subscribe((token) => (authToken = token));
 
     if (authToken) {
-      this.authService.checkIfAuthenticated().subscribe(() => {}, this.authService.logout);
+      this.authService
+        .checkIfAuthenticated()
+        .pipe(
+          catchError(() => {
+            this.authService.logout();
+            return of(false);
+          }),
+        )
+        .subscribe(() => {});
       return true;
     }
     this.router.navigateByUrl('/auth');
