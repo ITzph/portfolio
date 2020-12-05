@@ -10,16 +10,16 @@
     </p-header>
     <div class="card-content">
       <div class="p-field p-float-label">
-        <input type="text" pInputText formControlName="name" />
-        <label>Name</label>
-      </div>
-      <div class="p-field p-float-label">
         <p-autoComplete
           formControlName="category"
           [suggestions]="filteredOptions$ | async"
           (completeMethod)="search($event)"
         ></p-autoComplete>
         <label>Category</label>
+      </div>
+      <div class="p-field p-float-label">
+        <input type="text" pInputText formControlName="name" />
+        <label>Name</label>
       </div>
       <div class="p-field">
         <p-toggleButton

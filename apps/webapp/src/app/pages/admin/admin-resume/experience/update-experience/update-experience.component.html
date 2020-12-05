@@ -1,42 +1,39 @@
 <form [formGroup]="experienceFormGroup">
-  <mat-card class="form-wrapper">
-    <mat-card-title>
-      Update Experience
-    </mat-card-title>
-    <mat-card-content class="card-content">
-      <mat-form-field appearance="fill">
-        <mat-label>Choose a start date</mat-label>
-        <input matInput [matDatepicker]="startPicker" formControlName="startDate" />
-        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-        <mat-datepicker #startPicker></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Choose an end date</mat-label>
-        <input matInput [matDatepicker]="endPicker" formControlName="endDate" />
-        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-        <mat-datepicker #endPicker></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Name" formControlName="name" />
-        <!-- <mat-error *ngIf="experienceFormGroup.get('title').hasError('required')"
-      >Title is required</mat-error
-    > -->
-      </mat-form-field>
+  <p-card class="form-wrapper">
+    <p-header>
+      <h2
+        class="p-pl-5 p-pt-3"
+        style="display: flex; align-items: center; justify-content: center;"
+      >
+        Update Experience
+      </h2>
+    </p-header>
+    <div class="card-content">
+      <div class="p-field p-float-label">
+        <p-calendar dateFormat="yy-mm-dd" formControlName="startDate"></p-calendar>
+        <label>Start Date</label>
+      </div>
 
-      <mat-form-field>
-        <mat-label>Role</mat-label>
-        <input matInput placeholder="Role" formControlName="role" />
-        <!-- <mat-error *ngIf="experienceFormGroup.get('role').hasError('required')"
-      >Role is required</mat-error
-    > -->
-      </mat-form-field>
+      <div class="p-field p-float-label">
+        <p-calendar dateFormat="yy-mm-dd" formControlName="endDate"></p-calendar>
+        <label>End Date</label>
+      </div>
+
+      <div class="p-field p-float-label">
+        <input type="text" pInputText style="width: 100%;" formControlName="name" />
+        <label>Name</label>
+      </div>
+
+      <div class="p-field p-float-label">
+        <input type="text" pInputText style="width: 100%;" formControlName="role" />
+        <label>Role</label>
+      </div>
 
       <quill-editor formControlName="events"> </quill-editor>
-    </mat-card-content>
-    <mat-card-actions align="end">
-      <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
-      <button mat-raised-button color="primary" (click)="onExperienceUpdate()">Update</button>
-    </mat-card-actions>
-  </mat-card>
+    </div>
+    <p-footer align="end">
+      <button pButton class="p-mr-2" (click)="onCancel()" label="Cancel"></button>
+      <button pButton (click)="onExperienceUpdate()" label="Update"></button>
+    </p-footer>
+  </p-card>
 </form>
