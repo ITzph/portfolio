@@ -1,29 +1,39 @@
 <form [formGroup]="skillFormGroup">
   <p-card class="form-wrapper">
     <p-header>
-      Update Skill
+      <h2
+        class="p-pl-5 p-pt-3"
+        style="display: flex; align-items: center; justify-content: center;"
+      >
+        Update Skill
+      </h2>
     </p-header>
     <div class="card-content">
       <div class="p-field p-float-label">
-        <input type="text" pInputText style="width: 100%;" formControlName="name" />
-        <label for="float-input">Name</label>
+        <input type="text" pInputText formControlName="name" />
+        <label>Name</label>
       </div>
-      <p-autoComplete
-        formControlName="category"
-        [suggestions]="filteredOptions$ | async"
-        (completeMethod)="search($event)"
-      ></p-autoComplete>
-      <p-toggleButton
-        formControlName="current"
-        [onIcon]="'pi pi-check'"
-        offIcon="pi pi-times"
-        [onLabel]="'Current skill'"
-        offLabel="Not current skill"
-      ></p-toggleButton>
+      <div class="p-field p-float-label">
+        <p-autoComplete
+          formControlName="category"
+          [suggestions]="filteredOptions$ | async"
+          (completeMethod)="search($event)"
+        ></p-autoComplete>
+        <label>Category</label>
+      </div>
+      <div class="p-field">
+        <p-toggleButton
+          formControlName="current"
+          [onIcon]="'pi pi-check'"
+          offIcon="pi pi-times"
+          [onLabel]="'Current skill'"
+          offLabel="Not current skill"
+        ></p-toggleButton>
+      </div>
     </div>
-    <p-footer align="end">
-      <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
-      <button mat-raised-button color="primary" (click)="onSkillUpdate()">Update</button>
+    <p-footer>
+      <button pButton (click)="onCancel()" label="Cancel" class="p-mr-2"></button>
+      <button pButton (click)="onSkillUpdate()" label="Update"></button>
     </p-footer>
   </p-card>
 </form>
