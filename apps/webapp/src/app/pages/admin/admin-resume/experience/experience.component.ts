@@ -2,9 +2,9 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ExperienceCategory, IUserExperience } from '@portfolio/api-interfaces';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
 import { ExperienceService } from './experience.service';
 import { ResumeAdminComponentAbstract } from '../resume-admin-abstract.component';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'portfolio-admin-experience',
@@ -18,42 +18,42 @@ export class AdminExperienceComponent extends ResumeAdminComponentAbstract {
 
   constructor(
     readonly snackbar: MatSnackBar,
-    readonly dialog: MatDialog,
     readonly experienceService: ExperienceService,
+    private readonly confirmationService: ConfirmationService,
   ) {
-    super(dialog, experienceService, snackbar);
+    super(experienceService, snackbar);
   }
 
   experiences$: Observable<IUserExperience[]> = this.experienceService.getElements;
 
   onAddNewExperience() {
-    const cb = () => {
-      const emptyExperience: IUserExperience = {
-        id: null,
-        endDate: null,
-        events: 'Events in the experience',
-        name: 'Update name',
-        role: 'Update this Role',
-        category: ExperienceCategory.WORK, // TODO Make this dynamic
-        startDate: null,
-        isActive: false,
-      };
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to add a default experience template?',
+      key: 'resume-admin',
+      accept: () => {
+        const emptyExperience: IUserExperience = {
+          id: null,
+          endDate: null,
+          events: 'Events in the experience',
+          name: 'Update name',
+          role: 'Update this Role',
+          category: ExperienceCategory.WORK, // TODO Make this dynamic
+          startDate: null,
+          isActive: false,
+        };
 
-      this.experienceService.addElement(emptyExperience);
-    };
-
-    this.showConfirmationDialog(
-      'Add Experience',
-      [`Are you sure you want to add new experience?`],
-      cb,
-    );
+        this.experienceService.addElement(emptyExperience);
+      },
+    });
   }
 
   onDeleteExperience(experience: IUserExperience) {
-    this.showConfirmationDialog(
-      'Delete Experience',
-      [`Are you sure you want to delete ${experience.name}?`],
-      () => this.experienceService.deleteElement(experience.id),
-    );
+    this.confirmationService.confirm({
+      key: 'resume-admin',
+      message: `Are you sure you want to delete ${experience.name}?`,
+      accept: () => {
+        this.experienceService.deleteElement(experience.id);
+      },
+    });
   }
 }

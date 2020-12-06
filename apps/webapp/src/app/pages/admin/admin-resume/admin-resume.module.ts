@@ -17,7 +17,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { CalendarModule } from 'primeng/calendar';
-import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     InputTextModule,
     ToggleButtonModule,
     CalendarModule,
-    MatDialogModule,
+    ConfirmDialogModule,
   ],
   exports: [
     AdminResumeComponent,
