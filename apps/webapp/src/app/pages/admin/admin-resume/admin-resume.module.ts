@@ -18,6 +18,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { CalendarModule } from 'primeng/calendar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ToggleButtonModule,
     CalendarModule,
     ConfirmDialogModule,
+    ToastModule,
   ],
   exports: [
     AdminResumeComponent,

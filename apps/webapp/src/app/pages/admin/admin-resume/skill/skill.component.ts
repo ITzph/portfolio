@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SkillService } from './skill.service';
 import { ResumeAdminComponentAbstract } from '../resume-admin-abstract.component';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'portfolio-admin-skill',
@@ -23,6 +23,7 @@ export class AdminSkillComponent extends ResumeAdminComponentAbstract implements
     readonly snackbar: MatSnackBar,
     readonly skillService: SkillService,
     private readonly confirmationService: ConfirmationService,
+    private readonly messageService: MessageService,
   ) {
     super(skillService, snackbar);
   }
@@ -53,6 +54,15 @@ export class AdminSkillComponent extends ResumeAdminComponentAbstract implements
       accept: () => {
         this.skillService.deleteElement(skill.id);
       },
+    });
+  }
+
+  onUpdateCallback() {
+    this.elementToModify = null;
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Updated skill successfully',
+      detail: 'Via MessageService',
     });
   }
 }

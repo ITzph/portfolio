@@ -20,10 +20,10 @@ export abstract class ResumeAdminComponentAbstract {
     this.elementToModify = element;
   }
 
-  onUpdate() {
-    this.elementToModify = null;
-    this.snackbar.open(`Updated skill successfully`, 'success', {
-      duration: 2000,
-    });
-  }
+  // onUpdate() {
+  //   this.elementToModify = null;
+  //   this.snackbar.open(`Updated skill successfully`, 'success', {
+  //     duration: 2000,
+  //   });
+  // }
 }

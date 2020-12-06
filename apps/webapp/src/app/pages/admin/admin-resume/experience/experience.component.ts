@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ExperienceService } from './experience.service';
 import { ResumeAdminComponentAbstract } from '../resume-admin-abstract.component';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'portfolio-admin-experience',
@@ -20,6 +20,7 @@ export class AdminExperienceComponent extends ResumeAdminComponentAbstract {
     readonly snackbar: MatSnackBar,
     readonly experienceService: ExperienceService,
     private readonly confirmationService: ConfirmationService,
+    private messageService: MessageService,
   ) {
     super(experienceService, snackbar);
   }
@@ -54,6 +55,15 @@ export class AdminExperienceComponent extends ResumeAdminComponentAbstract {
       accept: () => {
         this.experienceService.deleteElement(experience.id);
       },
+    });
+  }
+
+  onUpdateCallback() {
+    this.elementToModify = null;
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Updated experience successfully',
+      detail: 'Via MessageService',
     });
   }
 }

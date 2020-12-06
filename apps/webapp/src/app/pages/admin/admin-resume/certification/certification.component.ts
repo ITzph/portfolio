@@ -5,7 +5,7 @@ import { ResumeAdminComponentAbstract } from '../resume-admin-abstract.component
 import { Identifiable, IUserCertification, TIME_ZONE } from '@portfolio/api-interfaces';
 import { CertificationService } from './certification.service';
 import { formatDate } from '@angular/common';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'portfolio-admin-certification',
@@ -21,6 +21,7 @@ export class AdminCertificationComponent extends ResumeAdminComponentAbstract im
     readonly snackbar: MatSnackBar,
     readonly certificationService: CertificationService,
     private readonly confirmationService: ConfirmationService,
+    private readonly messageService: MessageService,
   ) {
     super(certificationService, snackbar);
   }
@@ -53,6 +54,15 @@ export class AdminCertificationComponent extends ResumeAdminComponentAbstract im
       accept: () => {
         this.certificationService.deleteElement(certification.id);
       },
+    });
+  }
+
+  onUpdateCallback() {
+    this.elementToModify = null;
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Service Message',
+      detail: 'Via MessageService',
     });
   }
 
