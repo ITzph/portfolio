@@ -1,24 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Store } from '@ngrx/store';
 import { Blog, API_ENDPOINTS } from '@portfolio/api-interfaces';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { catchError, finalize } from 'rxjs/operators';
 import { environment } from '../../../../src/environments/environment';
-import { deleteBlog, updateBlog } from '../../actions/blog.actions';
 
-import * as fromBlog from '../../reducers/blog.reducer';
 @Injectable({
   providedIn: 'root',
 })
 export class BlogsService {
-  constructor(
-    private readonly http: HttpClient,
-    private readonly spinner: NgxSpinnerService,
-    private readonly snackBar: MatSnackBar,
-    private readonly blogsStore: Store<fromBlog.State>,
-  ) {}
+  constructor(private readonly http: HttpClient, private readonly spinner: NgxSpinnerService) {}
 
   fetchAllBlogs() {
     return this.http.get<Blog[]>(`${environment.api}/${API_ENDPOINTS.blogs}/${API_ENDPOINTS.all}`);
@@ -38,7 +29,7 @@ export class BlogsService {
 
   updateBlog(id: number, blog: Partial<Blog>) {
     this.spinner.show('blogsSpinner');
-    this.http
+    return this.http
       .patch<Partial<Blog>>(`${environment.api}/${API_ENDPOINTS.blogs}/${id}`, blog)
       .pipe(
         finalize(() => {
@@ -47,38 +38,16 @@ export class BlogsService {
         catchError((err) => {
           throw { message: err };
         }),
-      )
-      .subscribe((res) => {
-        // TODO handle result properly, check why result was id
-        this.blogsStore.dispatch(
-          updateBlog({
-            blog: {
-              id,
-              changes: res,
-            },
-          }),
-        );
-
-        this.snackBar.open(`Updated ${blog.title} successfully`, 'success', {
-          duration: 2000,
-        });
-      });
+      );
   }
 
   deleteBlog(blog: Blog) {
     this.spinner.hide('blogsSpinner');
-    this.deleteBlogById(blog.id)
-      .pipe(
-        finalize(() => {
-          this.spinner.hide('blogsSpinner');
-        }),
-      )
-      .subscribe((res) => {
-        this.blogsStore.dispatch(deleteBlog({ id: res.id }));
-        this.snackBar.open(`Deleted ${blog.title} successfully`, 'success', {
-          duration: 2000,
-        });
-      });
+    return this.deleteBlogById(blog.id).pipe(
+      finalize(() => {
+        this.spinner.hide('blogsSpinner');
+      }),
+    );
   }
 
   deleteBlogById(id: number) {

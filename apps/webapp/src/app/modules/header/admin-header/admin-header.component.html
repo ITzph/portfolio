@@ -71,7 +71,17 @@
 </ng-template>
 
 <ng-template #forLogout>
-  <button mat-icon-button (click)="onLogout()" style="color: red;" title="Logout">
-    <mat-icon>power_settings_new</mat-icon>
-  </button>
+  <button
+    pButton
+    type="button"
+    name="logout"
+    title="Logout"
+    style="color: red; font-size: 2em;"
+    class="p-button-text p-button-rounded"
+    (click)="onLogout()"
+    icon="fa fa-sign-out-alt"
+  ></button>
 </ng-template>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-toast></p-toast>

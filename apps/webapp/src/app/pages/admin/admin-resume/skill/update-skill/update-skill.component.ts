@@ -30,6 +30,10 @@ export class UpdateSkillComponent implements OnInit {
     current: [false],
   });
 
+  filterValue = '';
+
+  results: string[];
+
   constructor(private readonly fb: FormBuilder, private readonly skillService: SkillService) {}
 
   ngOnInit(): void {
@@ -44,6 +48,10 @@ export class UpdateSkillComponent implements OnInit {
     this.closed.emit();
   }
 
+  search(event) {
+    this.filterValue = event.query;
+  }
+
   get filteredOptions$(): Observable<string[]> {
     return this.skillService.getElements.pipe(
       map((skills) => {
@@ -52,9 +60,9 @@ export class UpdateSkillComponent implements OnInit {
             return !!curr.category && !acc.includes(curr.category) ? [...acc, curr.category] : acc;
           }, [])
           .filter((skill: string) => {
-            const value = this.skillFormGroup.get('category').value as string;
-
-            return !!value ? skill.toLowerCase().includes(value.toLowerCase()) : true;
+            return !!this.filterValue
+              ? skill.toLowerCase().includes(this.filterValue.toLowerCase())
+              : true;
           });
       }),
     );

@@ -6,6 +6,10 @@
   margin-bottom: $margin-very-small;
 }
 
+.color-primary {
+  color: $color-primary-dark;
+}
+
 .cli-header {
   display: flex;
   background-color: $color-light;

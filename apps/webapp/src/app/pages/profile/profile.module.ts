@@ -12,11 +12,9 @@ import { LayoutModule } from '../../modules/layout/layout.module';
 import { HeaderModule } from '../../modules/header/header.module';
 import { FooterModule } from '../../modules/footer/footer.module';
 import { NotFoundModule } from '../not-found/not-found.module';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { ContactMeModule } from '../../modules/contact-me/contact-me.module';
-import { MatCardModule } from '@angular/material/card';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [ProfileComponent, AutoTyperComponent, GreetingsTranscriptComponent],
@@ -29,11 +27,9 @@ import { MatCardModule } from '@angular/material/card';
     LayoutModule,
     HeaderModule,
     FooterModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatCardModule,
+    CardModule,
     ContactMeModule,
+    ButtonModule,
   ],
   exports: [ProfileComponent, AutoTyperComponent, GreetingsTranscriptComponent],
 })

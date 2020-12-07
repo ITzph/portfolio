@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { getAllBlogs, getPublishedBlogs } from '../../../../selectors/blog.selectors';
+import { getAllBlogs } from '../../../../selectors/blog.selectors';
 import * as fromBlogs from '../../../../reducers/blog.reducer';
 import { Blog } from '@portfolio/api-interfaces';
 import { BlogsService } from '../../../blogs/blogs.service';
-import { MatDialog } from '@angular/material/dialog';
-import { BinaryConfirmationComponent } from '../../../../modules/custom-dialog/binary-confirmation/binary-confirmation.component';
 import { Router } from '@angular/router';
+import { deleteBlog } from '../../../../actions/blog.actions';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'portfolio-list-blogs',
@@ -19,8 +19,9 @@ export class ListBlogsComponent implements OnInit {
   constructor(
     private readonly blogStore: Store<fromBlogs.State>,
     private readonly blogService: BlogsService,
-    private readonly dialog: MatDialog,
     private readonly router: Router,
+    private readonly messageService: MessageService,
+    private confirmationService: ConfirmationService,
   ) {}
 
   ngOnInit(): void {}
@@ -30,21 +31,19 @@ export class ListBlogsComponent implements OnInit {
   }
 
   onBlogDelete(blog: Blog) {
-    const dialogProp = {
-      title: 'Delete Photo',
-      messages: [`Are you sure you want to delete ${blog.title}?`],
-      okayLabel: 'Okay',
-      noLabel: 'Cancel',
-    };
-
-    const dialogRef = this.dialog.open(BinaryConfirmationComponent, {
-      data: dialogProp,
-    });
-
-    dialogRef.afterClosed().subscribe((isTrue: boolean) => {
-      if (isTrue) {
-        this.blogService.deleteBlog(blog);
-      }
+    this.confirmationService.confirm({
+      message: `Are you sure you want to delete ${blog.title}?`,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.blogService.deleteBlog(blog).subscribe((res) => {
+          this.blogStore.dispatch(deleteBlog({ id: res.id }));
+          this.messageService.add({
+            severity: 'success',
+            summary: `Deleted ${blog.title} successfully`,
+            detail: 'Via MessageService',
+          });
+        });
+      },
     });
   }
 

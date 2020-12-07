@@ -1,29 +1,25 @@
+<button pButton color="primary" (click)="onAddNewExperience()" label="Add new experience"></button>
+
 <ng-container *ngFor="let experience of experiences$ | async; trackBy: elementTracker">
-  <mat-card
-    (click)="onSelectElement(experience)"
-    style="cursor: pointer; margin-bottom: 1rem;"
-    *ngIf="!elementToModify"
-  >
+  <p-card (click)="onSelectElement(experience)" *ngIf="!elementToModify">
     <p>{{ experience.name }}</p>
     <p>{{ experience.role }}</p>
     <p>{{ experience.startDate }}</p>
     <p>{{ experience.endDate }}</p>
     <button
-      mat-icon-button
+      pButton
       color="warn"
+      class="p-button-rounded"
+      icon="fa fa-trash-alt"
       (click)="onDeleteExperience(experience); $event.stopPropagation()"
-    >
-      <mat-icon>delete</mat-icon>
-    </button>
-  </mat-card>
+    ></button>
+  </p-card>
 </ng-container>
-
-<button mat-raised-button color="primary" (click)="onAddNewExperience()">Add new experience</button>
 
 <ng-container *ngIf="!!elementToModify">
   <portfolio-update-experience
     [experience]="elementToModify"
     (closed)="elementToModify = null"
-    (update)="onUpdate()"
+    (update)="onUpdateCallback()"
   ></portfolio-update-experience>
 </ng-container>

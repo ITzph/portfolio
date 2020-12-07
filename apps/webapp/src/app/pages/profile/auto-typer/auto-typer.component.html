@@ -1,4 +1,4 @@
-<section class="cli">
+<section class="cli p-shadow-2" style="border-radius: 0.5rem;">
   <aside class="cli-header">
     <div class="circle circle--red"></div>
     <div class="circle circle--yellow"></div>
@@ -13,20 +13,18 @@
   </article>
 </section>
 <button
-  mat-icon-button
+  pButton
   (click)="skipAutoType()"
+  class="p-button-text p-button-rounded color-primary"
   *ngIf="isTyping"
-  matTooltip="Skip"
-  matTooltipPosition="right"
->
-  <mat-icon>skip_next</mat-icon>
-</button>
+  icon="fa fa-forward"
+  title="Skip"
+></button>
 <button
-  mat-icon-button
+  pButton
   (click)="retriggerAutoType()"
+  class="p-button-text p-button-rounded color-primary"
   *ngIf="!isTyping"
-  matTooltip="Repeat"
-  matTooltipPosition="right"
->
-  <mat-icon>refresh</mat-icon>
-</button>
+  title="Repeat"
+  icon="fa fa-redo"
+></button>

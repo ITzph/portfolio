@@ -1,41 +1,21 @@
 <form [formGroup]="blogFormGroup" class="blog-form-wrapper">
-  <mat-card class="blog-form">
-    <mat-form-field class="double-font-size">
-      <mat-label>Title</mat-label>
-      <input
-        matInput
-        placeholder="Enter an awesome title here!"
-        formControlName="title"
-        class="font-size-doubled"
-      />
-      <mat-error *ngIf="blogFormGroup.get('title').hasError('required')"
-        >Title is required</mat-error
-      >
-    </mat-form-field>
-    <mat-form-field class="example-chip-list">
-      <mat-chip-list #chipList aria-label="Fruit selection" formControlName="tags">
-        <mat-chip
-          *ngFor="let tag of tags.value; let i = index"
-          [selectable]="selectable"
-          [removable]="removable"
-          (removed)="removeTag(tag, i)"
-        >
-          {{ tag }}
-          <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
-        </mat-chip>
-        <input
-          placeholder="Tags"
-          [matChipInputFor]="chipList"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          [matChipInputAddOnBlur]="addOnBlur"
-          (matChipInputTokenEnd)="addTag($event)"
-        />
-      </mat-chip-list>
-    </mat-form-field>
+  <p-card class="blog-form">
+    <div class="p-inputgroup">
+      <input type="text" pInputText placeholder="Username" formControlName="title" />
+    </div>
+    <div class="p-inputgroup">
+      <p-chips
+        formControlName="tags"
+        [separator]="','"
+        class="full-width"
+        [style]="{ width: '100%' }"
+        [inputStyle]="{ width: '100%' }"
+      ></p-chips>
+    </div>
     <quill-editor formControlName="content"> </quill-editor>
     <mat-hint>*Content is required</mat-hint>
-    <mat-card-actions class="actions" *ngIf="blog">
-      <button mat-raised-button color="warn" (click)="close()">Cancel</button>
+    <p-footer class="actions" *ngIf="blog">
+      <button p-button color="warn" (click)="close()">Cancel</button>
       <button
         color="primary"
         type="submit"
@@ -46,14 +26,14 @@
       >
         Update Blog
       </button>
-      <button mat-raised-button color="primary" (click)="onPublishBlog()" *ngIf="!blog.published">
+      <button p-button color="primary" (click)="onPublishBlog()" *ngIf="!blog.published">
         Publish
       </button>
-      <button mat-raised-button color="primary" (click)="onUnpublishBlog()" *ngIf="blog.published">
+      <button p-button color="primary" (click)="onUnpublishBlog()" *ngIf="blog.published">
         Unpublish
       </button>
-    </mat-card-actions>
-  </mat-card>
+    </p-footer>
+  </p-card>
   <h3 class="published-label" *ngIf="blog">
     {{ blog.published ? 'Published' : 'Unpublished' }}
   </h3>

@@ -14,6 +14,7 @@
 }
 
 .logout {
+  font-size: 2em;
   color: red;
 }
 
@@ -35,6 +36,7 @@
 
 .links-button {
   display: block;
+  font-size: 2em;
 
   @media #{$md-device} {
     display: none;

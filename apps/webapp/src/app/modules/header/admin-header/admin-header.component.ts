@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { AuthService } from '../../../services/auth.service';
 import { HeaderAbstract } from '../header.abstract';
 
@@ -11,7 +10,11 @@ import { HeaderAbstract } from '../header.abstract';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminHeaderComponent extends HeaderAbstract {
-  constructor(authService: AuthService, dialog: MatDialog, snackBar: MatSnackBar) {
-    super(authService, dialog, snackBar);
+  constructor(
+    authService: AuthService,
+    confirmationService: ConfirmationService,
+    messageService: MessageService,
+  ) {
+    super(authService, confirmationService, messageService);
   }
 }

@@ -16,56 +16,44 @@
         Thou shall not pass! You need to verify your credential first.
       </h2>
     </div>
-    <mat-card class="fex-column auth-form-container">
-      <mat-card-title>
+    <p-card class="fex-column auth-form-container">
+      <p-header>
         <h2>
           Please login
         </h2>
         <p *ngIf="isInvalidCredentials" class="invalid-credentials">
           Invalid username or password
         </p>
-      </mat-card-title>
-      <mat-card-content>
-        <form [formGroup]="authForm" class="flex-column">
-          <mat-form-field>
-            <mat-label>Username</mat-label>
-            <input
-              matInput
-              placeholder="Username"
-              formControlName="username"
-              name="username"
-              [autocomplete]="true"
-            />
-            <mat-error *ngIf="authForm.get('username').hasError('required')"
-              >Username is required</mat-error
-            >
-            <mat-error *ngIf="authForm.get('username').hasError('minlength')"
-              >Minimum length of 4 characters</mat-error
-            >
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input
-              matInput
-              type="password"
-              placeholder="Password"
-              name="password"
-              formControlName="password"
-              [autocomplete]="true"
-            />
-          </mat-form-field>
-          <button type="submit" name="login" color="primary" mat-raised-button (click)="onLogin()">
-            Login
-          </button>
-        </form>
-      </mat-card-content>
-    </mat-card>
+      </p-header>
+      <form [formGroup]="authForm" class="flex-column">
+        <div class="p-field p-float-label p-input-icon-right">
+          <i class="pi pi-user"></i>
+          <input type="text" pInputText style="width: 100%;" formControlName="username" />
+          <label for="float-input">Username</label>
+        </div>
+        <div class="p-field p-float-label p-input-icon-right">
+          <i class="fa fa-key"></i>
+          <input type="password" pInputText style="width: 100%;" formControlName="password" />
+          <label for="float-input">Password</label>
+        </div>
+        <button
+          type="submit"
+          name="login"
+          color="primary"
+          pButton
+          (click)="onLogin()"
+          label="Login"
+        ></button>
+      </form>
+    </p-card>
   </div>
 
   <footer class="footer">
     <p class="copyright">Copyrights. All rights reserved 2020</p>
   </footer>
 </div>
+
+<p-toast></p-toast>
 
 <ngx-spinner
   name="authSpinner"

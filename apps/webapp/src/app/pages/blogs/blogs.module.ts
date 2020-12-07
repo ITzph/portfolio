@@ -8,13 +8,10 @@ import { LayoutModule } from '../../modules/layout/layout.module';
 import { StoreModule } from '@ngrx/store';
 
 import * as fromBlog from '../../reducers/blog.reducer';
-import { MatCardModule } from '@angular/material/card';
 import { UtilitiesModule } from '../../modules/utilities/utilities.module';
-import { MatChipsModule } from '@angular/material/chips';
 import { QuillModule } from 'ngx-quill';
 import { FullBlogContentComponent } from './full-blog-content/full-blog-content.component';
 import { BlogListComponent } from './blog-list/blog-list.component';
-import { MatIconModule } from '@angular/material/icon';
 import { BlogTileComponent } from './blog-tile/blog-tile.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TagFilterComponent } from './tag-filter/tag-filter.component';
@@ -35,12 +32,9 @@ import { TooltipModule } from 'primeng/tooltip';
     HeaderModule,
     FooterModule,
     LayoutModule,
-    MatCardModule,
     UtilitiesModule,
-    MatChipsModule,
     QuillModule.forRoot(),
     StoreModule.forFeature(fromBlog.blogsFeatureKey, fromBlog.reducer),
-    MatIconModule,
     NgxSpinnerModule,
     CardModule,
     TooltipModule,

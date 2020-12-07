@@ -9,14 +9,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { select, Store } from '@ngrx/store';
 import { IUserExperience, TIME_ZONE } from '@portfolio/api-interfaces';
-import { updateExperience, updateProfile } from '../../../../../actions/profile.actions';
-import { getExperiences } from '../../../../../selectors/profile.selectors';
-import { take, withLatestFrom } from 'rxjs/operators';
-import { environment } from '../../../../../../environments/environment';
-import * as fromProfile from '../../../../../reducers/profile.reducer';
 import { ExperienceService } from '../experience.service';
 
 @Component({

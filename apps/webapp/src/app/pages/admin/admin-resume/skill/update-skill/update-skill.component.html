@@ -1,33 +1,39 @@
 <form [formGroup]="skillFormGroup">
-  <mat-card class="form-wrapper">
-    <mat-card-title>
-      Update Skill
-    </mat-card-title>
-    <mat-card-content class="card-content">
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput type="text" placeholder="Name" formControlName="name" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Category</mat-label>
-        <input
-          matInput
-          type="text"
-          placeholder="Category"
+  <p-card class="form-wrapper">
+    <p-header>
+      <h2
+        class="p-pl-5 p-pt-3"
+        style="display: flex; align-items: center; justify-content: center;"
+      >
+        Update Skill
+      </h2>
+    </p-header>
+    <div class="card-content">
+      <div class="p-field p-float-label">
+        <p-autoComplete
           formControlName="category"
-          [matAutocomplete]="auto"
-        />
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">
-            {{ option }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <mat-checkbox formControlName="current">Is current skill?</mat-checkbox>
-    </mat-card-content>
-    <mat-card-actions align="end">
-      <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
-      <button mat-raised-button color="primary" (click)="onSkillUpdate()">Update</button>
-    </mat-card-actions>
-  </mat-card>
+          [suggestions]="filteredOptions$ | async"
+          (completeMethod)="search($event)"
+        ></p-autoComplete>
+        <label>Category</label>
+      </div>
+      <div class="p-field p-float-label">
+        <input type="text" pInputText formControlName="name" />
+        <label>Name</label>
+      </div>
+      <div class="p-field">
+        <p-toggleButton
+          formControlName="current"
+          [onIcon]="'pi pi-check'"
+          offIcon="pi pi-times"
+          [onLabel]="'Current skill'"
+          offLabel="Not current skill"
+        ></p-toggleButton>
+      </div>
+    </div>
+    <p-footer>
+      <button pButton (click)="onCancel()" label="Cancel" class="p-mr-2"></button>
+      <button pButton (click)="onSkillUpdate()" label="Update"></button>
+    </p-footer>
+  </p-card>
 </form>

@@ -10,6 +10,12 @@
   }
 }
 
+::ng-deep {
+  .menu-top {
+    top: 0 !important;
+  }
+}
+
 .certifications {
   &__wrapper {
     display: grid;

@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BlogsService } from '../../../blogs/blogs.service';
@@ -8,6 +7,8 @@ import * as fromBlogs from '../../../../reducers/blog.reducer';
 import { UpsertBlog } from '../upsert-blog.abstract';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Blog } from '@portfolio/api-interfaces';
+import { MessageService } from 'primeng/api';
+import { updateBlog } from '../../../../actions/blog.actions';
 
 @Component({
   selector: 'portfolio-update-blog',
@@ -23,11 +24,11 @@ export class UpdateBlogComponent extends UpsertBlog implements OnInit {
     readonly blogsStore: Store<fromBlogs.State>,
     readonly blogService: BlogsService,
     readonly spinner: NgxSpinnerService,
-    readonly snackbar: MatSnackBar,
+    readonly messageService: MessageService,
     readonly router: Router,
     private route: ActivatedRoute,
   ) {
-    super(fb, blogsStore, blogService, spinner, snackbar, router);
+    super(fb, blogsStore, blogService, spinner, router);
 
     this.route.params.subscribe((param) => {
       const { id } = param;
@@ -79,19 +80,43 @@ export class UpdateBlogComponent extends UpsertBlog implements OnInit {
     this.patchBlog(this.isValueChanged || this.blog.published, false);
   }
 
-  private patchBlog(condition: boolean, isPublished: boolean) {
+  private patchBlog(hasChanges: boolean, isPublished: boolean) {
     const updatedBlog = this.blogFormGroup.value;
 
-    if (condition) {
-      this.blogService.updateBlog(this.blog.id, {
-        content: updatedBlog.content,
-        title: updatedBlog.title,
-        tags: updatedBlog.tags,
-        published: isPublished,
-      });
+    if (hasChanges) {
+      this.blogService
+        .updateBlog(this.blog.id, {
+          content: updatedBlog.content,
+          title: updatedBlog.title,
+          tags: updatedBlog.tags,
+          published: isPublished,
+        })
+        .subscribe((res) => {
+          this.messageService.add({
+            key: 'blog-admin',
+            severity: 'success',
+            summary: `Updated ${updatedBlog.title} successfully`,
+            detail: 'Via MessageService',
+          });
+
+          this.router.navigateByUrl('admin/blogs');
+
+          // TODO handle result properly, check why result was id
+          this.blogsStore.dispatch(
+            updateBlog({
+              blog: {
+                id: this.blog.id,
+                changes: res,
+              },
+            }),
+          );
+        });
     } else {
-      this.snackbar.open(`There are no changes`, 'warning', {
-        duration: 2000,
+      this.messageService.add({
+        key: 'blog-admin',
+        severity: 'warn',
+        summary: 'There are no changes',
+        detail: 'Via MessageService',
       });
     }
   }

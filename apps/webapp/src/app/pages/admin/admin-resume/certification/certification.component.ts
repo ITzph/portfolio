@@ -1,13 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ResumeAdminComponentAbstract } from '../resume-admin-abstract.component';
-import * as fromProfile from '../../../../reducers/profile.reducer';
 import { Identifiable, IUserCertification, TIME_ZONE } from '@portfolio/api-interfaces';
 import { CertificationService } from './certification.service';
 import { formatDate } from '@angular/common';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'portfolio-admin-certification',
@@ -20,43 +18,52 @@ export class AdminCertificationComponent extends ResumeAdminComponentAbstract im
 
   elementToModify: Identifiable;
   constructor(
-    private readonly profileStore: Store<fromProfile.State>,
     readonly snackbar: MatSnackBar,
-    readonly dialog: MatDialog,
     readonly certificationService: CertificationService,
+    private readonly confirmationService: ConfirmationService,
+    private readonly messageService: MessageService,
   ) {
-    super(dialog, certificationService, snackbar);
+    super(certificationService, snackbar);
   }
 
   certifications$: Observable<IUserCertification[]> = this.certificationService.getElements;
 
   onAddNewCertification() {
-    const cb = () => {
-      const emptyCertification: IUserCertification = {
-        id: null,
-        dateAcquired: formatDate(new Date(), 'yyyy-MM-dd', TIME_ZONE.DEFAULT),
-        description: 'To Update',
-        name: 'To Update',
-        provider: 'To Update',
-        url: '',
-      };
+    this.confirmationService.confirm({
+      key: 'resume-admin',
+      message: 'Are you sure that you want to add a default experience template?',
+      accept: () => {
+        const emptyCertification: IUserCertification = {
+          id: null,
+          dateAcquired: formatDate(new Date(), 'yyyy-MM-dd', TIME_ZONE.DEFAULT),
+          description: 'To Update',
+          name: 'To Update',
+          provider: 'To Update',
+          url: '',
+        };
 
-      this.certificationService.addElement(emptyCertification);
-    };
-
-    this.showConfirmationDialog(
-      'Add Certification',
-      [`Are you sure you want to add new certification?`],
-      cb,
-    );
+        this.certificationService.addElement(emptyCertification);
+      },
+    });
   }
 
   onDeleteCertification(certification: IUserCertification) {
-    this.showConfirmationDialog(
-      'Delete Certification',
-      [`Are you sure you want to delete ${certification.name}?`],
-      () => this.certificationService.deleteElement(certification.id),
-    );
+    this.confirmationService.confirm({
+      key: 'resume-admin',
+      message: `Are you sure you want to delete ${certification.name}?`,
+      accept: () => {
+        this.certificationService.deleteElement(certification.id);
+      },
+    });
+  }
+
+  onUpdateCallback() {
+    this.elementToModify = null;
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Service Message',
+      detail: 'Via MessageService',
+    });
   }
 
   ngOnInit(): void {}

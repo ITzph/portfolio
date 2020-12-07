@@ -32,10 +32,6 @@ export class AuthService {
     );
   }
 
-  private setToken(token: string) {
-    this.authToken.next(token);
-  }
-
   public hasAuthToken(): Observable<boolean> {
     return this.getToken().pipe(map((token) => !!token));
   }
@@ -78,5 +74,9 @@ export class AuthService {
     this.authToken.next(null);
     this.username.next(null);
     this.router.navigateByUrl('/');
+  }
+
+  private setToken(token: string) {
+    this.authToken.next(token);
   }
 }

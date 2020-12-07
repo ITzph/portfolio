@@ -1,3 +1,9 @@
 .file-list-table {
   width: 100%;
 }
+
+.actions {
+  :not(:last-child) {
+    margin-right: 0.5rem;
+  }
+}

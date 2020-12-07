@@ -1,5 +1,9 @@
 @import '../../../../../styles/variables';
 
+.full-width {
+  width: 100%;
+}
+
 :host {
   display: flex;
   flex-direction: column;
