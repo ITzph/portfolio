@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { IFileMetadata } from '@portfolio/api-interfaces';
 import { FilesService } from '../files.service';
+import { PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'portfolio-file-list',
@@ -34,24 +36,29 @@ export class FileListComponent implements OnInit {
 
   displayedColumns: string[] = ['fileType', 'fileName', 'description', 'key'];
 
-  constructor(private readonly filesService: FilesService) {}
+  constructor(
+    private readonly filesService: FilesService,
+    @Inject(PLATFORM_ID) private readonly platformId: string,
+  ) {}
 
   downloadFile(file: IFileMetadata) {
-    this.filesService.getOneFile(file.key).subscribe((response: any) => {
-      const filename = file.fileName;
+    if (isPlatformBrowser(this.platformId)) {
+      this.filesService.getOneFile(file.key).subscribe((response: any) => {
+        const filename = file.fileName;
 
-      const dataType = response.type;
-      if (filename) {
-        const binaryData = [];
-        binaryData.push(response);
-        const downloadLink = document.createElement('a');
-        downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, { type: dataType }));
-        downloadLink.setAttribute('download', filename);
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-      }
-    });
+        const dataType = response.type;
+        if (filename) {
+          const binaryData = [];
+          binaryData.push(response);
+          const downloadLink = document.createElement('a');
+          downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, { type: dataType }));
+          downloadLink.setAttribute('download', filename);
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+        }
+      });
+    }
   }
 
   ngOnInit(): void {}
