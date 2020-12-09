@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Inject, PLATFORM_ID } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as fromProfile from '../../reducers/profile.reducer';
 import { Observable } from 'rxjs';
@@ -10,6 +10,7 @@ import { setProfile } from '../../actions/profile.actions';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FilesService } from '../files/files.service';
 import { MenuItem } from 'primeng/api';
+import { isPlatformBrowser } from '@angular/common';
 
 interface CategorizedSkill {
   category: string;
@@ -51,24 +52,28 @@ export class ResumeComponent implements OnInit {
     private readonly apiService: ApiService,
     private readonly spinner: NgxSpinnerService,
     private readonly filesService: FilesService,
+    @Inject(PLATFORM_ID) private readonly platformId: string,
   ) {}
 
   private downloadResume(fileType: 'pdf' | 'word') {
-    this.filesService.getResume(fileType).subscribe((response: any) => {
-      const filename = `MyResume.${fileType === 'word' ? '.docx' : 'pdf'}`;
+    if (isPlatformBrowser(this.platformId)) {
+      this.filesService.getResume(fileType).subscribe((response: any) => {
+        const filename = `MyResume.${fileType === 'word' ? '.docx' : 'pdf'}`;
 
-      const dataType = response.type;
-      if (filename) {
-        const binaryData = [];
-        binaryData.push(response);
-        const downloadLink = document.createElement('a');
-        downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, { type: dataType }));
-        downloadLink.setAttribute('download', filename);
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-      }
-    });
+        const dataType = response.type;
+
+        if (filename) {
+          const binaryData = [];
+          binaryData.push(response);
+          const downloadLink = document.createElement('a');
+          downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, { type: dataType }));
+          downloadLink.setAttribute('download', filename);
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+        }
+      });
+    }
   }
 
   get categorizedSkill$() {
